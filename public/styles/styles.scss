@@ -1,0 +1,266 @@
+@import '/styles/bulma.css';
+@import '/styles/bulma-steps.css';
+@import '/styles/fonts.css';
+@import '/styles/store.css';
+
+$sizeUnit: rem;
+$marginKey: 'm';
+$paddingKey: 'p';
+$separator: '-';
+$sizes: (
+    ('none', 0),
+    ('xxs', 0.125),
+    ('xs', 0.25),
+    ('sm', 0.5),
+    ('md', 1),
+    ('lg', 2),
+    ('xl', 4),
+    ('xxl', 8),
+);
+$positions: (
+    ('t', 'top'),
+    ('r', 'right'),
+    ('b', 'bottom'),
+    ('l', 'left')
+);
+
+@function sizeValue($key, $value) {
+    @return if($key == 'none', 0, $value + $sizeUnit);
+}
+
+@each $size in $sizes {
+    $sizeKey: nth($size, 1);
+    $sizeValue: nth($size, 2);
+    .#{$marginKey}#{$separator}#{$sizeKey} {
+        margin: sizeValue($sizeKey, $sizeValue);
+    }
+    .#{$paddingKey}#{$separator}#{$sizeKey} {
+        padding: sizeValue($sizeKey, $sizeValue);
+    }
+    @each $position in $positions {
+        $posKey: nth($position, 1);
+        $posValue: nth($position, 2);
+        .#{$marginKey}#{$separator}#{$posKey}#{$separator}#{$sizeKey} {
+            margin-#{$posValue}: sizeValue($sizeKey, $sizeValue);
+        }
+        .#{$paddingKey}#{$separator}#{$posKey}#{$separator}#{$sizeKey} {
+            padding-#{$posValue}: sizeValue($sizeKey, $sizeValue);
+        }
+    }
+}
+
+$break1: 480px;
+$break2: 600px;
+$break3: 840px;
+$break4: 1020px;
+$break5: 1280px;
+$break6: 1440px;
+$break7: 1600px;
+$break8: 1800px;
+
+@mixin media($media) {
+    @if $media == break1 {
+        @media only screen and (min-width: $break1) { @content; }
+    } @else if $media == break2 {
+        @media only screen and (min-width: $break2) { @content; }
+    } @else if $media == break3 {
+        @media only screen and (min-width: $break3) { @content; }
+    } @else if $media == break4 {
+        @media only screen and (min-width: $break4) { @content; }
+    } @else if $media == break5 {
+        @media only screen and (min-width: $break5) { @content; }
+    } @else if $media == break6 {
+        @media only screen and (min-width: $break6) { @content; }
+    } @else if $media == break7 {
+        @media only screen and (min-width: $break7) { @content; }
+    } @else if $media == break8 {
+    @media only screen and (min-width: $break8) { @content; }
+    }
+}
+
+
+/* Variables */
+$teal: #71CBD3;
+$dark-teal: #00676D;
+$ice: #EFF9FA;
+$light-gray: #EBEBEB;
+$soft-gray: #E4E4E4;
+$gray: #ccc;
+$dark-gray: #565656;
+$off-white: #f0f0f0;
+
+/* Animations */
+.bounce {
+    animation-duration: 2s;
+    animation-fill-mode: both;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
+    -webkit-animation-iteration-count: infinite; 
+}
+@keyframes bounce {
+	0%, 100%, 20%, 50%, 80% {
+		-webkit-transform: translateY(0);
+		-ms-transform:     translateY(0);
+		transform:         translateY(0)
+	}
+	40% {
+		-webkit-transform: translateY(-20px);
+		-ms-transform:     translateY(-20px);
+		transform:         translateY(-20px)
+	}
+	60% {
+		-webkit-transform: translateY(-10px);
+		-ms-transform:     translateY(-10px);
+		transform:         translateY(-10px)
+	}
+}
+
+/* Bulma overwrites */
+.button.is-primary, .button.is-primary {background: $dark-teal;transition: 1s;}
+.button.is-primary:hover, .button.is-primary.is-hovered {background:$teal;transition: 1s;}
+.card {background: none;}
+
+/* Steps */
+.steps {margin:20px auto 0;max-width: 125px;}
+.steps-segment {cursor: pointer;}
+.steps-segment:after, .steps:not(.is-hollow) .steps-marker:not(.is-hollow), .steps:not(.is-hollow) .steps-segment.is-active .steps-marker:not(.is-hollow) {
+    background-color: $teal;
+}
+@include media(break3) {
+    .steps {max-width: initial;}
+}
+
+/* Globals */
+html {background: $teal;}
+body {font-family: 'TT Commons';}
+a {color:$teal;}
+
+/* Type */
+h1 {font-weight: 600;}
+header {text-align:center;}
+.logo {background: url("/images/shipenguin-logo_v2.svg") no-repeat;width: 402px;height: 74px;display: block;margin: 100px auto 20px;}
+.tagline {font-weight: 400;font-size: 1.75em;color: $ice;}
+
+.penguin_background {
+    overflow: hidden;height: 100%;width:100%;position: absolute;top:0;left:0;
+    .ice_a, .ice_b, .ice_c, .ice_left, .ice_right, .pen {display: none;}
+    .ice_a, .ice_b, .ice_c, .ice_left, .ice_right {position: absolute;bottom: 0;}
+    .ice_left {left: 0;}
+    .ice_right {right: 0;bottom:-10px;}
+    .ice_a {left:24vw;bottom:10vh;}
+    .ice_b {left: 33vw;bottom:15vh;}
+    .ice_c {left: 44vw;bottom:20vh;}
+    .pen {width: 35px;position: absolute;}
+    .penguin_a {right: 150px;bottom:175px;}
+    .penguin_b {width:28px;right: 130px;bottom:150px;}
+    .penguin_c {width:20px;right: 155px;bottom:145px;}
+    .penguin_d {width:20px;right: 155px;bottom:145px;}
+    .penguin_e {width: 22px;right: 355px;bottom: 72px;}
+    @include media(break5) {
+       .ice_left, .ice_right, .pen {display: block;}
+    }
+}
+
+/* Steps */
+.label {text-transform: uppercase;color: $teal;}
+.label span {text-transform: none;color: $gray;}
+.button {padding:25px 0;text-transform: uppercase;font-weight: 800;margin:-5px 0;position: relative;width: 100%;max-width: 300px;}
+.button svg {margin: 0 0 0 10px;display: block;}
+h1.headline {font-size: 3em;text-align: center;line-height: 1.25;}
+p.subhead {padding:0;font-size: 1.25em;font-weight: 300;text-align: center;}
+.label_preview {max-width: 300px;margin: 0 auto;}
+.box {
+    background-color:$ice;max-width: 1100px;margin:25px 20px 0;z-index: 10;position: relative;transition: all 500ms;
+    @include media(break3) {
+        margin: 50px auto;
+    }
+}
+.verify {
+    font-size: .8em;position: absolute;top:8px;right:5px;
+    svg {max-width: 12px;margin:-2px 5px 0 0;display: inline-block;}
+}
+.container.step1 .box {
+    @include media(break7) {
+        transform:translateX(-160px);
+    }
+}
+
+.package_info {background:$off-white;border:1px solid darken($soft-gray, 10%);padding: 15px 20px;border-radius: 5px;margin:5px 0;}
+.package_info.payment_info {margin:25px auto;}
+
+@include media(break3) {
+    .step {padding: 50px;}
+}
+.step_one {
+    text-align:center;
+    .control {max-width: 400px;margin: 50px auto 0;}
+    input[type='email'] {display:block;z-index: 2;position: relative;}
+    .button:hover {animation-name: bounce;}
+    @include media(break3) {
+        padding: 50px 75px 0;
+    }
+}
+.step_two, .step_three, .step_four {
+    padding: 50px 0;
+    @include media(break3) {
+        padding: 0 75px 50px;
+
+    }
+}
+.step_chart {
+    margin:0;
+    p {text-transform: uppercase;color:$gray;font-weight: 400;letter-spacing: 1px;}
+    li.is-active p {color: $teal;}
+}
+aside {
+    background: #EBEBEB;margin:15px auto;padding: 20px;border-radius: 5px;height: 100%;position: relative;overflow: hidden;max-width: 300px;
+    .rate_list {
+        background: $dark-teal;position: absolute;top:-100%;left:0;width: 100%;height: 100%;padding:20px;z-index: 2;overflow: hidden;
+        .close {text-align: right;color:$ice;cursor: pointer;}
+        .close i:hover {color:darken($ice, 10%);}
+        .newRate, strong {color:$ice !important;}
+        .newRate {display: flex;justify-content: space-between;padding:4px;cursor: pointer;}
+        .newRate:hover {background: $ice;color:$dark-teal !important;}
+        .newRate:hover strong {color:$dark-teal !important;}
+    }
+    .package_type {
+        position:relative;cursor:pointer;margin:25px auto 50px;text-align:center;border-radius:5px;
+        .holder {background: $ice;border: 1px solid $teal;padding:15px;}
+        &.is-inactive {opacity: .3;}
+        label {color:$teal;font-weight: 800;text-transform: uppercase;}
+        img {display:block;margin:10px auto;}
+        p {font-size: 12px;}
+        button {font-size:12px;color:$gray;font-weight:800;cursor:pointer;position: absolute;bottom:-30px;text-transform: uppercase;color: $dark-gray;padding:15px 10px 5px;z-index: -1;transform: translateX(-50%);}
+        &:hover {background: darken($ice, 5%);}
+    }
+    .rate_box {
+        margin:10px auto;
+        label {font-weight: 600;font-size: 12px;color:$gray;}
+    }
+    .rate {
+        margin:0 auto;background: $soft-gray;border:1px solid $gray;font-size: 3em;text-align: center;color:$gray;padding:20px 0;border-radius: 15px;
+        &.is-active {background: $ice;border: 1px solid $teal;}
+        &.is-active span, &.is-active label {color:$teal;}
+        span {margin:0;display:block;line-height: 1;}
+        label {font-size: 14px;margin:0;display: block;text-align: center;;}
+    }
+    .t_and_c {
+        text-align: center;
+        label {font-size: .8em;color: $dark-gray;}
+    }
+    .button {margin: 15px auto;border-radius: 15px;}
+    .checkbox.is-error {
+        color: red;
+    }
+
+    @include media(break7) {
+        margin:0;position: absolute;top: 0;right: -390px;padding: 20px 40px;width: 400px;z-index: -2;max-width: initial;
+        .package_type {max-width: 60%;}
+        .rate_box {max-width:60%;text-transform: uppercase;color:$dark-gray;}
+    }
+}
+
+/* Elements */
+a.github_tag {
+    background:url("/images/github-corner.svg") no-repeat;height: 83px;width: 80px;top:0;right:0;position: absolute;
+}

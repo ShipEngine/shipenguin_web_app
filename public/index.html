@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Shipengquin by ShipEngine</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" href="/css/styles.css">
+  <link rel="icon" type="image/png" sizes="104x80" href="/images/shipenguin-icon.svg">
+</head>
+
+<body>
+    <header>
+        <a class="logo" href="/"></a>
+        <p class="tagline">Shipenguin is the fastest, cheapest way to print a label online.</p>
+    </header>
+
+    <div class="container step0">
+        <div class="box">
+
+            <div class="step_chart columns m-t-lg is-centered">
+                <div class="column is-two-thirds">
+                <ul class="steps has-content-centered">
+                    <li class="steps-segment is-active">
+                        <span class="steps-marker"></span>
+                        <div class="steps-content">
+                            <p class="is-size-7">Start</p>
+                        </div>
+                    </li>
+                    <li class="steps-segment">
+                        <span class="steps-marker"></span>
+                        <div class="steps-content">
+                            <p class="is-size-7">Shipment</p>
+                        </div>
+                    </li>
+                    <li class="steps-segment">
+                        <span class="steps-marker"></span>
+                        <div class="steps-content">
+                            <p class="is-size-7">Payment</p>
+                        </div>
+                    </li>
+                    <li class="steps-segment">
+                        <span class="steps-marker"></span>
+                        <div class="steps-content">
+                            <p class="is-size-7">Get Label</p>
+                        </div>
+                    </li>
+                </ul>
+                </div>
+            </div>
+
+            <section class="step step_one">
+                <h1 class="headline">Shipenguin is the fastest, cheapest way to print a label online.</h1>
+                <p class="subhead">Something something. How amazing is Shipenguin? Look ma! No hands. Checkout these awesome shipping labels. This is all powered by <a href="https://www.shipengine.com/">ShipEngine</a>.</p>
+                <div class="m-lg">
+                    <button id="goToStep2" class="button is-primary is-active bounce">Get Started</button>
+                    <p class="text-center m-t-md is-size-6">Secondary call to action? Login?</p>
+                </div>
+            </section>
+
+            <section class="step step_two is-hidden">
+                <h1 class="headline">Let's get to know each other...</h1>
+                <p class="subhead m-b-md">Where are you shipping from? What are you shipping?</p>
+
+                <form id="step_two_form">
+                <div class="columns">
+                    <div class="column is-one-third">
+
+                        <div class="field">
+                            <label class="label is-size-6">My Name</label>
+                            <div class="control">
+                                <input id="my_name" placeholder="Your Full Name" class="input" type="text" value="" required />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="locationField2" class="column is-two-thirds">
+                        <div class="field">
+                            <label class="label is-size-6">Ship from <span>Autocomplete by Google</span></label>
+                            <div class="control">
+                                <input id="autocomplete" placeholder="Start typing your address" onFocus="geolocate()" class="input" type="text" required />
+                                <span class="tag verify" id="verify">
+                                    <i class="fas fa-cog fa-spin"></i>Verifying via ShipEngine
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="columns">
+                    <div class="column is-one-third">
+                        <div class="field">
+                            <label class="label is-size-6">recipient’s Name</label>
+                            <div class="control">
+                                <input id="rep_name" placeholder="Recipient’s Full Name" class="input" type="text" value="" required />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="locationField2" class="column is-two-thirds">
+                        <div class="field">
+                            <label class="label is-size-6">Ship to <span>Autocomplete by Google</span></label>
+                            <div class="control">
+                                <input id="autocomplete2" placeholder="Start typing your address" onFocus="geolocate()" class="input" type="text" required />
+                                <span class="tag verify" id="verify2">
+                                    <i class="fas fa-cog fa-spin"></i>Verifying via ShipEngine
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <label class="label has-text-grey-light">Package Information</label>
+
+                <div class="columns package_info">
+                    <div class="column is-one-half">
+                        <label class="label">Package weight</label>
+                        <div class="columns">
+                            <div class="column is-one-half">
+                                <div class="control">
+                                    <input id="weight_lb" class="input" type="text" placeholder="Weight - Lbs" value="" required>
+                                </div>
+                                <p class="help">Pounds</p>
+                            </div>
+                            <div class="column is-one-half">
+                                <div class="control">
+                                    <input id="weight_oz" class="input" type="text" placeholder="Weight - Oz" value="" required>
+                                </div>
+                                <p class="help">Oz</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="column is-one-half">
+                        <label class="label">Package Dimensions</label>
+                        <div class="columns">
+                            <div class="column is-one-half">
+                                <div class="control">
+                                    <input id="size_length" class="input" type="text" placeholder="Length" value="" required>
+                                </div>
+                                <p class="help">Length in inches</p>
+                            </div>
+                            <div class="column is-one-half">
+                                <div class="control">
+                                    <input id="size_width" class="input" type="text" placeholder="Width" value="" >
+                                </div>
+                                <p class="help">Width in inches</p>
+                            </div>
+                            <div class="column is-one-half">
+                                <div class="control">
+                                    <input id="size_height" class="input" type="text" placeholder="Height" value="" >
+                                </div>
+                                <p class="help">Height in inches</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <aside>
+
+                    <div class="rate_list">
+                        <div class="rate_holder"></div>
+                        <div class="close"><i class="fa fa-times" aria-hidden="true"></i></div>
+                    </div>
+
+                    <div class="package_type is-inactive">
+                        <div class="holder">
+                            <label>Package Type</label>
+                                <img src="/images/icon-box-generic.svg">
+                            <p class="package_label">USPS</p>
+                        </div>
+                        <button>Select package type</button>
+                    </div>
+
+                    <div class="rate_box">
+                        <label>Your label price</label>
+                        <div class="rate">
+                            <span><i class="fas fa-cog fa-spin"></i></span><label>Plus Tax</label>
+                        </div>
+                    </div>
+
+                    <div class="is-grouped-centered">
+                        <p class="step2_errors"></p>
+                        <button id="goToStep3" class="button is-inactive" disabled>Pay for my label <i class="fas fa-arrow-alt-circle-right"></i></button>
+                    </div>
+
+                    <div class="t_and_c"">
+                        <label class="checkbox">
+                            <input type="checkbox" class="checkHazardous">
+                            I agree this package contains <strong>no</strong> hazardous materials
+                        </label>
+                        <label class="checkbox">
+                            <input type="checkbox" class="checkTcs">
+                            I agree to the <a href="#">terms and conditions</a>
+                        </label>
+                    </div>
+                 </aside>
+                </form>
+            </section>
+
+            <section class="step step_three is-hidden">
+                <h1 class="headline">Almost finished!</h1>
+                <p class="subhead final_price">We'll charge your card <strong>$xx.xx</strong> and you can download your label on the next step!</p>
+                <form id="payment-form">
+                    <div class="package_info payment_info">
+                        <div class="field is-grouped is-grouped-centered">
+                            <img src="/images/powered_by_stripe.svg">
+                        </div>
+                        <div id="card-element"><!--Stripe.js injects the Card Element--></div>
+                        <div class="field is-grouped is-grouped-centered">
+                            <p id="card-errors" role="alert"></p>
+                            <p class="result-message is-hidden">
+                            Payment succeeded!
+                            </p>
+                        </div>
+                        <div class="field is-grouped is-grouped-centered m-md">
+                            <button id="submit" class="button is-primary bounce">Pay and Grab my label! <i class="fas fa-arrow-alt-circle-right"></i></button>
+                        </div>
+                    </form>
+            </section>
+
+            <section class="step step_four has-text-centered is-hidden">
+                <h1 class="headline">Success!</h1>
+                <p class="subhead m-b-md">Checkout your label below!</p>
+                <p><a id="labelPlaceholder" href="#"><img class="label_preview" src="#"><br>Download my label</a></p>
+            </section>
+
+        </div>
+
+    </div>
+
+    <a class="github_tag" href="https://github.com/mccombs/shipenguin-by-shipengine"></a>
+    <div class="penguin_background">
+        <img class="ice_left" src="/images/ice_corner_left.svg">
+        <img class="ice_right" src="/images/ice_corner_right.svg">
+        <img class="ice_a" src="/images/ice_a.svg">
+        <img class="ice_b" src="/images/ice_b.svg">
+        <img class="ice_c" src="/images/ice_c.svg">
+        <img class="pen penguin_a" src="/images/penguin.svg">
+        <img class="pen penguin_b" src="/images/penguin.svg">
+        <img class="pen penguin_c" src="/images/penguin.svg">
+        <img class="pen penguin_d" src="/images/penguin.svg">
+        <img class="pen penguin_e" src="/images/penguin.svg">
+    </div>
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAE-jLiYIzUUX9ahjhVptyfcEKXjYNo9QY&libraries=places&callback=initAutocomplete" defer></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+    <script src="https://js.stripe.com/v3/"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <script src="/js/client.js" defer></script>
+
+</body>
+
+</html>
