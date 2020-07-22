@@ -318,7 +318,8 @@ function estimate(someData) {
         localStorage.setItem("rateId", rateId);
         localStorage.setItem("ratePrice", baseRate);
 
-        console.log("rateId:" + localStorage.getItem("rateId"));
+        console.log("rateId: " + localStorage.getItem("rateId"));
+        console.log("ratePrice: " + localStorage.getItem("ratePrice"));
 
         $(data.rate_response.rates).each(function() {
             console.log(this);

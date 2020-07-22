@@ -32,7 +32,6 @@ router.post('/verify', (req, res) => {
         if (error) throw new Error(error);
 
         var responseBody =  JSON.parse(response.body);
-        // quick reference -> app console
         // var verification = responseBody[0].status;
         // console.log(verification);
         console.log(responseBody);
