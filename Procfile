@@ -1,4 +1,4 @@
 # Heroku procfile
-# https://devcenter.heroku.com/aricles/procfile
+# https://devcenter.heroku.com/articles/procfile
 
-worker: npm start
+web: npm start
