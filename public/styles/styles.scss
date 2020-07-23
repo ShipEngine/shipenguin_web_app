@@ -95,7 +95,7 @@ $off-white: #f0f0f0;
     animation-fill-mode: both;
     animation-timing-function: ease-in-out;
     animation-iteration-count: infinite;
-    -webkit-animation-iteration-count: infinite; 
+    -webkit-animation-iteration-count: infinite;
 }
 @keyframes bounce {
 	0%, 100%, 20%, 50%, 80% {
@@ -263,4 +263,5 @@ aside {
 /* Elements */
 a.github_tag {
     background:url("/images/github-corner.svg") no-repeat;height: 83px;width: 80px;top:0;right:0;position: absolute;
+    cursor: pointer;
 }
