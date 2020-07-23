@@ -20,4 +20,4 @@ This is a reference implementation of the following ShipEngine API services:
 
 - This app also uses [Stripe](https://stripe.com/docs "Stripe Developer Portal") for payments. 
     * You can use the following test card information to pay for the label: 
-    * `4242 4242 4242 4242` `CVV:<any 3 digits>` `EXP:<any future date>`
+    * `4242 4242 4242 4242` `CVV:<any 3 digits>` `EXP:<any future date>` `ZIPCODE:<any 6 digits>`
