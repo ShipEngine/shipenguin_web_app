@@ -264,4 +264,5 @@ aside {
 a.github_tag {
     background:url("/images/github-corner.svg") no-repeat;height: 83px;width: 80px;top:0;right:0;position: absolute;
     cursor: pointer;
+    z-index:10;
 }
