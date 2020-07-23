@@ -29,7 +29,7 @@ router.post('/verify', (req, res) => {
         body: JSON.stringify(req.body)
       };
       request(options, function (error, response) {
-        if (error) throw new Error(error);
+        if (error) throw new Error(error) && console.log(error);
 
         var responseBody =  JSON.parse(response.body);
         // var verification = responseBody[0].status;
@@ -63,7 +63,7 @@ router.post('/rates', (req, res) => {
         // quick reference -> app console
         // var verification = responseBody[0].status;
         // console.log(verification);
-        // console.log(responseBody);
+        console.log(responseBody);
         res.json(responseBody);
         // res.json(response);
         // res.status(200).json(response);
@@ -87,7 +87,7 @@ router.post('/label', (req, res) => {
 
       };
       request(options, function (error, response) {
-        if (error) throw new Error(error);
+        if (error) throw new Error(error) && console.log(error);
 
         var responseBody =  JSON.parse(response.body);
         // quick reference -> app console

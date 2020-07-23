@@ -10,9 +10,11 @@ const path = require('path');
 const ngrok = config.ngrok.enabled ? require('ngrok') : null;
 const app = express();
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
+const morgan = require('morgan');
 const opn = require('opn');
 const { read } = require('fs');
 
+app.use(morgan('dev'));
 app.use(
   bodyParser.json({
     // The raw body to verify webhook signatures.
