@@ -1,4 +1,3 @@
-
 localStorage.clear();
 
 //////////////////////////////////////////
@@ -22,7 +21,7 @@ function initAutocomplete() {
     });
 
 
-  autocomplete.addListener('place_changed', function() {
+  autocomplete.addListener('place_changed', function () {
     fillInAddress(autocomplete, "");
   });
 
@@ -31,7 +30,7 @@ function initAutocomplete() {
     (document.getElementById('autocomplete2')), {
       types: ['geocode']
     });
-  autocomplete2.addListener('place_changed', function() {
+  autocomplete2.addListener('place_changed', function () {
     fillInAddress(autocomplete2, "2");
   });
 
@@ -58,11 +57,12 @@ function fillInAddress(autocomplete, unique) {
 
   verifyAddressWithShipEngine(place, statusButton, unique);
 }
+
 google.maps.event.addDomListener(window, "load", initAutocomplete);
 
 function geolocate() {
   if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(function(position) {
+    navigator.geolocation.getCurrentPosition(function (position) {
       var geolocation = {
         lat: position.coords.latitude,
         lng: position.coords.longitude
@@ -70,321 +70,351 @@ function geolocate() {
     });
   }
 }
+
 ///// END STEP ONE: Google Autocomplete //////
 /////////////////////////////////////////////
 
 /////////////////////////////////////////////
 ///// STEP TWO: Verify with ShipEngine //////
 function verifyAddressWithShipEngine(data, statusButton, unique) {
-    const addressData = [];
-    var store = false;
-    var obj = {};
+  const addressData = [];
+  var store = false;
+  var obj = {};
 
-    ///// STEP TWO (A): Clean //////
-    for (var i = 0; i < data.address_components.length; i++) {
-        var addressType = data.address_components[i].types[0];
-        var val = data.address_components[i].short_name;
+  ///// STEP TWO (A): Clean //////
+  for (var i = 0; i < data.address_components.length; i++) {
+    var addressType = data.address_components[i].types[0];
+    var val = data.address_components[i].short_name;
 
-        // SHIPENGINE ADDRESS FORMAT
-        // [{"address_line1":"Winchester Blvd","city_locality":"San Jose","state_province":"CA","postal_code":"78756","country_code":"US"}]
+    // SHIPENGINE ADDRESS FORMAT
+    // [{"address_line1":"Winchester Blvd","city_locality":"San Jose","state_province":"CA","postal_code":"78756","country_code":"US"}]
 
-        // store street number and route into address_line1
-        if (addressType == "street_number") {
-            streetNumber = val;
-            var store = false;
-            continue;
-        }
-        if (addressType == "route") {
-            addressType = "address_line1";
-            val = streetNumber + " " + val;
-        }
-        if (addressType == "locality") { addressType = "city_locality" };
-        if (addressType == "administrative_area_level_1") { addressType = "state_province" };
-        // Translating and hardcoding US
-        if (addressType == "country") { addressType = "country_code";val = "US"; };
-
-        var store = true;
-
-        if (store == true) {
-            obj[addressType] = val;
-        }
-
+    // store street number and route into address_line1
+    if (addressType == "street_number") {
+      streetNumber = val;
+      var store = false;
+      continue;
     }
-    addressData.push(obj);
-
-    // Name is assocaited with Address for ShipEngine
-    if (unique != 2) {
-       obj["name"] = $('#my_name').val();
-    } else {
-        obj["name"] = $('#rep_name').val();
+    if (addressType == "route") {
+      addressType = "address_line1";
+      val = streetNumber + " " + val;
     }
-    // adding a placeholder because we don't ask for phone number
-    obj["phone"] = "111-111-1111";
-    // adding a placeholder because we don't ask for phone number
+    if (addressType == "locality") {
+      addressType = "city_locality"
+    }
+    ;
+    if (addressType == "administrative_area_level_1") {
+      addressType = "state_province"
+    }
+    ;
+    // Translating and hardcoding US
+    if (addressType == "country") {
+      addressType = "country_code";
+      val = "US";
+    }
+    ;
 
-    const addressDataFormat = JSON.stringify(addressData);
+    var store = true;
 
-    console.log('Format address to verify with SE');
-    console.log(addressDataFormat);
+    if (store == true) {
+      obj[addressType] = val;
+    }
 
-    // Reset button status while verifing
-    statusButton.className = "tag verify is-warning"
-    statusButton.innerHTML = '<i class="fas fa-cog fa-spin"></i>Verifying via ShipEngine';
+  }
+  addressData.push(obj);
 
-    ///// STEP TWO (B): Check with SHIPENGINE -> router.post('/verify') //////
-    fetch("/verify", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: addressDataFormat
-      })
-      .then(function(response) {
-        return response.json();
-      }).then(function(data) {
-        // console.log(data);
+  // Name is assocaited with Address for ShipEngine
+  if (unique != 2) {
+    obj["name"] = $('#my_name').val();
+  } else {
+    obj["name"] = $('#rep_name').val();
+  }
+  // adding a placeholder because we don't ask for phone number
+  obj["phone"] = "111-111-1111";
+  // adding a placeholder because we don't ask for phone number
 
-        // Check Satus
-        if (data[0].status) {
-            var status = data[0].status;
-            if (status == "verified") {
-                statusButton.className = "tag verify is-success";
-                statusButton.innerHTML = "Verified by ShipEngine!";
+  const addressDataFormat = JSON.stringify(addressData);
 
-                var whichUnique = "address" + unique;
-                localStorage.setItem(whichUnique, addressDataFormat);
+  console.log('Format address to verify with SE');
+  console.log(addressDataFormat);
 
-            }
-            else if (status == "unverified") {
-                statusButton.innerHTML = "Could not verify address";
-            }
-            else if (status == "warning") {
-                statusButton.className += " is-danger";
-                statusButton.innerHTML = "Error with Address! Please try again.";
-            }
-            else if (status == "error") {
-                statusButton.className += " is-danger";
-                statusButton.innerHTML = "Error with Address! Please try again.";
-            }
-        };
-    });
+  // Reset button status while verifing
+  statusButton.className = "tag verify is-warning"
+  statusButton.innerHTML = '<i class="fas fa-cog fa-spin"></i>Verifying via ShipEngine';
+
+  ///// STEP TWO (B): Check with SHIPENGINE -> router.post('/verify') //////
+  fetch("/verify", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: addressDataFormat
+  })
+    .then(function (response) {
+      return response.json();
+    }).then(function (data) {
+    // console.log(data);
+
+    // Check Satus
+    if (data[0].status) {
+      var status = data[0].status;
+      if (status == "verified") {
+        statusButton.className = "tag verify is-success";
+        statusButton.innerHTML = "Verified by ShipEngine!";
+
+        var whichUnique = "address" + unique;
+        localStorage.setItem(whichUnique, addressDataFormat);
+
+      } else if (status == "unverified") {
+        statusButton.innerHTML = "Could not verify address";
+      } else if (status == "warning") {
+        statusButton.className += " is-danger";
+        statusButton.innerHTML = "Error with Address! Please try again.";
+      } else if (status == "error") {
+        statusButton.className += " is-danger";
+        statusButton.innerHTML = "Error with Address! Please try again.";
+      }
+    }
+    ;
+  });
 
 
 }
+
 ///// END STEP TWO: Verify with ShipEngine //////
 /////////////////////////////////////////////
 
 
-$('#goToStep2').click(function(){
+$('#goToStep2').click(function () {
+  $('.container').removeClass('step0 step1 step2 step3');
+  $('.container').addClass('step1');
+  $('.step_one').addClass('is-hidden');
+  $('.step_two').removeClass('is-hidden');
+  $('.steps-segment').removeClass('is-active');
+  $('.steps-segment:nth-child(2)').addClass('is-active');
+});
+
+$('.package_type, .package_type button').click(function (event) {
+  event.preventDefault();
+  if (!$('.package_type').hasClass('is-inactive')) {
+    $('.rate_list').animate({top: 0}, 800);
+  }
+});
+$('.rate_list .close').click(function (event) {
+  event.preventDefault();
+  $('.rate_list').animate({top: "-100%"}, 800);
+});
+
+$("body").on("click", ".newRate", function (event) {
+  event.preventDefault();
+  $('.rate_list').animate({top: "-100%"}, 800);
+  var newPackage = $(this).attr('id');
+  var newPackageService = $(this).find('strong').text();
+  var newPackageName = $(this).find('em').text();
+  var newPackagePrice = $(this).find('span').text();
+  console.log(newPackage + "" + newPackageName + " " + newPackagePrice);
+  var stripePrice = newPackagePrice.replace('$', '');
+
+  // overwriting baseRate and storing
+  localStorage.setItem("rateId", newPackage);
+  localStorage.setItem("ratePrice", stripePrice);
+
+  $('.package_label').text(newPackageService + newPackageName);
+  $('.rate span').text(newPackagePrice);
+  $('.final_price strong').text('$' + stripePrice);
+
+});
+
+$('#goToStep3').click(function (event) {
+  event.preventDefault();
+  if (($('.checkHazardous:checked').is(':checked')) && ($('.checkTcs:checked').is(':checked'))) {
+    // Container Adjust
     $('.container').removeClass('step0 step1 step2 step3');
-    $('.container').addClass('step1');
-    $('.step_one').addClass('is-hidden');
-    $('.step_two').removeClass('is-hidden');
+    $('.container').addClass('step2');
+    $('.step_two').slideUp();
+    $('.step_three').slideDown().removeClass('is-hidden');
+
+    // Steps Adjust
     $('.steps-segment').removeClass('is-active');
-    $('.steps-segment:nth-child(2)').addClass('is-active');
-});
+    $('.steps-segment:nth-child(3)').addClass('is-active');
 
-$('.package_type, .package_type button').click(function(event){
-    event.preventDefault();
-    if (!$('.package_type').hasClass('is-inactive')) {
-        $('.rate_list').animate({top:0}, 800);
-    }
-});
-$('.rate_list .close').click(function(event){
-    event.preventDefault();
-    $('.rate_list').animate({top:"-100%"}, 800);
-});
-
-$("body").on("click", ".newRate", function(event){
-    event.preventDefault();
-    $('.rate_list').animate({top:"-100%"}, 800);
-    var newPackage = $(this).attr('id');
-    var newPackageService = $(this).find('strong').text();
-    var newPackageName = $(this).find('em').text();
-    var newPackagePrice = $(this).find('span').text();
-    console.log(newPackage + "" + newPackageName + " " + newPackagePrice);
-    var stripePrice = newPackagePrice.replace('$', '');
-
-    // overwriting baseRate and storing
-    localStorage.setItem("rateId", newPackage);
-    localStorage.setItem("ratePrice", stripePrice);
-
-    $('.package_label').text(newPackageService + newPackageName);
-    $('.rate span').text(newPackagePrice);
-    $('.final_price strong').text('$' + stripePrice);
-
-});
-
-$('#goToStep3').click(function(event) {
-    event.preventDefault();
-    if (($('.checkHazardous:checked').is(':checked')) && ($('.checkTcs:checked').is(':checked'))) {
-        // Container Adjust
-        $('.container').removeClass('step0 step1 step2 step3');
-        $('.container').addClass('step2');
-        $('.step_two').slideUp();
-        $('.step_three').slideDown().removeClass('is-hidden');
-
-        // Steps Adjust
-        $('.steps-segment').removeClass('is-active');
-        $('.steps-segment:nth-child(3)').addClass('is-active');
-
-        // Send new price to stripe
-        console.log("pre step 3");
-        console.log(localStorage.getItem("rateId"));
-        pay(localStorage.getItem("ratePrice"));
-    } else {
-        $('.t_and_c .checkbox').addClass('is-error');
-    }
+    // Send new price to stripe
+    console.log("pre step 3");
+    console.log(localStorage.getItem("rateId"));
+    pay(localStorage.getItem("ratePrice"));
+  } else {
+    $('.t_and_c .checkbox').addClass('is-error');
+  }
 
 
 });
 
 $("#step_two_form input").bind('blur', function (e) {
-    console.log('=== STEP: Form blur and data check ===');
-    if (localStorage.getItem("address2") != null) {
-        var ship_to = JSON.parse(localStorage.getItem("address2"))[0];
-    }
-    if (localStorage.getItem("address") != null) {
-        var ship_from = JSON.parse(localStorage.getItem("address"))[0];
-    }
+  console.log('=== STEP: Form blur and data check ===');
+  if (localStorage.getItem("address2") != null) {
+    var ship_to = JSON.parse(localStorage.getItem("address2"))[0];
+  }
+  if (localStorage.getItem("address") != null) {
+    var ship_from = JSON.parse(localStorage.getItem("address"))[0];
+  }
 
-    // Calculate weight
-    var lbs = $('#weight_lb').val();
-    var oz = $('#weight_oz').val();
-    var totalWeight = (lbs * 16) + oz;
+  // Calculate weight
+  var lbs = $('#weight_lb').val();
+  var oz = $('#weight_oz').val();
+  var totalWeight = (lbs * 16) + oz;
 
-    // Calculate size
-    var size_length = $('#size_length').val();
-    var size_width = $('#size_width').val();
-    var size_height = $('#size_height').val();
+  // Calculate size
+  var size_length = $('#size_length').val();
+  var size_width = $('#size_width').val();
+  var size_height = $('#size_height').val();
 
-    var someData =
-        {
-            // It is recommended to obfuscate carrier_ids when possible.
-            rate_options: {"carrier_ids":["se-256091"]},
-            shipment: {
-                validate_address:"no_validation",
-                ship_to: ship_to,
-                ship_from: ship_from,
-                packages: [{"weight":{"value":totalWeight,"unit":"ounce"},"dimensions":{"unit":"inch","length":size_length,"width":size_width,"height":size_height}}]
+  var someData =
+    {
+      // It is recommended to obfuscate carrier_ids when possible.
+      rate_options: {
+        "carrier_ids": [
+          "se-256091"
+        ],  // TODO: confirm with robertbahn if we want to
+        // "package_types": [
+        //   "package"
+        // ]
+      },
+      shipment: {
+        validate_address: "no_validation",
+        ship_to: ship_to,
+        ship_from: ship_from,
+        packages: [
+          {
+            "weight": {
+              "value": totalWeight,
+              "unit": "ounce"
+            },
+            "dimensions": {
+              "unit": "inch",
+              "length": size_length,
+              "width": size_width,
+              "height": size_height
             }
-        };
+          }
+        ]
+      }
+    };
 
-    var dataArray = [ship_to, ship_from, totalWeight, size_length, size_width, size_height];
-    console.log(dataArray);
-    if (!dataArray.includes(undefined)) {
-        console.log('exsists');
-        var package = JSON.stringify(someData);
-        estimate(package);
-    }
+  var dataArray = [ship_to, ship_from, totalWeight, size_length, size_width, size_height];
+  console.log(dataArray);
+  if (!dataArray.includes(undefined)) {
+    console.log('exsists');
+    var package = JSON.stringify(someData);
+    estimate(package);
+  }
 });
 
 
 function estimate(someData) {
-    console.log('STEP: Estimate');
+  console.log('STEP: Estimate');
 
-    fetch("/rates", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: someData
-      })
-      .then(function(response) {
-        return response.json();
-      }).then(function(data) {
-        console.log(data);
+  fetch("/rates", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: someData
+  })
+    .then(function (response) {
+      return response.json();
+    }).then(function (data) {
+    console.log(data);
 
-        // console.log(data.rate_response.rates[0]);
-        var baseRate = data.rate_response.rates[0].shipping_amount.amount;
-        var rateId = data.rate_response.rates[0].rate_id;
-        var baseServiceType = data.rate_response.rates[0].service_type;
-        var basePackageType = data.rate_response.rates[0].package_type;
+    // console.log(data.rate_response.rates[0]);
+    var baseRate = data.rate_response.rates[0].shipping_amount.amount;
+    var rateId = data.rate_response.rates[0].rate_id;
+    var baseServiceType = data.rate_response.rates[0].service_type;
+    var basePackageType = data.rate_response.rates[0].package_type;
 
-        console.log("=== RATE ID ===");
-        console.log(rateId);
+    console.log("=== RATE ID ===");
+    console.log(rateId);
 
-        // Run actions with base rate data
-        $('.rate span').text('$' + baseRate);
-        $('.final_price strong').text('$' + baseRate);
-        $('.package_type').removeClass('is-inactive');
-        $('.package_type .package_label').text(baseServiceType + ' ' + basePackageType);
-        $('.rate_box .rate').addClass('is-active');
+    // Run actions with base rate data
+    $('.rate span').text('$' + baseRate);
+    $('.final_price strong').text('$' + baseRate);
+    $('.package_type').removeClass('is-inactive');
+    $('.package_type .package_label').text(baseServiceType + ' ' + basePackageType);
+    $('.rate_box .rate').addClass('is-active');
 
-        // Allow to go to Step 3
-        $('#goToStep3').removeAttr("disabled").removeClass('is-inactive').addClass('is-success');
+    // Allow to go to Step 3
+    $('#goToStep3').removeAttr("disabled").removeClass('is-inactive').addClass('is-success');
 
-        // Store base rate ID
-        localStorage.setItem("rateId", rateId);
-        localStorage.setItem("ratePrice", baseRate);
+    // Store base rate ID
+    localStorage.setItem("rateId", rateId);
+    localStorage.setItem("ratePrice", baseRate);
 
-        console.log("rateId: " + localStorage.getItem("rateId"));
-        console.log("ratePrice: " + localStorage.getItem("ratePrice"));
+    console.log("rateId: " + localStorage.getItem("rateId"));
+    console.log("ratePrice: " + localStorage.getItem("ratePrice"));
 
-        $(data.rate_response.rates).each(function() {
-            console.log(this);
-            $('.rate_holder').append('<div class="newRate" id="' + this.rate_id + '"><strong>' + this.service_type + '</strong><em>'+ ' ' + this.package_type + '</em><span>$'+this.shipping_amount.amount+'</span></div>');
-        });
-
-
+    $(data.rate_response.rates).each(function () {
+      console.log(this);
+      $('.rate_holder').append('<div class="newRate" id="' + this.rate_id + '"><strong>' + this.service_type + '</strong><em>' + ' ' + format_package_codes(this.package_type) + '</em><span>$' + this.shipping_amount.amount + '</span></div>');
     });
+
+
+  });
 }
 
 // A reference to Stripe.js initialized with your real test publishable API key.
 var stripe = Stripe("pk_test_0gDWcjB7xWWgt34p1UQoCxFH00CcruEzwb");
 
 function pay(storedRate) {
-    console.log("=== STEP Pay() ===");
-    console.log(storedRate);
+  console.log("=== STEP Pay() ===");
+  console.log(storedRate);
 
-    var rate = {"rate": storedRate};
+  var rate = {"rate": storedRate};
 
-    fetch("/create-payment-intent", {
+  fetch("/create-payment-intent", {
     method: "POST",
     headers: {
-        "Content-Type": "application/json"
+      "Content-Type": "application/json"
     },
     body: JSON.stringify(rate)
+  })
+    .then(function (result) {
+      return result.json();
     })
-    .then(function(result) {
-        return result.json();
-    })
-    .then(function(data) {
-        var elements = stripe.elements();
+    .then(function (data) {
+      var elements = stripe.elements();
 
-        var style = {
+      var style = {
         base: {
-            color: "#32325d",
-            fontFamily: 'Arial, sans-serif',
-            fontSmoothing: "antialiased",
-            fontSize: "16px",
-            "::placeholder": {
+          color: "#32325d",
+          fontFamily: 'Arial, sans-serif',
+          fontSmoothing: "antialiased",
+          fontSize: "16px",
+          "::placeholder": {
             color: "#32325d"
-            }
+          }
         },
         invalid: {
-            fontFamily: 'Arial, sans-serif',
-            color: "#fa755a",
-            iconColor: "#fa755a"
+          fontFamily: 'Arial, sans-serif',
+          color: "#fa755a",
+          iconColor: "#fa755a"
         }
-        };
+      };
 
-        var card = elements.create("card", { style: style });
-        // Stripe injects an iframe into the DOM
-        card.mount("#card-element");
+      var card = elements.create("card", {style: style});
+      // Stripe injects an iframe into the DOM
+      card.mount("#card-element");
 
-        card.on("change", function (event) {
-            // Disable the Pay button if there are no card details in the Element
-            document.querySelector("button").disabled = event.empty;
-            document.querySelector("#card-errors").textContent = event.error ? event.error.message : "";
-        });
+      card.on("change", function (event) {
+        // Disable the Pay button if there are no card details in the Element
+        document.querySelector("button").disabled = event.empty;
+        document.querySelector("#card-errors").textContent = event.error ? event.error.message : "";
+      });
 
-        var form = document.getElementById("payment-form");
-        form.addEventListener("submit", function(event) {
+      var form = document.getElementById("payment-form");
+      form.addEventListener("submit", function (event) {
         event.preventDefault();
         // Complete payment when the submit button is clicked
         payWithCard(stripe, card, data.clientSecret);
-        });
+      });
     });
 
 
@@ -393,96 +423,106 @@ function pay(storedRate) {
 // Calls stripe.confirmCardPayment
 // If the card requires authentication Stripe shows a pop-up modal to
 // prompt the user to enter authentication details without leaving your page.
-var payWithCard = function(stripe, card, clientSecret) {
-    loading(true);
-    stripe.confirmCardPayment(clientSecret, {
-        payment_method: {
-            card: card
-        }
-        })
-        .then(function(result) {
-        if (result.error) {
-            // Show error to your customer
-            showError(result.error.message);
-        } else {
-            // The payment succeeded!
-            orderComplete(result.paymentIntent.id);
-        }
-        });
+var payWithCard = function (stripe, card, clientSecret) {
+  loading(true);
+  stripe.confirmCardPayment(clientSecret, {
+    payment_method: {
+      card: card
+    }
+  })
+    .then(function (result) {
+      if (result.error) {
+        // Show error to your customer
+        showError(result.error.message);
+      } else {
+        // The payment succeeded!
+        orderComplete(result.paymentIntent.id);
+      }
+    });
 };
 
 /* ------- UI helpers ------- */
 
 // Shows a success message when the payment is complete
-var orderComplete = function(paymentIntentId) {
-    loading(false);
-    //   document
-    //     .querySelector(".result-message a")
-    //     .setAttribute(
-    //       "href",
-    //       "https://dashboard.stripe.com/test/payments/" + paymentIntentId
-    //     );
+var orderComplete = function (paymentIntentId) {
+  loading(false);
+  //   document
+  //     .querySelector(".result-message a")
+  //     .setAttribute(
+  //       "href",
+  //       "https://dashboard.stripe.com/test/payments/" + paymentIntentId
+  //     );
 
-    // RELEASE THE HOUNDS!
-    console.log('=== STEP XX: Release the hounds! I mean form ===');
-    getLabel();
-    $('.result-message').removeClass("is-hidden");
-    $('.container').removeClass('step0 step1 step2 step3');
-    $('.container').addClass('step3');
-    $('.step_three').addClass('is-hidden');
-    $('.step_four').removeClass('is-hidden');
-    // Steps Adjust
-    $('.steps-segment').removeClass('is-active');
-    $('.steps-segment:nth-child(4)').addClass('is-active');
+  // RELEASE THE HOUNDS!
+  console.log('=== STEP XX: Release the hounds! I mean form ===');
+  getLabel();
+  $('.result-message').removeClass("is-hidden");
+  $('.container').removeClass('step0 step1 step2 step3');
+  $('.container').addClass('step3');
+  $('.step_three').addClass('is-hidden');
+  $('.step_four').removeClass('is-hidden');
+  // Steps Adjust
+  $('.steps-segment').removeClass('is-active');
+  $('.steps-segment:nth-child(4)').addClass('is-active');
 
-    document.querySelector("button").disabled = true;
+  document.querySelector("button").disabled = true;
 };
 
 // Show the customer the error from Stripe if their card fails to charge
-var showError = function(errorMsgText) {
-    loading(false);
-    var errorMsg = document.querySelector("#card-errors");
-    errorMsg.textContent = errorMsgText;
-    setTimeout(function() {
-        errorMsg.textContent = "";
-    }, 4000);
+var showError = function (errorMsgText) {
+  loading(false);
+  var errorMsg = document.querySelector("#card-errors");
+  errorMsg.textContent = errorMsgText;
+  setTimeout(function () {
+    errorMsg.textContent = "";
+  }, 4000);
 };
 
 // Show a spinner on payment submission
-    var loading = function(isLoading) {
-    if (isLoading) {
-        // Disable the button and show a spinner
-        document.querySelector("button").disabled = true;
-    } else {
-        document.querySelector("button").disabled = false;
-    }
+var loading = function (isLoading) {
+  if (isLoading) {
+    // Disable the button and show a spinner
+    document.querySelector("button").disabled = true;
+  } else {
+    document.querySelector("button").disabled = false;
+  }
 };
 
 function getLabel() {
-    console.log('=== STEP XX: Get Label ===');
-    console.log(localStorage.getItem("rateId"));
+  console.log('=== STEP XX: Get Label ===');
+  console.log(localStorage.getItem("rateId"));
 
-     var rate = {"rate": localStorage.getItem("rateId")};
+  var rate = {"rate": localStorage.getItem("rateId")};
 
-    console.log(rate);
+  console.log(rate);
 
-    fetch("/label", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify(rate)
-        })
-        .then(function(response) {
-            return response.json();
-        }).then(function(data) {
+  fetch("/label", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(rate)
+  })
+    .then(function (response) {
+      return response.json();
+    }).then(function (data) {
 
-            console.log(data);
-            var labelPdf = data.label_download.href;
-            var labelImage = data.label_download.png;
+    console.log(data);
+    var labelPdf = data.label_download.href;
+    var labelImage = data.label_download.png;
 
-            $('#labelPlaceholder').attr("href", labelPdf);
-            $('.label_preview').attr("src", labelImage);
+    $('#labelPlaceholder').attr("href", labelPdf);
+    $('.label_preview').attr("src", labelImage);
 
-        })
+  })
+}
+
+// util functions
+function format_package_codes(str) {
+  let newStr = str.split("_");
+
+  for (let i = 0; i < newStr.length; i++) {
+    newStr[i] = newStr[i][0].toUpperCase() + newStr[i].substr(1);
+  }
+  return newStr.join(" ");
 }
