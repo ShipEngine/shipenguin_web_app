@@ -133,7 +133,8 @@ $off-white: #f0f0f0;
 /* Globals */
 html {background: $teal;}
 body {font-family: 'TT Commons';}
-a {color:$teal;}
+a {color:$dark-teal;}
+a:hover {color: $teal;}
 
 /* Type */
 h1 {font-weight: 600;}
@@ -170,7 +171,7 @@ h1.headline {font-size: 3em;text-align: center;line-height: 1.25;}
 p.subhead {padding:0;font-size: 1.25em;font-weight: 300;text-align: center;}
 .label_preview {max-width: 300px;margin: 0 auto;}
 .box {
-    background-color:$ice;max-width: 1100px;margin:25px 20px 0;z-index: 10;position: relative;transition: all 500ms;
+    background-color:$ice;max-width: 1150px;margin:25px 20px 0;z-index: 10;position: relative;transition: all 500ms;
     @include media(break3) {
         margin: 50px auto;
     }
