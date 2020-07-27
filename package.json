@@ -7,46 +7,50 @@
     "node": ">=10.0.0"
   },
   "dependencies": {
-    "autoprefixer": "^9.8.5",
     "axios": "^0.19.2",
     "body-parser": "^1.17.1",
-    "browser-sync": "^2.26.10",
-    "cssnano": "^4.1.10",
     "dotenv": "^4.0.0",
     "ejs": "^2.5.7",
     "express": "^4.17.1",
-    "gulp": "^4.0.2",
-    "gulp-postcss": "^8.0.0",
-    "gulp-sass": "^4.1.0",
-    "gulp-sourcemaps": "^2.6.5",
     "morgan": "^1.9.1",
     "ngrok": "^3.2.7",
     "node-fetch": "^2.6.0",
-    "nodemon": "^2.0.4",
     "opn": "^6.0.0",
     "postcss-import": "^12.0.1",
     "request": "^2.88.2",
     "stripe": "^6.36.0"
   },
   "devDependencies": {
+    "@babel/core": "^7.10.5",
+    "@babel/preset-env": "^7.10.4",
     "@types/faker": "^4.1.5",
+    "autoprefixer": "^9.8.5",
+    "browser-sync": "^2.26.12",
+    "bulma": "^0.8.2",
+    "cssnano": "^4.1.10",
+    "gulp": "^4.0.2",
+    "gulp-babel": "^8.0.0",
+    "gulp-concat": "^2.6.1",
+    "gulp-postcss": "^8.0.0",
+    "gulp-sass": "^4.1.0",
+    "gulp-sourcemaps": "^2.6.5",
     "ngrok": "^3.2.7",
-    "bulma": "^0.8.2"
+    "nodemon": "^2.0.4"
   },
   "scripts": {
     "setup-cli": "stripe login --project-name=stripe-payments-demo",
     "webhook": "stripe listen --project-name=stripe-payments-demo --forward-to http://localhost:8000/webhook",
-    "start": "node server/node/server.js",
-    "dev": "nodemon server/node/server.js"
+    "start": "NODE_ENV=production node server/node/server.js",
+    "dev": "NODE_ENV=development nodemon server/node/server.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/<gituser>/<git-repo>.git"
+    "url": "https://github.com/ShipEngine/shipenguin_web_app"
   },
   "author": "Kasey Cantu",
   "license": "MIT",
   "bugs": {
-    "url": ""
+    "url": "https://github.com/ShipEngine/shipenguin_web_app/issues"
   },
-  "homepage": ""
+  "homepage": "https://shipenguin-dev.herokuapp.com/"
 }
