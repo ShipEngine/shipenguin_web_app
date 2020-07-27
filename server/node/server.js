@@ -58,7 +58,6 @@ app.post("/create-payment-intent", async (req, res) => {
 
 const server = app.listen(config.port, () => {
   console.log(`🚀🚀🚀🚀  Server listening on port ${server.address().port}`);
-  console.log(`Navigate to http://localhost:${server.address().port}`)
 });
 
 // Turn on the ngrok tunneverifyl in development, which provides both the mandatory HTTPS
