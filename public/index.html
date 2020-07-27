@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-  <title>Shipengquin by ShipEngine</title>
+  <title>ShipPenguin by ShipEngine</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" type="text/css" href="/css/styles.css">
@@ -50,15 +50,15 @@
             </div>
 
             <section class="step step_one">
-                <h1 class="headline">ShipPenguin is the fastest, cheapest way to print a label online.</h1>
-                <p class="subhead">Something something. How amazing is ShipPenguin? Look ma! No hands. Checkout these awesome shipping labels. This is all powered by <a href="https://www.shipengine.com/">ShipEngine</a>.</p>
+                <h1 class="title ">Skip the Post Office and print discounted postage using ShipPenguin. Click the Get Started button below to begin shipping with ease.</h1>
+                <p class="subhead">ShipPenguin is powered by ShipEngine, the world’s leading shipping API. Learn more about <a href="https://www.shipengine.com/?ref=shippenguin" target="_blank">ShipEngine</a>.</p>
                 <div class="m-lg">
-                    <button id="goToStep2" class="button is-primary is-active bounce">Get Started</button>
+                    <button id="goToStep2" class="button is-primary is-active bounce">Start Shipping</button>
                 </div>
             </section>
 
             <section class="step step_two is-hidden">
-                <h1 class="headline">Let's get to know each other...</h1>
+                <h1 class="headline">Tell us about your package …</h1>
                 <p class="subhead m-b-md">Where are you shipping from? What are you shipping?</p>
 
                 <form id="step_two_form" autocomplete="off">
@@ -116,13 +116,13 @@
                         <div class="columns">
                             <div class="column is-one-half">
                                 <div class="control">
-                                    <input id="weight_lb" class="input" type="text" placeholder="Weight - Lbs" value="" autocomplete="false" required="required">
+                                    <input id="weight_lb" class="input" type="text" placeholder="Weight - Pounds" value="" autocomplete="false" required="required">
                                 </div>
                                 <p class="help">Pounds</p>
                             </div>
                             <div class="column is-one-half">
                                 <div class="control">
-                                    <input id="weight_oz" class="input" type="text" placeholder="Weight - Oz" value="" autocomplete="false" required="required">
+                                    <input id="weight_oz" class="input" type="text" placeholder="Weight - Ounces" value="" autocomplete="false" required="required">
                                 </div>
                                 <p class="help">Oz</p>
                             </div>
@@ -166,7 +166,8 @@
                                 <img src="/images/icon-box-generic.svg">
                             <p class="package_label">USPS</p>
                         </div>
-                        <button>Select package type</button>
+                        <button>Select package type <i class="fa fa-chevron-down" aria-hidden="true" style="margin-left: 5px;"></i>
+</button>
                     </div>
 
                     <div class="rate_box">
@@ -178,7 +179,7 @@
 
                     <div class="is-grouped-centered">
                         <p class="step2_errors"></p>
-                        <button id="goToStep3" class="button is-inactive" disabled>Pay for my label <i class="fas fa-arrow-alt-circle-right"></i></button>
+                        <button id="goToStep3" class="button is-inactive" disabled>Pay for my label  <i class="fas fa-arrow-alt-circle-right"></i></button>
                     </div>
 
                     <div class="t_and_c">
@@ -221,6 +222,7 @@
                 <h1 class="headline">Success!</h1>
                 <p class="subhead m-b-md">Checkout your label below!</p>
                 <p><a id="labelPlaceholder" href="#"><img class="label_preview" src="#"><br>Download my label</a></p>
+                <button class="button is-primary" onClick="window.location.reload();" style="margin-top: 15px; z-index: 10;">Create another label</button>
             </section>
 
         </div>
