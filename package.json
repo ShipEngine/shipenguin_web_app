@@ -44,8 +44,7 @@
     "start": "NODE_ENV=production node server/node/server.js",
     "dev": "NODE_ENV=production nodemon server/node/server.js",
     "dev:ngrok": "NODE_ENV=development node server/node/server.js",
-    "gulp_watch": "gulp watch",
-    "gulp_watch:ngrok": "npm-run-all dev:ngrok gulp_watch"
+    "gulp_watch": "gulp watch"
   },
   "repository": {
     "type": "git",

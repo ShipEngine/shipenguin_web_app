@@ -69,7 +69,6 @@ module.exports = {
   // Tunnel to serve the app over HTTPS and be able to receive webhooks locally.
   // Optionally, if you have a paid ngrok account, you can specify your `subdomain`
   // and `authtoken` in your `.env` file to use it.
-  // Uncomment the 'enabled' option on line 74 to use NGROK tunneling
   ngrok: {
     enabled: process.env.NODE_ENV !== 'production',
     port: process.env.PORT || 8000,
