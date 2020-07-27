@@ -304,8 +304,8 @@ $("#step_two_form input").bind('blur', function (e) {
   console.log(dataArray);
   if (!dataArray.includes(undefined)) {
     console.log('exsists');
-    var package = JSON.stringify(someData);
-    estimate(package);
+    var packages = JSON.stringify(someData);
+    estimate(packages);
   }
 });
 
