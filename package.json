@@ -35,13 +35,17 @@
     "gulp-sass": "^4.1.0",
     "gulp-sourcemaps": "^2.6.5",
     "ngrok": "^3.2.7",
-    "nodemon": "^2.0.4"
+    "nodemon": "^2.0.4",
+    "npm-run-all": "^4.1.5"
   },
   "scripts": {
     "setup-cli": "stripe login --project-name=stripe-payments-demo",
     "webhook": "stripe listen --project-name=stripe-payments-demo --forward-to http://localhost:8000/webhook",
     "start": "NODE_ENV=production node server/node/server.js",
-    "dev": "NODE_ENV=development nodemon server/node/server.js"
+    "dev": "NODE_ENV=production nodemon server/node/server.js",
+    "dev:ngrok": "NODE_ENV=development node server/node/server.js",
+    "gulp_watch": "gulp watch",
+    "gulp_watch:ngrok": "npm-run-all dev:ngrok gulp_watch"
   },
   "repository": {
     "type": "git",
