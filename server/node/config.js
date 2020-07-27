@@ -71,7 +71,7 @@ module.exports = {
   // and `authtoken` in your `.env` file to use it.
   // Uncomment the 'enabled' option on line 74 to use NGROK tunneling
   ngrok: {
-    // enabled: process.env.NODE_ENV !== 'production',
+    enabled: process.env.NODE_ENV !== 'production',
     port: process.env.PORT || 8000,
     subdomain: process.env.NGROK_SUBDOMAIN,
     authtoken: process.env.NGROK_AUTHTOKEN,
