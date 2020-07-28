@@ -258,15 +258,30 @@ $("#step_two_form input").bind('blur', function (e) {
     var ship_from = JSON.parse(localStorage.getItem("address"))[0];
   }
 
+  if (!$('#size_length').val()) {
+    var size_length = '0';
+  } else {
+    var size_length = $('#size_length').val();
+  }
+
+  if (!$('#size_width').val()) {
+    var size_width = '0';
+  } else {
+    var size_width = $('#size_width').val();
+  }
+
+  if (!$('#size_height').val()) {
+    var size_height = '0';
+  } else {
+      var size_height = $('#size_height').val();
+  }
+
   // Calculate weight
   var lbs = $('#weight_lb').val();
   var oz = $('#weight_oz').val();
   var totalWeight = (lbs * 16) + oz;
 
   // Calculate size
-  var size_length = $('#size_length').val();
-  var size_width = $('#size_width').val();
-  var size_height = $('#size_height').val();
 
   var someData =
     {
