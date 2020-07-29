@@ -329,14 +329,14 @@ $("#step_two_form input").change(function (e) {
 
 $('#dimButton').click(function (event) {
   event.preventDefault();
-  $('#dimButton').addClass('is-hidden');
-  $('#dimForm').removeClass('is-hidden');
+  $('#dimButton').toggleClass('is-hidden');
+  $('#dimForm').toggleClass('is-hidden');
 });
 
 $('#closeDims').click(function (event) {
   event.preventDefault();
-  $('#dimButton').removeClass('is-hidden');
-  $('#dimForm').addClass('is-hidden');
+  $('#dimForm').toggleClass('is-hidden');
+  $('#dimButton').toggleClass('is-hidden');
 })
 
 function estimate(someData) {
