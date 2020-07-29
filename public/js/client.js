@@ -249,8 +249,11 @@ $('#goToStep3').click(function (event) {
 
 });
 
-$("#step_two_form input").bind('blur', function (e) {
-  console.log('=== STEP: Form blur and data check ===');
+$("#step_two_form input").change(function (e) {
+  console.log('=== STEP: Form and data check ===');
+
+  $('#cog').addClass('fa-spin');
+
   if (localStorage.getItem("address2") != null) {
     var ship_to = JSON.parse(localStorage.getItem("address2"))[0];
   }
@@ -324,6 +327,17 @@ $("#step_two_form input").bind('blur', function (e) {
   }
 });
 
+$('#dimButton').click(function (event) {
+  event.preventDefault();
+  $('#dimButton').addClass('is-hidden');
+  $('#dimForm').removeClass('is-hidden');
+});
+
+$('#closeDims').click(function (event) {
+  event.preventDefault();
+  $('#dimButton').removeClass('is-hidden');
+  $('#dimForm').addClass('is-hidden');
+})
 
 function estimate(someData) {
   console.log('STEP: Estimate');

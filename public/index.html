@@ -73,7 +73,8 @@
                     <div class="column is-one-third">
 
                         <div class="field">
-                            <label class="label is-size-6">My Name <span style="color: #00676D;">*</span> <span class="is-size-6"></span></label>
+                            <label class="label is-size-6">My Name <span style="color: #00676D;">*</span> <span
+                                    class="is-size-6"></span></label>
                             <div class="control">
                                 <input id="my_name" placeholder="Your Full Name" class="input" type="text" value=""
                                        autocomplete="false" required="required"/>
@@ -97,7 +98,8 @@
                 <div class="columns">
                     <div class="column is-one-third">
                         <div class="field">
-                            <label class="label is-size-6">Recipient’s Name <span style="color: #00676D;">*</span> <span class="is-size-6"></span></label>
+                            <label class="label is-size-6">Recipient’s Name <span style="color: #00676D;">*</span> <span
+                                    class="is-size-6"></span></label>
                             <div class="control">
                                 <input id="rep_name" placeholder="Recipient’s Full Name" class="input" type="text"
                                        value="" autocomplete="false" required="required"/>
@@ -124,7 +126,8 @@
 
                 <div class="columns package_info">
                     <div class="column is-one-half">
-                        <label class="label">Package weight <span style="color: #00676D;">*</span> <span class="is-size-6"></span></label>
+                        <label class="label">Package weight <span style="color: #00676D;">*</span> <span
+                                class="is-size-6"></span></label>
                         <div class="columns">
                             <div class="column is-one-half">
                                 <div class="control">
@@ -143,26 +146,34 @@
                         </div>
                     </div>
 
-                    <div class="column is-one-half">
-                        <label class="label">Package Dimensions <span class="is-size-6">Optional</span></label>
+                    <div id="dimButton" class="column is-mobile is-one-quarter" style="margin-top: 2.5rem;">
+                        <div class="columns">
+                            <button class="button is-primary">Add Dimensions</button>
+                        </div>
+                    </div>
+
+                    <div id="dimForm" class="column is-one-half is-hidden">
+                        <label class="label">Package Dimensions <span class="is-size-6">Optional</span>
+                            <i id="closeDims" class="fa fa-times-circle is-pulled-right" aria-hidden="true"></i>
+                        </label>
                         <div class="columns">
                             <div class="column is-one-half">
                                 <div class="control">
-                                    <input id="size_length" class="input" type="text" placeholder="Length" value=""
+                                    <input id="size_length" name="length_input" class="input" type="text" placeholder="Length" value=""
                                            autocomplete="false">
                                 </div>
                                 <p class="help">Length in inches</p>
                             </div>
                             <div class="column is-one-half">
                                 <div class="control">
-                                    <input id="size_width" class="input" type="text" placeholder="Width" value=""
+                                    <input id="size_width" name="width_input" class="input" type="text" placeholder="Width" value=""
                                            autocomplete="false">
                                 </div>
                                 <p class="help">Width in inches</p>
                             </div>
                             <div class="column is-one-half">
                                 <div class="control">
-                                    <input id="size_height" class="input" type="text" placeholder="Height" value=""
+                                    <input id="size_height" name="height_input" class="input" type="text" placeholder="Height" value=""
                                            autocomplete="false">
                                 </div>
                                 <p class="help">Height in inches</p>
@@ -193,7 +204,7 @@
                     <div class="rate_box">
                         <label>Your label price</label>
                         <div class="rate">
-                            <span><i class="fas fa-cog fa-spin"></i></span><label>Plus Tax</label>
+                            <span><i id="cog" class="fas fa-cog"></i></span><label>Plus Tax</label>
                         </div>
                     </div>
 
