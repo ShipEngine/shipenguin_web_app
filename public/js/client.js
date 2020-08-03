@@ -327,17 +327,13 @@ $("#step_two_form input").change(function (e) {
   }
 });
 
-$('#dimButton').click(function (event) {
+$('#addPackageOption').click(function (event) {
   event.preventDefault();
-  $('#dimButton').toggleClass('is-hidden');
-  $('#dimForm').toggleClass('is-hidden');
+  $('#packageDimForm').toggleClass('is-hidden');
+  $('#size_length').val('');
+  $('#size_width').val('');
+  $('#size_height').val('');
 });
-
-$('#closeDims').click(function (event) {
-  event.preventDefault();
-  $('#dimForm').toggleClass('is-hidden');
-  $('#dimButton').toggleClass('is-hidden');
-})
 
 function estimate(someData) {
   console.log('STEP: Estimate');
