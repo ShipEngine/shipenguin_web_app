@@ -15,22 +15,24 @@ var componentForm = {
 function initAutocomplete() {
 
   autocomplete = new google.maps.places.Autocomplete(
-    /** @type {!HTMLInputElement} */
+  /** @type {!HTMLInputElement} */
     (document.getElementById('autocomplete')), {
       types: ['geocode']
     });
 
 
   autocomplete.addListener('place_changed', function () {
+    $('#verify').toggleClass('is-hidden');
     fillInAddress(autocomplete, "");
   });
 
   autocomplete2 = new google.maps.places.Autocomplete(
-    /** @type {!HTMLInputElement} */
+  /** @type {!HTMLInputElement} */
     (document.getElementById('autocomplete2')), {
       types: ['geocode']
     });
   autocomplete2.addListener('place_changed', function () {
+    $('#verify2').toggleClass('is-hidden');
     fillInAddress(autocomplete2, "2");
   });
 
@@ -227,6 +229,7 @@ $("body").on("click", ".newRate", function (event) {
 
 $('#goToStep3').click(function (event) {
   event.preventDefault();
+  $('#mainBox').css('margin-left', '');
   if (($('.checkHazardous:checked').is(':checked')) && ($('.checkTcs:checked').is(':checked'))) {
     // Container Adjust
     $('.container').removeClass('step0 step1 step2 step3');
@@ -381,9 +384,17 @@ function estimate(someData) {
       $('.rate_holder').append('<div class="newRate" id="' + this.rate_id + '"><strong>' + this.service_type + '</strong><em>' + ' ' + format_package_codes(this.package_type) + '</em><span>$' + this.shipping_amount.amount + '</span></div>');
     });
 
+    $('#nextButton').removeClass('is-hidden');
 
   });
 }
+
+$('#nextButton').click(function(event) {
+  event.preventDefault();
+  $('#mainBox').css('margin-left', '-115px');
+  $('aside').removeClass('is-hidden');
+  $(this).addClass('is-hidden');
+});
 
 // A reference to Stripe.js initialized with your real test publishable API key.
 var stripe = Stripe("pk_test_0gDWcjB7xWWgt34p1UQoCxFH00CcruEzwb");

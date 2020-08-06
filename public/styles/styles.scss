@@ -182,11 +182,11 @@ p.subhead {padding:0;font-size: 1.25em;font-weight: 300;text-align: center;}
 }
 .container.step1 .box {
     @include media(break7) {
-        transform:translateX(-160px);
+        //transform:translateX(-160px);
     }
 }
 
-.package_info {background:$off-white;border:1px solid darken($soft-gray, 10%);padding: 15px 20px;border-radius: 5px;margin:5px 0;}
+.package_info {background:$off-white;border:1px solid darken($soft-gray, 10%);padding: 15px 20px;border-radius: 5px;margin:5px 0; width: 600px;}
 .package_info.payment_info {margin:25px auto;}
 
 @include media(break3) {
@@ -277,4 +277,8 @@ a.github_tag {
 
 .successText {
     color: $dark-teal;
+}
+
+.progressCursor {
+    cursor: progress;
 }
