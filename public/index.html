@@ -68,7 +68,8 @@
             <h1 class="headline">Tell us about your package …</h1>
             <p class="subhead m-b-md">Where are you shipping from? What are you shipping?</p>
 
-            <form id="step_two_form" autocomplete="nofill">
+            <form id="step_two_form" autocomplete="new-password">
+                <input autocomplete="new-password" name="hidden" type="text" style="display:none;">
                 <div class="columns">
                     <div class="column is-one-third">
 
@@ -76,7 +77,8 @@
                             <label class="label is-size-6">My Name <span style="color: #00676D;">*</span> <span
                                     class="is-size-6"></span></label>
                             <div class="control">
-                                <input id="my_name" name="ShipFromName" placeholder="Your Full Name" class="input" type="text" value="" autocomplete="nofill" required="required"/>
+                                <input id="my_name" name="Shipper" placeholder="Your Full Name" class="input" type="text"
+                                       value="" onfocus="this.setAttribute('autocomplete', 'new-password')" autocomplete="new-password"  required="required"/>
                             </div>
                         </div>
                     </div>
@@ -86,7 +88,7 @@
                             <label class="label is-size-6">My Address <span style="color: #00676D;">*</span> <span>Autocomplete by Google</span></label>
                             <div class="control">
                                 <input id="autocomplete" name="ShipFrom" placeholder="Start typing your address" onFocus="geolocate()"
-                                       class="input" type="text" autocomplete="nofill" required="required"/>
+                                       class="input" type="text" autocomplete="new-password" onfocus="this.setAttribute('autocomplete', 'new-password')" required="required"/>
                                 <span class="tag verify is-hidden" id="verify">
                                     <i class="fas fa-cog fa-spin"></i>Verifying via ShipEngine
                                 </span>
@@ -100,8 +102,8 @@
                             <label class="label is-size-6">Recipient’s Name <span style="color: #00676D;">*</span> <span
                                     class="is-size-6"></span></label>
                             <div class="control">
-                                <input id="rep_name" name="ShipToName" placeholder="Recipient’s Full Name" class="input" type="text"
-                                       value="" autocomplete="nofill" required="required"/>
+                                <input id="rep_name" name="Recipient" placeholder="Recipient’s Full Name" class="input" type="text"
+                                       value="" autocomplete="new-password" onfocus="this.setAttribute('autocomplete', 'new-password')" required="required"/>
                             </div>
                         </div>
                     </div>
@@ -112,7 +114,7 @@
                                 <span>Autocomplete by Google</span></label>
                             <div class="control">
                                 <input id="autocomplete2" name="ShipTo" placeholder="Start typing your address" onFocus="geolocate()"
-                                       class="input" type="text" autocomplete="nofill" required="required"/>
+                                       class="input" type="text" autocomplete="new-password" onfocus="this.setAttribute('autocomplete', 'new-password')" required="required"/>
                                 <span class="tag verify is-hidden" id="verify2">
                                     <i class="fas fa-cog fa-spin"></i>Verifying via ShipEngine
                                 </span>
@@ -131,14 +133,14 @@
                             <div class="column is-one-half">
                                 <div class="control">
                                     <input id="weight_lb" class="input" type="text" placeholder="Weight - Pounds"
-                                           value="" autocomplete="nofill" required="required" style="width: 150px;">
+                                           value="" autocomplete="new-password" required="required" style="width: 150px;">
                                 </div>
                                 <p class="help">Pounds</p>
                             </div>
                             <div class="column is-one-half">
                                 <div class="control">
                                     <input id="weight_oz" class="input" type="text" placeholder="Weight - Ounces"
-                                           value="" autocomplete="nofill" required="required" style="width: 150px;">
+                                           value="" autocomplete="new-password" required="required" style="width: 150px;">
                                 </div>
                                 <p class="help">Ounces</p>
                             </div>
@@ -160,21 +162,21 @@
                             <div class="column is-one-half">
                                 <div class="control">
                                     <input id="size_length" name="length_input" class="input" type="text" placeholder="Length" value=""
-                                           autocomplete="nofill" style="width: 80px;">
+                                           autocomplete="new-password" style="width: 80px;">
                                 </div>
                                 <p class="help">Length in inches</p>
                             </div>
                             <div class="column is-one-half">
                                 <div class="control">
                                     <input id="size_width" name="width_input" class="input" type="text" placeholder="Width" value=""
-                                           autocomplete="nofill" style="width: 80px;">
+                                           autocomplete="new-password" style="width: 80px;">
                                 </div>
                                 <p class="help">Width in inches</p>
                             </div>
                             <div class="column is-one-half">
                                 <div class="control">
                                     <input id="size_height" name="height_input" class="input" type="text" placeholder="Height" value=""
-                                           autocomplete="nofill" style="width: 80px;">
+                                           autocomplete="new-password" style="width: 80px;">
                                 </div>
                                 <p class="help">Height in inches</p>
                             </div>

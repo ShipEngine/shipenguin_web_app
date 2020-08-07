@@ -63,6 +63,8 @@ function fillInAddress(autocomplete, unique) {
 google.maps.event.addDomListener(window, "load", initAutocomplete);
 
 function geolocate() {
+  $("#autocomplete").attr("autocomplete", "new-password");
+  $("#autocomplete2").attr("autocomplete", "new-password");
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(function (position) {
       var geolocation = {
