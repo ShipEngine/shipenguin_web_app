@@ -365,8 +365,8 @@ function estimate(someData) {
     console.log(rateId);
 
     // Run actions with base rate data
-    $('.rate span').text('$' + baseRate);
-    $('.final_price strong').text('$' + baseRate);
+    $('.rate span').text('$' + baseRate.toFixed(2));
+    $('.final_price strong').text('$' + baseRate.toFixed(2));
     $('.package_type').removeClass('is-inactive');
     $('.package_type .package_label').text(baseServiceType + ' ' + basePackageType);
     $('.rate_box .rate').addClass('is-active');
@@ -393,9 +393,12 @@ function estimate(someData) {
 
 $('#nextButton').click(function(event) {
   event.preventDefault();
+  $('#nextButton button').addClass('is-loading');
   $('#mainBox').css('margin-left', '-115px');
   $('aside').removeClass('is-hidden');
-  $(this).addClass('is-hidden');
+  $(this).fadeOut(1000, function () {
+    $(this).remove();
+  });
 });
 
 // A reference to Stripe.js initialized with your real test publishable API key.
