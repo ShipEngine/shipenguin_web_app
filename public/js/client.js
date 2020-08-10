@@ -531,6 +531,8 @@ var loading = function (isLoading) {
 
 function getLabel() {
   console.log('=== STEP XX: Get Label ===');
+  $('.label_preview').attr("src", '/images/ajax-loading.gif');
+
   console.log(localStorage.getItem("rateId"));
 
   var rate = {"rate": localStorage.getItem("rateId")};
@@ -549,7 +551,7 @@ function getLabel() {
     }).then(function (data) {
 
     console.log(data);
-    var labelPdf = data.label_download.href;
+    var labelPdf = data.label_download.png;
     var labelImage = data.label_download.png;
 
     $('#labelPlaceholder').attr("href", labelPdf);
