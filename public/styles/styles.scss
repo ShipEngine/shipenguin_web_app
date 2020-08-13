@@ -262,7 +262,13 @@ aside {
         margin:0;position: absolute;top: 0;right: -390px;padding: 20px 40px;width: 400px;z-index: -2;max-width: initial;
         .package_type {max-width: 60%;}
         .rate_box {max-width:60%;text-transform: uppercase;color:$dark-gray;}
-        #mainBox {margin-left: -115px;}
+    }
+}
+
+
+#mainBox {
+    @media only screen and (min-width: $break7) {
+        margin-left: -115px;
     }
 }
 

@@ -258,7 +258,7 @@ $('#goToStep3').click(function (event) {
 
 });
 
-$("#step_two_form input").change(function (e) {
+$("#step_two_form input:not([type=checkbox])").change(function (e) {
   console.log('=== STEP: Form and data check ===');
 
   $('#cog').addClass('fa-spin');
