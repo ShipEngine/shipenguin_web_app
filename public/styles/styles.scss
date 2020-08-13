@@ -122,7 +122,7 @@ $off-white: #f0f0f0;
 
 /* Steps */
 .steps {margin:20px auto 0;max-width: 125px;}
-.steps-segment {cursor: pointer;}
+.steps-segment {cursor: default;}
 .steps-segment:after, .steps:not(.is-hollow) .steps-marker:not(.is-hollow), .steps:not(.is-hollow) .steps-segment.is-active .steps-marker:not(.is-hollow) {
     background-color: $teal;
 }
@@ -139,7 +139,7 @@ a:hover {color: $teal;}
 /* Type */
 h1 {font-weight: 600;}
 header {text-align:center;}
-.logo {background: url("/images/shipenguin-logo_v2.svg") no-repeat;width: 402px;height: 74px;display: block;margin: 100px auto 20px;}
+.logo {background: url("/images/shipenguin-logo_v4.svg") no-repeat;width: 800px;height: 125px;display: block;margin: 100px auto 20px;}
 .tagline {font-weight: 400;font-size: 1.75em;color: $ice;}
 
 .penguin_background {

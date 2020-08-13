@@ -204,29 +204,33 @@ $('.package_type, .package_type button').click(function (event) {
     $('.rate_list').animate({top: 0}, 800);
   }
 });
+
 $('.rate_list .close').click(function (event) {
-  event.preventDefault();
+  event.preventDefault()
   $('.rate_list').animate({top: "-100%"}, 800);
 });
 
 $("body").on("click", ".newRate", function (event) {
   event.preventDefault();
   $('.rate_list').animate({top: "-100%"}, 800);
-  var newPackage = $(this).attr('id');
+  var newPackageId = $(this).attr('id');
   var newPackageService = $(this).find('strong').text();
   var newPackageName = $(this).find('em').text();
   var newPackagePrice = $(this).find('span').text();
-  console.log(newPackage + "" + newPackageName + " " + newPackagePrice);
+  var newServiceClass = $(this).find('strong').text();
+  console.log(newPackageId + newServiceClass + newPackageName + " " + newPackagePrice);
   var stripePrice = newPackagePrice.replace('$', '');
 
   // overwriting baseRate and storing
-  localStorage.setItem("rateId", newPackage);
+  localStorage.setItem("rateId", newPackageId);
   localStorage.setItem("ratePrice", stripePrice);
+  localStorage.setItem("userSelectedServiceClass", newServiceClass);
+  console.log("New Rate ID: " + newPackageId + " New Label Price: " + stripePrice + " New Service Class: " + newServiceClass);
 
   $('.package_label').text(newPackageService + newPackageName);
   $('.rate span').text(newPackagePrice);
   $('.final_price strong').text('$' + stripePrice);
-
+  $('.final_price span').text(newServiceClass + " shipment");
 });
 
 $('#goToStep3').click(function (event) {
@@ -266,20 +270,24 @@ $("#step_two_form input").change(function (e) {
     var ship_from = JSON.parse(localStorage.getItem("address"))[0];
   }
 
+  if ($('.weight_lb').val() === '') {
+    $('.weight_lb').val(0);
+  }
+
   if (!$('#size_length').val()) {
-    var size_length = '0';
+    var size_length = 0;
   } else {
     var size_length = $('#size_length').val();
   }
 
   if (!$('#size_width').val()) {
-    var size_width = '0';
+    var size_width = 0;
   } else {
     var size_width = $('#size_width').val();
   }
 
   if (!$('#size_height').val()) {
-    var size_height = '0';
+    var size_height = 0;
   } else {
       var size_height = $('#size_height').val();
   }
@@ -353,7 +361,7 @@ function estimate(someData) {
     .then(function (response) {
       return response.json();
     }).then(function (data) {
-    console.log(data);
+      console.log(data);
 
     // console.log(data.rate_response.rates[0]);
     var baseRate = data.rate_response.rates[0].shipping_amount.amount;
@@ -377,6 +385,10 @@ function estimate(someData) {
     // Store base rate ID
     localStorage.setItem("rateId", rateId);
     localStorage.setItem("ratePrice", baseRate);
+    localStorage.setItem("serviceClass", baseServiceType);
+    console.log("Base Rate ID: " + rateId + " Base Label Price: " + baseRate + " Base Service Class: " + baseServiceType);
+
+    $('#labelSummaryText').text(baseServiceType + " shipment");
 
     console.log("rateId: " + localStorage.getItem("rateId"));
     console.log("ratePrice: " + localStorage.getItem("ratePrice"));

@@ -11,7 +11,9 @@
 
 <body>
 <header>
-    <a class="logo" href="/"></a>
+    <a href="/">
+        <img class="logo" src="/images/shipenguin-logo_v4.svg" alt="Ship Penguin Logo">
+    </a>
     <p class="tagline">ShipPenguin is the fastest, cheapest way to print a label online.</p>
 </header>
 
@@ -194,9 +196,9 @@
 
                 <aside class="is-hidden">
 
-                    <div class="rate_list">
-                        <div class="rate_holder"></div>
+                    <div class="rate_list" style="overflow: auto;">
                         <div class="close"><i class="fa fa-times" aria-hidden="true"></i></div>
+                        <div class="rate_holder"></div>
                     </div>
 
                     <div class="package_type is-inactive">
@@ -241,8 +243,7 @@
 
         <section class="step step_three is-hidden">
             <h1 class="headline">Almost finished!</h1>
-            <p class="subhead final_price">We'll charge your card <strong>$xx.xx</strong> and you can download your
-                label on the next step!</p>
+            <p class="subhead final_price">We'll charge your card <strong>$xx.xx</strong> for your <span id="labelSummaryText" style="font-weight: bold;">carrier service label</span> and you can download your label on the next step!</p>
             <form id="payment-form">
                 <div class="package_info payment_info">
                     <div class="field is-grouped is-grouped-centered">
