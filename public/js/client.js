@@ -254,7 +254,7 @@ $('#goToStep3').click(function (event) {
   } else {
     $('.t_and_c .checkbox').addClass('is-error');
   }
-
+ 
 
 });
 
