@@ -406,7 +406,7 @@ function estimate(someData) {
 $('#nextButton').click(function(event) {
   event.preventDefault();
   $('#nextButton button').addClass('is-loading');
-  $('#mainBox').css('margin-left', '-115px');
+  // $('#mainBox').css('margin-left', '-115px');
   $('aside').removeClass('is-hidden');
   $(this).fadeOut(1000, function () {
     $(this).remove();
