@@ -406,12 +406,24 @@ function estimate(someData) {
 $('#nextButton').click(function(event) {
   event.preventDefault();
   $('#nextButton button').addClass('is-loading');
-  $('#mainBox').css('margin-left', '-115px');
+  if  (getWidth() >= 1585) {
+    $('#mainBox').css('margin-left', '-115px');
+  }
   $('aside').removeClass('is-hidden');
   $(this).fadeOut(1000, function () {
     $(this).remove();
   });
 });
+
+function getWidth() {
+  return Math.max(
+    document.body.scrollWidth,
+    document.documentElement.scrollWidth,
+    document.body.offsetWidth,
+    document.documentElement.offsetWidth,
+    document.documentElement.clientWidth
+  );
+}
 
 // A reference to Stripe.js initialized with your real test publishable API key.
 var stripe = Stripe("pk_live_mmtkHCLOSChO07ixkQPOKk30");
