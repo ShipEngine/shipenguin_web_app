@@ -304,7 +304,7 @@ $("#step_two_form input:not([type=checkbox])").change(function (e) {
       // It is recommended to obfuscate carrier_ids when possible.
       rate_options: {
         "carrier_ids": [
-          "se-256091"
+          "se-291402"
         ],  // TODO: confirm with robertbahn if we want to
         // "package_types": [
         //   "package"
