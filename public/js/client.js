@@ -406,7 +406,7 @@ function estimate(someData) {
 $('#nextButton').click(function(event) {
   event.preventDefault();
   $('#nextButton button').addClass('is-loading');
-  // $('#mainBox').css('margin-left', '-115px');
+  $('#mainBox').css('margin-left', '-115px');
   $('aside').removeClass('is-hidden');
   $(this).fadeOut(1000, function () {
     $(this).remove();
@@ -414,7 +414,7 @@ $('#nextButton').click(function(event) {
 });
 
 // A reference to Stripe.js initialized with your real test publishable API key.
-var stripe = Stripe("pk_test_0gDWcjB7xWWgt34p1UQoCxFH00CcruEzwb");
+var stripe = Stripe("pk_live_mmtkHCLOSChO07ixkQPOKk30");
 
 function pay(storedRate) {
   console.log("=== STEP Pay() ===");
