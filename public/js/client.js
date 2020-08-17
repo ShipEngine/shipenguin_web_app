@@ -301,7 +301,8 @@ $("#step_two_form input:not([type=checkbox])").change(function (e) {
 
   var someData =
     {
-      // It is recommended to obfuscate carrier_ids when possible.
+      // It is recommended to obfuscate carrier_ids when possible. Ours are added on the server side when the
+      // request is made, before sending off to ShipEngine API.
       rate_options: {
         "carrier_ids": []
       },
