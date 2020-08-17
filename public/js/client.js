@@ -303,12 +303,7 @@ $("#step_two_form input:not([type=checkbox])").change(function (e) {
     {
       // It is recommended to obfuscate carrier_ids when possible.
       rate_options: {
-        "carrier_ids": [
-          "se-291402"
-        ],  // TODO: confirm with robertbahn if we want to
-        // "package_types": [
-        //   "package"
-        // ]
+        "carrier_ids": []
       },
       shipment: {
         validate_address: "no_validation",
@@ -575,7 +570,7 @@ function getLabel() {
     }).then(function (data) {
 
     console.log(data);
-    var labelPdf = data.label_download.png;
+    var labelPdf = data.label_download.pdf;
     var labelImage = data.label_download.png;
 
     $('#labelPlaceholder').attr("href", labelPdf);

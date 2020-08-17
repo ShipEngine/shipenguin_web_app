@@ -23,7 +23,9 @@ router.post('/verify', (req, res) => {
         'url': 'https://api.shipengine.com/v1/addresses/validate',
         'headers': {
           'Host': 'api.shipengine.com',
-          'API-Key': process.env.SHIPENGINE_PROD_API_KEY,
+          'API-Key': process.env.NODE_ENV === 'development' ?
+            process.env.SHIPENGINE_SANDBOX_API_KEY : process.env.NODE_ENV === 'development' ?
+            process.env.SHIPENGINE_SANDBOX_API_KEY : process.env.SHIPENGINE_PROD_API_KEY,
           'Content-Type': 'application/json'
         },
         body: JSON.stringify(req.body)
@@ -45,12 +47,17 @@ router.post('/verify', (req, res) => {
 
 router.post('/rates', (req, res) => {
 
+    req.body.rate_options.carrier_ids.push(
+      process.env.NODE_ENV === 'development' ? process.env.SHIPENGINE_SANDBOX_SDC_CARRIER_ID : process.env.SHIPENGINE_PROD_SDC_CARRIER_ID
+    );
+
     var options = {
         'method': 'POST',
         'url': 'https://api.shipengine.com/v1/rates',
         'headers': {
           'Host': 'api.shipengine.com',
-          'API-Key': process.env.SHIPENGINE_PROD_API_KEY,
+          'API-Key': process.env.NODE_ENV === 'development' ?
+            process.env.SHIPENGINE_SANDBOX_API_KEY : process.env.SHIPENGINE_PROD_API_KEY,
           'Content-Type': 'application/json'
         },
         body: JSON.stringify(req.body)
@@ -80,7 +87,8 @@ router.post('/label', (req, res) => {
         'url': rateUrl,
         'headers': {
           'Host': 'api.shipengine.com',
-          'API-Key': process.env.SHIPENGINE_PROD_API_KEY,
+          'API-Key': process.env.NODE_ENV === 'development' ?
+            process.env.SHIPENGINE_SANDBOX_API_KEY : process.env.SHIPENGINE_PROD_API_KEY,
           'Content-Type': 'application/json'
         },
         body: JSON.stringify(req.body)

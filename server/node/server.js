@@ -8,7 +8,7 @@ const bodyParser = require('body-parser');
 const path = require('path');
 const ngrok = config.ngrok.enabled ? require('ngrok') : null;
 const app = express();
-const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
+const stripe = require("stripe")(process.env.NODE_ENV === 'development' ? process.env.STRIPE_DEV_SECRET_KEY : process.env.STRIPE_SECRET_KEY);
 const morgan = require('morgan');
 const opn = require('opn');
 const { read } = require('fs');

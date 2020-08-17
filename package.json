@@ -43,7 +43,7 @@
     "setup-cli": "stripe login --project-name=stripe-payments-demo",
     "webhook": "stripe listen --project-name=stripe-payments-demo --forward-to http://localhost:8000/webhook",
     "start": "NODE_ENV=production node server/node/server.js",
-    "dev": "NODE_ENV=production nodemon server/node/server.js",
+    "dev": "NODE_ENV=development nodemon server/node/server.js",
     "dev:ngrok": "NODE_ENV=development node server/node/server.js",
     "gulp_watch": "gulp watch"
   },

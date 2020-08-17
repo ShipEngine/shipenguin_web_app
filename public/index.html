@@ -267,12 +267,22 @@
         <section class="step step_four has-text-centered is-hidden">
             <h1 class="headline successText">Success!</h1>
             <p class="subhead m-b-md">Checkout your label below!</p>
-            <p><a id="labelPlaceholder" href="#"><img class="label_preview" src="#"><br>Download my label</a></p>
+
+            <img class="label_preview" src="#">
+
             <div class="columns is-mobile is-centered">
-                <div class="column is-primary">
-                    <button class="button is-primary is-active" onClick="window.location.reload();"
-                            style="margin-top: 15px; z-index: 10;">Create another label
-                    </button>
+                <div class="column">
+                    <a id="labelPlaceholder" href="#" class="button is-primary is-active" style="margin-top: 15px; z-index: 10;"
+                    target="_blank">
+                        Download my label
+                    </a>
+                </div>
+
+                <div class="column">
+                    <a href="#" class="button is-primary is-active"  style="margin-top: 15px; z-index: 10;"
+                       onClick="window.location.reload();">
+                        Create another label
+                    </a>
                 </div>
             </div>
         </section>
