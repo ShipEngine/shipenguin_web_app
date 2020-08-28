@@ -389,6 +389,8 @@ function estimate(someData) {
     console.log("rateId: " + localStorage.getItem("rateId"));
     console.log("ratePrice: " + localStorage.getItem("ratePrice"));
 
+    $('.newRate').remove();
+
     $(data.rate_response.rates).each(function () {
       console.log(this);
       $('.rate_holder').append('<div class="newRate" id="' + this.rate_id + '"><strong>' + this.service_type + '</strong><em>' + ' ' + format_package_codes(this.package_type) + '</em><span>$' + this.shipping_amount.amount + '</span></div>');
