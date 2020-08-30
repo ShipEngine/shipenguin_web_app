@@ -20,7 +20,9 @@ export function verifyAddressWithShipEngine(data, statusButton, unique) {
     }
     if (addressType == "route") {
       addressType = "address_line1";
-      val = streetNumber + " " + val;
+      if(streetNumber) {
+        val = streetNumber + " " + val;
+      }
     }
     if (addressType == "locality") {
       addressType = "city_locality";
