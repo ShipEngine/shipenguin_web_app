@@ -10,314 +10,334 @@
 </head>
 
 <body>
-<header>
-    <a href="/">
-        <img class="logo" src="/images/shipenguin-logo_v4.svg" alt="Ship Penguin Logo">
-    </a>
-    <p class="tagline">ShipPenguin is the fastest, cheapest way to print a label online.</p>
-</header>
+    <header>
+        <a href="/">
+            <img class="logo" src="/images/shipenguin-logo_v4.svg" alt="Ship Penguin Logo">
+        </a>
+        <p class="tagline">ShipPenguin is the fastest, cheapest way to print a label online.</p>
+    </header>
 
-<div class="container step0">
-    <div id="mainBox" class="box">
+    <div class="container step0">
+        <div id="mainBox" class="box">
 
-        <div class="step_chart columns m-t-lg is-centered">
-            <div class="column is-two-thirds">
-                <ul class="steps has-content-centered">
-                    <li class="steps-segment is-active">
-                        <span class="steps-marker"></span>
-                        <div class="steps-content">
-                            <p class="is-size-7">Start</p>
-                        </div>
-                    </li>
-                    <li class="steps-segment">
-                        <span class="steps-marker"></span>
-                        <div class="steps-content">
-                            <p class="is-size-7">Shipment</p>
-                        </div>
-                    </li>
-                    <li class="steps-segment">
-                        <span class="steps-marker"></span>
-                        <div class="steps-content">
-                            <p class="is-size-7">Payment</p>
-                        </div>
-                    </li>
-                    <li class="steps-segment">
-                        <span class="steps-marker"></span>
-                        <div class="steps-content">
-                            <p class="is-size-7">Get Label</p>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-        </div>
-
-        <section class="step step_one">
-            <h1 class="title ">Skip the Post Office and print discounted postage using ShipPenguin. Click the Get
-                Started button below to begin shipping with ease.</h1>
-            <div class="columns is-mobile is-centered">
-                <div class="column is-primary">
-                    <div class="m-lg">
-                        <button id="goToStep2" class="button is-primary is-active bounce">Start Shipping</button>
-                    </div>
+            <div class="step_chart columns m-t-lg is-centered">
+                <div class="column is-two-thirds">
+                    <ul class="steps has-content-centered">
+                        <li class="steps-segment is-active">
+                            <span class="steps-marker"></span>
+                            <div class="steps-content">
+                                <p class="is-size-7">Start</p>
+                            </div>
+                        </li>
+                        <li class="steps-segment">
+                            <span class="steps-marker"></span>
+                            <div class="steps-content">
+                                <p class="is-size-7">Shipment</p>
+                            </div>
+                        </li>
+                        <li class="steps-segment">
+                            <span class="steps-marker"></span>
+                            <div class="steps-content">
+                                <p class="is-size-7">Payment</p>
+                            </div>
+                        </li>
+                        <li class="steps-segment">
+                            <span class="steps-marker"></span>
+                            <div class="steps-content">
+                                <p class="is-size-7">Get Label</p>
+                            </div>
+                        </li>
+                    </ul>
                 </div>
             </div>
 
-            <p style="margin-bottom:2rem;" class="subhead">ShipPenguin is powered by ShipEngine, the world’s leading shipping API. Learn more about
-                <a href="https://www.shipengine.com/?ref=shippenguin" target="_blank">ShipEngine</a>.</p>
-
-        </section>
-
-        <section class="step step_two is-hidden">
-            <h1 class="headline">Tell us about your package …</h1>
-            <p class="subhead m-b-md">Where are you shipping from? What are you shipping?</p>
-
-            <form id="step_two_form" autocomplete="new-password">
-                <input autocomplete="new-password" name="hidden" type="text" style="display:none;">
-                <div class="columns">
+            <section class="step step_one">
+                <h1 class="title ">Skip the Post Office and print discounted postage using ShipPenguin. Click the Get
+                    Started button below to begin shipping with ease.</h1>
+                <div class="columns is-mobile is-centered">
                     <div class="column is-primary">
+                        <div class="m-lg">
+                            <button id="goToStep2" class="button is-primary is-active bounce">Start Shipping</button>
+                        </div>
+                    </div>
+                </div>
 
-                        <div class="field">
-                            <label class="label is-size-6">My Name <span style="color: #00676D;">*</span> <span
+                <p style="margin-bottom:2rem;" class="subhead">ShipPenguin is powered by ShipEngine, the world’s leading
+                    shipping API. Learn more about
+                    <a href="https://www.shipengine.com/?ref=shippenguin" target="_blank">ShipEngine</a>.</p>
+
+            </section>
+
+            <section class="step step_two is-hidden">
+                <h1 class="headline">Tell us about your package …</h1>
+                <p class="subhead m-b-md">Where are you shipping from? What are you shipping?</p>
+
+                <form id="step_two_form" autocomplete="new-password">
+                    <input autocomplete="new-password" name="hidden" type="text" style="display:none;">
+                    <div class="columns">
+                        <div class="column is-primary">
+
+                            <div class="field">
+                                <label class="label is-size-6">My Name <span style="color: #00676D;">*</span> <span
+                                        class="is-size-6"></span></label>
+                                <div class="control">
+                                    <input id="my_name" name="Shipper" placeholder="Your Full Name" class="input"
+                                        type="text" value="" autocomplete="new-password" required="required" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="locationField2" class="column is-two-thirds">
+                            <div class="field">
+                                <label class="label is-size-6">My Address <span style="color: #00676D;">*</span>
+                                    <span>Autocomplete by Google</span></label>
+                                <div class="control">
+                                    <input id="autocomplete" name="ShipFrom" placeholder="Start typing your address" f
+                                        class="input" type="text" autocomplete="new-password" required="required" />
+                                    <span class="tag verify is-hidden" id="verify">
+                                        <i class="fas fa-cog fa-spin"></i>Verifying via ShipEngine
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="columns">
+                        <div class="column is-primary">
+                            <div class="field">
+                                <label class="label is-size-6">Recipient’s Name <span style="color: #00676D;">*</span>
+                                    <span class="is-size-6"></span></label>
+                                <div class="control">
+                                    <input id="rep_name" name="Recipient" placeholder="Recipient’s Full Name"
+                                        class="input" type="text" value="" autocomplete="new-password"
+                                        required="required" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="locationField2" class="column is-two-thirds">
+                            <div class="field">
+                                <label class="label is-size-6">Recipient’s Address <span
+                                        style="color: #00676D;">*</span>
+                                    <span>Autocomplete by Google</span></label>
+                                <div class="control">
+                                    <input id="autocomplete2" name="ShipTo" placeholder="Start typing your address"
+                                        class="input" type="text" autocomplete="new-password" required="required" />
+                                    <span class="tag verify is-hidden" id="verify2">
+                                        <i class="fas fa-cog fa-spin"></i>Verifying via ShipEngine
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <label class="label has-text-grey-light">Package Information</label>
+
+                    <div class="columns package_info">
+                        <div class="column is-one-half">
+                            <label class="label">Package weight <span style="color: #00676D;">*</span> <span
                                     class="is-size-6"></span></label>
-                            <div class="control">
-                                <input id="my_name" name="Shipper" placeholder="Your Full Name" class="input" type="text"
-                                       value="" autocomplete="new-password"  required="required"/>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div id="locationField2" class="column is-two-thirds">
-                        <div class="field">
-                            <label class="label is-size-6">My Address <span style="color: #00676D;">*</span> <span>Autocomplete by Google</span></label>
-                            <div class="control">
-                                <input id="autocomplete" name="ShipFrom" placeholder="Start typing your address"f
-                                       class="input" type="text" autocomplete="new-password" required="required"/>
-                                <span class="tag verify is-hidden" id="verify">
-                                    <i class="fas fa-cog fa-spin"></i>Verifying via ShipEngine
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="columns">
-                    <div class="column is-primary">
-                        <div class="field">
-                            <label class="label is-size-6">Recipient’s Name <span style="color: #00676D;">*</span> <span
-                                    class="is-size-6"></span></label>
-                            <div class="control">
-                                <input id="rep_name" name="Recipient" placeholder="Recipient’s Full Name" class="input" type="text"
-                                       value="" autocomplete="new-password" required="required"/>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div id="locationField2" class="column is-two-thirds">
-                        <div class="field">
-                            <label class="label is-size-6">Recipient’s Address <span style="color: #00676D;">*</span>
-                                <span>Autocomplete by Google</span></label>
-                            <div class="control">
-                                <input id="autocomplete2" name="ShipTo" placeholder="Start typing your address"
-                                       class="input" type="text" autocomplete="new-password" required="required"/>
-                                <span class="tag verify is-hidden" id="verify2">
-                                    <i class="fas fa-cog fa-spin"></i>Verifying via ShipEngine
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <label class="label has-text-grey-light">Package Information</label>
-
-                <div class="columns package_info">
-                    <div class="column is-one-half">
-                        <label class="label">Package weight <span style="color: #00676D;">*</span> <span
-                                class="is-size-6"></span></label>
-                        <div class="columns">
-                            <div class="column is-one-half">
-                                <div class="control">
-                                    <input id="weight_lb" class="input" type="text" placeholder="Weight - Pounds"
-                                           value="" autocomplete="new-password" required="required" style="width: 150px;">
+                            <div class="columns">
+                                <div class="column is-one-half">
+                                    <div class="control">
+                                        <input id="weight_lb" class="input" type="text" placeholder="Weight - Pounds"
+                                            value="" autocomplete="new-password" required="required"
+                                            style="width: 150px;">
+                                    </div>
+                                    <p class="help">Pounds</p>
                                 </div>
-                                <p class="help">Pounds</p>
-                            </div>
-                            <div class="column is-one-half">
-                                <div class="control">
-                                    <input id="weight_oz" class="input" type="text" placeholder="Weight - Ounces"
-                                           value="" autocomplete="new-password" required="required" style="width: 150px;">
+                                <div class="column is-one-half">
+                                    <div class="control">
+                                        <input id="weight_oz" class="input" type="text" placeholder="Weight - Ounces"
+                                            value="" autocomplete="new-password" required="required"
+                                            style="width: 150px;">
+                                    </div>
+                                    <p class="help">Ounces</p>
                                 </div>
-                                <p class="help">Ounces</p>
                             </div>
                         </div>
                     </div>
-                </div>
 
-                <a id="addPackageOption" class="label is-size-6" style="text-decoration: underline; margin-top: 2rem; margin-bottom: 2rem; z-index: 10;">
-                    <i class="fa fa-angle-double-right" aria-hidden="true" style="text-decoration: underline; z-index: 10;"></i> Add package dimensions (optional)
-                </a>
+                    <a id="addPackageOption" class="label is-size-6"
+                        style="text-decoration: underline; margin-top: 2rem; margin-bottom: 2rem; z-index: 10;">
+                        <i class="fa fa-angle-double-right" aria-hidden="true"
+                            style="text-decoration: underline; z-index: 10;"></i> Add package dimensions (optional)
+                    </a>
 
-<!--                <label id="packageDimForm" class="label has-text-grey-light is-hidden">Package Dimensions</label>-->
+                    <!--                <label id="packageDimForm" class="label has-text-grey-light is-hidden">Package Dimensions</label>-->
 
-                <div id="packageDimForm" class="columns package_info is-hidden" style="margin-bottom: 2rem;">
+                    <div id="packageDimForm" class="columns package_info is-hidden" style="margin-bottom: 2rem;">
 
-                    <div id="" class="column is-one-half">
-                        <label class="label">Package Dimensions <span class="is-size-6">Optional</span></label>
-                        <div class="columns">
-                            <div class="column is-one-half">
-                                <div class="control">
-                                    <input id="size_length" name="length_input" class="input" type="text" placeholder="Length" value=""
-                                           autocomplete="new-password" style="width: 80px;">
+                        <div id="" class="column is-one-half">
+                            <label class="label">Package Dimensions <span class="is-size-6">Optional</span></label>
+                            <div class="columns">
+                                <div class="column is-one-half">
+                                    <div class="control">
+                                        <input id="size_length" name="length_input" class="input" type="text"
+                                            placeholder="Length" value="" autocomplete="new-password"
+                                            style="width: 80px;">
+                                    </div>
+                                    <p class="help">Length in inches</p>
                                 </div>
-                                <p class="help">Length in inches</p>
-                            </div>
-                            <div class="column is-one-half">
-                                <div class="control">
-                                    <input id="size_width" name="width_input" class="input" type="text" placeholder="Width" value=""
-                                           autocomplete="new-password" style="width: 80px;">
+                                <div class="column is-one-half">
+                                    <div class="control">
+                                        <input id="size_width" name="width_input" class="input" type="text"
+                                            placeholder="Width" value="" autocomplete="new-password"
+                                            style="width: 80px;">
+                                    </div>
+                                    <p class="help">Width in inches</p>
                                 </div>
-                                <p class="help">Width in inches</p>
-                            </div>
-                            <div class="column is-one-half">
-                                <div class="control">
-                                    <input id="size_height" name="height_input" class="input" type="text" placeholder="Height" value=""
-                                           autocomplete="new-password" style="width: 80px;">
+                                <div class="column is-one-half">
+                                    <div class="control">
+                                        <input id="size_height" name="height_input" class="input" type="text"
+                                            placeholder="Height" value="" autocomplete="new-password"
+                                            style="width: 80px;">
+                                    </div>
+                                    <p class="help">Height in inches</p>
                                 </div>
-                                <p class="help">Height in inches</p>
                             </div>
                         </div>
                     </div>
-                </div>
 
-                <div id="nextButton" class="columns is-mobile is-hidden bounce">
-                    <div class="column is-one-fifth">
-                        <button class="button is-primary is-medium"
-                                style="margin-top: 15px; z-index: 10;">Next
-                        </button>
-                    </div>
-                </div>
-
-                <aside class="is-hidden">
-
-                    <div class="rate_list" style="overflow: auto;">
-                        <div class="close"><i class="fa fa-times" aria-hidden="true"></i></div>
-                        <div class="rate_holder"></div>
-                    </div>
-
-                    <div class="package_type is-inactive">
-                        <div class="holder">
-                            <label>Package Type</label>
-                            <img src="/images/icon-box-generic.svg">
-                            <p class="package_label">USPS</p>
-                        </div>
-                        <button>Select package type <i class="fa fa-chevron-down" aria-hidden="true"
-                                                       style="margin-left: 5px;"></i>
-                        </button>
-                    </div>
-
-                    <div class="rate_box">
-                        <label>Your label price</label>
-                        <div class="rate">
-                            <span><i id="cog" class="fas fa-cog"></i></span><label>Plus Tax</label>
+                    <div id="nextButton" class="columns is-mobile is-hidden bounce">
+                        <div class="column is-one-fifth">
+                            <button class="button is-primary is-medium" style="margin-top: 15px; z-index: 10;">Next
+                            </button>
                         </div>
                     </div>
 
-                    <div class="is-grouped-centered">
-                        <p class="step2_errors"></p>
-                        <button id="goToStep3" class="button is-inactive" disabled>Pay for my label <i
-                                class="fas fa-arrow-alt-circle-right"></i></button>
-                    </div>
+                    <aside class="is-hidden">
 
-                    <div class="t_and_c">
-                        <label class="checkbox">
-                            <input type="checkbox" class="checkHazardous">
-                            I agree this package contains <strong>no</strong> <strong><a href="./pdfs/ShipPenguin_List_of_Hazardous_Materials.pdf">hazardous materials</a></strong>
-                        </label>
-                        <label class="checkbox">
-                            <input type="checkbox" class="checkTcs">
-                            I agree to the <a href="./pdfs/ShipPenguin_Terms_of_Service.pdf" target="_blank"><strong>terms
-                            and conditions</strong></a>
+                        <div class="rate_list" style="overflow: auto;">
+                            <div class="close"><i class="fa fa-times" aria-hidden="true"></i></div>
+                            <div class="rate_holder"></div>
+                        </div>
+
+                        <div class="package_type is-inactive">
+                            <div class="holder">
+                                <label>Package Type</label>
+                                <img src="/images/icon-box-generic.svg">
+                                <p class="package_label">USPS</p>
+                            </div>
+                            <button>Select package type <i class="fa fa-chevron-down" aria-hidden="true"
+                                    style="margin-left: 5px;"></i>
+                            </button>
+                        </div>
+
+                        <div class="rate_box">
+                            <label>Your label price</label>
+                            <div class="rate">
+                                <span><i id="cog" class="fas fa-cog"></i></span><label>Plus Tax</label>
+                            </div>
+                        </div>
+
+                        <div class="is-grouped-centered">
+                            <p class="step2_errors"></p>
+                            <button id="goToStep3" class="button is-inactive" disabled>Pay for my label <i
+                                    class="fas fa-arrow-alt-circle-right"></i></button>
+                        </div>
+
+                        <div class="t_and_c">
+                            <label class="checkbox">
+                                <input type="checkbox" class="checkHazardous">
+                                I agree this package contains <strong>no</strong> <strong><a
+                                        href="./pdfs/ShipPenguin_List_of_Hazardous_Materials.pdf">hazardous
+                                        materials</a></strong>
+                            </label>
+                            <label class="checkbox">
+                                <input type="checkbox" class="checkTcs">
+                                I agree to the <a href="./pdfs/ShipPenguin_Terms_of_Service.pdf"
+                                    target="_blank"><strong>terms
+                                        and conditions</strong></a>
+                                </p>
+                            </label>
+                        </div>
+                    </aside>
+                </form>
+            </section>
+
+            <section class="step step_three is-hidden">
+                <h1 class="headline">Almost finished!</h1>
+                <p class="subhead final_price">We'll charge your card <strong>$xx.xx</strong> for your <span
+                        id="labelSummaryText" style="font-weight: bold;">carrier service label</span> and you can
+                    download your label on the next step!</p>
+                <form id="payment-form">
+                    <div class="package_info payment_info">
+                        <div class="field is-grouped is-grouped-centered">
+                            <img src="/images/powered_by_stripe.svg">
+                        </div>
+                        <div id="card-element">
+                            <!--Stripe.js injects the Card Element-->
+                        </div>
+                        <div class="field is-grouped is-grouped-centered">
+                            <p id="card-errors" role="alert"></p>
+                            <p class="result-message is-hidden">
+                                Payment succeeded!
                             </p>
-                        </label>
-                    </div>
-                </aside>
-            </form>
-        </section>
+                        </div>
+                        <div class="field is-grouped is-grouped-centered m-md">
+                            <button id="submit" class="button is-primary bounce">Pay and Grab my label! <i
+                                    class="fas fa-arrow-alt-circle-right"></i></button>
+                        </div>
+                </form>
+            </section>
 
-        <section class="step step_three is-hidden">
-            <h1 class="headline">Almost finished!</h1>
-            <p class="subhead final_price">We'll charge your card <strong>$xx.xx</strong> for your <span id="labelSummaryText" style="font-weight: bold;">carrier service label</span> and you can download your label on the next step!</p>
-            <form id="payment-form">
-                <div class="package_info payment_info">
-                    <div class="field is-grouped is-grouped-centered">
-                        <img src="/images/powered_by_stripe.svg">
-                    </div>
-                    <div id="card-element"><!--Stripe.js injects the Card Element--></div>
-                    <div class="field is-grouped is-grouped-centered">
-                        <p id="card-errors" role="alert"></p>
-                        <p class="result-message is-hidden">
-                            Payment succeeded!
-                        </p>
-                    </div>
-                    <div class="field is-grouped is-grouped-centered m-md">
-                        <button id="submit" class="button is-primary bounce">Pay and Grab my label! <i
-                                class="fas fa-arrow-alt-circle-right"></i></button>
-                    </div>
-            </form>
-        </section>
+            <section class="step step_four has-text-centered is-hidden">
+                <h1 class="headline successText">Success!</h1>
+                <p class="subhead m-b-md">Checkout your label below!</p>
 
-        <section class="step step_four has-text-centered is-hidden">
-            <h1 class="headline successText">Success!</h1>
-            <p class="subhead m-b-md">Checkout your label below!</p>
+                <img class="label_preview" src="#">
 
-            <img class="label_preview" src="#">
+                <div class="columns is-mobile is-centered">
+                    <div class="column">
+                        <a id="labelPlaceholder" href="#" class="button is-primary is-active"
+                            style="margin-top: 15px; z-index: 10;" target="_blank">
+                            Download my label
+                        </a>
+                    </div>
 
-            <div class="columns is-mobile is-centered">
-                <div class="column">
-                    <a id="labelPlaceholder" href="#" class="button is-primary is-active" style="margin-top: 15px; z-index: 10;"
-                    target="_blank">
-                        Download my label
-                    </a>
+                    <div class="column">
+                        <a href="#" class="button is-primary is-active" style="margin-top: 15px; z-index: 10;"
+                            onClick="window.location.reload();">
+                            Create another label
+                        </a>
+                    </div>
                 </div>
+            </section>
 
-                <div class="column">
-                    <a href="#" class="button is-primary is-active"  style="margin-top: 15px; z-index: 10;"
-                       onClick="window.location.reload();">
-                        Create another label
-                    </a>
-                </div>
-            </div>
-        </section>
+        </div>
 
     </div>
 
-</div>
+    <a class="github_tag" href="https://github.com/ShipEngine/shipenguin_web_app" target="_blank"></a>
+    <div class="penguin_background">
+        <img class="ice_left" src="/images/ice_corner_left.svg">
+        <img class="ice_right" src="/images/ice_corner_right.svg">
+        <img class="ice_a" src="/images/ice_a.svg">
+        <img class="ice_b" src="/images/ice_b.svg">
+        <img class="ice_c" src="/images/ice_c.svg">
+        <img class="pen penguin_a" src="/images/penguin.svg">
+        <img class="pen penguin_b" src="/images/penguin.svg">
+        <img class="pen penguin_c" src="/images/penguin.svg">
+        <img class="pen penguin_d" src="/images/penguin.svg">
+        <img class="pen penguin_e" src="/images/penguin.svg">
+    </div>
 
-<a class="github_tag" href="https://github.com/ShipEngine/shipenguin_web_app" target="_blank"></a>
-<div class="penguin_background">
-    <img class="ice_left" src="/images/ice_corner_left.svg">
-    <img class="ice_right" src="/images/ice_corner_right.svg">
-    <img class="ice_a" src="/images/ice_a.svg">
-    <img class="ice_b" src="/images/ice_b.svg">
-    <img class="ice_c" src="/images/ice_c.svg">
-    <img class="pen penguin_a" src="/images/penguin.svg">
-    <img class="pen penguin_b" src="/images/penguin.svg">
-    <img class="pen penguin_c" src="/images/penguin.svg">
-    <img class="pen penguin_d" src="/images/penguin.svg">
-    <img class="pen penguin_e" src="/images/penguin.svg">
-</div>
-
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAE-jLiYIzUUX9ahjhVptyfcEKXjYNo9QY&libraries=places&callback=initAutocomplete"
+    <script
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAE-jLiYIzUUX9ahjhVptyfcEKXjYNo9QY&libraries=places&callback=initAutocomplete"
         defer></script>
-<script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
-<script src="https://js.stripe.com/v3/"></script>
-<script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
-<script src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js" integrity="sha256-eGE6blurk5sHj+rmkfsGYeKyZx3M4bG+ZlFyA7Kns7E=" crossorigin="anonymous"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+    <script src="https://js.stripe.com/v3/"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"
+        integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"
+        integrity="sha256-eGE6blurk5sHj+rmkfsGYeKyZx3M4bG+ZlFyA7Kns7E=" crossorigin="anonymous"></script>
 
-<script type="module" src="/js/address-auto-complete.js"></script>
-<script type="module" src="/js/verify-address.js"></script>
-<script type="module" src="/js/get-label.js"></script>
-<script type="module" src="/js/payment.js"></script>
-<script type="module" src="/js/ui-helpers.js"></script>
-<script type="module" src="/js/client.js" defer></script>
+    <script type="module" src="/js/address-auto-complete.js"></script>
+    <script type="module" src="/js/verify-address.js"></script>
+    <script type="module" src="/js/get-label.js"></script>
+    <script type="module" src="/js/payment.js"></script>
+    <script type="module" src="/js/ui-helpers.js"></script>
+    <script type="module" src="/js/client.js" defer></script>
 
 </body>
 
