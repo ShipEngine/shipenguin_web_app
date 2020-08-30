@@ -6,7 +6,6 @@ localStorage.clear();
 
 //////////////////////////////////////////
 ///// STEP ONE: Google Autocomplete //////
-
 initAutocomplete();
 
 ///// END STEP ONE: Google Autocomplete //////
@@ -20,7 +19,7 @@ initAutocomplete();
 /////////////////////////////////////////////
 
 
-$("#goToStep2").click(function () {
+$("#goToStep2").click(() => {
   $(".container").removeClass("step0 step1 step2 step3");
   $(".container").addClass("step1");
   $(".step_one").addClass("is-hidden");
@@ -29,20 +28,20 @@ $("#goToStep2").click(function () {
   $(".steps-segment:nth-child(2)").addClass("is-active");
 });
 
-$(".package_type, .package_type button").click(function (event) {
-  event.preventDefault();
+$(".package_type, .package_type button").click((evt) => {
+  evt.preventDefault();
   if (!$(".package_type").hasClass("is-inactive")) {
     $(".rate_list").animate({ top: 0 }, 800);
   }
 });
 
-$(".rate_list .close").click(function (event) {
-  event.preventDefault()
+$(".rate_list .close").click((evt) => {
+  evt.preventDefault()
   $(".rate_list").animate({ top: "-100%" }, 800);
 });
 
-$("body").on("click", ".newRate", function (event) {
-  event.preventDefault();
+$("body").on("click", ".newRate", (evt) => {
+  evt.preventDefault();
   $(".rate_list").animate({ top: "-100%" }, 800);
   const newPackageId = $(this).attr("id");
   const newPackageService = $(this).find("strong").text();
@@ -82,8 +81,8 @@ $("#rep_name").focus((evt) => {
   evt.target.setAttribute("autocomplete", "new-password");
 });
 
-$("#goToStep3").click(function (event) {
-  event.preventDefault();
+$("#goToStep3").click((evt) => {
+  evt.preventDefault();
   $("#mainBox").css("margin-left", "");
   if (($(".checkHazardous:checked").is(":checked")) && ($(".checkTcs:checked").is(":checked"))) {
     // Container Adjust
@@ -105,7 +104,7 @@ $("#goToStep3").click(function (event) {
   }
 });
 
-$("#step_two_form input:not([type=checkbox])").change(function (e) {
+$("#step_two_form input:not([type=checkbox])").change((e) => {
   console.log("=== STEP: Form and data check ===");
 
   $("#cog").addClass("fa-spin");
@@ -182,8 +181,8 @@ $("#step_two_form input:not([type=checkbox])").change(function (e) {
   }
 });
 
-$("#addPackageOption").click(function (event) {
-  event.preventDefault();
+$("#addPackageOption").click((evt) => {
+  evt.preventDefault();
   $("#packageDimForm").toggleClass("is-hidden");
   $("#size_length").val("");
   $("#size_width").val("");

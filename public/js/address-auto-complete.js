@@ -1,6 +1,6 @@
 import { verifyAddressWithShipEngine } from "./verify-address.js";
 
-let placeSearch, autocomplete, autocomplete2;
+let autocomplete, autocomplete2;
 let componentForm = {
   street_number: "short_name",
   route: "long_name",
@@ -20,7 +20,7 @@ export function initAutocomplete() {
     });
 
 
-  autocomplete.addListener("place_changed", function () {
+  autocomplete.addListener("place_changed", () => {
     $("#verify").toggleClass("is-hidden");
     fillInAddress(autocomplete, "");
   });
@@ -30,7 +30,7 @@ export function initAutocomplete() {
     (document.getElementById("autocomplete2")), {
       types: ["geocode"]
     });
-  autocomplete2.addListener("place_changed", function () {
+  autocomplete2.addListener("place_changed", () => {
     $("#verify2").toggleClass("is-hidden");
     fillInAddress(autocomplete2, "2");
   });
@@ -66,7 +66,8 @@ export function geolocate() {
   $("#autocomplete").attr("autocomplete", "new-password");
   $("#autocomplete2").attr("autocomplete", "new-password");
   if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(function (position) {
+    navigator.geolocation.getCurrentPosition((position) => {
+      // TODO: What does this do?
       var geolocation = {
         lat: position.coords.latitude,
         lng: position.coords.longitude
