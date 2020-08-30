@@ -47,11 +47,10 @@ export function rateEstimate(someData) {
 
     $(data.rate_response.rates).each(function () {
       console.log(this);
-      $('.rate_holder').append('<div class="newRate" id="' + this.rate_id + '"><strong>' + this.service_type + '</strong><em>' + ' ' + format_package_codes(this.package_type) + '</em><span>$' + this.shipping_amount.amount + '</span></div>');
+      $('.rate_holder').append('<div class="newRate" id="' + this.rate_id + '"><strong>' + this.service_type + '</strong><em>' + ' ' + format_package_codes(this.package_type) + '</em><span>$' + this.shipping_amount.amount.toFixed(2) + '</span></div>');
     });
 
     $('#nextButton').removeClass('is-hidden');
-
   });
 }
 
