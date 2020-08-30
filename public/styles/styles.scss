@@ -199,6 +199,10 @@ p.subhead {padding:0;font-size: 1.25em;font-weight: 300;text-align: center;}
     .button:hover {animation-name: bounce;}
     @include media(break3) {
         padding: 50px 75px 0;
+    } 
+
+    p {
+        margin-bottom: 2rem;;
     }
 }
 .step_two, .step_three, .step_four {
@@ -206,6 +210,42 @@ p.subhead {padding:0;font-size: 1.25em;font-weight: 300;text-align: center;}
     @include media(break3) {
         padding: 0 75px 50px;
 
+    }
+
+    #step_two_form {
+
+        #weight_lb, #weight_oz {
+            width: 150px;
+        }
+
+        input[name="hidden"] {
+            display:none;
+        }
+
+        #addPackageOption {
+            text-decoration: underline; 
+            margin-top: 2rem; 
+            margin-bottom: 2rem; 
+            z-index: 10;
+
+            i {
+                text-decoration: underline; 
+                z-index: 10;
+            }
+        }
+
+        #packageDimForm {
+            margin-bottom: 2rem;
+
+            #size_length, #size_width, #size_height {
+                width: 80px;
+            }
+        }
+
+        #nextButton button {
+            margin-top: 15px; 
+            z-index: 10;
+        }
     }
 }
 .step_chart {
