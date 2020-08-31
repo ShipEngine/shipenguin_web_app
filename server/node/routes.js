@@ -1,32 +1,32 @@
 
-'use strict';
+"use strict";
 
-const config = require('./config');
-const request = require('request');
-const express = require('express');
+const config = require("./config");
+const request = require("request");
+const express = require("express");
 const router = express.Router();
-const stripe = require('stripe')(config.stripe.secretKey);
+const stripe = require("stripe")(config.stripe.secretKey);
 stripe.setApiVersion(config.stripe.apiVersion);
 
-require('dotenv').config();
+require("dotenv").config();
 
 // Render the main app HTML.
-router.get('/', (req, res) => {
-  res.render('index.html');
+router.get("/", (req, res) => {
+  res.render("index.html");
 });
 
 
-router.post('/verify', (req, res) => {
+router.post("/verify", (req, res) => {
 
     var options = {
-        'method': 'POST',
-        'url': 'https://api.shipengine.com/v1/addresses/validate',
-        'headers': {
-          'Host': 'api.shipengine.com',
-          'API-Key': process.env.NODE_ENV === 'development' ?
-            process.env.SHIPENGINE_SANDBOX_API_KEY : process.env.NODE_ENV === 'development' ?
+        "method": "POST",
+        "url": "https://api.shipengine.com/v1/addresses/validate",
+        "headers": {
+          "Host": "api.shipengine.com",
+          "API-Key": process.env.NODE_ENV === "development" ?
+            process.env.SHIPENGINE_SANDBOX_API_KEY : process.env.NODE_ENV === "development" ?
             process.env.SHIPENGINE_SANDBOX_API_KEY : process.env.SHIPENGINE_PROD_API_KEY,
-          'Content-Type': 'application/json'
+          "Content-Type": "application/json"
         },
         body: JSON.stringify(req.body)
       };
@@ -45,20 +45,20 @@ router.post('/verify', (req, res) => {
 });
 
 
-router.post('/rates', (req, res) => {
+router.post("/rates", (req, res) => {
 
     req.body.rate_options.carrier_ids.push(
-      process.env.NODE_ENV === 'development' ? process.env.SHIPENGINE_SANDBOX_SDC_CARRIER_ID : process.env.SHIPENGINE_PROD_SDC_CARRIER_ID
+      process.env.NODE_ENV === "development" ? process.env.SHIPENGINE_SANDBOX_SDC_CARRIER_ID : process.env.SHIPENGINE_PROD_SDC_CARRIER_ID
     );
 
     var options = {
-        'method': 'POST',
-        'url': 'https://api.shipengine.com/v1/rates',
-        'headers': {
-          'Host': 'api.shipengine.com',
-          'API-Key': process.env.NODE_ENV === 'development' ?
+        "method": "POST",
+        "url": "https://api.shipengine.com/v1/rates",
+        "headers": {
+          "Host": "api.shipengine.com",
+          "API-Key": process.env.NODE_ENV === "development" ?
             process.env.SHIPENGINE_SANDBOX_API_KEY : process.env.SHIPENGINE_PROD_API_KEY,
-          'Content-Type': 'application/json'
+          "Content-Type": "application/json"
         },
         body: JSON.stringify(req.body)
 
@@ -77,19 +77,19 @@ router.post('/rates', (req, res) => {
     });
 });
 
-router.post('/label', (req, res) => {
+router.post("/label", (req, res) => {
 
     var rate = req.body.rate;
     var rateUrl = "https://api.shipengine.com/v1/labels/rates/" + rate;
 
     var options = {
-        'method': 'POST',
-        'url': rateUrl,
-        'headers': {
-          'Host': 'api.shipengine.com',
-          'API-Key': process.env.NODE_ENV === 'development' ?
+        "method": "POST",
+        "url": rateUrl,
+        "headers": {
+          "Host": "api.shipengine.com",
+          "API-Key": process.env.NODE_ENV === "development" ?
             process.env.SHIPENGINE_SANDBOX_API_KEY : process.env.SHIPENGINE_PROD_API_KEY,
-          'Content-Type': 'application/json'
+          "Content-Type": "application/json"
         },
         body: JSON.stringify(req.body)
 
@@ -111,14 +111,14 @@ router.post('/label', (req, res) => {
 
 
 // Webhook handler to process payments for sources asynchronously.
-router.post('/webhook', async (req, res) => {
+router.post("/webhook", async (req, res) => {
   let data;
   let eventType;
   // Check if webhook signing is configured.
   if (config.stripe.webhookSecret) {
     // Retrieve the event by verifying the signature using the raw body and secret.
     let event;
-    let signature = req.headers['stripe-signature'];
+    let signature = req.headers["stripe-signature"];
     try {
       event = stripe.webhooks.constructEvent(
         req.rawBody,
@@ -141,13 +141,13 @@ router.post('/webhook', async (req, res) => {
   const object = data.object;
 
   // Monitor payment_intent.succeeded & payment_intent.payment_failed events.
-  if (object.object === 'payment_intent') {
+  if (object.object === "payment_intent") {
     const paymentIntent = object;
-    if (eventType === 'payment_intent.succeeded') {
+    if (eventType === "payment_intent.succeeded") {
       console.log(
         `🔔  Webhook received! Payment for PaymentIntent ${paymentIntent.id} succeeded.`
       );
-    } else if (eventType === 'payment_intent.payment_failed') {
+    } else if (eventType === "payment_intent.payment_failed") {
       const paymentSourceOrMethod = paymentIntent.last_payment_error
         .payment_method
         ? paymentIntent.last_payment_error.payment_method
@@ -162,8 +162,8 @@ router.post('/webhook', async (req, res) => {
 
   // Monitor `source.chargeable` events.
   if (
-    object.object === 'source' &&
-    object.status === 'chargeable' &&
+    object.object === "source" &&
+    object.status === "chargeable" &&
     object.metadata.paymentIntent
   ) {
     const source = object;
@@ -173,7 +173,7 @@ router.post('/webhook', async (req, res) => {
       source.metadata.paymentIntent
     );
     // Check whether this PaymentIntent requires a source.
-    if (paymentIntent.status != 'requires_payment_method') {
+    if (paymentIntent.status != "requires_payment_method") {
       return res.sendStatus(403);
     }
     // Confirm the PaymentIntent with the chargeable source.
@@ -182,8 +182,8 @@ router.post('/webhook', async (req, res) => {
 
   // Monitor `source.failed` and `source.canceled` events.
   if (
-    object.object === 'source' &&
-    ['failed', 'canceled'].includes(object.status) &&
+    object.object === "source" &&
+    ["failed", "canceled"].includes(object.status) &&
     object.metadata.paymentIntent
   ) {
     const source = object;
@@ -201,7 +201,7 @@ router.post('/webhook', async (req, res) => {
  */
 
 // Expose the Stripe publishable key and other pieces of config via an endpoint.
-router.get('/config', (req, res) => {
+router.get("/config", (req, res) => {
   res.json({
     stripePublishableKey: config.stripe.publishableKey,
     stripeCountry: config.stripe.country,
@@ -213,7 +213,7 @@ router.get('/config', (req, res) => {
 });
 
 // Retrieve the PaymentIntent status.
-router.get('/payment_intents/:id/status', async (req, res) => {
+router.get("/payment_intents/:id/status", async (req, res) => {
   const paymentIntent = await stripe.paymentIntents.retrieve(req.params.id);
   res.json({paymentIntent: {status: paymentIntent.status}});
 });

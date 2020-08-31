@@ -48,9 +48,9 @@ export function verifyAddressWithShipEngine(data, statusButton, unique) {
 
   // Name is associated with Address for ShipEngine
   if (unique != 2) {
-    obj["name"] = $('#my_name').val();
+    obj["name"] = $("#my_name").val();
   } else {
-    obj["name"] = $('#rep_name').val();
+    obj["name"] = $("#rep_name").val();
   }
   // adding a placeholder because we don't ask for phone number
   obj["phone"] = "111-111-1111";
@@ -63,7 +63,7 @@ export function verifyAddressWithShipEngine(data, statusButton, unique) {
 
   // Reset button status while verifing
   statusButton.className = "tag verify is-warning"
-  statusButton.innerHTML = '<i class="fas fa-cog fa-spin"></i>Verifying via ShipEngine';
+  statusButton.innerHTML = `<i class="fas fa-cog fa-spin"></i>Verifying via ShipEngine`;
 
   ///// STEP TWO (B): Check with SHIPENGINE -> router.post('/verify') //////
   fetch("/verify", {

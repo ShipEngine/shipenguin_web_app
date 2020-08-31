@@ -1,19 +1,19 @@
-'use strict';
+"use strict";
 
-require('dotenv').config();
+require("dotenv").config();
 
-const config = require('./config');
-const express = require('express');
-const bodyParser = require('body-parser');
-const path = require('path');
-const ngrok = config.ngrok.enabled ? require('ngrok') : null;
+const config = require("./config");
+const express = require("express");
+const bodyParser = require("body-parser");
+const path = require("path");
+const ngrok = config.ngrok.enabled ? require("ngrok") : null;
 const app = express();
-const stripe = require("stripe")(process.env.NODE_ENV === 'development' ? process.env.STRIPE_DEV_SECRET_KEY : process.env.STRIPE_SECRET_KEY);
-const morgan = require('morgan');
-const opn = require('opn');
-const { read } = require('fs');
-const http = require('http');
-const enforce = require('express-sslify');
+const stripe = require("stripe")(process.env.NODE_ENV === "development" ? process.env.STRIPE_DEV_SECRET_KEY : process.env.STRIPE_SECRET_KEY);
+const morgan = require("morgan");
+const opn = require("opn");
+const { read } = require("fs");
+const http = require("http");
+const enforce = require("express-sslify");
 
 /* ATTN: If this project ever gets hosted on any services that do not set the x-forwarded-proto header
 DO NOT use the Options object that is being passed to enforce.HTTPS(); as it is easy to spoof
@@ -23,23 +23,23 @@ app.use(enforce.HTTPS({
   trustProtoHeader: true
 }));
 
-app.use(morgan('dev'));
+app.use(morgan("dev"));
 app.use(
   bodyParser.json({
     // The raw body to verify webhook signatures.
     verify: function (req, res, buf) {
-      if (req.originalUrl.startsWith('/webhook')) {
+      if (req.originalUrl.startsWith("/webhook")) {
         req.rawBody = buf.toString();
       }
     },
   })
 );
 app.use(bodyParser.urlencoded({extended: true}));
-app.use(express.static(path.join(__dirname, '../../public')));
-app.engine('html', require('ejs').renderFile);
-app.set('view engine', 'html');
+app.use(express.static(path.join(__dirname, "../../public")));
+app.engine("html", require("ejs").renderFile);
+app.set("view engine", "html");
 
-app.use('/', require('./routes'));
+app.use("/", require("./routes"));
 app.use(express.static("."));
 app.use(express.json());
 
