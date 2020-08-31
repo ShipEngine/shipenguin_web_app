@@ -1,5 +1,5 @@
 export function rateEstimate(someData) {
-  console.log('STEP: Estimate');
+  console.log("STEP: Estimate");
 
   fetch("/rates", {
     method: "POST",
@@ -23,14 +23,14 @@ export function rateEstimate(someData) {
     console.log(rateId);
 
     // Run actions with base rate data
-    $('.rate span').text('$' + baseRate.toFixed(2));
-    $('.final_price strong').text('$' + baseRate.toFixed(2));
-    $('.package_type').removeClass('is-inactive');
-    $('.package_type .package_label').text(baseServiceType + ' ' + basePackageType);
-    $('.rate_box .rate').addClass('is-active');
+    $(".rate span").text("$" + baseRate.toFixed(2));
+    $(".final_price strong").text("$" + baseRate.toFixed(2));
+    $(".package_type").removeClass("is-inactive");
+    $(".package_type .package_label").text(baseServiceType + " " + basePackageType);
+    $(".rate_box .rate").addClass("is-active");
 
     // Allow to go to Step 3
-    $('#goToStep3').removeAttr("disabled").removeClass('is-inactive').addClass('is-success');
+    $("#goToStep3").removeAttr("disabled").removeClass("is-inactive").addClass("is-success");
 
     // Store base rate ID
     localStorage.setItem("rateId", rateId);
@@ -38,19 +38,19 @@ export function rateEstimate(someData) {
     localStorage.setItem("serviceClass", baseServiceType);
     console.log("Base Rate ID: " + rateId + " Base Label Price: " + baseRate + " Base Service Class: " + baseServiceType);
 
-    $('#labelSummaryText').text(baseServiceType + " shipment");
+    $("#labelSummaryText").text(baseServiceType + " shipment");
 
     console.log("rateId: " + localStorage.getItem("rateId"));
     console.log("ratePrice: " + localStorage.getItem("ratePrice"));
 
-    $('.newRate').remove();
+    $(".newRate").remove();
 
     $(data.rate_response.rates).each(function () {
       console.log(this);
-      $('.rate_holder').append('<div class="newRate" id="' + this.rate_id + '"><strong>' + this.service_type + '</strong><em>' + ' ' + format_package_codes(this.package_type) + '</em><span>$' + this.shipping_amount.amount.toFixed(2) + '</span></div>');
+      $(".rate_holder").append(`<div class="newRate" id="${this.rate_id}"><strong>${this.service_type}</strong><em>${format_package_codes(this.package_type)}</em><span>$${this.shipping_amount.amount.toFixed(2)} </span></div>`);
     });
 
-    $('#nextButton').removeClass('is-hidden');
+    $("#nextButton button").removeAttr("disabled");
   });
 }
 
