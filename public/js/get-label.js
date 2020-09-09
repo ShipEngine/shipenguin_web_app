@@ -1,30 +1,32 @@
+import { getLocalStorageItem } from "./local-storage.js";
+
 export function getLabel() {
   console.log("=== STEP XX: Get Label ===");
-  $(".label_preview").attr("src", "/images/ajax-loading.gif");
+  // $(".label_preview").attr("src", "/images/ajax-loading.gif");
 
   console.log(localStorage.getItem("rateId"));
 
-  var rate = {"rate": localStorage.getItem("rateId")};
+  const labelBody = {"rate": getLocalStorageItem("rateID")};
 
-  console.log(rate);
+  console.log(labelBody);
 
-  fetch("/label", {
+  return fetch("/label", {
     method: "POST",
     headers: {
       "Content-Type": "application/json"
     },
-    body: JSON.stringify(rate)
+    body: JSON.stringify(labelBody)
   })
     .then(function (response) {
       return response.json();
     }).then(function (data) {
 
     console.log(data);
-    var labelPdf = data.label_download.pdf;
-    var labelImage = data.label_download.png;
+    // var labelPdf = data.label_download.pdf;
+    // var labelImage = data.label_download.png;
 
-    $("#labelPlaceholder").attr("href", labelPdf);
-    $(".label_preview").attr("src", labelImage);
+    // $("#labelPlaceholder").attr("href", labelPdf);
+    // $(".label_preview").attr("src", labelImage);
 
   })
 }

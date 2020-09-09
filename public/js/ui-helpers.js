@@ -44,3 +44,16 @@ export function orderComplete (paymentIntentId) {
 
   document.querySelector("button").disabled = true;
 };
+
+export function setStep(stepName) {
+  const stepSectionClasses = ["step_zero", "step_one", "step_two", "step_three", "step_four", "step_five"];
+
+  for(let step of stepSectionClasses) {
+    if(step === stepName) {
+      $(`.${step}`).removeClass("is-hidden");
+    }
+    else {
+      $(`.${step}`).addClass("is-hidden");
+    }
+  }
+}

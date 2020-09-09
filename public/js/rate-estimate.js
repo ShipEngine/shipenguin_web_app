@@ -1,64 +1,58 @@
-export function rateEstimate(someData) {
-  console.log("STEP: Estimate");
+import { getLocalStorageItem } from "./local-storage.js";
 
-  fetch("/rates", {
+export function rateEstimate() {
+
+  console.log("STEP: Estimate");
+  const rateBody = {
+    // It is recommended to obfuscate carrier_ids when possible. Ours are added on the server side when the
+    // request is made, before sending off to ShipEngine API.
+    rate_options: {
+      carrier_ids: []
+    },
+    shipment: {
+      validate_address: "no_validation",
+      ship_to: getLocalStorageItem("toAddress"),
+      ship_from: {
+        ...getLocalStorageItem("fromAddress"),
+        phone: "111-111-1111"
+      },
+      packages: [
+        {
+          weight: {
+            value: getLocalStorageItem("totalWeight"),
+            unit: "ounce"
+          },
+          dimensions: {
+            unit: "inch",
+            ...getLocalStorageItem("dimensions")
+          }
+        }
+      ]
+    }
+  };
+
+  return fetch("/rates", {
     method: "POST",
     headers: {
       "Content-Type": "application/json"
     },
-    body: someData
+    body: JSON.stringify(rateBody)
   })
-    .then(function (response) {
+    .then((response) => {
       return response.json();
-    }).then(function (data) {
+    })
+    .then((data) => {
       console.log(data);
+      const rateSelectList = document.getElementById("estimated-rates");
+      rateSelectList.innerHTML = "";
+      for(let rate of data.rate_response.rates) {
+        const option = document.createElement("option");
+        option.id = rate.rate_id;
+        option.value = rate.rate_id;
+        const totalAmount = rate.shipping_amount.amount + rate.insurance_amount.amount + rate.confirmation_amount.amount + rate.other_amount.amount;
+        option.textContent = `$${totalAmount.toFixed(2)} - ${rate.service_type} / ${rate.delivery_days} day(s)`;
 
-    // console.log(data.rate_response.rates[0]);
-    var baseRate = data.rate_response.rates[0].shipping_amount.amount;
-    var rateId = data.rate_response.rates[0].rate_id;
-    var baseServiceType = data.rate_response.rates[0].service_type;
-    var basePackageType = data.rate_response.rates[0].package_type;
-
-    console.log("=== RATE ID ===");
-    console.log(rateId);
-
-    // Run actions with base rate data
-    $(".rate span").text("$" + baseRate.toFixed(2));
-    $(".final_price strong").text("$" + baseRate.toFixed(2));
-    $(".package_type").removeClass("is-inactive");
-    $(".package_type .package_label").text(baseServiceType + " " + basePackageType);
-    $(".rate_box .rate").addClass("is-active");
-
-    // Allow to go to Step 3
-    $("#goToStep3").removeAttr("disabled").removeClass("is-inactive").addClass("is-success");
-
-    // Store base rate ID
-    localStorage.setItem("rateId", rateId);
-    localStorage.setItem("ratePrice", baseRate);
-    localStorage.setItem("serviceClass", baseServiceType);
-    console.log("Base Rate ID: " + rateId + " Base Label Price: " + baseRate + " Base Service Class: " + baseServiceType);
-
-    $("#labelSummaryText").text(baseServiceType + " shipment");
-
-    console.log("rateId: " + localStorage.getItem("rateId"));
-    console.log("ratePrice: " + localStorage.getItem("ratePrice"));
-
-    $(".newRate").remove();
-
-    $(data.rate_response.rates).each(function () {
-      console.log(this);
-      $(".rate_holder").append(`<div class="newRate" id="${this.rate_id}"><strong>${this.service_type}</strong><em>${format_package_codes(this.package_type)}</em><span>$${this.shipping_amount.amount.toFixed(2)} </span></div>`);
-    });
-
-    $("#nextButton button").removeAttr("disabled");
+        rateSelectList.append(option);
+      }
   });
-}
-
-function format_package_codes(str) {
-  let newStr = str.split("_");
-
-  for (let i = 0; i < newStr.length; i++) {
-    newStr[i] = newStr[i][0].toUpperCase() + newStr[i].substr(1);
-  }
-  return newStr.join(" ");
 }

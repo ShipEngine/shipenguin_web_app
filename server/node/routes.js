@@ -18,7 +18,7 @@ router.get("/", (req, res) => {
 
 router.post("/verify", (req, res) => {
 
-    var options = {
+    const options = {
         "method": "POST",
         "url": "https://api.shipengine.com/v1/addresses/validate",
         "headers": {
@@ -33,7 +33,7 @@ router.post("/verify", (req, res) => {
       request(options, function (error, response) {
         if (error) throw new Error(error) && console.log(error);
 
-        var responseBody =  JSON.parse(response.body);
+        const responseBody =  JSON.parse(response.body);
         // var verification = responseBody[0].status;
         // console.log(verification);
         console.log(responseBody);
@@ -51,7 +51,7 @@ router.post("/rates", (req, res) => {
       process.env.NODE_ENV === "development" ? process.env.SHIPENGINE_SANDBOX_SDC_CARRIER_ID : process.env.SHIPENGINE_PROD_SDC_CARRIER_ID
     );
 
-    var options = {
+    const options = {
         "method": "POST",
         "url": "https://api.shipengine.com/v1/rates",
         "headers": {
@@ -66,7 +66,7 @@ router.post("/rates", (req, res) => {
       request(options, function (error, response) {
         if (error) throw new Error(error);
 
-        var responseBody =  JSON.parse(response.body);
+        const responseBody =  JSON.parse(response.body);
         // quick reference -> app console
         // var verification = responseBody[0].status;
         // console.log(verification);
@@ -79,10 +79,10 @@ router.post("/rates", (req, res) => {
 
 router.post("/label", (req, res) => {
 
-    var rate = req.body.rate;
-    var rateUrl = "https://api.shipengine.com/v1/labels/rates/" + rate;
+    const rate = req.body.rate;
+    const rateUrl = "https://api.shipengine.com/v1/labels/rates/" + rate;
 
-    var options = {
+    const options = {
         "method": "POST",
         "url": rateUrl,
         "headers": {
@@ -97,7 +97,7 @@ router.post("/label", (req, res) => {
       request(options, function (error, response) {
         if (error) throw new Error(error) && console.log(error);
 
-        var responseBody =  JSON.parse(response.body);
+        const responseBody =  JSON.parse(response.body);
         // quick reference -> app console
         // var verification = responseBody[0].status;
         // console.log(verification);
