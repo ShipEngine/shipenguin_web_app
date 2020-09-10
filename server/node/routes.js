@@ -18,8 +18,6 @@ router.get("/", (req, res) => {
   res.render("index.html");
 });
 
-const isProd = process.env.NODE_ENV === "production";
-
 router.post("/verify", async (req, res) => {
 
   const options = {
@@ -46,7 +44,7 @@ router.post("/verify", async (req, res) => {
 router.post("/rates", async (req, res) => {
 
   req.body.rate_options.carrier_ids.push(
-    isProd ? process.env.SHIPENGINE_PROD_SDC_CARRIER_ID : process.env.SHIPENGINE_SANDBOX_SDC_CARRIER_ID
+    config.shipengine.stampsCarrierID
   );
 
   const options = {

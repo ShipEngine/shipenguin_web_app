@@ -31,6 +31,7 @@ const config = {
   },
 
   shipengine: {
+    stampsCarrierID: isProd ? process.env.SHIPENGINE_PROD_SDC_CARRIER_ID : process.env.SHIPENGINE_SANDBOX_SDC_CARRIER_ID,
     apiKey: isProd ? process.env.SHIPENGINE_PROD_API_KEY : process.env.SHIPENGINE_SANDBOX_API_KEY
   },
 
