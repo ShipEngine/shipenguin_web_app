@@ -38,9 +38,8 @@ router.post("/verify", async (req, res) => {
   } 
   catch (e) {
     console.error(e.message);
-    res.send(500, "Unexpected server error");
+    res.send(500, "Unexpected Server Error");
   }
-  
 });
 
 
@@ -68,7 +67,7 @@ router.post("/rates", async (req, res) => {
   }
   catch(e) {
     console.error(e.message);
-    res.send(500, "Unexpected server error");
+    res.send(500, "Unexpected Server Error");
   }
 });
 
@@ -103,7 +102,7 @@ router.post("/checkForFraud", async (req, res) => {
   }
   catch(e) {
     console.error(e.message);
-    res.send(500, "Unexpected server error");
+    res.send(500, "Unexpected Server Error");
   }
 });
 
@@ -129,7 +128,7 @@ router.post("/label", async (req, res) => {
   }
   catch(e) {
     console.error(e.message);
-    res.send(500, "Unexpected server error");
+    res.send(500, "Unexpected Server Error");
   }
 });
 
@@ -181,10 +180,10 @@ router.post("/email", async (req, res) => {
     res.send(200);
   } catch (error) {
     console.error(error);
-
     if (error.response) {
       console.error(error.response.body)
     }
+    res.send(500, "Unexpected Server Error");
   }
 });
 
@@ -204,26 +203,33 @@ router.post("/create-checkout-session", async (req, res) => {
 
   const totalCharge = parsedResponse.shipping_amount.amount + parsedResponse.insurance_amount.amount + parsedResponse.confirmation_amount.amount + parsedResponse.other_amount.amount;
 
-  const session = await stripe.checkout.sessions.create({
-    payment_method_types: ["card"],
-    line_items: [
-      {
-        price_data: {
-          currency: "usd",
-          product_data: {
-            name: "Label",
+  try {
+    const session = await stripe.checkout.sessions.create({
+      payment_method_types: ["card"],
+      line_items: [
+        {
+          price_data: {
+            currency: "usd",
+            product_data: {
+              name: "Label",
+            },
+            unit_amount: totalCharge * 100,
           },
-          unit_amount: totalCharge * 100,
+          quantity: 1,
         },
-        quantity: 1,
-      },
-    ],
-    mode: "payment",
-    success_url: `${url}/#step5`,
-    cancel_url: `${url}/#step4`,
-  });
+      ],
+      mode: "payment",
+      success_url: `${url}/#step5`,
+      cancel_url: `${url}/#step4`,
+    });
+  
+    res.json({ id: session.id });
+  }
+  catch(e) {
+    console.error(e.message);
+    res.send(500, "Unexpected Server Error");
+  }
 
-  res.json({ id: session.id });
 });
 
 module.exports = router;
