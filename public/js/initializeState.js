@@ -75,7 +75,7 @@ export async function setCurrentStep(isBrowserLoad) {
       break;
 
     case "#step5":
-      setStep("step_four");
+      // setStep("step_four");
       loading(true);
       const madePayment = await verifyStripePayment();
       if (!madePayment) {
