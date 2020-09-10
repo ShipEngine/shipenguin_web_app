@@ -38,7 +38,8 @@
     "gulp-sourcemaps": "^2.6.5",
     "ngrok": "^3.2.7",
     "nodemon": "^2.0.4",
-    "npm-run-all": "^4.1.5"
+    "npm-run-all": "^4.1.5",
+    "tailwindcss": "^1.8.7"
   },
   "scripts": {
     "setup-cli": "stripe login --project-name=stripe-payments-demo",
@@ -46,7 +47,8 @@
     "start": "cross-env NODE_ENV=production node server/node/server.js",
     "dev": "cross-env NODE_ENV=development nodemon server/node/server.js",
     "dev:ngrok": "cross-env NODE_ENV=development node server/node/server.js",
-    "gulp_watch": "gulp watch"
+    "gulp_watch": "gulp watch",
+    "build-css": "npx tailwind build public/css/styles.css -o public/css/output/output.css"
   },
   "repository": {
     "type": "git",
