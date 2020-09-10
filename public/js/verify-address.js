@@ -40,7 +40,6 @@ export async function verifyAddress() {
 
   let data = [];
 
-  loading(true);
   try {
     const response = await fetch("/verify", {
       method: "POST",
@@ -53,18 +52,17 @@ export async function verifyAddress() {
     data = await response.json();
 
     data.forEach((item, index) => {
+      const key = index === 0 ? "fromAddress" : "toAddress";
+      console.log(`${key}: ${item.status}`);
       if (item.status === "verified") {
-        const key = index === 0 ? "fromAddress" : "toAddress";
         setLocalStorage(key, item.matched_address);
       }
       else {
         // error status types ("unverified, warning, error")
         const addressName = index === 0 ? "Shipping From" : "Shipping To";
-        window.alert(`Could not verify ${addressName} address`);
+        // window.alert(`Could not verify ${addressName} address`);
       }
     });
-
-    loading(false);
 
     return true;
 
