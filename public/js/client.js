@@ -14,11 +14,8 @@ window.addEventListener("load", () => {
   })
 
   document.getElementById("step1Form").addEventListener("submit", async (evt) => {
-
     evt.preventDefault();
-
     const isVerified = await verifyAddress();
-
     if (isVerified) {
       window.location.hash = "#step2";
     }
@@ -37,7 +34,7 @@ window.addEventListener("load", () => {
     setLocalStorage("totalWeight", 16 * pounds + ounces);
     setLocalStorage("dimensions", { length, width, height });
 
-    await rateEstimate()
+    await rateEstimate();
     window.location.hash = "#step3";
   });
 

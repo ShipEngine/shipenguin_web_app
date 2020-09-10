@@ -1,6 +1,7 @@
 import { getLocalStorageItem } from "./local-storage.js"
+import { showError } from "./ui-helpers.js";
 
-export function checkForFraud(){
+export async function checkForFraud() {
 
   const fromAddress = getLocalStorageItem("fromAddress");
 
@@ -20,23 +21,23 @@ export function checkForFraud(){
     }
   }
 
-  return fetch("/checkForFraud", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify(body)
-  })
-  .then((response) => {
-    return response.json();
-  })
-  .then((data) => {
+  try {
+    const response = await fetch("/checkForFraud", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(body)
+    })
+    const data = response.json();
 
-    if(data.result === "A") {
+    if (data.result === "A") {
       return true;
     }
 
     return false;
-    
-  });
+  } 
+  catch (e) {
+    showError("Error validating your identity, please contact ShipEngine support");
+  }
 }

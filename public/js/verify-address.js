@@ -1,6 +1,7 @@
 import { setLocalStorage } from "./local-storage.js";
+import { showError } from "./ui-helpers.js";
 
-export function verifyAddress(data, statusButton, unique) {
+export async function verifyAddress() {
 
   const fromName = document.getElementById("from-name").value;
   const fromAddress1 = document.getElementById("from-address1").value;
@@ -37,39 +38,38 @@ export function verifyAddress(data, statusButton, unique) {
     }
   ];
 
-  const addressDataFormat = JSON.stringify(addressData);
+  let data = [];
 
-  console.log('Format address to verify with SE');
-  console.log(addressDataFormat);
+  try {
+    const response = await fetch("/verify", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(addressData)
+    })
+  
+    data = await response.json();
 
-  // Reset button status while verifing
-  // statusButton.className = "tag verify is-warning"
-  // statusButton.innerHTML = `<i class="fas fa-cog fa-spin"></i>Verifying via ShipEngine`;
+    data.forEach((item, index) => {
+      if (item.status === "verified") {
+        const key = index === 0 ? "fromAddress" : "toAddress";
+        setLocalStorage(key, item.matched_address);
+      }
+      else {
+        // error status types ("unverified, warning, error")
+        const addressName = index === 0 ? "Shipping From" : "Shipping To";
+        window.alert(`Could not verify ${addressName} address`);
+      }
+    }); 
 
-  ///// STEP TWO (B): Check with SHIPENGINE -> router.post('/verify') //////
-  return fetch("/verify", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: addressDataFormat
-  })
-    .then(function (response) {
-      return response.json();
-    }).then(function (data) {
+    return true;
+    
+  }
+  catch(e) {
+    showError("Unable to verify your addresses");
+    return false;
+  }
 
-      data.forEach((item, index) => {
-        if (item.status === "verified") {
-          const key = index === 0 ? "fromAddress" : "toAddress";
-          setLocalStorage(key, item.matched_address);
-        }
-        else {
-          // error status types ("unverified, warning, error")
-          const addressName = index === 0 ? "Shipping From" : "Shipping To";
-          window.alert(`Could not verify ${addressName} address`);
-        }
-      });
-
-      return data[0].status === "verified" && data[1].status === "verified";
-    });
+   
 }

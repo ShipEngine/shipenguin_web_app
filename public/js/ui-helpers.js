@@ -1,11 +1,12 @@
 // Show the customer the error from Stripe if their card fails to charge
 export function showError(errorMsgText) {
-  loading(false);
-  const errorMsg = document.querySelector("#card-errors");
-  errorMsg.textContent = errorMsgText;
-  setTimeout(function () {
-    errorMsg.textContent = "";
-  }, 4000);
+  window.alert(errorMsgText);
+  // loading(false);
+  // const errorMsg = document.querySelector("#card-errors");
+  // errorMsg.textContent = errorMsgText;
+  // setTimeout(function () {
+  //   errorMsg.textContent = "";
+  // }, 4000);
 };
 
 // Show a spinner on payment submission
