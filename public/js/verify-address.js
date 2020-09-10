@@ -1,5 +1,5 @@
 import { setLocalStorage } from "./local-storage.js";
-import { showError } from "./ui-helpers.js";
+import { showError, loading } from "./ui-helpers.js";
 
 export async function verifyAddress() {
 
@@ -40,6 +40,7 @@ export async function verifyAddress() {
 
   let data = [];
 
+  loading(true);
   try {
     const response = await fetch("/verify", {
       method: "POST",
@@ -48,7 +49,7 @@ export async function verifyAddress() {
       },
       body: JSON.stringify(addressData)
     })
-  
+
     data = await response.json();
 
     data.forEach((item, index) => {
@@ -61,15 +62,18 @@ export async function verifyAddress() {
         const addressName = index === 0 ? "Shipping From" : "Shipping To";
         window.alert(`Could not verify ${addressName} address`);
       }
-    }); 
+    });
+
+    loading(false);
 
     return true;
-    
+
   }
-  catch(e) {
+  catch (e) {
     showError("Unable to verify your addresses");
+    loading(false);
     return false;
   }
 
-   
+
 }

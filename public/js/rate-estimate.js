@@ -1,5 +1,5 @@
 import { getLocalStorageItem } from "./local-storage.js";
-import { showError } from "./ui-helpers.js";
+import { showError, loading } from "./ui-helpers.js";
 
 export async function rateEstimate() {
   const rateBody = {
@@ -28,6 +28,7 @@ export async function rateEstimate() {
     }
   };
 
+  loading(true);
   try {
     const response = await fetch("/rates", {
       method: "POST",
@@ -39,7 +40,8 @@ export async function rateEstimate() {
 
     const data = await response.json();
 
-    console.log(data);
+    loading(false);
+
     const rateFieldSet = document.getElementById("step3Fieldset");
     rateFieldSet.innerHTML = "";
     let defaultChecked = false;
@@ -67,6 +69,7 @@ export async function rateEstimate() {
     }
   }
   catch (e) {
+    loading(false);
     showError("There was an issue with retrieving rates")
   }
 }
