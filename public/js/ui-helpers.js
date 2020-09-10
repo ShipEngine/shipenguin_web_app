@@ -1,5 +1,3 @@
-import { getLabel } from "./get-label.js";
-
 // Show the customer the error from Stripe if their card fails to charge
 export function showError(errorMsgText) {
   loading(false);
@@ -20,40 +18,15 @@ export function loading(isLoading) {
   }
 };
 
-// Shows a success message when the payment is complete
-export function orderComplete (paymentIntentId) {
-  loading(false);
-  //   document
-  //     .querySelector(".result-message a")
-  //     .setAttribute(
-  //       "href",
-  //       "https://dashboard.stripe.com/test/payments/" + paymentIntentId
-  //     );
-
-  // RELEASE THE HOUNDS!
-  console.log("=== STEP XX: Release the hounds! I mean form ===");
-  getLabel();
-  $(".result-message").removeClass("is-hidden");
-  $(".container").removeClass("step0 step1 step2 step3");
-  $(".container").addClass("step3");
-  $(".step_three").addClass("is-hidden");
-  $(".step_four").removeClass("is-hidden");
-  // Steps Adjust
-  $(".steps-segment").removeClass("is-active");
-  $(".steps-segment:nth-child(4)").addClass("is-active");
-
-  document.querySelector("button").disabled = true;
-};
-
 export function setStep(stepName) {
   const stepSectionClasses = ["step_zero", "step_one", "step_two", "step_three", "step_four", "step_five"];
 
   for(let step of stepSectionClasses) {
     if(step === stepName) {
-      $(`.${step}`).removeClass("is-hidden");
+      document.querySelector(`.${step}`).classList.remove("is-hidden");
     }
     else {
-      $(`.${step}`).addClass("is-hidden");
+      document.querySelector(`.${step}`).classList.add("is-hidden");
     }
   }
 }
