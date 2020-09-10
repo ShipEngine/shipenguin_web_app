@@ -1,26 +1,56 @@
-import { getLocalStorageBlob } from "./local-storage.js";
-import { setStep, loading } from "./ui-helpers.js";
+import { getLocalStorageBlob, getLocalStorageItem } from "./local-storage.js";
+import { setStep, loading, showError } from "./ui-helpers.js";
 import { getLabel } from "./get-label.js";
 import { sendEmail } from "./send-email.js";
+import { rateEstimate } from "./rate-estimate.js";
+import { verifyStripePayment } from "./payment.js";
 
 export function initializeState() {
   const results = getLocalStorageBlob();
 
-  setCurrentStep(results);
+  setCurrentStep(true);
 
   // Populate fields
 
-  if (results["shipFromAddress"]) {
-    $("#shipFromAddress").val(results["shipFromAddress"]);
+  // From Address
+  const fromAddress = getLocalStorageItem("fromAddress");
+  if (fromAddress) {
+    document.getElementById("from-name").value = fromAddress.name;
+    document.getElementById("from-address1").value = fromAddress.address_line1;
+    document.getElementById("from-address2").value = fromAddress.address_line2;
+    document.getElementById("from-city").value = fromAddress.city_locality;
+    document.getElementById("from-state").value = fromAddress.state_province;
+    document.getElementById("from-zip").value = fromAddress.postal_code;
   }
 
-  if (results["shipToAddress"]) {
-    $("#shipToAddress").val(results["shipToAddress"]);
+  // To Address
+  const toAddress = getLocalStorageItem("toAddress");
+  if (toAddress) {
+    document.getElementById("to-name").value = toAddress.name;
+    document.getElementById("to-address1").value = toAddress.address_line1;
+    document.getElementById("to-address2").value = toAddress.address_line2;
+    document.getElementById("to-city").value = toAddress.city_locality;
+    document.getElementById("to-state").value = toAddress.state_province;
+    document.getElementById("to-zip").value = toAddress.postal_code;
+  }
+
+  // Package Weight
+  const packageWeight = getLocalStorageItem("weight");
+  if (packageWeight) {
+    document.getElementById("weight-lbs").value = packageWeight.pounds;
+    document.getElementById("weight-ounces").value = packageWeight.ounces;
+  }
+
+  // Dimensions
+  const dimensions = getLocalStorageItem("dimensions");
+  if (dimensions) {
+    document.getElementById("length").value = dimensions.length;
+    document.getElementById("width").value = dimensions.width;
+    document.getElementById("height").value = dimensions.height;
   }
 }
 
-
-export async function setCurrentStep() {
+export async function setCurrentStep(isBrowserLoad) {
 
   switch (window.location.hash) {
     case "#step1":
@@ -32,6 +62,11 @@ export async function setCurrentStep() {
       break;
 
     case "#step3":
+
+      if(isBrowserLoad) {
+        await rateEstimate();
+      }
+
       setStep("step_three");
       break;
 
@@ -42,6 +77,12 @@ export async function setCurrentStep() {
     case "#step5":
       setStep("step_four");
       loading(true);
+      const madePayment = await verifyStripePayment();
+      if (!madePayment) {
+        loading(false);
+        showError("Sorry but you don't appear to have made a payment, please contact ShipEngine support");
+        break;
+      }
       const labelUrls = await getLabel();
       await sendEmail(labelUrls);
       loading(false);

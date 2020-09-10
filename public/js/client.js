@@ -1,5 +1,5 @@
 import { rateEstimate } from "./rate-estimate.js";
-import { setLocalStorage, clearLocalStorage } from "./local-storage.js";
+import { setLocalStorage, clearLocalStorage, clearInputs } from "./local-storage.js";
 import { pay } from "./payment.js";
 import { initializeState, setCurrentStep } from "./initializeState.js";
 import { verifyAddress } from "./verify-address.js";
@@ -13,7 +13,7 @@ window.addEventListener("load", () => {
     window.location.hash = "#step1"
   })
 
-  document.getElementById("step1Form").addEventListener("change", async (evt) => {
+  document.getElementById("step1Form").addEventListener("change", async () => {
     await verifyAddress();
   });
 
@@ -35,7 +35,7 @@ window.addEventListener("load", () => {
     const height = document.getElementById("height").value;
 
     setLocalStorage("weight", { pounds, ounces });
-    setLocalStorage("totalWeight", 16 * pounds + ounces);
+    setLocalStorage("totalWeight", 16 * Number(pounds) + Number(ounces));
     setLocalStorage("dimensions", { length, width, height });
 
     await rateEstimate();
@@ -64,8 +64,8 @@ window.addEventListener("load", () => {
   });
 
   document.getElementById("createAnotherLabel").addEventListener("click", () => {
-    evt.preventDefault();
     clearLocalStorage();
+    clearInputs();
     window.location.hash = "";
   });
 
