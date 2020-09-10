@@ -13,6 +13,10 @@ window.addEventListener("load", () => {
     window.location.hash = "#step1"
   })
 
+  document.getElementById("step1Form").addEventListener("change", async (evt) => {
+    await verifyAddress();
+  });
+
   document.getElementById("step1Form").addEventListener("submit", async (evt) => {
     evt.preventDefault();
     const isVerified = await verifyAddress();
