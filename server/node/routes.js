@@ -145,10 +145,14 @@ router.post("/email", async (req, res) => {
 
   const msg = {
     to: email,
-    from: "noresponse@shipengine.com", // Use the email address or domain you verified above
-    subject: "ShipEngine Labels",
+    from: "ShipPenguin@shipengine.com", // Use the email address or domain you verified above
+    subject: "Here's your shipping label!",
     // text: "and easy to do anywhere, even with Node.js",
-    html: "<strong>Thank you for your purchase!</strong>",
+    html: `Thanks for using ShipPenguin, the fastest, cheapest way to print a shipping label. You’ll find your label attached in this message. Have questions? Just reply to this email.
+    <br/><br/>
+    And, remember: ShipPenguin is always here for you when you want to skip the line at the Post Office. Happy shipping!
+    <br/><br/>
+    The ShipPenguin Team`,
     attachments: [
       {
         content: parsedPdfResponse.toString("base64"),

@@ -5,122 +5,328 @@
   <title>ShipPenguin by ShipEngine</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" type="text/css" href="/css/styles.css">
+  <link rel="stylesheet" type="text/css" href="/css/output/output.css">
   <link rel="icon" type="image/png" sizes="104x80" href="/images/shipenguin-icon.svg">
 </head>
 
 <body>
-  <header>
+  <header class="mb-4">
+    <a href="#"><img class="max-w-xs inline" src="/images/shipenguin-logo_v4.svg" alt="ShipPenguin logo"></a>
+  </header>
+  <!-- <header class="mb-4">
     <a href="/">
       <img class="logo" src="/images/shipenguin-logo_v4.svg" alt="Ship Penguin Logo">
     </a>
-    <p class="tagline">ShipPenguin is the fastest, cheapest way to print a label online.</p>
-  </header>
-
-  <div class="container step0">
-    <div id="mainBox" class="box">
-
-      <section class="step step_zero is-hidden">
-        <button id="step0NextButton" class="button is-primary is-active bounce" type="button">Get
-          Started</button>
-      </section>
-
-      <section class="step step_one is-hidden">
-        <span>Addresses</span>
-        <form id="step1Form">
-          <fieldset>
-            <input id="from-name" type="text" placeholder="From Name" required />
-            <input id="from-address1" type="text" placeholder="From Address 1" required />
-            <input id="from-address2" type="text" placeholder="From Address 2" />
-            <input id="from-city" type="text" placeholder="From City" required />
-            <input id="from-state" type="text" placeholder="From State" required />
-            <input id="from-zip" type="text" placeholder="From Zip" required />
-          </fieldset>
-
-          <fieldset>
-            <input id="to-name" type="text" placeholder="To Name" required />
-            <input id="to-address1" type="text" placeholder="To Address 1" required />
-            <input id="to-address2" type="text" placeholder="To Address 2" />
-            <input id="to-city" type="text" placeholder="To City" required />
-            <input id="to-state" type="text" placeholder="To State" required />
-            <input id="to-zip" type="text" placeholder="To Zip" required />
-          </fieldset>
-          <button id="step1NextButton" class="button is-primary is-active bounce" type="submit">Next</button>
-        </form>
-      </section>
-
-      <section class="step step_two is-hidden">
-        <span>Package weight and dimensions</span>
-        <form id="step2Form">
-          <fieldset>
-            <input id="weight-lbs" type="number" />
-            <input id="weight-ounces" type="number" />
-          </fieldset>
-
-          <fieldset>
-            <input id="length" type="number" />
-            <input id="width" type="number" />
-            <input id="height" type="number" />
-          </fieldset>
-          <button id="step2NextButton" class="button is-primary is-active bounce" type="submit">Next</button>
-        </form>
-      </section>
-
-      <section class="step step_three is-hidden">
-        <span>Estimate Rates</span>
-        <form id="step3Form">
-          <fieldset id="step3Fieldset">
-          </fieldset>
-          <button id="purchaseLabel" class="button is-primary is-active bounce">Purchase Label</button>
-        </form>
-      </section>
-
-      <section class="step step_four is-hidden">
-        <span>Checkout</span>
-        <form id="step4Form">
-          <fieldset>
-            <input id="iovation-input" name="iovation-input" type="hidden" />
-            <input id="email" type="email" required />
-            <button id="printLabel" class="button is-primary is-active bounce">Purchase and Print Label</button>
-          </fieldset>
-        </form>
-      </section>
-
-      <section class="step step_five is-hidden">
-        <span>Thank You For Your Purchase!</span>
-        <button id="createAnotherLabel" class="button is-primary is-active bounce">Create Another Label?</button>
-      </section>
+  </header> -->
 
 
+  <section class="container mx-auto mt-10 w-4/5 font-primary step-zero hidden">
+    <h1 class="text-white text-2xl text-center mb-10">ShipPenguin is the fastest, cheapest way to print a label
+      online.</h1>
+    <div class="card-container text-center sm:px-12 px-24 space-y-20">
+      <h2 class="text-3xl sm:text-2xl font-bold">Skip the post office and print discounted postage using
+        ShipPenguin.<br />
+        Click the Get Started button below to begin shipping with ease.</h2>
+      <button id="step0NextButton" class="btn w-4/5">Start Shipping</button>
+      <p class="text-s text-gray-500">ShipPenguin is powered by ShipEngine, the world's leading shipping API. Learn
+        more about <a class="link" href="https://www.shipengine.com/">ShipEngine</a>.</p>
     </div>
-    <div class="field is-grouped is-grouped-centered">
-      <p id="card-errors" role="alert"></p>
-      <p class="result-message is-hidden">
-        Payment succeeded!
-      </p>
-    </div>
-    <div class="field is-grouped is-grouped-centered m-md">
-      <button id="submit" class="button is-primary bounce">Pay and Grab my label! <i
-          class="fas fa-arrow-alt-circle-right"></i></button>
-    </div>
+  </section>
+
+  <section class="container mx-auto mt-10 w-4/5 md:w-full font-primary step-one hidden">
+    <form id="address-form">
+      <div class="flex mb-4 justify-between">
+        <h1 class="text-white ">Address Information</h1>
+        <span class="text-white">STEP 1 OF 4</span>
+      </div>
+      <div class="card-container flex lg:flex-col">
+
+        <div class="px-24 xl:px-0 w-1/2 lg:w-full">
+          <h2 class="text-xl mb-5">Shipping From (Sender)</h2>
+          <div class="flex md:items-center mb-4">
+            <div class="w-full">
+              <label class="block font-bold" for="from-name">Name:</label>
+              <input class="input" id="from-name" type="text" placeholder="e.g. Jane Doe">
+            </div>
+          </div>
+          <div class="flex md:items-center">
+            <div class="w-full">
+              <label class="block font-bold" for="from-address1">Address:</label>
+              <input class="input" id="from-address1" type="address" placeholder="e.g. Address Line 1">
+
+              <label class="hidden" for="from-address2">Address 2:</label>
+              <input class="input" id="from-address2" type="address" placeholder="e.g. Address Line 2">
+
+              <div class="grid grid-cols-3">
+                <div>
+                  <label class="hidden" for="from-city">City:</label>
+                  <input class="input" id="from-city" type="text" placeholder="City">
+                </div>
+                <div>
+                  <label class="hidden" for="from-state">State:</label>
+                  <input class="input" id="from-state" type="text" placeholder="State">
+                </div>
+                <div>
+                  <label class="hidden" for="from-zip">Zip:</label>
+                  <input class="input" id="from-zip" type="text" placeholder="Zip">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="px-24 xl:px-0 w-1/2 lg:w-full">
+          <h2 class="text-xl mb-5 lg:mt-10">Shipping To (Recipient)</h2>
+          <div class="flex md:items-center mb-4">
+            <div class="w-full">
+              <label class="block font-bold" for="to-name">Name:</label>
+              <input class="input" id="to-name" type="text" placeholder="e.g. Jane Doe">
+            </div>
+          </div>
+          <div class="flex md:items-center">
+            <div class="w-full">
+              <label class="block font-bold" for="to-address1">Address:</label>
+              <input class="input" id="to-address1" type="address" placeholder="e.g. Address Line 1">
+
+              <label class="hidden" for="to-address2">Address 2:</label>
+              <input class="input" id="to-address2" type="address" placeholder="e.g. Address Line 2">
+
+              <div class="grid grid-cols-3">
+                <div>
+                  <label class="hidden" for="to-city">City:</label>
+                  <input class="input" id="to-city" type="text" placeholder="City">
+                </div>
+                <div>
+                  <label class="hidden" for="to-state">State:</label>
+                  <input class="input" id="to-state" type="text" placeholder="State">
+                </div>
+                <div>
+                  <label class="hidden" for="to-zip">Zip:</label>
+                  <input class="input" id="to-zip" type="text" placeholder="Zip">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div class="my-5 md:mx-3">
+        <button id="step-1-next-button" type="button" class="btn w-1/6 md:w-full">Next</button>
+      </div>
     </form>
-    </section>
+  </section>
 
-  </div>
+  <section id="step2" class="container mx-auto font-primary px-12 sm:px-1 sm:text-sm step-two hidden">
+    <div class="flex mb-4 justify-between">
+      <h1 class="text-white ">Package Information</h1>
+      <span class="text-white">STEP 2 OF 4</span>
+    </div>
+    <div class="card-container p-0">
+      <div class="address-container">
+        <div class="flex"><strong>From:</strong>
+          <p id="dimensions-from-summary" class="pl-2">
+            <span class="name"></span>
+            <br />
+            <span class="street-address"></span>
+            <br />
+            <span class="city-state-zip"></span>
+          </p>
+        </div>
+        <div class="flex"><strong>To:</strong>
+          <p id="dimensions-to-summary" class="pl-2">
+            <span class="name"></span>
+            <br />
+            <span class="street-address"></span>
+            <br />
+            <span class="city-state-zip"></span>
+          </p>
+        </div>
+        <a href="#step1" class="edit-btn">
+          <img class="w-5" src="/images/edit-regular.svg" alt="edit icon">
+          Edit
+        </a>
+      </div>
+      <div class="flex sm:flex-col">
+        <div class="w-1/2 sm:w-full">
+          <form id="step-2-form" class="w-full max-w-sm mt-12 ml-12 sm:mt-2 sm:ml-1">
+            <div class="flex items-center mb-4">
+              <div class="">
+                <label class="block text-black font-bold mb-1 md:mb-0 pr-4" for="inline-full-name">
+                  WEIGHT
+                </label>
+              </div>
+              <div class="md:w-1/3 flex items-center">
+                <input id="weight-lbs" class="input mr-2" type="number" min="0">
+                <p class="mr-2">lbs</p>
+              </div>
+              <div class="md:w-1/3 flex items-center">
+                <input id="weight-ounces" class="input mr-2" type="number" min="0">
+                <p>oz</p>
+              </div>
+            </div>
+            <div class="flex items-center mb-4">
+              <div class="">
+                <label class="block text-black font-bold mb-1 md:mb-0 pr-4" for="inline-full-name">
+                  DIMENSIONS
+                </label>
+              </div>
+              <div class="md:w-1/3 flex items-center">
+                <input id="length" class="input mr-2" type="number" placeholder="L" min="1">
+                <p class="mr-2">x</p>
+              </div>
+              <div class="md:w-1/3 flex items-center">
+                <input id="width" class="input mr-2" type="number" placeholder="W" min="1">
+                <p class="mr-2">x</p>
+              </div>
+              <div class="md:w-1/3 flex items-center">
+                <input id="height" class="input mr-2" type="number" placeholder="H" min="1">
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="w-1/2 p-12 sm:w-full">
+          <img class="w-1/2 sm:w-full" src="/images/step2_box.png" alt="Box with length, width, height">
+        </div>
+      </div>
+
+    </div>
+    <div class="my-5 md:mx-3">
+      <button id="step-2-button" type="button" class="btn w-1/6 md:w-full">Next</button>
+    </div>
+
+  </section>
+
+  <section class="container mx-auto mt-10 w-4/5 md:w-full font-primary sm:text-sm pt-0 step-three hidden">
+    <form id="step-3-form">
+      <div class="flex mb-4 justify-between">
+        <h1 class="text-white">Select Rates</h1>
+        <span class="text-white">Step 3 of 4</span>
+      </div>
+      <div class="card-container p-0">
+        <div class="address-container">
+          <div class="flex"><strong>From:</strong>
+            <p id="rate-from-summary" class="pl-2">
+              <span class="name"></span>
+              <br />
+              <span class="street-address"></span>
+              <br />
+              <span class="city-state-zip"></span>
+            </p>
+          </div>
+          <div class="flex"><strong>To:</strong>
+            <p id="rateToSummary" class="pl-2">
+              <span class="name"></span>
+              <br />
+              <span class="street-address"></span>
+              <br />
+              <span class="city-state-zip"></span>
+            </p>
+          </div>
+          <a href="#step1" class="edit-btn">
+            <img class="w-5" src="/images/edit-regular.svg" alt="edit icon">
+            Edit
+          </a>
+        </div>
+        <div class="address-container rounded-none mt-1">
+          <div class="flex items-center"><strong>Package:</strong>
+            <p id="rate-dimension-weight-summary" class="pl-2">1lb, 2oz (10 x 5 x 6 in)</p>
+          </div>
+          <a href="#step2" class="edit-btn">
+            <img class="w-5" src="/images/edit-regular.svg" alt="edit icon">
+            Edit
+          </a>
+        </div>
+        <h2 class="p-5"><strong>Select Rates:</strong></h2>
+        <div class="flex lg:flex-col-reverse lg:items-center justify-between pb-10">
+          <div class="w-1/2 sm:w-full">
+            <div id="rate-input-list" class="flex flex-col mx-auto ml-32 lg:ml-5 lg:mt-10"></div>
+          </div>
+          <div class="flex w-1/2 sm:w-full items-center"><img class="max-w-sm lg:max-w-xs"
+              src="/images/usps-logo-transparent.png" alt="USPS logo"></div>
+        </div>
+      </div>
+      <div class="flex items-center my-3 md:mx-5">
+        <input class="mr-2" type="checkbox" id="hazardous-materials" required>
+        <label for="hazardous-materials">
+          I agree this package contains no <a class="link" href="#">hazardous materials</a>
+        </label>
+      </div>
+      <div class="md:mx-3">
+        <button id="purchaseLabel" type="submit" class="btn w-1/6 md:w-full">Next</button>
+      </div>
+    </form>
+  </section>
+
+  <section id="step4" class="container mx-auto w-4/5  md:w-full font-primary pt-0 step-four hidden">
+    <form id="step4Form">
+      <div class="flex mb-4 justify-between">
+        <h1 class="text-white">Review and Pay</h1>
+        <span class="text-white">Step 4 of 4</span>
+      </div>
+      <div class="card-container grid lg:grid-cols-1 grid-cols-2 gap-6">
+        <div class="label-image-container xl:w-smallLabelWidth xl:h-smallLabelHeight relative">
+          <div class="label-edit-row top-32 xl:top-29 px-3 items-center">
+            <p id="carrier-service" class="uppercase text-xl xl:text-xl"></p>
+            <a href="#step3" class="edit-btn mt-1 xl:pb-0">
+              <img class="w-5" src="/images/edit-regular.svg" alt="edit icon">
+              Edit
+            </a>
+          </div>
+          <div class="label-edit-row top-44 xl:top-36 px-3">
+            <p id="checkout-from-address" class="xl:text-sm text-lg">
+              <span class="name"></span>
+              <br />
+              <span class="street-address"></span>
+              <br />
+              <span class="city-state-zip"></span>
+            </p>
+            <a href="#step2" class="edit-btn mt-1 xl:pb-0">
+              <img class="w-5" src="/images/edit-regular.svg" alt="edit icon">
+              Edit
+            </a>
+          </div>
+          <div class="label-edit-row top-78 xl:top-62">
+            <p id="checkout-to-address" class="text-lg xl:text-sm pl-20">
+              <span class="name"></span>
+              <br />
+              <span class="street-address"></span>
+              <br />
+              <span class="city-state-zip"></span>
+            </p>
+            <a href="#step2" class="edit-btn xl:pb-0 mr-3">
+              <img class="w-5" src="/images/edit-regular.svg" alt="edit icon">
+              Edit
+            </a>
+          </div>
+        </div>
+        <div class="lg:mt-10">
+          <p class="text-2xl font-bold mb-10">Please provide an email address and we will send you a receipt and PDF
+            label.</p>
+          <div class="py-8">
+            <input id="iovation-input" name="iovation-input" type="hidden" required />
+            <label class="block font-bold" for="email-address">Email Address:</label>
+            <input class="input w-3/5 lg:w-full" id="email" type="text" placeholder="e.g. jane@company.com">
+          </div>
+          <div class="flex items-center pb-8">
+            <input class="mr-2" id="terms-and-conditions" type="checkbox" required>
+            <label for="email-address">I agree to the <a class="link" href="#">terms and conditions.</a></label>
+          </div>
+          <button id="print-label" type="submit" class="btn w-2/5 lg:w-full"></button>
+        </div>
+      </div>
+    </form>
+  </section>
+
+  <section class="container mx-auto mt-10 w-4/5 font-primary step-five hidden">
+    <div class="card-container text-center sm:px-12 px-24 space-y-20">
+      <h2 class="text-3xl sm:text-2xl font-bold">Thank You For Your Purchase!</h2>
+      <button id="createAnotherLabel" class="btn w-4/5">Create Another Label?</button>
+      <p class="text-s text-gray-500">ShipPenguin is powered by ShipEngine, the world's leading shipping API. Learn
+        more about <a class="link" href="https://www.shipengine.com/">ShipEngine</a>.</p>
+    </div>
+  </section>
 
   <a class="github_tag" href="https://github.com/ShipEngine/shipenguin_web_app" target="_blank"></a>
-  <div class="penguin_background">
-    <img class="ice_left" src="/images/ice_corner_left.svg">
-    <img class="ice_right" src="/images/ice_corner_right.svg">
-    <img class="ice_a" src="/images/ice_a.svg">
-    <img class="ice_b" src="/images/ice_b.svg">
-    <img class="ice_c" src="/images/ice_c.svg">
-    <img class="pen penguin_a" src="/images/penguin.svg">
-    <img class="pen penguin_b" src="/images/penguin.svg">
-    <img class="pen penguin_c" src="/images/penguin.svg">
-    <img class="pen penguin_d" src="/images/penguin.svg">
-    <img class="pen penguin_e" src="/images/penguin.svg">
-  </div>
 
   <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
   <script src="https://js.stripe.com/v3/"></script>

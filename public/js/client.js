@@ -21,17 +21,17 @@ window.addEventListener("load", () => {
     await verifyAddress();
   }
   // const debouncedAddressVerify = debounce(runVerifyAddress);
-  document.getElementById("step1Form").addEventListener("change", debounce(runVerifyAddress));
+  document.getElementById("address-form").addEventListener("change", debounce(runVerifyAddress));
 
-  document.getElementById("step1Form").addEventListener("submit", async (evt) => {
-    evt.preventDefault();
+  document.getElementById("step-1-next-button").addEventListener("click", async (evt) => {
+    // evt.preventDefault();
     const isVerified = await verifyAddress();
     if (isVerified) {
       window.location.hash = "#step2";
     }
   });
 
-  document.getElementById("step2Form").addEventListener("submit", async (evt) => {
+  document.getElementById("step-2-button").addEventListener("click", async (evt) => {
     evt.preventDefault();
 
     const pounds = document.getElementById("weight-lbs").value;
@@ -48,11 +48,19 @@ window.addEventListener("load", () => {
     window.location.hash = "#step3";
   });
 
-  document.getElementById("step3Form").addEventListener("submit", (evt) => {
+  document.getElementById("step-3-form").addEventListener("submit", (evt) => {
     evt.preventDefault();
-    const rateFieldSet = document.getElementById("step3Fieldset");
+    const rateFieldSet = document.getElementById("rate-input-list");
     const selectedRate = rateFieldSet.querySelector("input:checked");
-    setLocalStorage("rateID", selectedRate.value);
+    const rateID = selectedRate.value;
+
+    const rateLabel = rateFieldSet.querySelector(`label[for="${rateID}`);
+    
+    const carrierService = rateLabel.textContent.split("-")[1].split("/")[0].trim();
+    const shippingCost = rateLabel.textContent.split("-")[0].trim();
+    setLocalStorage("carrierService", carrierService);
+    setLocalStorage("shippingCost", shippingCost);
+    setLocalStorage("rateID", rateID);
     window.location.hash = "#step4";
   });
 

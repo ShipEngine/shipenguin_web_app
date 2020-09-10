@@ -1,3 +1,6 @@
+import { getLocalStorageItem } from "./local-storage.js";
+
+
 // Show the customer the error from Stripe if their card fails to charge
 export function showError(errorMsgText) {
   window.alert(errorMsgText);
@@ -11,14 +14,14 @@ export function loading(isLoading) {
 };
 
 export function setStep(stepName) {
-  const stepSectionClasses = ["step_zero", "step_one", "step_two", "step_three", "step_four", "step_five"];
+  const stepSectionClasses = ["step-zero", "step-one", "step-two", "step-three", "step-four", "step-five"];
 
   for(let step of stepSectionClasses) {
     if(step === stepName) {
-      document.querySelector(`.${step}`).classList.remove("is-hidden");
+      document.querySelector(`.${step}`).classList.remove("hidden");
     }
     else {
-      document.querySelector(`.${step}`).classList.add("is-hidden");
+      document.querySelector(`.${step}`).classList.add("hidden");
     }
   }
 }
@@ -34,4 +37,95 @@ export function debounce(func, wait = 300) {
       func.apply(this, args);
     }, wait);
   };
+}
+
+
+export function populateCheckoutPage() {
+
+  //Carrier Service
+  const carrierServiceName = getLocalStorageItem("carrierService");
+
+  const carrierService = document.getElementById("carrier-service");
+  carrierService.innerHTML = "";
+  carrierService.textContent = carrierServiceName;
+
+  //From Address
+  const fromAddress = getLocalStorageItem("fromAddress");
+
+  const fromName = document.querySelector("#checkout-from-address .name");
+  fromName.innerHTML = "";
+  fromName.textContent = fromAddress.name;
+
+  const fromStreetAdress = document.querySelector("#checkout-from-address .street-address");
+  fromStreetAdress.innerHTML = "";
+  fromStreetAdress.textContent = `${fromAddress.address_line1} ${fromAddress.address_line2}`;
+
+  const fromCityStateZip = document.querySelector("#checkout-from-address .city-state-zip");
+  fromCityStateZip.innerHTML = "";
+  fromCityStateZip.textContent = `${fromAddress.city_locality}, ${fromAddress.state_province}, ${fromAddress.postal_code}`;
+
+  // To Address
+  const toAddress = getLocalStorageItem("toAddress");
+
+  const toName = document.querySelector("#checkout-to-address .name");
+  toName.innerHTML = "";
+  toName.textContent = toAddress.name;
+
+  const toStreetAdress = document.querySelector("#checkout-to-address .street-address");
+  toStreetAdress.innerHTML = "";
+  toStreetAdress.textContent = `${toAddress.address_line1} ${toAddress.address_line2}`;
+
+  const toCityStateZip = document.querySelector("#checkout-to-address .city-state-zip");
+  toCityStateZip.innerHTML = "";
+  toCityStateZip.textContent = `${toAddress.city_locality}, ${toAddress.state_province}, ${toAddress.postal_code}`;
+
+  // dimensions
+  const dimensions = getLocalStorageItem("dimensions");
+  const weight = getLocalStorageItem("weight");
+
+  const dimensionWeight = document.querySelector("#rate-dimension-weight-summary");
+
+  dimensionWeight.innerHTML = "";
+  dimensionWeight.textContent = `${weight.pounds ? weight.pounds : "0"}lb(s), ${weight.ounces ? weight.ounces : "0"}oz (${dimensions.length} x ${dimensions.width} x ${dimensions.height} in)`;
+
+  // payment amount
+  const shippingCost = getLocalStorageItem("shippingCost");
+
+  const paymentButton = document.querySelector("#print-label");
+  paymentButton.textContent = `Pay ${shippingCost}`;
+
+}
+
+export function populateDimensionsAndWeightPage() {
+
+  //From Address
+  const fromAddress = getLocalStorageItem("fromAddress");
+
+  const fromName = document.querySelector("#dimensions-from-summary .name");
+  fromName.innerHTML = "";
+  fromName.textContent = fromAddress.name;
+
+  const fromStreetAdress = document.querySelector("#dimensions-from-summary .street-address");
+  fromStreetAdress.innerHTML = "";
+  fromStreetAdress.textContent = `${fromAddress.address_line1} ${fromAddress.address_line2}`;
+
+  const fromCityStateZip = document.querySelector("#dimensions-from-summary .city-state-zip");
+  fromCityStateZip.innerHTML = "";
+  fromCityStateZip.textContent = `${fromAddress.city_locality}, ${fromAddress.state_province}, ${fromAddress.postal_code}`;
+
+  // To Address
+  const toAddress = getLocalStorageItem("toAddress");
+
+  const toName = document.querySelector("#dimensions-to-summary .name");
+  toName.innerHTML = "";
+  toName.textContent = toAddress.name;
+
+  const toStreetAdress = document.querySelector("#dimensions-to-summary .street-address");
+  toStreetAdress.innerHTML = "";
+  toStreetAdress.textContent = `${toAddress.address_line1} ${toAddress.address_line2}`;
+
+  const toCityStateZip = document.querySelector("#dimensions-to-summary .city-state-zip");
+  toCityStateZip.innerHTML = "";
+  toCityStateZip.textContent = `${toAddress.city_locality}, ${toAddress.state_province}, ${toAddress.postal_code}`;
+
 }

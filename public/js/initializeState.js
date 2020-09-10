@@ -1,12 +1,11 @@
-import { getLocalStorageBlob, getLocalStorageItem } from "./local-storage.js";
-import { setStep, loading, showError } from "./ui-helpers.js";
+import { getLocalStorageItem } from "./local-storage.js";
+import { setStep, loading, showError, populateCheckoutPage, populateDimensionsAndWeightPage } from "./ui-helpers.js";
 import { getLabel } from "./get-label.js";
 import { sendEmail } from "./send-email.js";
-import { rateEstimate } from "./rate-estimate.js";
+import { rateEstimate, populateRatePage } from "./rate-estimate.js";
 import { verifyStripePayment } from "./payment.js";
 
 export function initializeState() {
-  const results = getLocalStorageBlob();
 
   setCurrentStep(true);
 
@@ -54,28 +53,34 @@ export async function setCurrentStep(isBrowserLoad) {
 
   switch (window.location.hash) {
     case "#step1":
-      setStep("step_one");
+      setStep("step-one");
       break;
 
     case "#step2":
-      setStep("step_two");
+
+      populateDimensionsAndWeightPage();
+
+      setStep("step-two");
       break;
 
     case "#step3":
 
-      if(isBrowserLoad) {
+      if (isBrowserLoad) {
         await rateEstimate();
       }
 
-      setStep("step_three");
+      populateRatePage();
+
+      setStep("step-three");
       break;
 
     case "#step4":
-      setStep("step_four");
+      populateCheckoutPage();
+      setStep("step-four");
       break;
 
     case "#step5":
-      // setStep("step_four");
+      // setStep("step-four");
       loading(true);
       const madePayment = await verifyStripePayment();
       if (!madePayment) {
@@ -86,10 +91,11 @@ export async function setCurrentStep(isBrowserLoad) {
       const labelUrls = await getLabel();
       await sendEmail(labelUrls);
       loading(false);
-      setStep("step_five");
+      setStep("step-five");
       break;
 
     default:
-      setStep("step_zero");
+      setStep("step-zero");
   }
 }
+
