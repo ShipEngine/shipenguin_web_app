@@ -22,3 +22,16 @@ export function setStep(stepName) {
     }
   }
 }
+
+/** Wrap a function in a debouncer, helps with event listeners that can 
+ * fire multiple times with a short period.
+ */
+export function debounce(func, wait = 300) {
+  let timeout;
+  return function(...args) {
+    clearTimeout(timeout);
+    timeout = setTimeout(() => {
+      func.apply(this, args);
+    }, wait);
+  };
+}

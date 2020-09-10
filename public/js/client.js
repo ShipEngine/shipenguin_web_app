@@ -4,6 +4,8 @@ import { pay } from "./payment.js";
 import { initializeState, setCurrentStep } from "./initializeState.js";
 import { verifyAddress } from "./verify-address.js";
 import { checkForFraud } from "./check-for-fraud.js";
+import { debounce } from "./ui-helpers.js";
+
 
 window.addEventListener("load", () => {
 
@@ -13,9 +15,13 @@ window.addEventListener("load", () => {
     window.location.hash = "#step1"
   })
 
-  document.getElementById("step1Form").addEventListener("change", async () => {
+  // If the user does an address auto complete via their browser then that can cause many change
+  // events to be fired at once. We wrap it in a debounce function to keep the api calls limited. 
+  async function runVerifyAddress() {
     await verifyAddress();
-  });
+  }
+  // const debouncedAddressVerify = debounce(runVerifyAddress);
+  document.getElementById("step1Form").addEventListener("change", debounce(runVerifyAddress));
 
   document.getElementById("step1Form").addEventListener("submit", async (evt) => {
     evt.preventDefault();
