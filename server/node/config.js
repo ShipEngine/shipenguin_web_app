@@ -4,29 +4,14 @@
 // Load environment variables from the `.env` file.
 require("dotenv").config();
 
-module.exports = {
+const isProd = process.env.NODE_ENV === "production";
+
+const config = {
   // Default country for the checkout form.
   country: "US",
 
   // Store currency.
   currency: "eur",
-
-  // Supported payment methods for the store.
-  // Some payment methods support only a subset of currencies.
-  // Make sure to check the docs: https://stripe.com/docs/sources
-  paymentMethods: [
-    // "ach_credit_transfer", // usd (ACH Credit Transfer payments must be in U.S. Dollars)
-    "alipay", // aud, cad, eur, gbp, hkd, jpy, nzd, sgd, or usd.
-    "bancontact", // eur (Bancontact must always use Euros)
-    "card", // many (https://stripe.com/docs/currencies#presentment-currencies)
-    "eps", // eur (EPS must always use Euros)
-    "ideal", // eur (iDEAL must always use Euros)
-    "giropay", // eur (Giropay must always use Euros)
-    "multibanco", // eur (Multibanco must always use Euros)
-    // "sepa_debit", // Restricted. See docs for activation details: https://stripe.com/docs/sources/sepa-debit
-    "sofort", // eur (SOFORT must always use Euros)
-    "wechat", // aud, cad, eur, gbp, hkd, jpy, sgd, or usd.
-  ],
 
   // Configuration for Stripe.
   // API Keys: https://dashboard.stripe.com/account/apikeys
@@ -35,33 +20,33 @@ module.exports = {
   // You can fill them in your own `.env` file.
   stripe: {
     // The two-letter country code of your Stripe account (required for Payment Request).
-    country: process.env.STRIPE_ACCOUNT_COUNTRY || "US",
+    // country: process.env.STRIPE_ACCOUNT_COUNTRY || "US",
     // API version to set for this app (Stripe otherwise uses your default account version).
     apiVersion: "2019-03-14",
     // Use your test keys for development and live keys for real charges in production.
     // For non-card payments like iDEAL, live keys will redirect to real banking sites.
-    publishableKey: process.env.STRIPE_PUBLISHABLE_KEY,
-    secretKey: process.env.NODE_ENV === "production" ? process.env.STRIPE_SECRET_KEY : process.env.STRIPE_DEV_SECRET_KEY,
-    // Setting the webhook secret is good practice in order to verify signatures.
-    // After creating a webhook, click to reveal details and find your signing secret.
-    webhookSecret: process.env.STRIPE_WEBHOOK_SECRET,
+    publishableKey: isProd ? process.env.STRIPE_PUBLISHABLE_KEY : process.env.STRIPE_DEV_PUBLISHABLE_KEY,
+    secretKey: isProd ? process.env.STRIPE_SECRET_KEY : process.env.STRIPE_DEV_SECRET_KEY,
+    
   },
 
-  // Shipping options for the Payment Request API.
-  shippingOptions: [
-    {
-      id: "free",
-      label: "Free Shipping",
-      detail: "Delivery within 5 days",
-      amount: 0,
-    },
-    {
-      id: "express",
-      label: "Express Shipping",
-      detail: "Next day delivery",
-      amount: 500,
-    },
-  ],
+  shipengine: {
+    apiKey: isProd ? process.env.SHIPENGINE_PROD_API_KEY : process.env.SHIPENGINE_SANDBOX_API_KEY
+  },
+
+  shippenguin: {
+    url: isProd ? "https://www.shippenguin.com" : "https://ship-penguin.ngrok.io"
+  },
+
+  iovation: {
+    subscriberID: isProd ? process.env.SUBSCRIBER_ID : process.env.DEV_SUBSCRIBER_ID,
+    subscriberAccount: isProd ? process.env.SUBSCRIBER_ACCOUNT : process.env.DEV_SUBSCRIBER_ACCOUNT,
+    passCode: isProd ? process.env.SUBSCRIBER_PASS_CODE : process.env.DEV_SUBSCRIBER_PASS_CODE
+  },
+
+  sendgrid: {
+    apiKey: process.env.SENDGRID_API_KEY
+  },
 
   // Server port.
   port: process.env.PORT || 8000,
@@ -71,8 +56,13 @@ module.exports = {
   // and `authtoken` in your `.env` file to use it.
   ngrok: {
     enabled: process.env.NODE_ENV !== "production",
+    // enabled: true,
     port: process.env.PORT || 8000,
     subdomain: process.env.NGROK_SUBDOMAIN,
     authtoken: process.env.NGROK_AUTHTOKEN,
   },
 };
+
+config.iovation.url = isProd ? `https://api.iovation.com/fraud/v1/subs/${config.iovation.subscriberID}/checks` : `https://ci-api.iovation.com/fraud/v1/subs/${config.iovation.subscriberID}/checks`;
+
+module.exports = config;

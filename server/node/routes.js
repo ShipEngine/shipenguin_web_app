@@ -9,7 +9,7 @@ const stripe = require("stripe")(config.stripe.secretKey);
 stripe.setApiVersion(config.stripe.apiVersion);
 
 const sgMail = require("@sendgrid/mail");
-sgMail.setApiKey(process.env.SENDGRID_API_KEY)
+sgMail.setApiKey(config.sendgrid.apiKey);
 
 require("dotenv").config();
 
@@ -26,7 +26,7 @@ router.post("/verify", async (req, res) => {
     "method": "POST",
     "headers": {
       "Host": "api.shipengine.com",
-      "API-Key": isProd ? process.env.SHIPENGINE_PROD_API_KEY : process.env.SHIPENGINE_SANDBOX_API_KEY,
+      "API-Key": config.shipengine.apiKey,
       "Content-Type": "application/json"
     },
     body: JSON.stringify(req.body)
@@ -35,7 +35,7 @@ router.post("/verify", async (req, res) => {
     const response = await fetch("https://api.shipengine.com/v1/addresses/validate", options);
     const parsedResponse = await response.json();
     res.json(parsedResponse);
-  } 
+  }
   catch (e) {
     console.error(e.message);
     res.send(500, "Unexpected Server Error");
@@ -46,14 +46,14 @@ router.post("/verify", async (req, res) => {
 router.post("/rates", async (req, res) => {
 
   req.body.rate_options.carrier_ids.push(
-    isProd ? process.env.SHIPENGINE_PROD_SDC_CARRIER_ID : process.env.SHIPENGINE_SANDBOX_SDC_CARRIER_ID  
+    isProd ? process.env.SHIPENGINE_PROD_SDC_CARRIER_ID : process.env.SHIPENGINE_SANDBOX_SDC_CARRIER_ID
   );
 
   const options = {
     "method": "POST",
     "headers": {
       "Host": "api.shipengine.com",
-      "API-Key": isProd ? process.env.SHIPENGINE_PROD_API_KEY : process.env.SHIPENGINE_SANDBOX_API_KEY,
+      "API-Key": config.shipengine.apiKey,
       "Content-Type": "application/json"
     },
     body: JSON.stringify(req.body)
@@ -63,9 +63,10 @@ router.post("/rates", async (req, res) => {
   try {
     const response = await fetch("https://api.shipengine.com/v1/rates", options);
     const parsedResponse = await response.json();
+    // TODO: Check for rate errors
     res.json(parsedResponse);
   }
-  catch(e) {
+  catch (e) {
     console.error(e.message);
     res.send(500, "Unexpected Server Error");
   }
@@ -74,11 +75,9 @@ router.post("/rates", async (req, res) => {
 
 router.post("/checkForFraud", async (req, res) => {
 
-  const subscriberID = isProd ? process.env.SUBSCRIBER_ID : process.env.DEV_SUBSCRIBER_ID;
-  const subscriberAccount = isProd ? process.env.SUBSCRIBER_ACCOUNT : process.env.DEV_SUBSCRIBER_ACCOUNT;
-  const passCode = isProd ? process.env.SUBSCRIBER_PASS_CODE : process.env.DEV_SUBSCRIBER_PASS_CODE;
-
-  const iovationUrl = isProd ? `https://api.iovation.com/fraud/v1/subs/${subscriberID}/checks` : `https://ci-api.iovation.com/fraud/v1/subs/${subscriberID}/checks`;
+  const subscriberID = config.iovation.subscriberID;
+  const subscriberAccount = config.iovation.subscriberAccount;
+  const passCode = config.iovation.passCode;
 
   const basicAuthString = `${subscriberID}/${subscriberAccount}:${passCode}`;
 
@@ -96,11 +95,11 @@ router.post("/checkForFraud", async (req, res) => {
   };
 
   try {
-    const response = await fetch(iovationUrl, options);
+    const response = await fetch(config.iovation.url, options);
     const parsedResponse = await response.json();
     res.json(parsedResponse);
   }
-  catch(e) {
+  catch (e) {
     console.error(e.message);
     res.send(500, "Unexpected Server Error");
   }
@@ -115,7 +114,7 @@ router.post("/label", async (req, res) => {
     "method": "POST",
     "headers": {
       "Host": "api.shipengine.com",
-      "API-Key": isProd ? process.env.SHIPENGINE_PROD_API_KEY : process.env.SHIPENGINE_SANDBOX_API_KEY,
+      "API-Key": config.shipengine.apiKey,
       "Content-Type": "application/json"
     },
     body: JSON.stringify(req.body)
@@ -126,7 +125,7 @@ router.post("/label", async (req, res) => {
     const parsedResponse = await response.json();
     res.json(parsedResponse)
   }
-  catch(e) {
+  catch (e) {
     console.error(e.message);
     res.send(500, "Unexpected Server Error");
   }
@@ -189,13 +188,11 @@ router.post("/email", async (req, res) => {
 
 router.post("/create-checkout-session", async (req, res) => {
 
-  const url = isProd ? "https://www.shippenguin.com" : "https://ship-penguin.ngrok.io";
-
   const options = {
     "method": "GET",
     "headers": {
       "Host": "api.shipengine.com",
-      "API-Key": isProd ? process.env.SHIPENGINE_PROD_API_KEY : process.env.SHIPENGINE_SANDBOX_API_KEY,
+      "API-Key": config.shipengine.apiKey,
     }
   };
   const response = await fetch(`https://api.shipengine.com/v1/rates/${req.body.rateID}/`, options);
@@ -219,17 +216,28 @@ router.post("/create-checkout-session", async (req, res) => {
         },
       ],
       mode: "payment",
-      success_url: `${url}/#step5`,
-      cancel_url: `${url}/#step4`,
+      success_url: `${config.shippenguin.url}/#step5`,
+      cancel_url: `${config.shippenguin.url}/#step4`,
     });
-  
+
     res.json({ id: session.id });
   }
-  catch(e) {
+  catch (e) {
     console.error(e.message);
     res.send(500, "Unexpected Server Error");
   }
-
 });
+
+router.get("/verifyStripePayment", async (req, res) => {
+  const session = await stripe.checkout.sessions.retrieve(req.query.sessionID);
+  res.send(200, session.payment_status === "paid")
+});
+
+router.get("/config", (req, res) => {
+  res.json({
+    stripePublishableKey: config.stripe.publishableKey
+  });
+});
+
 
 module.exports = router;
