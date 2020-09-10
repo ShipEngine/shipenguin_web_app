@@ -211,7 +211,7 @@ router.post("/create-checkout-session", async (req, res) => {
           price_data: {
             currency: "usd",
             product_data: {
-              name: "Label",
+              name: "Shipping Label",
             },
             unit_amount: totalCharge * 100,
           },
