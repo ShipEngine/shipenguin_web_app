@@ -3,7 +3,7 @@ import { setLocalStorage, clearLocalStorage } from "./local-storage.js";
 import { pay } from "./payment.js";
 import { initializeState, setCurrentStep } from "./initializeState.js";
 import { verifyAddress } from "./verify-address.js";
-import { getLabel } from "./get-label.js";
+import { checkForFraud } from "./check-for-fraud.js";
 
 window.addEventListener("load", () => {
 
@@ -43,16 +43,23 @@ window.addEventListener("load", () => {
 
   document.getElementById("step3Form").addEventListener("submit", (evt) => {
     evt.preventDefault();
-    const selectList = document.getElementById("estimated-rates");
-    const selectedOption = selectList.options[selectList.selectedIndex];
-    setLocalStorage("rateID", selectedOption.value);
+    const rateFieldSet = document.getElementById("step3Fieldset");
+    const selectedRate = rateFieldSet.querySelector("input:checked");
+    setLocalStorage("rateID", selectedRate.value);
     window.location.hash = "#step4";
   });
 
   document.getElementById("step4Form").addEventListener("submit", async (evt) => {
     evt.preventDefault();
-    await getLabel();
-    window.location.hash = "#step5";
+    const isFraud = await checkForFraud();
+
+    if (isFraud) {
+      window.alert("You have been flagged for potential fraud, please contact the ShipEngine support team");
+    }
+    else {
+      setLocalStorage("email", document.getElementById("email").value);
+      await pay();
+    }
   });
 
   document.getElementById("createAnotherLabel").addEventListener("click", () => {

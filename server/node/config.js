@@ -41,7 +41,7 @@ module.exports = {
     // Use your test keys for development and live keys for real charges in production.
     // For non-card payments like iDEAL, live keys will redirect to real banking sites.
     publishableKey: process.env.STRIPE_PUBLISHABLE_KEY,
-    secretKey: process.env.STRIPE_SECRET_KEY,
+    secretKey: process.env.NODE_ENV === "production" ? process.env.STRIPE_SECRET_KEY : process.env.STRIPE_DEV_SECRET_KEY,
     // Setting the webhook secret is good practice in order to verify signatures.
     // After creating a webhook, click to reveal details and find your signing secret.
     webhookSecret: process.env.STRIPE_WEBHOOK_SECRET,

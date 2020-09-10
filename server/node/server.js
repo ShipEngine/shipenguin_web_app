@@ -43,32 +43,6 @@ app.use("/", require("./routes"));
 app.use(express.static("."));
 app.use(express.json());
 
-
-function calculateOrderAmount(rate) {
-  const converRate = (rate / 100).toFixed(4);
-  const convertedCost = parseInt(converRate.toString().replace(".", ""), 10);
-  return convertedCost;
-}
-
-app.post("/create-payment-intent", async (req, res) => {
-  const rate = req.body.rate;
-  const convertedCost = calculateOrderAmount(rate);
-
-
-  // Create a PaymentIntent with the order amount and currency
-  const paymentIntent = await stripe.paymentIntents.create({
-    amount: convertedCost,
-    currency: "usd"
-  });
-  res.send({
-    clientSecret: paymentIntent.client_secret
-  });
-});
-
-// const server = app.listen(config.port, () => {
-//   console.log(`🚀🚀🚀🚀  Server listening on port ${server.address().port}`);
-// });
-
 // Configure the HTTPS server
 http.createServer(app)
   .listen(config.port, () => {

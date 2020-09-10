@@ -22,6 +22,7 @@ export function getLabel() {
     }).then(function (data) {
 
     console.log(data);
+    return { pdf: data.label_download.pdf, zpl: data.label_download.zpl, png: data.label_download.png };
     // var labelPdf = data.label_download.pdf;
     // var labelImage = data.label_download.png;
 

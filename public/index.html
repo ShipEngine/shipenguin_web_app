@@ -61,8 +61,7 @@
         <form id="step1Form">
           <fieldset>
             <input id="from-name" type="text" placeholder="From Name" value="John" required />
-            <input id="from-address1" type="text" placeholder="From Address 1" value="4009 Marathon Blvd"
-              required />
+            <input id="from-address1" type="text" placeholder="From Address 1" value="4009 Marathon Blvd" required />
             <input id="from-address2" type="text" placeholder="From Address 2" />
             <input id="from-city" type="text" placeholder="From City" required value="Austin" />
             <input id="from-state" type="text" placeholder="From State" required value="TX" />
@@ -101,7 +100,7 @@
       <section class="step step_three is-hidden">
         <span>Estimate Rates</span>
         <form id="step3Form">
-          <fieldset>
+          <fieldset id="step3Fieldset">
             <select id="estimated-rates"></select>
           </fieldset>
           <button id="purchaseLabel" class="button is-primary is-active bounce">Purchase Label</button>
@@ -112,7 +111,8 @@
         <span>Checkout</span>
         <form id="step4Form">
           <fieldset>
-            <input id="emailAddress" type="email" required />
+            <input id="iovation-input" name="iovation-input" type="hidden" />
+            <input id="email" type="email" required />
             <button id="printLabel" class="button is-primary is-active bounce">Purchase and Print Label</button>
           </fieldset>
         </form>
@@ -123,195 +123,7 @@
         <button id="createAnotherLabel" class="button is-primary is-active bounce">Create Another Label?</button>
       </section>
 
-      <!-- <section class="step step_two is-hidden">
-                <h1 class="headline">Tell us about your package …</h1>
-                <p class="subhead m-b-md">Where are you shipping from? What are you shipping?</p>
 
-                <form id="step_two_form" autocomplete="new-password">
-                    <input autocomplete="new-password" name="hidden" type="text">
-                    <div class="columns">
-                        <div class="column is-primary">
-
-                            <div class="field">
-                                <label class="label is-size-6">My Name <span style="color: #00676D;">*</span> <span
-                                        class="is-size-6"></span></label>
-                                <div class="control">
-                                    <input id="my_name" name="Shipper" placeholder="Your Full Name" class="input"
-                                        type="text" value="" autocomplete="new-password" required="required" />
-                                </div>
-                            </div>
-                        </div>
-
-                        <div id="locationField2" class="column is-two-thirds">
-                            <div class="field">
-                                <label class="label is-size-6">My Address <span style="color: #00676D;">*</span>
-                                    <span>Autocomplete by Google</span></label>
-                                <div class="control">
-                                    <input id="autocomplete" name="ShipFrom" placeholder="Start typing your address" f
-                                        class="input" type="text" autocomplete="new-password" required="required" />
-                                    <span class="tag verify is-hidden" id="verify">
-                                        <i class="fas fa-cog fa-spin"></i>Verifying via ShipEngine
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="columns">
-                        <div class="column is-primary">
-                            <div class="field">
-                                <label class="label is-size-6">Recipient’s Name <span style="color: #00676D;">*</span>
-                                    <span class="is-size-6"></span></label>
-                                <div class="control">
-                                    <input id="rep_name" name="Recipient" placeholder="Recipient’s Full Name"
-                                        class="input" type="text" value="" autocomplete="new-password"
-                                        required="required" />
-                                </div>
-                            </div>
-                        </div>
-
-                        <div id="locationField2" class="column is-two-thirds">
-                            <div class="field">
-                                <label class="label is-size-6">Recipient’s Address <span
-                                        style="color: #00676D;">*</span>
-                                    <span>Autocomplete by Google</span></label>
-                                <div class="control">
-                                    <input id="autocomplete2" name="ShipTo" placeholder="Start typing your address"
-                                        class="input" type="text" autocomplete="new-password" required="required" />
-                                    <span class="tag verify is-hidden" id="verify2">
-                                        <i class="fas fa-cog fa-spin"></i>Verifying via ShipEngine
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <label class="label has-text-grey-light">Package Information</label>
-
-                    <div class="columns package_info">
-                        <div class="column is-one-half">
-                            <label class="label">Package weight <span style="color: #00676D;">*</span> <span
-                                    class="is-size-6"></span></label>
-                            <div class="columns">
-                                <div class="column is-one-half">
-                                    <div class="control">
-                                        <input id="weight_lb" class="input" type="text" placeholder="Weight - Pounds"
-                                            value="" autocomplete="new-password" required="required">
-                                    </div>
-                                    <p class="help">Pounds</p>
-                                </div>
-                                <div class="column is-one-half">
-                                    <div class="control">
-                                        <input id="weight_oz" class="input" type="text" placeholder="Weight - Ounces"
-                                            value="" autocomplete="new-password" required="required">
-                                    </div>
-                                    <p class="help">Ounces</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <a id="addPackageOption" class="label is-size-6">
-                        <i class="fa fa-angle-double-right" aria-hidden="true"></i> Add package dimensions (optional)
-                    </a>
-
-                    <div id="packageDimForm" class="columns package_info is-hidden">
-
-                        <div id="" class="column is-one-half">
-                            <label class="label">Package Dimensions <span class="is-size-6">Optional</span></label>
-                            <div class="columns">
-                                <div class="column is-one-half">
-                                    <div class="control">
-                                        <input id="size_length" name="length_input" class="input" type="text"
-                                            placeholder="Length" value="" autocomplete="new-password">
-                                    </div>
-                                    <p class="help">Length in inches</p>
-                                </div>
-                                <div class="column is-one-half">
-                                    <div class="control">
-                                        <input id="size_width" name="width_input" class="input" type="text"
-                                            placeholder="Width" value="" autocomplete="new-password">
-                                    </div>
-                                    <p class="help">Width in inches</p>
-                                </div>
-                                <div class="column is-one-half">
-                                    <div class="control">
-                                        <input id="size_height" name="height_input" class="input" type="text"
-                                            placeholder="Height" value="" autocomplete="new-password">
-                                    </div>
-                                    <p class="help">Height in inches</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div id="nextButton" class="columns is-mobile bounce">
-                        <div class="column is-one-fifth">
-                            <button class="button is-primary is-medium" disabled="true">Next</button>
-                        </div>
-                    </div>
-
-                    <aside class="is-hidden">
-
-                        <div class="rate_list" style="overflow: auto;">
-                            <div class="close"><i class="fa fa-times" aria-hidden="true"></i></div>
-                            <div class="rate_holder"></div>
-                        </div>
-
-                        <div class="package_type is-inactive">
-                            <div class="holder">
-                                <label>Package Type</label>
-                                <img src="/images/icon-box-generic.svg">
-                                <p class="package_label">USPS</p>
-                            </div>
-                            <button>Select package type <i class="fa fa-chevron-down" aria-hidden="true"
-                                    style="margin-left: 5px;"></i>
-                            </button>
-                        </div>
-
-                        <div class="rate_box">
-                            <label>Your label price</label>
-                            <div class="rate">
-                                <span><i id="cog" class="fas fa-cog"></i></span><label>Plus Tax</label>
-                            </div>
-                        </div>
-
-                        <div class="is-grouped-centered">
-                            <p class="step2_errors"></p>
-                            <button id="goToStep3" class="button is-inactive" disabled>Pay for my label <i
-                                    class="fas fa-arrow-alt-circle-right"></i></button>
-                        </div>
-
-                        <div class="t_and_c">
-                            <label class="checkbox">
-                                <input type="checkbox" class="checkHazardous">
-                                I agree this package contains <strong>no</strong> <strong><a
-                                        href="./pdfs/ShipPenguin_List_of_Hazardous_Materials.pdf">hazardous
-                                        materials</a></strong>
-                            </label>
-                            <label class="checkbox">
-                                <input type="checkbox" class="checkTcs">
-                                I agree to the <a href="./pdfs/ShipPenguin_Terms_of_Service.pdf"
-                                    target="_blank"><strong>terms
-                                        and conditions</strong></a>
-                                </p>
-                            </label>
-                        </div>
-                    </aside>
-                </form>
-            </section> -->
-
-      <!-- <section class="step step_three is-hidden">
-                <h1 class="headline">Almost finished!</h1>
-                <p class="subhead final_price">We'll charge your card <strong>$xx.xx</strong> for your <span
-                        id="labelSummaryText" style="font-weight: bold;">carrier service label</span> and you can
-                    download your label on the next step!</p>
-                <form id="payment-form">
-                    <div class="package_info payment_info">
-                        <div class="field is-grouped is-grouped-centered">
-                            <img src="/images/powered_by_stripe.svg">
-                        </div>
-                        <div id="card-element">
-                            <!--Stripe.js injects the Card Element-->
     </div>
     <div class="field is-grouped is-grouped-centered">
       <p id="card-errors" role="alert"></p>
@@ -326,29 +138,6 @@
     </form>
     </section>
 
-    <!-- <section class="step step_four has-text-centered is-hidden">
-                <h1 class="headline successText">Success!</h1>
-                <p class="subhead m-b-md">Checkout your label below!</p>
-
-                <img class="label_preview" src="#">
-
-                <div class="columns is-mobile is-centered">
-                    <div class="column">
-                        <a id="labelPlaceholder" href="#" class="button is-primary is-active"
-                            style="margin-top: 15px; z-index: 10;" target="_blank">
-                            Download my label
-                        </a>
-                    </div>
-
-                    <div class="column">
-                        <a href="#" class="button is-primary is-active" style="margin-top: 15px; z-index: 10;"
-                            onClick="window.location.reload();">
-                            Create another label
-                        </a>
-                    </div>
-                </div>
-            </section> -->
-  </div>
   </div>
 
   <a class="github_tag" href="https://github.com/ShipEngine/shipenguin_web_app" target="_blank"></a>
@@ -372,12 +161,49 @@
   <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"
     integrity="sha256-eGE6blurk5sHj+rmkfsGYeKyZx3M4bG+ZlFyA7Kns7E=" crossorigin="anonymous"></script>
 
-  <script type="module" src="/js/local-storage.js"></script>
-  <script type="module" src="/js/verify-address.js"></script>
-  <script type="module" src="/js/get-label.js"></script>
-  <script type="module" src="/js/payment.js"></script>
-  <script type="module" src="/js/ui-helpers.js"></script>
   <script type="module" src="/js/client.js" defer></script>
+
+  <script>
+    /* Copyright(c) 2016, iovation, inc. All rights reserved. */
+    window.io_global_object_name = "IGLOO";
+    window.IGLOO = window.IGLOO || {
+      enable_flash: false,
+      bb_callback: function (bb, complete) {
+        var fields = document.getElementsByName("iovation-input");
+        var i = 0;
+        for (i = 0; i < fields.length; i++)
+          fields[i].value = bb;
+      },
+      loader: {
+        uri_hook: "/iojs/",
+        version: "general5",
+        subkey: "",
+        trace_handler: function (msg) {
+          console.log(msg);
+        }
+      }
+    };
+  </script>
+  <script>
+    /*
+     Copyright(c) 2018, iovation, inc. All rights reserved.
+    */
+    (function B() {
+      function v(e, a) { var b = {}, c; for (c = e.length - 1; -1 < c; c--)0 < c ? b[c] = function () { var d = c; return function () { return w(e[d], b[d + 1], a) } }() : w(e[c], b[c + 1], a) } function w(e, n, k) {
+        var c = document.createElement("script"), f, g, l; l = A(a[k] && a[k].staticVer && a[k].staticVer + "/" || e[1]); e[0] = e[0].replace("##version##", l); f = e[0].split("?")[0].split("/"); g = f[f.length - 1].split(".")[0]; u.test(e[1]) && l !== e[1] && d("loader: Overriding configured version with staticVer."); c.setAttribute("src", e[0]); c && c.addEventListener ?
+          c.addEventListener("error", function () { b[k + "_" + g + "_load_failure"] = "true" }) : c.attachEvent && c.attachEvent("onerror", function () { b[k + "_" + g + "_load_failure"] = "true" }); n && (c.onload = n); document.getElementsByTagName("head")[0].appendChild(c)
+      } function d(e) { if ("function" === typeof a.trace_handler) try { a.trace_handler(e) } catch (b) { } } function f(b, a) {
+        var d = null !== b && void 0 !== b; return !d || "1" !== b.toString() && "true" !== b.toString().toLowerCase() ? !d || "0" !== b.toString() && "false" !== b.toString().toLowerCase() ? "boolean" ===
+          typeof a ? a : !1 : !1 : !0
+      } function A(a) { d("********** version before replace: " + a + " **********"); d('localNamespace[ "url_dots_to_dashes" ]: ' + b.url_dots_to_dashes); d("numericVersionPattern.test( output ): " + u.test(a)); b.url_dots_to_dashes && u.test(a) && (a = a.replace(/\./g, "-")); d("version after replace: " + a); return a } var g = window, x = g.io_global_object_name || "IGLOO", a = g[x] = g[x] || {}, b = a.loader = a.loader || {}, y = [], z = [], u = /^[0-9]{1,3}(\.[0-9]{1,3}){2}\/$/; if (b.loaderMain) return d("loader: Loader script has already run, try reducing the number of places it's being included."),
+        !1; b.loaderMain = B; b.loaderVer = "5.2.2"; (function () {
+          var e = f(b.tp, !0), n = f(b.fp_static, !0), k = f(b.fp_dyn, !0), c = f(b.enable_legacy_compatibility), u = f(b.tp_split), v = b.tp_host && b.tp_host.replace(/\/+$/, "") || "https://mpsnare.iesnare.com", l = b.fp_static_override_uri, m = void 0 !== b.uri_hook ? b.uri_hook + "/" : "/iojs/", p = (b.version || "versionOrAliasIsRequired") + "/", w = b.subkey ? g.encodeURIComponent(b.subkey) + "/" : "", x = b.tp_resource || "wdp.js", q = b.tp_host ? "&tp_host=" + g.encodeURIComponent(b.tp_host) : "", C = l ? "&fp_static_uri=" +
+            g.encodeURIComponent(l) : "", r, t, h; b.tp_host = v; r = f(a.enable_flash, !0); t = a.io && a.io.enable_flash; h = a.fp && a.fp.enable_flash; t = void 0 !== t && null !== t ? f(t, !0) : r; void 0 !== h && null !== h ? h = f(h, !0) : t = r; r = t ? "&flash=true" : "&flash=false"; h = h ? "&flash=true" : "&flash=false"; q = "?loaderVer=" + b.loaderVer + "&compat=" + c + "&tp=" + e + "&tp_split=" + u + q + "&fp_static=" + n + "&fp_dyn=" + k + C; e || n || d("loader: Not currently configured to load fp_static or tp script(s)."); a.fp && a.fp.staticVer && a.fp.staticVer + "/" !== p && (p = A(a.fp.staticVer + "/"),
+              d("loader: Configured version replaced with that from pre-loaded static script.")); n || a.fp && a.fp.staticMain ? (m = (m + "##version##" + w).replace(/\/\//g, "/"), n && (a.fp && a.fp.staticMain ? c && !a.fp.preCompatMain && d("loader: enable_legacy_compatibility on, but included static does not have the compat wrapper.") : l ? y.push([l, ""]) : y.push([m + "static_wdp.js" + q + h, p])), !k || a.fp && a.fp.dynMain ? a.fp && a.fp.dynMain && d("loader: First party dynamic script has already been loaded, disable fp_dyn or make sure you're not manually including the dynamic file separately.") :
+                y.push([m + "dyn_wdp.js" + q + h, p])) : f(b.fp_dyn) && d("loader: Invalid Config, first party dynamic script set to load without static."); e && (a.io && a.io.staticMain ? d("loader: Third party script has already been loaded.") : (m = v + "/##version##" + w, u ? (z.push([m + "static_wdp.js" + q + r, p]), z.push([m + "dyn_wdp.js" + q + r, p]), b.tp_resource && d("loader: Invalid Config: both tp_resource and tp_split set. Ignoring tp_resource.")) : z.push([m + x + q + r, p])))
+        })(); v(y, "fp"); v(z, "io")
+    })();
+  </script>
 
 </body>
 

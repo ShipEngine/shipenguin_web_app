@@ -43,16 +43,30 @@ export function rateEstimate() {
     })
     .then((data) => {
       console.log(data);
-      const rateSelectList = document.getElementById("estimated-rates");
-      rateSelectList.innerHTML = "";
+      const rateFieldSet = document.getElementById("step3Fieldset");
+      rateFieldSet.innerHTML = "";
+      let defaultChecked = false;
       for(let rate of data.rate_response.rates) {
-        const option = document.createElement("option");
-        option.id = rate.rate_id;
-        option.value = rate.rate_id;
-        const totalAmount = rate.shipping_amount.amount + rate.insurance_amount.amount + rate.confirmation_amount.amount + rate.other_amount.amount;
-        option.textContent = `$${totalAmount.toFixed(2)} - ${rate.service_type} / ${rate.delivery_days} day(s)`;
+        const radioInput = document.createElement("input");
+        radioInput.id = rate.rate_id;
+        radioInput.value = rate.rate_id;
+        radioInput.type = "radio";
+        radioInput.setAttribute("name", "rates");
 
-        rateSelectList.append(option);
+        const label = document.createElement("label");
+        const totalAmount = rate.shipping_amount.amount + rate.insurance_amount.amount + rate.confirmation_amount.amount + rate.other_amount.amount;
+        label.setAttribute("for", rate.rate_id);
+        label.textContent = `$${totalAmount.toFixed(2)} - ${rate.service_type} / ${rate.delivery_days} day(s)`;
+
+
+        if(!defaultChecked) {
+          radioInput.setAttribute("checked", "checked");
+          defaultChecked = true;
+        }
+
+        rateFieldSet.append(radioInput);
+        rateFieldSet.append(label);
+        rateFieldSet.append(document.createElement("br"));
       }
   });
 }

@@ -1,5 +1,7 @@
 import { getLocalStorageBlob } from "./local-storage.js";
 import { setStep } from "./ui-helpers.js";
+import { getLabel } from "./get-label.js";
+import { sendEmail } from "./send-email.js";
 
 export function initializeState() {
   const results = getLocalStorageBlob();
@@ -18,7 +20,7 @@ export function initializeState() {
 }
 
 
-export function setCurrentStep() {
+export async function setCurrentStep() {
 
   switch (window.location.hash) {
     case "#step1":
@@ -38,9 +40,11 @@ export function setCurrentStep() {
       break;
 
     case "#step5":
+      const labelUrls = await getLabel();
+      await sendEmail(labelUrls);
+
       setStep("step_five");
       break;
-
 
     default:
       setStep("step_zero");
