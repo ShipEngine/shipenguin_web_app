@@ -9,7 +9,7 @@ export async function checkForFraud() {
     accountCode: "", // This will be set server side.
     blackBox: document.getElementById("iovation-input").value,
     type: "", // This will be set server side.
-    // statedIp: "",
+    statedIp: "",
     transactionInsight: {
       email: document.getElementById("email").value,
       // homePhoneNumber: "",

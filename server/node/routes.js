@@ -82,6 +82,7 @@ router.post("/checkForFraud", async (req, res) => {
   const basicAuthString = `${subscriberID}/${subscriberAccount}:${passCode}`;
 
   req.body.accountCode = subscriberAccount;
+  req.body.statedIp = req.ip;
   // req.body.type = "ShipPenguin";
   req.body.type = "ShipEngine";
 
@@ -123,6 +124,7 @@ router.post("/label", async (req, res) => {
   try {
     const response = await fetch(rateUrl, options);
     const parsedResponse = await response.json();
+
     res.json(parsedResponse)
   }
   catch (e) {
