@@ -102,6 +102,7 @@ window.addEventListener("load", () => {
     }
     else {
       setLocalStorage("email", document.getElementById("email").value);
+      loading(true);
       await pay();
     }
   });
