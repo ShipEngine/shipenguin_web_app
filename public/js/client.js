@@ -55,6 +55,7 @@ window.addEventListener("load", () => {
 
     if(totalWeight > 16*70) {
       showError("Package weight cannot exceed 70 lbs");
+      return;
     }
 
     const allFilledDimensions = [length, width, height].every((item) => item !== undefined && item !== null && item !== "" );
