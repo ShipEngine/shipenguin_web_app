@@ -117,3 +117,5 @@ dist
 
 # Intellij IDEA
 .idea/
+
+.DS_Store
