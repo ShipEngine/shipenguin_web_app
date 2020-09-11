@@ -34,7 +34,6 @@ export async function rateEstimate() {
       ...dimensions,
       unit: "inch"
     }
-
   }
 
   loading(true);
@@ -50,7 +49,17 @@ export async function rateEstimate() {
 
     const data = await response.json();
 
-    loading(false);
+    if(data.errors && data.errors.length > 0) {
+
+      if(data.errors[0].message.includes("Mailpiece length plus girth")) {
+        showError("Package Dimensions Error", "Package length plus girth dimensions cannot exceed 130 inches.");
+      }
+      else {
+        showError("Shipping Rates Error", data.errors[0].message);
+      }
+      loading(false);
+      return;
+    }
 
     const rateInputList = document.getElementById("rate-input-list");
     rateInputList.innerHTML = "";
@@ -85,6 +94,7 @@ export async function rateEstimate() {
       rateInputList.textContent = "Sorry, we were unable to find any rates based on the criteria that you provided."
     }
 
+    loading(false);
     return true;
   }
   catch (e) {

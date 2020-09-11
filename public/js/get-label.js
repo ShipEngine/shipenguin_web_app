@@ -13,6 +13,17 @@ export async function getLabel() {
       body: JSON.stringify(labelBody)
     })
     const data = await response.json();
+
+    if(data.errors && data.errors.length > 0) {
+      if(data.errors[0].message.includes("Can not purchase")) {
+        showError("Duplicate Label Purchase", "Label has already been purchased for this session, please contact ShipEngine support.");
+      }
+      else {
+        showError("Label Purchase Error", data.errors[0].message);
+      } 
+      return;
+    }
+
     return { pdf: data.label_download.pdf, zpl: data.label_download.zpl, png: data.label_download.png };
   }
   catch(e) {

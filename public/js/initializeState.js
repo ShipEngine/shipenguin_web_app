@@ -90,10 +90,12 @@ export async function setCurrentStep(isBrowserLoad) {
         showError("Stripe Payment", "Sorry but you don't appear to have made a payment, please contact ShipEngine support");
         break;
       }
+
       const labelUrls = await getLabel();
-      await sendEmail(labelUrls);
+      if(labelUrls && labelUrls.pdf) {
+        await sendEmail(labelUrls);
+      }
       loading(false);
-      setStep("step-five");
       break;
 
     default:
