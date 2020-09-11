@@ -36,7 +36,7 @@ const config = {
   },
 
   shippenguin: {
-    url: isProd ? process.env.SHIPPENGUIN_URL : "https://ship-penguin.ngrok.io"
+    url: isProd ? process.env.SHIPPENGUIN_URL : "https://ship-penguin-swaite.ngrok.io"
   },
 
   iovation: {
