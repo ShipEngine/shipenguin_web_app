@@ -95,14 +95,15 @@ window.addEventListener("load", () => {
   // Checkout
   document.getElementById("step4Form").addEventListener("submit", async (evt) => {
     evt.preventDefault();
+    loading(true);
     const isFraud = await checkForFraud();
 
     if (isFraud) {
       showError("Potential Fraud Detected", "You have been flagged for potential fraud, please contact the ShipEngine support team");
+      loading(false);
     }
     else {
       setLocalStorage("email", document.getElementById("email").value);
-      loading(true);
       await pay();
     }
   });
