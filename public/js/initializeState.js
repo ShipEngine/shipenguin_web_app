@@ -1,8 +1,8 @@
 import { getLocalStorageItem } from "./local-storage.js";
-import { setStep, loading, showError, populateCheckoutPage, populateDimensionsAndWeightPage, clearError } from "./ui-helpers.js";
+import { setStep, loading, showError, populateCheckoutPage, populateRatePage, populateDimensionsAndWeightPage, clearError } from "./ui-helpers.js";
 import { getLabel } from "./get-label.js";
 import { sendEmail } from "./send-email.js";
-import { rateEstimate, populateRatePage } from "./rate-estimate.js";
+import { rateEstimate } from "./rate-estimate.js";
 import { verifyStripePayment } from "./payment.js";
 
 export function initializeState() {

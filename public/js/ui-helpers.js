@@ -169,3 +169,48 @@ export function populateDimensionsAndWeightPage() {
   toCityStateZip.textContent = `${toAddress.city_locality}, ${toAddress.state_province}, ${toAddress.postal_code}`;
 
 }
+
+
+export function populateRatePage() {
+  //From Address
+  const fromAddress = getLocalStorageItem("fromAddress");
+
+  const fromName = document.querySelector("#rate-from-summary .name");
+  fromName.innerHTML = "";
+  fromName.textContent = fromAddress.name;
+
+  const fromStreetAdress = document.querySelector("#rate-from-summary .street-address");
+  fromStreetAdress.innerHTML = "";
+  fromStreetAdress.textContent = `${fromAddress.address_line1} ${fromAddress.address_line2}`;
+
+  const fromCityStateZip = document.querySelector("#rate-from-summary .city-state-zip");
+  fromCityStateZip.innerHTML = "";
+  fromCityStateZip.textContent = `${fromAddress.city_locality}, ${fromAddress.state_province}, ${fromAddress.postal_code}`;
+
+  // To Address
+  const toAddress = getLocalStorageItem("toAddress");
+
+  const toName = document.querySelector("#rateToSummary .name");
+  toName.innerHTML = "";
+  toName.textContent = toAddress.name;
+
+  const toStreetAdress = document.querySelector("#rateToSummary .street-address");
+  toStreetAdress.innerHTML = "";
+  toStreetAdress.textContent = `${toAddress.address_line1} ${toAddress.address_line2}`;
+
+  const toCityStateZip = document.querySelector("#rateToSummary .city-state-zip");
+  toCityStateZip.innerHTML = "";
+  toCityStateZip.textContent = `${toAddress.city_locality}, ${toAddress.state_province}, ${toAddress.postal_code}`;
+
+  // dimensions
+  const dimensions = getLocalStorageItem("dimensions");
+  const weight = getLocalStorageItem("weight");
+
+  const dimensionWeight = document.querySelector("#rate-dimension-weight-summary");
+
+  dimensionWeight.innerHTML = "";
+  const weightString =  `${weight.pounds ? weight.pounds : "0"}lb(s), ${weight.ounces ? weight.ounces : "0"}oz`;
+  const dimensionsString = dimensions.length ? `(${dimensions.length} x ${dimensions.width} x ${dimensions.height})` : "";
+
+  dimensionWeight.textContent = `${weightString} ${dimensionsString}`;
+}
