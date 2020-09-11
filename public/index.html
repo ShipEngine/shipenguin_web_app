@@ -13,12 +13,14 @@
   <header class="mb-4">
     <a href="#"><img class="max-w-xs inline" src="/images/shipenguin-logo_v4.svg" alt="ShipPenguin logo"></a>
   </header>
-  <!-- <header class="mb-4">
-    <a href="/">
-      <img class="logo" src="/images/shipenguin-logo_v4.svg" alt="Ship Penguin Logo">
-    </a>
-  </header> -->
 
+  <div id="error-card" class="bg-red-100 border border-red-400 text-red-700 mx-auto w-4/5 px-4 py-3 relative hidden" role="alert">
+    <strong id="error-title" class="font-bold"></strong>
+    <span id="error-message" class="block sm:inline">Something seriously bad happened.</span>
+    <span id="error-button" class="absolute px-4 py-3 top-0 right-0">
+      <svg class="fill-current h-6 w-6 text-red-500" role="button" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><title>Close</title><path d="M14.348 14.849a1.2 1.2 0 0 1-1.697 0L10 11.819l-2.651 3.029a1.2 1.2 0 1 1-1.697-1.697l2.758-3.15-2.759-3.152a1.2 1.2 0 1 1 1.697-1.697L10 8.183l2.651-3.031a1.2 1.2 0 1 1 1.697 1.697l-2.758 3.152 2.758 3.15a1.2 1.2 0 0 1 0 1.698z"/></svg>
+    </span>
+  </div>
 
   <section class="container mx-auto mt-10 w-4/5 font-primary step-zero hidden">
     <h1 class="text-white text-2xl text-center mb-10">ShipPenguin is the fastest, cheapest way to print a label
@@ -330,12 +332,12 @@
             label.</p>
           <div class="py-8">
             <input id="iovation-input" name="iovation-input" type="hidden" required />
-            <label class="block font-bold" for="email-address">Email Address:</label>
-            <input class="input w-3/5 lg:w-full" id="email" type="text" placeholder="e.g. jane@company.com">
+            <label class="block font-bold" for="email">Email Address:</label>
+            <input class="input w-3/5 lg:w-full" id="email" type="text" placeholder="e.g. jane@company.com" required>
           </div>
           <div class="flex items-center pb-8">
             <input class="mr-2" id="terms-and-conditions" type="checkbox" required>
-            <label for="email-address">I agree to the <a class="link" href="#">terms and conditions.</a></label>
+            <label for="terms-and-conditions>I agree to the <a class="link" href="#">terms and conditions.</a></label>
           </div>
           <button id="print-label" type="submit" class="btn w-2/5 lg:w-full next-step">
             <span class="button-content">Next</span>
