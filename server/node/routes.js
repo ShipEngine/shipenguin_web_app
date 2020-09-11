@@ -18,7 +18,8 @@ router.get("/", (req, res) => {
   res.render("index.html");
 });
 
-router.post("/verify", async (req, res) => {
+// ShipEngine API Address Validation
+router.post("/verify-address", async (req, res) => {
 
   const options = {
     "method": "POST",
@@ -41,12 +42,14 @@ router.post("/verify", async (req, res) => {
 });
 
 
+// Simple ShipEngine rates call
 router.post("/rates", async (req, res) => {
 
   req.body.rate_options.carrier_ids.push(
     config.shipengine.stampsCarrierID
   );
 
+  // We currently only want to return generic custom package types to the user
   req.body.rate_options.package_types.push("package");
 
   const options = {
@@ -73,6 +76,7 @@ router.post("/rates", async (req, res) => {
 });
 
 
+// Call iovation with the information passed from the browser to check for fraud
 router.post("/check-for-fraud", async (req, res) => {
 
   const subscriberID = config.iovation.subscriberID;
@@ -106,6 +110,7 @@ router.post("/check-for-fraud", async (req, res) => {
   }
 });
 
+// Create a user's label
 router.post("/label", async (req, res) => {
 
   const rate = req.body.rate;
@@ -133,6 +138,7 @@ router.post("/label", async (req, res) => {
   }
 });
 
+// Email the user their various label downloads
 router.post("/email", async (req, res) => {
 
   const { email, labelUrls } = req.body;
@@ -192,6 +198,7 @@ router.post("/email", async (req, res) => {
   }
 });
 
+// Create a Stripe Checkout Session
 router.post("/create-checkout-session", async (req, res) => {
 
   const options = {
@@ -201,6 +208,9 @@ router.post("/create-checkout-session", async (req, res) => {
       "API-Key": config.shipengine.apiKey,
     }
   };
+
+  // Get the totalCharge from the rateID rather than passing a payment amount in the call from the 
+  // the browser to attempt to mitigate potential fraud.
   const response = await fetch(`https://api.shipengine.com/v1/rates/${req.body.rateID}/`, options);
   const parsedResponse = await response.json();
 
@@ -224,6 +234,11 @@ router.post("/create-checkout-session", async (req, res) => {
       mode: "payment",
       success_url: `${config.shippenguin.url}/#step5`,
       cancel_url: `${config.shippenguin.url}/#step4`,
+      metadata: {
+        "terms-of-service": "v1",
+        "date-accepted": new Date().toISOString(),
+        "customer-ip": req.ip
+      }
     });
 
     res.json({ id: session.id });
@@ -234,11 +249,14 @@ router.post("/create-checkout-session", async (req, res) => {
   }
 });
 
+// Verify the Stripe Payment
 router.get("/verify-stripe-payment", async (req, res) => {
   const session = await stripe.checkout.sessions.retrieve(req.query.sessionID);
   res.send(200, session.payment_status === "paid")
 });
 
+
+// Return the stripe publishable key config based on environments
 router.get("/config", (req, res) => {
   res.json({
     stripePublishableKey: config.stripe.publishableKey

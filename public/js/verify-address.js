@@ -41,7 +41,7 @@ export async function verifyAddress() {
   let data = [];
 
   try {
-    const response = await fetch("/verify", {
+    const response = await fetch("/verify-address", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
