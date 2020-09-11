@@ -11,6 +11,7 @@ window.addEventListener("load", () => {
 
   initializeState();
 
+  // Landing Page
   document.getElementById("step0NextButton").addEventListener("click", () => {
     window.location.hash = "#step1"
   })
@@ -22,10 +23,9 @@ window.addEventListener("load", () => {
     await verifyAddress();
     loading(false);
   }
-  // const debouncedAddressVerify = debounce(runVerifyAddress);
-  document.getElementById("address-form").addEventListener("change", debounce(runVerifyAddress));
 
-  
+  // Address Forms
+  document.getElementById("address-form").addEventListener("change", debounce(runVerifyAddress));
   document.getElementById("step-1-next-button").addEventListener("click", async (evt) => {
     // evt.preventDefault();
     loading(true);
@@ -36,9 +36,9 @@ window.addEventListener("load", () => {
     }
   });
 
+  // Dimensions and Weights
   document.getElementById("step-2-form").addEventListener("submit", async (evt) => {
     evt.preventDefault();
-
 
     const pounds = document.getElementById("weight-lbs").value;
     const ounces = document.getElementById("weight-ounces").value;
@@ -53,6 +53,9 @@ window.addEventListener("load", () => {
       return;
     }
 
+    if(totalWeight > 16*70) {
+      showError("Package weight cannot exceed 70 lbs");
+    }
 
     const allFilledDimensions = [length, width, height].every((item) => item !== undefined && item !== null && item !== "" );
     const allEmptyDimensions = [length, width, height]. every((item) => item === undefined || item === null || item === "");
@@ -71,6 +74,7 @@ window.addEventListener("load", () => {
     }
   });
 
+  // Rate Selections
   document.getElementById("step-3-form").addEventListener("submit", (evt) => {
     evt.preventDefault();
     const rateFieldSet = document.getElementById("rate-input-list");
@@ -87,6 +91,7 @@ window.addEventListener("load", () => {
     window.location.hash = "#step4";
   });
 
+  // Checkout
   document.getElementById("step4Form").addEventListener("submit", async (evt) => {
     evt.preventDefault();
     const isFraud = await checkForFraud();
@@ -100,6 +105,7 @@ window.addEventListener("load", () => {
     }
   });
 
+  // Thank you Page
   document.getElementById("createAnotherLabel").addEventListener("click", () => {
     clearLocalStorage();
     clearInputs();
