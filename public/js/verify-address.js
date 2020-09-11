@@ -51,24 +51,53 @@ export async function verifyAddress() {
 
     data = await response.json();
 
-    data.forEach((item, index) => {
-      const key = index === 0 ? "fromAddress" : "toAddress";
-      console.log(`${key}: ${item.status}`);
-      if (item.status === "verified") {
-        setLocalStorage(key, item.matched_address);
+    const fromVerifiedIcon = document.getElementById("from-address-verified");
+    const fromUnVerifiedIcon = document.getElementById("from-address-unverified");
+
+    const toVerifiedIcon = document.getElementById("to-address-verified");
+    const toUnVerifiedIcon = document.getElementById("to-address-unverified");
+
+    let isVerified = true;
+    for (let i = 0; i < data.length; i++) {
+      const key = i === 0 ? "fromAddress" : "toAddress";
+      console.log(`${key}: ${data[i].status}`);
+      if (data[i].status === "verified") {
+        setLocalStorage(key, data[i].matched_address);
+
+        if(key === "fromAddress") {
+          fromVerifiedIcon.classList.remove("hidden");
+          fromUnVerifiedIcon.classList.add("hidden");
+          
+        }
+        else {
+          toVerifiedIcon.classList.remove("hidden");
+          toUnVerifiedIcon.classList.add("hidden");
+
+        }
       }
       else {
         // error status types ("unverified, warning, error")
-        const addressName = index === 0 ? "Shipping From" : "Shipping To";
+        const addressName = i === 0 ? "Shipping From" : "Shipping To";
         // window.alert(`Could not verify ${addressName} address`);
+
+        if(key === "fromAddress") {
+          fromVerifiedIcon.classList.add("hidden");
+          fromUnVerifiedIcon.classList.remove("hidden");
+
+        }
+        else {
+          toVerifiedIcon.classList.add("hidden");
+          toUnVerifiedIcon.classList.remove("hidden");
+        }
+
+        isVerified = false;
       }
-    });
+    }
 
-    return true;
-
+    return isVerified;
   }
   catch (e) {
-    showError("Unable to verify your addresses");
+    // showError("Unable to verify your addresses");
     loading(false);
     return false;
   }
