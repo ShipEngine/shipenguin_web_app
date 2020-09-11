@@ -43,7 +43,7 @@ export async function verifyStripePayment() {
 
   const sessionID = getLocalStorageItem("stripeSession");
 
-  const response = await fetch(`/verifyStripePayment?sessionID=${sessionID}`);
+  const response = await fetch(`/verify-stripe-payment?sessionID=${sessionID}`);
   const success = await response.json();
 
   return success;

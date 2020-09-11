@@ -20,10 +20,9 @@ export async function checkForFraud() {
       billingStreet: fromAddress.address_line1 + fromAddress.address_line2 + fromAddress.address_line3
     }
   }
-
   clearError();
   try {
-    const response = await fetch("/checkForFraud", {
+    const response = await fetch("/check-for-fraud", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -35,7 +34,6 @@ export async function checkForFraud() {
     if (data.result === "A") {
       return true;
     }
-
     return false;
   } 
   catch (e) {

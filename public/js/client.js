@@ -6,7 +6,6 @@ import { verifyAddress } from "./verify-address.js";
 import { checkForFraud } from "./check-for-fraud.js";
 import { debounce, loading, showError, clearError } from "./ui-helpers.js";
 
-
 window.addEventListener("load", () => {
 
   initializeState();
@@ -49,19 +48,19 @@ window.addEventListener("load", () => {
     const totalWeight = 16 * Number(pounds) + Number(ounces);
 
     clearError();
-    if(!totalWeight) {
+    if (!totalWeight) {
       showError("Package Weight Error", "Please enter a weight for your package");
       return;
     }
 
-    if(totalWeight > 16 * 70) {
+    if (totalWeight > 16 * 70) {
       showError("Package Weight Error", "Package weight cannot exceed 70 lbs");
       return;
     }
 
-    const allFilledDimensions = [length, width, height].every((item) => item !== undefined && item !== null && item !== "" );
-    const allEmptyDimensions = [length, width, height]. every((item) => item === undefined || item === null || item === "");
-    if(!allFilledDimensions && !allEmptyDimensions) {
+    const allFilledDimensions = [length, width, height].every((item) => item !== undefined && item !== null && item !== "");
+    const allEmptyDimensions = [length, width, height].every((item) => item === undefined || item === null || item === "");
+    if (!allFilledDimensions && !allEmptyDimensions) {
       showError("Package Dimensions Error", "Please complete filling out the package dimensions");
       return;
     }
@@ -71,7 +70,7 @@ window.addEventListener("load", () => {
     setLocalStorage("dimensions", { length, width, height });
 
     const rateSucess = await rateEstimate();
-    if(rateSucess) {
+    if (rateSucess) {
       window.location.hash = "#step3";
     }
   });
@@ -84,7 +83,7 @@ window.addEventListener("load", () => {
     const rateID = selectedRate.value;
 
     const rateLabel = rateFieldSet.querySelector(`label[for="${rateID}`);
-    
+
     const carrierService = rateLabel.textContent.split("-")[1].split("/")[0].trim();
     const shippingCost = rateLabel.textContent.split("-")[0].trim();
     setLocalStorage("carrierService", carrierService);
@@ -99,7 +98,7 @@ window.addEventListener("load", () => {
     const isFraud = await checkForFraud();
 
     if (isFraud) {
-      window.alert("You have been flagged for potential fraud, please contact the ShipEngine support team");
+      showError("Potential Fraud Detected", "You have been flagged for potential fraud, please contact the ShipEngine support team");
     }
     else {
       setLocalStorage("email", document.getElementById("email").value);
@@ -113,7 +112,6 @@ window.addEventListener("load", () => {
     clearInputs();
     window.location.hash = "#step1";
   });
-
 
   document.getElementById("error-button").addEventListener("click", () => {
     clearError();

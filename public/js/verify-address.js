@@ -60,7 +60,7 @@ export async function verifyAddress() {
     let isVerified = true;
     for (let i = 0; i < data.length; i++) {
       const key = i === 0 ? "fromAddress" : "toAddress";
-      console.log(`${key}: ${data[i].status}`);
+      // error status types ("unverified, warning, error")
       if (data[i].status === "verified") {
         setLocalStorage(key, data[i].matched_address);
 
@@ -72,13 +72,10 @@ export async function verifyAddress() {
         else {
           toVerifiedIcon.classList.remove("hidden");
           toUnVerifiedIcon.classList.add("hidden");
-
         }
       }
       else {
-        // error status types ("unverified, warning, error")
         const addressName = i === 0 ? "Shipping From" : "Shipping To";
-        // window.alert(`Could not verify ${addressName} address`);
 
         if(key === "fromAddress") {
           fromVerifiedIcon.classList.add("hidden");
@@ -100,6 +97,4 @@ export async function verifyAddress() {
     loading(false);
     return false;
   }
-
-
 }

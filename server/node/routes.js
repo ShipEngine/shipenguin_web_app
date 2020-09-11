@@ -73,7 +73,7 @@ router.post("/rates", async (req, res) => {
 });
 
 
-router.post("/checkForFraud", async (req, res) => {
+router.post("/check-for-fraud", async (req, res) => {
 
   const subscriberID = config.iovation.subscriberID;
   const subscriberAccount = config.iovation.subscriberAccount;
@@ -234,7 +234,7 @@ router.post("/create-checkout-session", async (req, res) => {
   }
 });
 
-router.get("/verifyStripePayment", async (req, res) => {
+router.get("/verify-stripe-payment", async (req, res) => {
   const session = await stripe.checkout.sessions.retrieve(req.query.sessionID);
   res.send(200, session.payment_status === "paid")
 });
@@ -244,6 +244,5 @@ router.get("/config", (req, res) => {
     stripePublishableKey: config.stripe.publishableKey
   });
 });
-
 
 module.exports = router;
