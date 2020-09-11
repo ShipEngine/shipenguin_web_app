@@ -58,7 +58,15 @@ body {
       @apply label-image-container w-smallLabelWidth h-smallLabelHeight;
   }
 
+  .circle {
+    @apply rounded-full h-8 w-8 flex items-center bg-gray-400 justify-center mx-8;
+  }
+
   .label-edit-row {
       @apply flex absolute justify-between w-full;
   }
+}
+
+.circle1 {
+    background-color: theme("colors.background-blue");
 }

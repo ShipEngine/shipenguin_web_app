@@ -746,6 +746,20 @@ video {
   height: 32rem;
 }
 
+.circle {
+  border-radius: 9999px;
+  height: 2rem;
+  width: 2rem;
+  display: flex;
+  align-items: center;
+  --bg-opacity: 1;
+  background-color: #cbd5e0;
+  background-color: rgba(203, 213, 224, var(--bg-opacity));
+  justify-content: center;
+  margin-left: 2rem;
+  margin-right: 2rem;
+}
+
 .label-edit-row {
   display: flex;
   position: absolute;
@@ -23575,6 +23589,10 @@ body {
   background-position: bottom;
   height: 100vh;
   background-size: cover;
+  background-color: ;
+}
+
+.circle1 {
   background-color: ;
 }
 
