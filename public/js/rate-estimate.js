@@ -70,10 +70,12 @@ export async function rateEstimate() {
 
       rateInputList.append(inputWrapper);
     }
+    return true;
   }
   catch (e) {
     loading(false);
-    showError("There was an issue with retrieving rates")
+    showError("There was an issue with retrieving rates");
+    return false;
   }
 }
 

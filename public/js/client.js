@@ -4,7 +4,7 @@ import { pay } from "./payment.js";
 import { initializeState, setCurrentStep } from "./initializeState.js";
 import { verifyAddress } from "./verify-address.js";
 import { checkForFraud } from "./check-for-fraud.js";
-import { debounce, loading } from "./ui-helpers.js";
+import { debounce, loading, showError } from "./ui-helpers.js";
 
 
 window.addEventListener("load", () => {
@@ -25,6 +25,7 @@ window.addEventListener("load", () => {
   // const debouncedAddressVerify = debounce(runVerifyAddress);
   document.getElementById("address-form").addEventListener("change", debounce(runVerifyAddress));
 
+  
   document.getElementById("step-1-next-button").addEventListener("click", async (evt) => {
     // evt.preventDefault();
     loading(true);
@@ -35,8 +36,9 @@ window.addEventListener("load", () => {
     }
   });
 
-  document.getElementById("step-2-button").addEventListener("click", async (evt) => {
+  document.getElementById("step-2-form").addEventListener("submit", async (evt) => {
     evt.preventDefault();
+
 
     const pounds = document.getElementById("weight-lbs").value;
     const ounces = document.getElementById("weight-ounces").value;
@@ -44,12 +46,21 @@ window.addEventListener("load", () => {
     const width = document.getElementById("width").value;
     const height = document.getElementById("height").value;
 
+    const totalWeight = 16 * Number(pounds) + Number(ounces);
+
+    if(!totalWeight) {
+      showError("Please enter in a weight for your package");
+      return;
+    }
+
     setLocalStorage("weight", { pounds, ounces });
-    setLocalStorage("totalWeight", 16 * Number(pounds) + Number(ounces));
+    setLocalStorage("totalWeight", totalWeight);
     setLocalStorage("dimensions", { length, width, height });
 
-    await rateEstimate();
-    window.location.hash = "#step3";
+    const rateSucess = await rateEstimate();
+    if(rateSucess) {
+      window.location.hash = "#step3";
+    }
   });
 
   document.getElementById("step-3-form").addEventListener("submit", (evt) => {
