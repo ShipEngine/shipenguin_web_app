@@ -53,6 +53,14 @@ window.addEventListener("load", () => {
       return;
     }
 
+
+    const allFilledDimensions = [length, width, height].every((item) => item !== undefined && item !== null && item !== "" );
+    const allEmptyDimensions = [length, width, height]. every((item) => item === undefined || item === null || item === "");
+    if(!allFilledDimensions && !allEmptyDimensions) {
+      showError("Please complete filling out the package dimensions");
+      return;
+    }
+
     setLocalStorage("weight", { pounds, ounces });
     setLocalStorage("totalWeight", totalWeight);
     setLocalStorage("dimensions", { length, width, height });
