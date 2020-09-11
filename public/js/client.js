@@ -54,7 +54,7 @@ window.addEventListener("load", () => {
       return;
     }
 
-    if(totalWeight > 16*70) {
+    if(totalWeight > 16 * 70) {
       showError("Package Weight Error", "Package weight cannot exceed 70 lbs");
       return;
     }
@@ -111,7 +111,7 @@ window.addEventListener("load", () => {
   document.getElementById("create-another-label").addEventListener("click", () => {
     clearLocalStorage();
     clearInputs();
-    window.location.hash = "";
+    window.location.hash = "#step1";
   });
 
 
