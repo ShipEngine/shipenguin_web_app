@@ -9,6 +9,9 @@ html {
 }
 
 @layer components {
+  .section-container {
+      @apply container mx-auto mt-10 w-4/5 max-w-7xl font-primary;
+  }  
   .btn {
       @apply bg-green-button font-bold text-white p-3 uppercase rounded-sm 
       transition duration-200 ease-in-out;
