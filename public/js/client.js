@@ -108,7 +108,7 @@ window.addEventListener("load", () => {
   });
 
   // Thank you Page
-  document.getElementById("createAnotherLabel").addEventListener("click", () => {
+  document.getElementById("create-another-label").addEventListener("click", () => {
     clearLocalStorage();
     clearInputs();
     window.location.hash = "";

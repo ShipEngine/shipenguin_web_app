@@ -29,7 +29,11 @@ export async function rateEstimate() {
 
   const dimensions = getLocalStorageItem("dimensions");
   if(dimensions.length !== "") {
-    rateBody.shipment.packages[0].dimensions = dimensions;
+    rateBody.shipment.packages[0].dimensions = {
+      ...dimensions,
+      unit: "inch"
+    }
+
   }
 
   loading(true);
