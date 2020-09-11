@@ -21,12 +21,16 @@ export async function rateEstimate() {
           },
           dimensions: {
             unit: "inch",
-            ...getLocalStorageItem("dimensions")
           }
         }
       ]
     }
   };
+
+  const dimensions = getLocalStorageItem("dimensions");
+  if(dimensions.length !== "") {
+    rateBody.shipment.packages[0].dimensions = dimensions;
+  }
 
   loading(true);
   clearError();

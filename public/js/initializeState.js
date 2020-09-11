@@ -73,6 +73,9 @@ export async function setCurrentStep(isBrowserLoad) {
       break;
 
     case "#step4":
+      if (isBrowserLoad) {
+        await rateEstimate();
+      }
       populateCheckoutPage();
       setStep("step-four");
       break;
