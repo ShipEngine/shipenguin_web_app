@@ -27,7 +27,9 @@
       <h2 class="text-3xl sm:text-2xl font-bold">Skip the post office and print discounted postage using
         ShipPenguin.<br />
         Click the Get Started button below to begin shipping with ease.</h2>
-      <button id="step0NextButton" class="btn w-4/5">Start Shipping</button>
+      <button id="step0NextButton" class="btn w-4/5">
+        Start Shipping
+      </button>
       <p class="text-s text-gray-500">ShipPenguin is powered by ShipEngine, the world's leading shipping API. Learn
         more about <a class="link" href="https://www.shipengine.com/">ShipEngine</a>.</p>
     </div>
@@ -111,7 +113,13 @@
 
       </div>
       <div class="my-5 md:mx-3">
-        <button id="step-1-next-button" type="button" class="btn w-1/6 md:w-full">Next</button>
+        <button id="step-1-next-button" type="button" class="btn w-1/6 md:w-full next-step">
+          <svg class="hidden animate-spin h-5 w-5 mx-auto my-0" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path
+              d="m22 11a1 1 0 0 0 -1 1 9 9 0 1 1 -9-9 8.9 8.9 0 0 1 4.42 1.166l-1.127 1.127a1 1 0 0 0 .707 1.707h4a1 1 0 0 0 1-1v-4a1 1 0 0 0 -1.707-.707l-1.411 1.407a10.9 10.9 0 0 0 -5.882-1.7 11 11 0 1 0 11 11 1 1 0 0 0 -1-1z" />
+          </svg>
+          <span class="button-content">Next</span>
+        </button>
       </div>
     </form>
   </section>
@@ -191,7 +199,13 @@
 
     </div>
     <div class="my-5 md:mx-3">
-      <button id="step-2-button" type="button" class="btn w-1/6 md:w-full">Next</button>
+      <button id="step-2-button" type="button" class="btn w-1/6 md:w-full next-step">
+        <svg class="hidden animate-spin h-5 w-5 mx-auto my-0" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path
+            d="m22 11a1 1 0 0 0 -1 1 9 9 0 1 1 -9-9 8.9 8.9 0 0 1 4.42 1.166l-1.127 1.127a1 1 0 0 0 .707 1.707h4a1 1 0 0 0 1-1v-4a1 1 0 0 0 -1.707-.707l-1.411 1.407a10.9 10.9 0 0 0 -5.882-1.7 11 11 0 1 0 11 11 1 1 0 0 0 -1-1z" />
+        </svg>
+        <span class="button-content">Next</span>
+      </button>
     </div>
 
   </section>
@@ -252,7 +266,13 @@
         </label>
       </div>
       <div class="md:mx-3">
-        <button id="purchaseLabel" type="submit" class="btn w-1/6 md:w-full">Next</button>
+        <button id="purchaseLabel" type="submit" class="btn w-1/6 md:w-full next-step">
+          <svg class="hidden animate-spin h-5 w-5 mx-auto my-0" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path
+              d="m22 11a1 1 0 0 0 -1 1 9 9 0 1 1 -9-9 8.9 8.9 0 0 1 4.42 1.166l-1.127 1.127a1 1 0 0 0 .707 1.707h4a1 1 0 0 0 1-1v-4a1 1 0 0 0 -1.707-.707l-1.411 1.407a10.9 10.9 0 0 0 -5.882-1.7 11 11 0 1 0 11 11 1 1 0 0 0 -1-1z" />
+          </svg>
+          <span class="button-content">Next</span>
+        </button>
       </div>
     </form>
   </section>
@@ -311,7 +331,14 @@
             <input class="mr-2" id="terms-and-conditions" type="checkbox" required>
             <label for="email-address">I agree to the <a class="link" href="#">terms and conditions.</a></label>
           </div>
-          <button id="print-label" type="submit" class="btn w-2/5 lg:w-full"></button>
+          <button id="print-label" type="submit" class="btn w-2/5 lg:w-full next-step">
+            <span class="button-content">Next</span>
+            <svg class="hidden animate-spin h-5 w-5 mx-auto my-0" viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="m22 11a1 1 0 0 0 -1 1 9 9 0 1 1 -9-9 8.9 8.9 0 0 1 4.42 1.166l-1.127 1.127a1 1 0 0 0 .707 1.707h4a1 1 0 0 0 1-1v-4a1 1 0 0 0 -1.707-.707l-1.411 1.407a10.9 10.9 0 0 0 -5.882-1.7 11 11 0 1 0 11 11 1 1 0 0 0 -1-1z" />
+            </svg>
+          </button>
         </div>
       </div>
     </form>
@@ -320,7 +347,13 @@
   <section class="container mx-auto mt-10 w-4/5 font-primary step-five hidden">
     <div class="card-container text-center sm:px-12 px-24 space-y-20">
       <h2 class="text-3xl sm:text-2xl font-bold">Thank You For Your Purchase!</h2>
-      <button id="createAnotherLabel" class="btn w-4/5">Create Another Label?</button>
+      <button id="createAnotherLabel" class="btn w-4/5 next-step">
+        <svg class="hidden animate-spin h-5 w-5 mx-auto my-0" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path
+            d="m22 11a1 1 0 0 0 -1 1 9 9 0 1 1 -9-9 8.9 8.9 0 0 1 4.42 1.166l-1.127 1.127a1 1 0 0 0 .707 1.707h4a1 1 0 0 0 1-1v-4a1 1 0 0 0 -1.707-.707l-1.411 1.407a10.9 10.9 0 0 0 -5.882-1.7 11 11 0 1 0 11 11 1 1 0 0 0 -1-1z" />
+        </svg>
+        <span class="button-content">Create Another Label?</span>
+      </button>
       <p class="text-s text-gray-500">ShipPenguin is powered by ShipEngine, the world's leading shipping API. Learn
         more about <a class="link" href="https://www.shipengine.com/">ShipEngine</a>.</p>
     </div>

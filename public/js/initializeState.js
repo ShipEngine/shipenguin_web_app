@@ -57,9 +57,7 @@ export async function setCurrentStep(isBrowserLoad) {
       break;
 
     case "#step2":
-
       populateDimensionsAndWeightPage();
-
       setStep("step-two");
       break;
 
@@ -80,7 +78,7 @@ export async function setCurrentStep(isBrowserLoad) {
       break;
 
     case "#step5":
-      // setStep("step-four");
+      setStep("step-five");
       loading(true);
       const madePayment = await verifyStripePayment();
       if (!madePayment) {

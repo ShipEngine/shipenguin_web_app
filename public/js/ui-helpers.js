@@ -6,10 +6,44 @@ export function showError(errorMsgText) {
   window.alert(errorMsgText);
 };
 
-// Show a spinner on payment submission
+// Show a spinner on any long running api call and disable buttons to prevent further action
 export function loading(isLoading) {
   if (isLoading) {
-  } else {
+
+    const buttons =  document.querySelectorAll("button.next-step");
+    for(let button of buttons) {
+      button.setAttribute("disabled", "disabled");
+    }
+
+    const buttonContents = document.querySelectorAll(".button-content");
+    for (let buttonContent of buttonContents) {
+      buttonContent.classList.add("hidden");
+    }
+
+    const spinners = document.querySelectorAll("button .animate-spin");
+
+    for (let spinner of spinners) {
+      spinner.classList.remove("hidden");
+    }
+  } 
+  else {
+
+    const buttons =  document.querySelectorAll("button.next-step");
+    for(let button of buttons) {
+      button.removeAttribute("disabled");
+    }
+
+    const buttonContents = document.querySelectorAll(".button-content");
+    for (let buttonContent of buttonContents) {
+      buttonContent.classList.remove("hidden");
+    }
+
+    const spinners = document.querySelectorAll("button .animate-spin");
+
+    for (let spinner of spinners) {
+      spinner.classList.add("hidden");
+    }
+
   }
 };
 
@@ -91,7 +125,7 @@ export function populateCheckoutPage() {
   // payment amount
   const shippingCost = getLocalStorageItem("shippingCost");
 
-  const paymentButton = document.querySelector("#print-label");
+  const paymentButton = document.querySelector("#print-label .button-content");
   paymentButton.textContent = `Pay ${shippingCost}`;
 
 }
