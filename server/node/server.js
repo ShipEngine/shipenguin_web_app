@@ -19,9 +19,9 @@ const enforce = require("express-sslify");
 DO NOT use the Options object that is being passed to enforce.HTTPS(); as it is easy to spoof
 HTTP headers outside of environments that are actively setting/removing that specific header.
 e.g. load-balancers, heroku */
-app.use(enforce.HTTPS({
-  trustProtoHeader: true
-}));
+// app.use(enforce.HTTPS({
+//   trustProtoHeader: true
+// }));
 
 app.use(morgan("dev"));
 app.use(
