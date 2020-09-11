@@ -119,15 +119,6 @@ export function populateCheckoutPage() {
   toCityStateZip.innerHTML = "";
   toCityStateZip.textContent = `${toAddress.city_locality}, ${toAddress.state_province}, ${toAddress.postal_code}`;
 
-  // dimensions
-  const dimensions = getLocalStorageItem("dimensions");
-  const weight = getLocalStorageItem("weight");
-
-  const dimensionWeight = document.querySelector("#rate-dimension-weight-summary");
-
-  dimensionWeight.innerHTML = "";
-  dimensionWeight.textContent = `${weight.pounds ? weight.pounds : "0"}lb(s), ${weight.ounces ? weight.ounces : "0"}oz (${dimensions.length} x ${dimensions.width} x ${dimensions.height} in)`;
-
   // payment amount
   const shippingCost = getLocalStorageItem("shippingCost");
 
@@ -210,7 +201,7 @@ export function populateRatePage() {
 
   dimensionWeight.innerHTML = "";
   const weightString =  `${weight.pounds ? weight.pounds : "0"}lb(s), ${weight.ounces ? weight.ounces : "0"}oz`;
-  const dimensionsString = dimensions.length ? `(${dimensions.length} x ${dimensions.width} x ${dimensions.height})` : "";
+  const dimensionsString = dimensions.length ? `(${dimensions.length} x ${dimensions.width} x ${dimensions.height} in)` : "";
 
   dimensionWeight.textContent = `${weightString} ${dimensionsString}`;
 }
