@@ -1,16 +1,9 @@
 import { getLocalStorageItem } from "./local-storage.js";
-import { showError } from "./ui-helpers.js";
+import { showError, clearError } from "./ui-helpers.js";
 
 export async function getLabel() {
-  console.log("=== STEP XX: Get Label ===");
-  // $(".label_preview").attr("src", "/images/ajax-loading.gif");
-
-  console.log(localStorage.getItem("rateId"));
-
   const labelBody = { "rate": getLocalStorageItem("rateID") };
-
-  console.log(labelBody);
-
+  clearError();
   try {
     const response = await fetch("/label", {
       method: "POST",
@@ -23,12 +16,6 @@ export async function getLabel() {
     return { pdf: data.label_download.pdf, zpl: data.label_download.zpl, png: data.label_download.png };
   }
   catch(e) {
-    showError("Unable to create label");
+    showError("Label Purchase", "There was an error purchasing your label, please contact ShipEngine support");
   }
-  // var labelPdf = data.label_download.pdf;
-  // var labelImage = data.label_download.png;
-
-  // $("#labelPlaceholder").attr("href", labelPdf);
-  // $(".label_preview").attr("src", labelImage);
-
 }

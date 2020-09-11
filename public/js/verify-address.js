@@ -1,5 +1,5 @@
 import { setLocalStorage } from "./local-storage.js";
-import { showError, loading } from "./ui-helpers.js";
+import { loading } from "./ui-helpers.js";
 
 export async function verifyAddress() {
 
@@ -97,7 +97,6 @@ export async function verifyAddress() {
     return isVerified;
   }
   catch (e) {
-    // showError("Unable to verify your addresses");
     loading(false);
     return false;
   }

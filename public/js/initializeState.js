@@ -1,5 +1,5 @@
 import { getLocalStorageItem } from "./local-storage.js";
-import { setStep, loading, showError, populateCheckoutPage, populateDimensionsAndWeightPage } from "./ui-helpers.js";
+import { setStep, loading, showError, populateCheckoutPage, populateDimensionsAndWeightPage, clearError } from "./ui-helpers.js";
 import { getLabel } from "./get-label.js";
 import { sendEmail } from "./send-email.js";
 import { rateEstimate, populateRatePage } from "./rate-estimate.js";
@@ -81,9 +81,10 @@ export async function setCurrentStep(isBrowserLoad) {
       setStep("step-five");
       loading(true);
       const madePayment = await verifyStripePayment();
+      clearError();
       if (!madePayment) {
         loading(false);
-        showError("Sorry but you don't appear to have made a payment, please contact ShipEngine support");
+        showError("Stripe Payment", "Sorry but you don't appear to have made a payment, please contact ShipEngine support");
         break;
       }
       const labelUrls = await getLabel();

@@ -2,9 +2,15 @@ import { getLocalStorageItem } from "./local-storage.js";
 
 
 // Show the customer the error from Stripe if their card fails to charge
-export function showError(errorMsgText) {
-  window.alert(errorMsgText);
+export function showError(errorTitle, errorMsg) {
+  document.getElementById("error-title").textContent = errorTitle;
+  document.getElementById("error-message").textContent = errorMsg;
+  document.getElementById("error-card").classList.remove("hidden");
 };
+
+export function clearError() {
+  document.getElementById("error-card").classList.add("hidden");
+}
 
 // Show a spinner on any long running api call and disable buttons to prevent further action
 export function loading(isLoading) {

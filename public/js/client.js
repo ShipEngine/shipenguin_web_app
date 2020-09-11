@@ -4,7 +4,7 @@ import { pay } from "./payment.js";
 import { initializeState, setCurrentStep } from "./initializeState.js";
 import { verifyAddress } from "./verify-address.js";
 import { checkForFraud } from "./check-for-fraud.js";
-import { debounce, loading, showError } from "./ui-helpers.js";
+import { debounce, loading, showError, clearError } from "./ui-helpers.js";
 
 
 window.addEventListener("load", () => {
@@ -48,20 +48,21 @@ window.addEventListener("load", () => {
 
     const totalWeight = 16 * Number(pounds) + Number(ounces);
 
+    clearError();
     if(!totalWeight) {
-      showError("Please enter in a weight for your package");
+      showError("Package Weight Error", "Please enter a weight for your package");
       return;
     }
 
     if(totalWeight > 16*70) {
-      showError("Package weight cannot exceed 70 lbs");
+      showError("Package Weight Error", "Package weight cannot exceed 70 lbs");
       return;
     }
 
     const allFilledDimensions = [length, width, height].every((item) => item !== undefined && item !== null && item !== "" );
     const allEmptyDimensions = [length, width, height]. every((item) => item === undefined || item === null || item === "");
     if(!allFilledDimensions && !allEmptyDimensions) {
-      showError("Please complete filling out the package dimensions");
+      showError("Package Dimensions Error", "Please complete filling out the package dimensions");
       return;
     }
 
@@ -112,6 +113,11 @@ window.addEventListener("load", () => {
     clearInputs();
     window.location.hash = "";
   });
+
+
+  document.getElementById("error-button").addEventListener("click", () => {
+    clearError();
+  })
 
   window.addEventListener("hashchange", (evt) => {
     setCurrentStep();

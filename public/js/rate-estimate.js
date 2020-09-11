@@ -1,5 +1,5 @@
 import { getLocalStorageItem } from "./local-storage.js";
-import { showError, loading } from "./ui-helpers.js";
+import { showError, loading, clearError } from "./ui-helpers.js";
 
 export async function rateEstimate() {
   const rateBody = {
@@ -29,6 +29,7 @@ export async function rateEstimate() {
   };
 
   loading(true);
+  clearError();
   try {
     const response = await fetch("/rates", {
       method: "POST",
@@ -74,7 +75,7 @@ export async function rateEstimate() {
   }
   catch (e) {
     loading(false);
-    showError("There was an issue with retrieving rates");
+    showError("Shipping Rates Error", "There was an issue with retrieving rates");
     return false;
   }
 }

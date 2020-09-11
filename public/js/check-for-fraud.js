@@ -1,5 +1,5 @@
 import { getLocalStorageItem } from "./local-storage.js"
-import { showError } from "./ui-helpers.js";
+import { showError, clearError } from "./ui-helpers.js";
 
 export async function checkForFraud() {
 
@@ -21,6 +21,7 @@ export async function checkForFraud() {
     }
   }
 
+  clearError();
   try {
     const response = await fetch("/checkForFraud", {
       method: "POST",
@@ -38,6 +39,6 @@ export async function checkForFraud() {
     return false;
   } 
   catch (e) {
-    showError("Error validating your identity, please contact ShipEngine support");
+    showError("Fraud Detection", "Error validating your identity, please contact ShipEngine support");
   }
 }
