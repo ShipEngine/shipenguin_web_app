@@ -4,7 +4,8 @@ import { showError, loading, clearError } from "./ui-helpers.js";
 export async function rateEstimate() {
   const rateBody = {
     rate_options: {
-      carrier_ids: [] // Added server side
+      carrier_ids: [], // Added server side
+      package_types: [] // Added server side
     },
     shipment: {
       validate_address: "no_validation",
@@ -28,7 +29,7 @@ export async function rateEstimate() {
   };
 
   const dimensions = getLocalStorageItem("dimensions");
-  if(dimensions.length !== "") {
+  if (dimensions.length !== "") {
     rateBody.shipment.packages[0].dimensions = {
       ...dimensions,
       unit: "inch"
@@ -79,6 +80,11 @@ export async function rateEstimate() {
 
       rateInputList.append(inputWrapper);
     }
+
+    if (data.rate_response.rates.length === 0) {
+      rateInputList.textContent = "Sorry, we were unable to find any rates based on the criteria that you provided."
+    }
+
     return true;
   }
   catch (e) {

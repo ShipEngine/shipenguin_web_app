@@ -47,6 +47,8 @@ router.post("/rates", async (req, res) => {
     config.shipengine.stampsCarrierID
   );
 
+  req.body.rate_options.package_types.push("package");
+
   const options = {
     "method": "POST",
     "headers": {
