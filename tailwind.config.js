@@ -23,6 +23,9 @@ module.exports = {
                 'sm': {'max': '639px'},
                 // => @media (max-width: 639px) { ... }
             },
+            maxWidth: {
+                "7xl": "80rem"
+            },
             colors: {
                 "blue-background": "#72cbd3",
                 "gray-background": "#dbf0f2",
