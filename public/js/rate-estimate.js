@@ -70,11 +70,13 @@ export async function rateEstimate() {
       radioInput.value = rate.rate_id;
       radioInput.type = "radio";
       radioInput.setAttribute("name", "rates");
+      radioInput.className = "mx-3 w-4 h-4 align-text-top";
 
       const label = document.createElement("label");
       const totalAmount = rate.shipping_amount.amount + rate.insurance_amount.amount + rate.confirmation_amount.amount + rate.other_amount.amount;
       label.setAttribute("for", rate.rate_id);
       label.textContent = `$${totalAmount.toFixed(2)} - ${rate.service_type} / ${rate.delivery_days} day(s)`;
+      label.className = "py-2";
 
       if (!defaultChecked) {
         radioInput.setAttribute("checked", "checked");
@@ -82,7 +84,7 @@ export async function rateEstimate() {
       }
 
       const inputWrapper = document.createElement("div");
-      inputWrapper.classList.add("py-1");
+      inputWrapper.className = "my-2";
 
       inputWrapper.append(radioInput);
       inputWrapper.append(label);

@@ -102,4 +102,3 @@ export async function setCurrentStep(isBrowserLoad) {
       setStep("step-zero");
   }
 }
-

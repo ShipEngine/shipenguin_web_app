@@ -28,7 +28,7 @@
 
   <!-- Landing Page -->
   <section class="section-container pb-12 md:w-full step-zero hidden">
-    
+
     <h1 class="text-white text-2xl text-center mb-10">ShipPenguin is the fastest, cheapest way to print a label
       online.</h1>
     <div class="card-container text-center sm:px-12 px-24 space-y-20">
@@ -52,7 +52,7 @@
           <div class="circle"> </div>
           <span class="uppercase text-sm text-gray-400">Get Label</span>
         </div>
-      </div> 
+      </div>
       <h2 class="text-3xl sm:text-2xl font-bold">Want to skip the post office? Click the button below to print discounted postage and begin shipping with ease.</h2>
       <button id="step0NextButton" class="btn w-4/5">
         Start Shipping
@@ -74,7 +74,6 @@
         <div class="px-24 xl:px-0 w-1/2 lg:w-full">
           <h2 class="text-xl mb-5"><span>Shipping From (Sender)</span>
             <img id="from-address-verified" class="inline-block h-4 hidden" src="/images/verified.svg"/>
-            <img id="from-address-unverified" class="inline-block h-4 hidden" src="/images/unverified.svg"/>
           </h2>
           <div class="flex md:items-center mb-4">
             <div class="w-full">
@@ -114,7 +113,6 @@
           <h2 class="text-xl mb-5 lg:mt-10">
             <span>Shipping To (Recipient)</span>
             <img id="to-address-verified" class="inline-block h-4 hidden" src="/images/verified.svg"/>
-            <img id="to-address-unverified" class="inline-block h-4 hidden" src="/images/unverified.svg"/>
           </h2>
           <div class="flex md:items-center mb-4">
             <div class="w-full">
@@ -152,7 +150,7 @@
 
       </div>
       <div class="my-5 md:mx-3 text-right">
-        <button id="step-1-next-button" type="button" class="btn w-1/6 md:w-full next-step">
+        <button id="step-1-next-button" type="submit" class="btn w-1/6 md:w-full next-step">
           <img class="hidden animate-spin h-5 w-5 mx-auto my-0" src="/images/loading.svg" alt="Box with length, width, height">
           <span class="button-content">Next</span>
         </button>
@@ -294,8 +292,8 @@
         </div>
       </div>
       <div class="flex items-center my-3 md:mx-5">
-        <input class="mr-2" type="checkbox" id="hazardous-materials" required>
-        <label for="hazardous-materials">
+        <input type="checkbox" id="hazardous-materials" required class="m-2 w-4 h-4 align-text-top">
+        <label for="hazardous-materials" class="text-white py-2">
           I agree this package contains no <a class="link" href="#">hazardous materials</a>
         </label>
       </div>
@@ -361,8 +359,8 @@
             <input class="input w-3/5 lg:w-full" id="email" type="text" placeholder="e.g. jane@company.com" required>
           </div>
           <div class="flex items-center pb-8">
-            <input class="mr-2" id="terms-and-conditions" type="checkbox" required>
-            <label for="terms-and-conditions">I agree to the <a class="link" href="https://www.shipengine.com/terms-of-service/" target="_blank">Terms and Conditions.</a></label>
+            <input id="terms-and-conditions" type="checkbox" required class="mr-2 w-4 h-4 align-text-top">
+            <label for="terms-and-conditions" class="py-2">I agree to the <a class="link" href="https://www.shipengine.com/terms-of-service/" target="_blank">Terms and Conditions.</a></label>
           </div>
           <button id="print-label" type="submit" class="btn w-2/5 lg:w-full next-step">
             <span class="button-content">Next</span>
@@ -387,7 +385,7 @@
     </div>
   </section>
 
-  
+
 
   <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
   <script src="https://js.stripe.com/v3/"></script>
