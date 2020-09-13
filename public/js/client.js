@@ -2,7 +2,7 @@ import { rateEstimate } from "./rate-estimate.js";
 import { setLocalStorage, clearLocalStorage, clearInputs } from "./local-storage.js";
 import { pay } from "./payment.js";
 import { initializeState, setCurrentStep } from "./initialize-state.js";
-import { verifyAddress } from "./verify-address.js";
+import { verifyAddresses } from "./verify-addresses.js";
 import { checkForFraud } from "./check-for-fraud.js";
 import { debounce, loading, showError, clearError } from "./ui-helpers.js";
 
@@ -17,21 +17,29 @@ window.addEventListener("load", () => {
 
   // If the user does an address auto complete via their browser then that can cause many change
   // events to be fired at once. We wrap it in a debounce function to keep the api calls limited.
-  async function runVerifyAddress() {
+  async function runVerifyAddresses() {
     loading(true);
-    await verifyAddress();
+    await verifyAddresses();
     loading(false);
   }
 
   // Address Forms
-  document.getElementById("address-form").addEventListener("change", debounce(runVerifyAddress));
+  document.getElementById("address-form").addEventListener("change", debounce(runVerifyAddresses));
   document.getElementById("address-form").addEventListener("submit", async (evt) => {
     evt.preventDefault();
 
     loading(true);
-    const isVerified = await verifyAddress();
+    const verified = await verifyAddresses();
     loading(false);
-    if (isVerified) {
+
+    if (!verified.fromAddress) {
+      showError("Invalid Address", `The "Shipping From" address could not be verified`);
+    }
+    else if (!verified.toAddress) {
+      showError("Invalid Address", `The "Shipping To" address could not be verified`);
+    }
+    else {
+      clearError();
       window.location.hash = "#step2";
     }
   });
