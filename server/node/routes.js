@@ -15,7 +15,7 @@ require("dotenv").config();
 
 // Render the main app HTML.
 router.get("/", (req, res) => {
-  res.render("index.html");
+  res.render("index.ejs", {nonce: res.locals.cspNonce });
 });
 
 // ShipEngine API Address Validation

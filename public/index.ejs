@@ -5,8 +5,8 @@
   <title>ShipPenguin by ShipEngine</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" type="text/css" href="/css/output/output.css">
-  <link rel="icon" type="image/png" sizes="104x80" href="/images/shipenguin-icon.svg">
+  <link nonce="<%= nonce %>" rel="stylesheet" type="text/css" href="/css/output/output.css">
+  <link nonce="<%= nonce %>" rel="icon" type="image/png" sizes="104x80" href="/images/shipenguin-icon.svg">
 </head>
 
 <body>
@@ -396,12 +396,12 @@
 
 
 
-  <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
-  <script src="https://js.stripe.com/v3/"></script>
+  <!-- <script nonce="<%= nonce %>" defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script> -->
+  <script nonce="<%= nonce %>" type="text/javascript" src="https://js.stripe.com/v3/"></script>
 
-  <script type="module" src="/js/client.js" defer></script>
+  <script nonce="<%= nonce %>" type="module" src="/js/client.js" defer></script>
 
-  <script>
+  <script nonce="<%= nonce %>">
     /* Copyright(c) 2016, iovation, inc. All rights reserved. */
     window.io_global_object_name = "IGLOO";
     window.IGLOO = window.IGLOO || {
@@ -422,7 +422,7 @@
       }
     };
   </script>
-  <script>
+  <script nonce="<%= nonce %>">
     /*
      Copyright(c) 2018, iovation, inc. All rights reserved.
     */

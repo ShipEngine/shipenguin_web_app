@@ -12,14 +12,28 @@ const morgan = require("morgan");
 const opn = require("opn");
 const http = require("http");
 const enforce = require("express-sslify");
+const helmet = require("helmet");
+const crypto = require("crypto");
+
+const isProd = process.env.NODE_ENV === "production";
+
+app.use((req, res, next) => {
+  res.locals.cspNonce = crypto.randomBytes(16).toString("hex");
+  next();
+});
+
+app.use(helmet.contentSecurityPolicy({
+  directives: {
+    defaultSrc: ["'self'", "https://use.fontawesome.com", "https://js.stripe.com", "https://mpsnare.iesnare.com", "wss://mpsnare.iesnare.com/"],
+    scriptSrc: ["'self'", "https://mpsnare.iesnare.com",  (req, res) => `'nonce-${res.locals.cspNonce}'`],
+    styleSrc: ["'self'", "https://use.fontawesome.com",  (req, res) => `'nonce-${res.locals.cspNonce}'`],
+  }
+}));
 
 /* ATTN: If this project ever gets hosted on any services that do not set the x-forwarded-proto header
 DO NOT use the Options object that is being passed to enforce.HTTPS(); as it is easy to spoof
 HTTP headers outside of environments that are actively setting/removing that specific header.
 e.g. load-balancers, heroku */
-
-const isProd = process.env.NODE_ENV === "production";
-
 if(isProd) {
   app.use(enforce.HTTPS({
     trustProtoHeader: true
@@ -39,8 +53,9 @@ app.use(
 );
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static(path.join(__dirname, "../../public")));
-app.engine("html", require("ejs").renderFile);
-app.set("view engine", "html");
+// app.engine("html", require("ejs").renderFile);
+app.set("views", path.join(__dirname, "..", "..", "public"));
+app.set("view engine", "ejs");
 
 app.use("/", require("./routes"));
 app.use(express.static("."));
