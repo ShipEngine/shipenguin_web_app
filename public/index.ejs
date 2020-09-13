@@ -5,8 +5,17 @@
   <title>ShipPenguin by ShipEngine</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link nonce="<%= nonce %>" rel="stylesheet" type="text/css" href="/css/output/output.css">
-  <link nonce="<%= nonce %>" rel="icon" type="image/png" sizes="104x80" href="/images/shipenguin-icon.svg">
+  <link rel="stylesheet" type="text/css" href="/css/output/output.css">
+  <link rel="icon" type="image/png" sizes="104x80" href="/images/shipenguin-icon.svg">
+
+  <link rel="preload" href="/js/initialize-state.js" as="script">
+  <link rel="preload" href="/js/verify-addresses.js" as="script">
+  <link rel="preload" href="/js/ui-helpers.js" as="script">
+  <link rel="preload" href="/js/rate-estimate.js" as="script">
+  <link rel="preload" href="/js/local-storage.js" as="script">
+  <link rel="preload" href="/js/payment.js" as="script">
+  <link rel="preload" href="/js/check-for-fraud.js" as="script">
+
 </head>
 
 <body>
@@ -399,7 +408,7 @@
   <!-- <script nonce="<%= nonce %>" defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script> -->
   <script nonce="<%= nonce %>" type="text/javascript" src="https://js.stripe.com/v3/"></script>
 
-  <script nonce="<%= nonce %>" type="module" src="/js/client.js" defer></script>
+  <script type="module" src="/js/client.js" defer></script>
 
   <script nonce="<%= nonce %>">
     /* Copyright(c) 2016, iovation, inc. All rights reserved. */
