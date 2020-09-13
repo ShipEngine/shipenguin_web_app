@@ -43,14 +43,14 @@ app.use(compression());
 
 app.use(morgan("dev"));
 app.use(bodyParser.urlencoded({extended: true}));
-app.use(express.static(path.join(__dirname, "../public")));
+app.use(express.json());
+app.use(express.static(path.join(__dirname, "..", "public")));
 
 app.set("views", path.join(__dirname, "..", "public"));
 app.set("view engine", "ejs");
 
 app.use("/", require("./routes"));
 app.use(express.static("."));
-app.use(express.json());
 
 // Configure the HTTPS server
 http.createServer(app)
