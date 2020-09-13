@@ -19,7 +19,7 @@ router.get("/", (req, res) => {
 });
 
 // ShipEngine API Address Validation
-router.post("/verify-address", async (req, res) => {
+router.post("/verify-addresses", async (req, res) => {
 
   const options = {
     "method": "POST",
