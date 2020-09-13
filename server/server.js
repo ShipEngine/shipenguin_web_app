@@ -14,6 +14,7 @@ const http = require("http");
 const enforce = require("express-sslify");
 const helmet = require("helmet");
 const crypto = require("crypto");
+const compression = require("compression");
 
 const isProd = process.env.NODE_ENV === "production";
 
@@ -39,21 +40,12 @@ if(isProd) {
     trustProtoHeader: true
   }));
 }
+app.use(compression());
 
 app.use(morgan("dev"));
-app.use(
-  bodyParser.json({
-    // The raw body to verify webhook signatures.
-    verify: function (req, res, buf) {
-      if (req.originalUrl.startsWith("/webhook")) {
-        req.rawBody = buf.toString();
-      }
-    },
-  })
-);
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static(path.join(__dirname, "../public")));
-// app.engine("html", require("ejs").renderFile);
+
 app.set("views", path.join(__dirname, "..", "public"));
 app.set("view engine", "ejs");
 
