@@ -1,7 +1,7 @@
 import { rateEstimate } from "./rate-estimate.js";
 import { setLocalStorage, clearLocalStorage, clearInputs } from "./local-storage.js";
 import { pay } from "./payment.js";
-import { initializeState, setCurrentStep } from "./initializeState.js";
+import { initializeState, setCurrentStep } from "./initialize-state.js";
 import { verifyAddress } from "./verify-address.js";
 import { checkForFraud } from "./check-for-fraud.js";
 import { debounce, loading, showError, clearError } from "./ui-helpers.js";
