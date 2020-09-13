@@ -1,10 +1,10 @@
 import { rateEstimate } from "./rate-estimate.js";
 import { setLocalStorage, clearLocalStorage, clearInputs } from "./local-storage.js";
-import { pay } from "./payment.js";
+import { makeStripePayment } from "./payment.js";
 import { initializeState, setCurrentStep } from "./initialize-state.js";
 import { verifyAddresses } from "./verify-addresses.js";
 import { checkForFraud } from "./check-for-fraud.js";
-import { debounce, loading, showError, clearError } from "./ui-helpers.js";
+import { debounce, loading, showError, clearError, clearInfo } from "./ui-helpers.js";
 
 window.addEventListener("load", () => {
 
@@ -113,7 +113,7 @@ window.addEventListener("load", () => {
     }
     else {
       setLocalStorage("email", document.getElementById("email").value);
-      await pay();
+      await makeStripePayment();
     }
   });
 
@@ -126,7 +126,11 @@ window.addEventListener("load", () => {
 
   document.getElementById("error-button").addEventListener("click", () => {
     clearError();
-  })
+  });
+
+  document.getElementById("info-button").addEventListener("click", () => {
+    clearInfo();
+  });
 
   window.addEventListener("hashchange", (evt) => {
     setCurrentStep();

@@ -1,7 +1,6 @@
 import { getLocalStorageItem } from "./local-storage.js";
 
-
-// Show the customer the error from Stripe if their card fails to charge
+// Show an error message to the user when needed
 export function showError(errorTitle, errorMsg) {
   document.getElementById("error-title").textContent = errorTitle;
   document.getElementById("error-message").textContent = errorMsg;
@@ -11,6 +10,19 @@ export function showError(errorTitle, errorMsg) {
 export function clearError() {
   document.getElementById("error-card").classList.add("hidden");
 }
+
+
+// Show an info message to the user when needed
+export function showInfo(infoTitle, infoMsg) {
+  document.getElementById("info-title").textContent = infoTitle;
+  document.getElementById("info-message").textContent = infoMsg;
+  document.getElementById("info-card").classList.remove("hidden");
+};
+
+export function clearInfo() {
+  document.getElementById("info-card").classList.add("hidden");
+}
+
 
 // Show a spinner on any long running api call and disable buttons to prevent further action
 export function loading(isLoading) {

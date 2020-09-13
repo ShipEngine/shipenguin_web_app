@@ -1,9 +1,9 @@
 import { getLocalStorageItem } from "./local-storage.js";
-import { setStep, loading, showError, populateCheckoutPage, populateRatePage, populateDimensionsAndWeightPage, clearError } from "./ui-helpers.js";
+import { setStep, loading, showError, populateCheckoutPage, populateRatePage, populateDimensionsAndWeightPage, clearError, clearInfo, showInfo } from "./ui-helpers.js";
 import { getLabel } from "./get-label.js";
 import { sendEmail } from "./send-email.js";
 import { rateEstimate } from "./rate-estimate.js";
-import { verifyStripePayment } from "./payment.js";
+import { verifyStripePayment, refundStripePayment } from "./payment.js";
 
 export function initializeState() {
 
@@ -85,6 +85,7 @@ export async function setCurrentStep(isBrowserLoad) {
       loading(true);
       const madePayment = await verifyStripePayment();
       clearError();
+      clearInfo();
       if (!madePayment) {
         loading(false);
         showError("Stripe Payment", "Sorry but you don't appear to have made a payment, please contact ShipEngine support");
@@ -92,8 +93,18 @@ export async function setCurrentStep(isBrowserLoad) {
       }
 
       const labelUrls = await getLabel();
-      if(labelUrls && labelUrls.pdf) {
+
+      if (labelUrls && labelUrls.pdf) {
         await sendEmail(labelUrls);
+      }
+      else {
+        const success = await refundStripePayment();
+        if(success) {
+          showInfo("Payment Refund", "Your Stripe Payment has been refunded.");
+        }
+        else {
+          showError("Payment Refund", "There was an issue refunding your payment, please contact ShipEngine support");
+        }
       }
       loading(false);
       break;

@@ -1,10 +1,8 @@
 import { getLocalStorageItem, setLocalStorage } from "./local-storage.js";
+import { showError } from "./ui-helpers.js";
 
-// A reference to Stripe.js initialized with your real test publishable API key.
 let stripe;
-
-// A reference to Stripe.js initialized with your real test publishable API key.
-export async function pay() {
+export async function makeStripePayment() {
 
   if (!stripe) {
     const response = await fetch("/config");
@@ -47,4 +45,18 @@ export async function verifyStripePayment() {
   const success = await response.json();
 
   return success;
+}
+
+export async function refundStripePayment() {
+
+  try {
+    const sessionID = getLocalStorageItem("stripeSession");
+    const response = await fetch(`/refund-stripe-payment?sessionID=${sessionID}`, { method: "POST"});
+  
+    const data = await response.json();
+    return data;
+  }
+  catch (e) {
+    showError("Stripe Refund issue", `${e.message} \n Please contact ShipEngine support`);
+  }
 }
