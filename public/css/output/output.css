@@ -23591,13 +23591,13 @@ video {
 }
 
 body {
-  background-image: url("../../images/background-image.png");
+  /* background-image: url("../../images/background-image.png"); */
   height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   background-size: cover;
-  background-color: ;
+  background-color: #72cbd3;
 }
 
 .circle1 {

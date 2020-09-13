@@ -3,13 +3,13 @@
 @tailwind utilities;
 
 body {
-    background-image: url("../../images/background-image.png");
+    /* background-image: url("../../images/background-image.png"); */
     height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     background-size: cover;
-    background-color: theme("colors.background-blue");
+    background-color: theme("colors.blue-background");
 }
 
 @layer components {
