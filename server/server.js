@@ -26,8 +26,7 @@ app.use((req, res, next) => {
 app.use(helmet.contentSecurityPolicy({
   directives: {
     defaultSrc: ["'self'", "https://use.fontawesome.com", "https://js.stripe.com", "https://mpsnare.iesnare.com", "wss://mpsnare.iesnare.com/"],
-    scriptSrc: ["'self'", "https://mpsnare.iesnare.com",  (req, res) => `'nonce-${res.locals.cspNonce}'`],
-    styleSrc: ["'self'", "https://use.fontawesome.com",  (req, res) => `'nonce-${res.locals.cspNonce}'`]
+    scriptSrc: ["'self'", "https://mpsnare.iesnare.com",  (req, res) => `'nonce-${res.locals.cspNonce}'`]
   }
 }));
 
