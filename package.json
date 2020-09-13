@@ -44,9 +44,9 @@
   },
   "scripts": {
     "setup-cli": "stripe login --project-name=stripe-payments-demo",
-    "start": "node server/node/server.js",
-    "dev": "cross-env NODE_ENV=development nodemon server/node/server.js",
-    "dev:ngrok": "cross-env NODE_ENV=development node server/node/server.js",
+    "start": "node server/server.js",
+    "dev": "cross-env NODE_ENV=development nodemon server/server.js",
+    "dev:ngrok": "cross-env NODE_ENV=development node server/server.js",
     "gulp_watch": "gulp watch",
     "build-css": "npx tailwind build public/css/styles.css -o public/css/output/output.css"
   },

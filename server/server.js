@@ -26,7 +26,7 @@ app.use(helmet.contentSecurityPolicy({
   directives: {
     defaultSrc: ["'self'", "https://use.fontawesome.com", "https://js.stripe.com", "https://mpsnare.iesnare.com", "wss://mpsnare.iesnare.com/"],
     scriptSrc: ["'self'", "https://mpsnare.iesnare.com",  (req, res) => `'nonce-${res.locals.cspNonce}'`],
-    styleSrc: ["'self'", "https://use.fontawesome.com",  (req, res) => `'nonce-${res.locals.cspNonce}'`],
+    styleSrc: ["'self'", "https://use.fontawesome.com",  (req, res) => `'nonce-${res.locals.cspNonce}'`]
   }
 }));
 
@@ -52,9 +52,9 @@ app.use(
   })
 );
 app.use(bodyParser.urlencoded({extended: true}));
-app.use(express.static(path.join(__dirname, "../../public")));
+app.use(express.static(path.join(__dirname, "../public")));
 // app.engine("html", require("ejs").renderFile);
-app.set("views", path.join(__dirname, "..", "..", "public"));
+app.set("views", path.join(__dirname, "..", "public"));
 app.set("view engine", "ejs");
 
 app.use("/", require("./routes"));

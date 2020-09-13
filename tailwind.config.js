@@ -9,6 +9,9 @@ module.exports = {
             "62": "15.5rem",
             "78": "19.5rem"
         },
+        purge: [
+            "./public/index.ejs"
+        ],
         extend: {
             screens: {
                 'xl': {'max': '1279px'},
