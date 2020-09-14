@@ -754,16 +754,32 @@ video {
 
 .circle {
   border-radius: 9999px;
-  height: 2rem;
-  width: 2rem;
+  height: 2.5rem;
+  width: 2.5rem;
   display: flex;
   align-items: center;
   --bg-opacity: 1;
   background-color: #cbd5e0;
   background-color: rgba(203, 213, 224, var(--bg-opacity));
   justify-content: center;
-  margin-left: 2rem;
-  margin-right: 2rem;
+  z-index: 10;
+}
+
+.circle1 {
+  --bg-opacity: 1;
+  background-color: #72cbd3;
+  background-color: rgba(114, 203, 211, var(--bg-opacity));
+}
+
+.line-connector {
+  height: 0.5rem;
+  --bg-opacity: 1;
+  background-color: #cbd5e0;
+  background-color: rgba(203, 213, 224, var(--bg-opacity));
+  width: 8rem;
+  margin-left: -2.5rem;
+  margin-right: -2.5rem;
+  margin-top: 1rem;
 }
 
 .label-edit-row {
@@ -23598,10 +23614,6 @@ body {
   justify-content: space-between;
   background-size: cover;
   background-color: #72cbd3;
-}
-
-.circle1 {
-  background-color: ;
 }
 
 @media (max-width: 639px) {

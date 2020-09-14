@@ -64,14 +64,16 @@ body {
   }
 
   .circle {
-    @apply rounded-full h-8 w-8 flex items-center bg-gray-400 justify-center mx-8;
+    @apply rounded-full h-10 w-10 flex items-center bg-gray-400 justify-center z-10;
+  }
+  .circle1 {
+    @apply bg-blue-background;
+  }
+  .line-connector {
+      @apply h-2 bg-gray-400 w-32 -mx-10 mt-4;
   }
 
   .label-edit-row {
       @apply flex absolute justify-between w-full;
   }
-}
-
-.circle1 {
-    background-color: theme("colors.background-blue");
 }
