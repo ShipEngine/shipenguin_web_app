@@ -235,7 +235,7 @@ router.post("/create-checkout-session", async (req, res) => {
       success_url: `${config.shippenguin.url}/#step5`,
       cancel_url: `${config.shippenguin.url}/#step4`,
       metadata: {
-        "terms-of-service": "v1",
+        "terms-of-service": "TOSv1",
         "date-accepted": new Date().toISOString(),
         "customer-ip": req.ip
       }
