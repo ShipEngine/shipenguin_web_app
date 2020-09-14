@@ -4,7 +4,6 @@
 
 body {
     background-image: url("../../images/background-image.png");
-    background-position: bottom;
     height: 100vh;
     display: flex;
     flex-direction: column;
