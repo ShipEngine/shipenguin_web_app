@@ -115,6 +115,9 @@ router.post("/label", async (req, res) => {
 
     const rate = req.body.rate;
     const rateUrl = "https://api.shipengine.com/v1/labels/rates/" + rate;
+    const stripeSession = req.body.stripeSession;
+
+    delete req.body.stripeSession;
 
     const options = {
       "method": "POST",
@@ -129,11 +132,13 @@ router.post("/label", async (req, res) => {
     const response = await fetch(rateUrl, options);
     const parsedResponse = await response.json();
 
+    notifySlackChannel(stripeSession);
+
     res.json(parsedResponse)
   }
   catch (e) {
     console.error(e.message);
-    res.send(500, "Unexpected Server Error");
+    res.status(500).send("Unexpected Server Error");
   }
 });
 
@@ -187,13 +192,13 @@ router.post("/email", async (req, res) => {
     };
 
     await sgMail.send(msg);
-    res.send(200);
+    res.status(200).send();
   } catch (error) {
     console.error(error);
     if (error.response) {
       console.error(error.response.body)
     }
-    res.send(500, "Unexpected Server Error");
+    res.statu(500).send("Unexpected Server Error");
   }
 });
 
@@ -244,7 +249,7 @@ router.post("/create-checkout-session", async (req, res) => {
   }
   catch (e) {
     console.error(e.message);
-    res.send(500, "Unexpected Server Error");
+    res.status(500).send("Unexpected Server Error");
   }
 });
 
@@ -253,14 +258,11 @@ router.get("/verify-stripe-payment", async (req, res) => {
   try {
     const session = await stripe.checkout.sessions.retrieve(req.query.sessionID);
 
-    // Fire and forget 
-    // notifySlackChannel(session);
-
-    res.send(200, session.payment_status === "paid");
+    res.status(200).send(session.payment_status === "paid");
   }
   catch (e) {
     console.error(e.message);
-    res.send(500, "Unexpected Server Error");
+    res.status(500).send("Unexpected Server Error");
   }
 });
 
@@ -272,20 +274,19 @@ router.post("/refund-stripe-payment", async (req, res) => {
       payment_intent: session.payment_intent
     });
 
-    // Fire and forget 
-    // notifySlackChannel(refund);
-
     if (refund.status === "succeeded") {
-      res.send(200, true);
+      // Fire and forget 
+      notifySlackChannel(req.query.sessionID, true);
+      res.status(200).send(true);
     }
     else {
-      res.send(200, false);
+      res.status(200).send(false);
     }
 
   }
   catch (e) {
     console.error(e.message);
-    res.send(500, "Unexpected Server Error");
+    res.status(500).send("Unexpected Server Error");
   }
 });
 
@@ -296,43 +297,46 @@ router.get("/config", (req, res) => {
   });
 });
 
-// async function notifySlackChannel(stripeSession) {
+async function notifySlackChannel(stripeSessionID, isRefund) {
 
+  if(!config.slackChannel) {
+    return;
+  }
+  try {
 
-//   console.log(stripSession);
+    const stripeSession = await stripe.checkout.sessions.retrieve(stripeSessionID);
 
-//   const dollars = stripeSession.amount_total / 100;
-//   const totalAmount = dollars.toLocaleString("en-US", { style: "currency", currency: "USD" });
-//   const sessionID = session.id;
+    const dollars = stripeSession.amount_total / 100;
+    const totalAmount = dollars.toLocaleString("en-US", { style: "currency", currency: "USD" });
 
+    const action = isRefund ? "refunded" : "purchased";
 
-//   const body = {
-//     "blocks": [
-//       {
-//         "type": "section",
-//         "text": {
-//           "type": "mrkdwn",
-//           "text": `A Label has been purchased for the amount of ${totalAmount} \n Session ID: ${sessionID}`
-//         }
-//       }
-//     ]
-//   }
+    const body = {
+      "blocks": [
+        {
+          "type": "section",
+          "text": {
+            "type": "mrkdwn",
+            "text": `A Label has been ${action} for the amount of ${totalAmount} \n Payment Intent ID: ${stripeSession.payment_intent}`
+          }
+        }
+      ]
+    }
 
-//   try {
-//     const options = {
-//       "method": "POST",
-//       "headers": {
-//         "Content-Type": "application/json"
-//       },
-//       body: JSON.stringify(body)
-//     };
+    const options = {
+      "method": "POST",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(body)
+    };
 
-//     await fetch(`https://hooks.slack.com/services/${config.slackChannel}`, options);
-//   }
-//   catch (e) {
-//     console.error(`Error notifying slack channel: ${e.message}`);
-//   }
-// }
+    await fetch(`https://hooks.slack.com/services/${config.slackChannel}`, options);
+  }
+  catch (e) {
+    console.error(`Error notifying slack channel: ${e.message}`);
+  }
+}
 
 
 module.exports = router;
