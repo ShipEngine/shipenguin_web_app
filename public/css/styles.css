@@ -4,7 +4,6 @@
 
 body {
     background-image: url("../../images/background-image.png");
-    background-position: bottom;
     height: 100vh;
     background-size: cover;
     background-color: theme("colors.background-blue");
