@@ -50,37 +50,46 @@
 
     <h1 class="text-white text-2xl text-center mb-10">ShipPenguin is the fastest, cheapest way to print a label
       online.</h1>
-    <div class="card-container text-center sm:px-12 px-24 space-y-20">
-      <div class="flex flex-row justify-center">
-        <div class="flex flex-col items-center">
-          <div class="circle circle1"> </div>
-          <span class="uppercase text-sm">Start</span>
+    <div class="card-container p-0">
+      <div class="text-center sm:px-12 px-24 space-y-20 pt-20 pb-5">
+        <div class="flex flex-row justify-center">
+          <div class="flex flex-col items-center">
+            <div class="circle circle1"> </div>
+            <span class="uppercase text-sm">Start</span>
+          </div>
+          <div class="line-connector"></div>
+          <hr class="items-center w-2 m-0">
+          <div class="flex flex-col items-center">
+            <div class="circle"> </div>
+            <span class="uppercase text-sm text-gray-400">Shipment</span>
+          </div>
+          <div class="line-connector"></div>
+          <hr>
+          <div class="flex flex-col items-center">
+            <div class="circle"> </div>
+            <span class="uppercase text-sm text-gray-400">Payment</span>
+          </div>
+          <div class="line-connector"></div>
+          <hr>
+          <div class="flex flex-col items-center">
+            <div class="circle"> </div>
+            <span class="uppercase text-sm text-gray-400">Get Label</span>
+          </div>
         </div>
-        <div class="line-connector"></div>
-        <hr class="items-center w-2 m-0">
-        <div class="flex flex-col items-center">
-          <div class="circle"> </div>
-          <span class="uppercase text-sm text-gray-400">Shipment</span>
-        </div>
-        <div class="line-connector"></div>
-        <hr>
-        <div class="flex flex-col items-center">
-          <div class="circle"> </div>
-          <span class="uppercase text-sm text-gray-400">Payment</span>
-        </div>
-        <div class="line-connector"></div>
-        <hr>
-        <div class="flex flex-col items-center">
-          <div class="circle"> </div>
-          <span class="uppercase text-sm text-gray-400">Get Label</span>
-        </div>
-      </div>
-      <h2 class="text-3xl sm:text-2xl font-bold">Want to skip the post office? Click the button below to print discounted postage and begin shipping with ease.</h2>
-      <button id="step0NextButton" class="btn w-4/5">
-        Start Shipping
-      </button>
-      <p class="text-s text-gray-500">ShipPenguin is powered by ShipEngine, the world's leading shipping API. Learn
-        more about <a target="_blank" class="link" href="https://www.shipengine.com/?ref=shippenguin">ShipEngine</a>.</p>
+        <h2 class="text-3xl sm:text-2xl font-bold">Want to skip the post office? Click the button below to print discounted postage and begin shipping with ease.</h2>
+        <button id="step0NextButton" class="btn w-4/5">
+          Start Shipping
+        </button>
+        <div class="inline-block">      
+          <p class="text-s text-gray-500">ShipPenguin is powered by ShipEngine, the world's leading shipping API. Learn
+          more about <a target="_blank" class="link" href="https://www.shipengine.com/?ref=shippenguin">ShipEngine</a>.</p>
+          <div class="footer-container">
+          <a class="link no-underline" target="_blank" href="https://www.shipengine.com/privacy-policy/">Privacy Policy</a>
+          <a class="link no-underline ml-5" target="_blank" href="https://www.shipengine.com/terms-of-service/">Terms Of Service</a>
+          <a class="link no-underline float-right" target="_blank" href="https://www.shipengine.com/ccpa/">Do Not Sell My Information</a>
+          </div>
+        </div>  
+    </div>
     </div>
   </section>
 
@@ -91,82 +100,92 @@
         <h1 class="text-white text-2xl">Address Information</h1>
         <span class="text-white">STEP 1 OF 4</span>
       </div>
-      <div class="card-container flex lg:flex-col">
+      <div class="card-container flex-col text-center space-y-20 pb-5">
+        <div class="flex lg:flex-col">
+          <div class="px-24 xl:px-0 w-1/2 lg:w-full">
+            <h2 class="text-xl mb-5"><span>Shipping From (Sender)</span>
+              <img id="from-address-verified" class="inline-block h-4 hidden" src="/images/verified.svg" alt="Address verified logo"/>
+            </h2>
+            <div class="flex md:items-center mb-4">
+              <div class="w-full">
+                <label class="block font-bold" for="from-name">Name:</label>
+                <input class="input" id="from-name" type="text" placeholder="e.g. Jane Doe" required>
+              </div>
+            </div>
+            <div class="flex md:items-center">
+              <div class="w-full">
+                <label class="block font-bold" for="from-address1">Address:</label>
+                <div class="rounded border border-gray-400">
+                  <input class="input border-0 rounded-b-none" id="from-address1" type="address" placeholder="e.g. Address Line 1">
 
-        <div class="px-24 xl:px-0 w-1/2 lg:w-full">
-          <h2 class="text-xl mb-5"><span>Shipping From (Sender)</span>
-            <img id="from-address-verified" class="inline-block h-4 hidden" src="/images/verified.svg" alt="Address verified logo"/>
-          </h2>
-          <div class="flex md:items-center mb-4">
-            <div class="w-full">
-              <label class="block font-bold" for="from-name">Name:</label>
-              <input class="input" id="from-name" type="text" placeholder="e.g. Jane Doe" required>
+                  <label class="hidden" for="from-address2">Address 2:</label>
+                  <input class="input border-r-0 border-l-0 rounded-none" id="from-address2" type="address" placeholder="e.g. Address Line 2">
+
+                  <div class="grid grid-cols-3">
+                    <div>
+                      <label class="hidden" for="from-city">City:</label>
+                      <input class="input border-0 rounded-t-none rounded-br-none" id="from-city" type="text" placeholder="City">
+                    </div>
+                    <div>
+                      <label class="hidden" for="from-state">State:</label>
+                      <input class="input border-t-0 border-b-0 rounded-none" id="from-state" type="text" placeholder="State">
+                    </div>
+                    <div>
+                      <label class="hidden" for="from-zip">Zip:</label>
+                      <input class="input border-0 rounded-t-none rounded-bl-none" id="from-zip" type="text" placeholder="Zip">
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
-          <div class="flex md:items-center">
-            <div class="w-full">
-              <label class="block font-bold" for="from-address1">Address:</label>
-              <div class="rounded border border-gray-400">
-                <input class="input border-0 rounded-b-none" id="from-address1" type="address" placeholder="e.g. Address Line 1">
 
-                <label class="hidden" for="from-address2">Address 2:</label>
-                <input class="input border-r-0 border-l-0 rounded-none" id="from-address2" type="address" placeholder="e.g. Address Line 2">
+          <div class="px-24 xl:px-0 w-1/2 lg:w-full">
+            <h2 class="text-xl mb-5 lg:mt-10">
+              <span>Shipping To (Recipient)</span>
+              <img id="to-address-verified" class="inline-block h-4 hidden" src="/images/verified.svg" alt="image verified logo"/>
+            </h2>
+            <div class="flex md:items-center mb-4">
+              <div class="w-full">
+                <label class="block font-bold" for="to-name">Name:</label>
+                <input class="input" id="to-name" type="text" placeholder="e.g. Jane Doe" required>
+              </div>
+            </div>
+            <div class="flex md:items-center">
+              <div class="w-full">
+                <label class="block font-bold" for="to-address1">Address:</label>
+                <div class="rounded border border-gray-400">
+                  <input class="input border-0 rounded-b-none" id="to-address1" type="address" placeholder="e.g. Address Line 1">
 
-                <div class="grid grid-cols-3">
-                  <div>
-                    <label class="hidden" for="from-city">City:</label>
-                    <input class="input border-0 rounded-t-none rounded-br-none" id="from-city" type="text" placeholder="City">
-                  </div>
-                  <div>
-                    <label class="hidden" for="from-state">State:</label>
-                    <input class="input border-t-0 border-b-0 rounded-none" id="from-state" type="text" placeholder="State">
-                  </div>
-                  <div>
-                    <label class="hidden" for="from-zip">Zip:</label>
-                    <input class="input border-0 rounded-t-none rounded-bl-none" id="from-zip" type="text" placeholder="Zip">
+                  <label class="hidden" for="to-address2">Address 2:</label>
+                  <input class="input border-r-0 border-l-0 rounded-none" id="to-address2" type="address" placeholder="e.g. Address Line 2">
+
+                  <div class="grid grid-cols-3">
+                    <div>
+                      <label class="hidden" for="to-city">City:</label>
+                      <input class="input border-0 rounded-t-none rounded-br-none" id="to-city" type="text" placeholder="City">
+                    </div>
+                    <div>
+                      <label class="hidden" for="to-state">State:</label>
+                      <input class="input border-t-0 border-b-0 rounded-none" id="to-state" type="text" placeholder="State">
+                    </div>
+                    <div>
+                      <label class="hidden" for="to-zip">Zip:</label>
+                      <input class="input border-0 rounded-t-none rounded-bl-none" id="to-zip" type="text" placeholder="Zip">
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-
-        <div class="px-24 xl:px-0 w-1/2 lg:w-full">
-          <h2 class="text-xl mb-5 lg:mt-10">
-            <span>Shipping To (Recipient)</span>
-            <img id="to-address-verified" class="inline-block h-4 hidden" src="/images/verified.svg" alt="image verified logo"/>
-          </h2>
-          <div class="flex md:items-center mb-4">
-            <div class="w-full">
-              <label class="block font-bold" for="to-name">Name:</label>
-              <input class="input" id="to-name" type="text" placeholder="e.g. Jane Doe" required>
-            </div>
-          </div>
-          <div class="flex md:items-center">
-            <div class="w-full">
-              <label class="block font-bold" for="to-address1">Address:</label>
-              <div class="rounded border border-gray-400">
-                <input class="input border-0 rounded-b-none" id="to-address1" type="address" placeholder="e.g. Address Line 1">
-
-                <label class="hidden" for="to-address2">Address 2:</label>
-                <input class="input border-r-0 border-l-0 rounded-none" id="to-address2" type="address" placeholder="e.g. Address Line 2">
-
-                <div class="grid grid-cols-3">
-                  <div>
-                    <label class="hidden" for="to-city">City:</label>
-                    <input class="input border-0 rounded-t-none rounded-br-none" id="to-city" type="text" placeholder="City">
-                  </div>
-                  <div>
-                    <label class="hidden" for="to-state">State:</label>
-                    <input class="input border-t-0 border-b-0 rounded-none" id="to-state" type="text" placeholder="State">
-                  </div>
-                  <div>
-                    <label class="hidden" for="to-zip">Zip:</label>
-                    <input class="input border-0 rounded-t-none rounded-bl-none" id="to-zip" type="text" placeholder="Zip">
-                  </div>
-                </div>
-              </div>
-            </div>
+        <div class="inline-block">      
+          <p class="text-s text-gray-500">ShipPenguin is powered by ShipEngine, the world's leading shipping API. Learn
+          more about <a target="_blank" class="link" href="https://www.shipengine.com/?ref=shippenguin">ShipEngine</a>.</p>
+          <div class="footer-container">
+          <a class="link no-underline" target="_blank" href="https://www.shipengine.com/privacy-policy/">Privacy Policy</a>
+          <a class="link no-underline ml-5" target="_blank" href="https://www.shipengine.com/terms-of-service/">Terms Of Service</a>
+          <a class="link no-underline float-right" target="_blank" href="https://www.shipengine.com/ccpa/">Do Not Sell My Information</a>
           </div>
         </div>
 
@@ -186,8 +205,8 @@
       <h1 class="text-white text-2xl">Package Information</h1>
       <span class="text-white">STEP 2 OF 4</span>
     </div>
-    <div class="card-container p-0">
-      <div class="address-container">
+    <div class="card-container p-0 pb-5 text-center">
+      <div class="address-container text-left">
         <div class="flex"><strong>From:</strong>
           <p id="dimensions-from-summary" class="pl-2">
             <span class="name"></span>
@@ -253,6 +272,15 @@
           <img class="w-1/2 sm:w-full" src="/images/step2_box.png" alt="Box with length, width, height">
         </div>
       </div>
+      <div class="inline-block mt-20">      
+        <p class="text-s text-gray-500">ShipPenguin is powered by ShipEngine, the world's leading shipping API. Learn
+        more about <a target="_blank" class="link" href="https://www.shipengine.com/?ref=shippenguin">ShipEngine</a>.</p>
+        <div class="footer-container">
+        <a class="link no-underline" target="_blank" href="https://www.shipengine.com/privacy-policy/">Privacy Policy</a>
+        <a class="link no-underline ml-5" target="_blank" href="https://www.shipengine.com/terms-of-service/">Terms Of Service</a>
+        <a class="link no-underline float-right" target="_blank" href="https://www.shipengine.com/ccpa/">Do Not Sell My Information</a>
+        </div>
+      </div>
     </div>
     <div class="my-5 md:mx-3 text-right">
       <button id="step-2-button" type="submit" form="step-2-form" class="btn w-1/6 md:w-full next-step">
@@ -270,8 +298,8 @@
         <h1 class="text-white text-2xl">Select Rates</h1>
         <span class="text-white">Step 3 of 4</span>
       </div>
-      <div class="card-container p-0">
-        <div class="address-container">
+      <div class="card-container text-center p-0">
+        <div class="address-container text-left">
           <div class="flex"><strong>From:</strong>
             <p id="rate-from-summary" class="pl-2">
               <span class="name"></span>
@@ -304,13 +332,22 @@
             Edit
           </a>
         </div>
-        <h2 class="p-5"><strong>Select Rates:</strong></h2>
-        <div class="flex lg:flex-col-reverse lg:items-center justify-between pb-10">
+        <h2 class="p-5 text-left"><strong>Select Rates:</strong></h2>
+        <div class="flex lg:flex-col-reverse lg:items-center justify-between pb-10 text-left">
           <div class="w-1/2 sm:w-full">
             <div id="rate-input-list" class="flex flex-col mx-auto ml-32 lg:ml-5 lg:mt-10"></div>
           </div>
           <div class="flex w-1/2 sm:w-full items-center">
             <img class="max-w-sm lg:max-w-xs" src="/images/usps-logo-transparent.png" alt="USPS logo"></div>
+        </div>
+        <div class="inline-block mt-20 mb-5">      
+          <p class="text-s text-gray-500">ShipPenguin is powered by ShipEngine, the world's leading shipping API. Learn
+          more about <a target="_blank" class="link" href="https://www.shipengine.com/?ref=shippenguin">ShipEngine</a>.</p>
+          <div class="footer-container">
+          <a class="link no-underline" target="_blank" href="https://www.shipengine.com/privacy-policy/">Privacy Policy</a>
+          <a class="link no-underline ml-5" target="_blank" href="https://www.shipengine.com/terms-of-service/">Terms Of Service</a>
+          <a class="link no-underline float-right" target="_blank" href="https://www.shipengine.com/ccpa/">Do Not Sell My Information</a>
+          </div>
         </div>
       </div>
       <div class="flex items-center my-3 md:mx-5">
@@ -336,58 +373,69 @@
         <h1 class="text-white text-2xl">Review and Pay</h1>
         <span class="text-white">Step 4 of 4</span>
       </div>
-      <div class="card-container grid lg:grid-cols-1 grid-cols-2 gap-6">
-        <div class="label-image-container xl:w-smallLabelWidth xl:h-smallLabelHeight relative">
-          <div class="label-edit-row top-32 xl:top-29 px-3 items-center">
-            <p id="carrier-service" class="uppercase text-xl xl:text-xl"></p>
-            <a href="#step3" class="edit-btn mt-1 xl:pb-0">
-              <img class="edit-icon" src="/images/edit-regular.svg" alt="edit icon">
-              Edit
-            </a>
+      <div class="card-container text-center pb-5">
+        <div class="grid lg:grid-cols-1 grid-cols-2 gap-6 text-left">
+          <div class="label-image-container xl:w-smallLabelWidth xl:h-smallLabelHeight relative">
+            <div class="label-edit-row top-32 xl:top-29 px-3 items-center">
+              <p id="carrier-service" class="uppercase text-xl xl:text-xl"></p>
+              <a href="#step3" class="edit-btn mt-1 xl:pb-0">
+                <img class="edit-icon" src="/images/edit-regular.svg" alt="edit icon">
+                Edit
+              </a>
+            </div>
+            <div class="label-edit-row top-44 xl:top-36 px-3">
+              <p id="checkout-from-address" class="xl:text-sm text-lg">
+                <span class="name"></span>
+                <br />
+                <span class="street-address"></span>
+                <br />
+                <span class="city-state-zip"></span>
+              </p>
+              <a href="#step1" class="edit-btn mt-1 xl:pb-0">
+                <img class="edit-icon" src="/images/edit-regular.svg" alt="edit icon">
+                Edit
+              </a>
+            </div>
+            <div class="label-edit-row top-78 xl:top-62">
+              <p id="checkout-to-address" class="text-lg xl:text-sm pl-20">
+                <span class="name"></span>
+                <br />
+                <span class="street-address"></span>
+                <br />
+                <span class="city-state-zip"></span>
+              </p>
+              <a href="#step1" class="edit-btn xl:pb-0 mr-3">
+                <img class="edit-icon" src="/images/edit-regular.svg" alt="edit icon">
+                Edit
+              </a>
+            </div>
           </div>
-          <div class="label-edit-row top-44 xl:top-36 px-3">
-            <p id="checkout-from-address" class="xl:text-sm text-lg">
-              <span class="name"></span>
-              <br />
-              <span class="street-address"></span>
-              <br />
-              <span class="city-state-zip"></span>
-            </p>
-            <a href="#step1" class="edit-btn mt-1 xl:pb-0">
-              <img class="edit-icon" src="/images/edit-regular.svg" alt="edit icon">
-              Edit
-            </a>
-          </div>
-          <div class="label-edit-row top-78 xl:top-62">
-            <p id="checkout-to-address" class="text-lg xl:text-sm pl-20">
-              <span class="name"></span>
-              <br />
-              <span class="street-address"></span>
-              <br />
-              <span class="city-state-zip"></span>
-            </p>
-            <a href="#step1" class="edit-btn xl:pb-0 mr-3">
-              <img class="edit-icon" src="/images/edit-regular.svg" alt="edit icon">
-              Edit
-            </a>
+          <div class="lg:mt-10">
+            <p class="text-2xl font-bold mb-10">Please provide an email address and we will send you a receipt and PDF
+              label.</p>
+            <div class="py-8">
+              <input id="iovation-input" name="iovation-input" type="hidden" required />
+              <label class="block font-bold" for="email">Email Address:</label>
+              <input class="input w-3/5 lg:w-full" id="email" type="text" placeholder="e.g. jane@company.com" required>
+            </div>
+            <div class="flex items-center pb-8">
+              <input id="terms-and-conditions" type="checkbox" required class="mr-2 w-4 h-4 align-text-top">
+              <label for="terms-and-conditions" class="py-2">I agree to the <a class="link" href="https://www.shipengine.com/terms-of-service/" target="_blank">Terms and Conditions.</a></label>
+            </div>
+            <button id="print-label" type="submit" class="btn w-2/5 lg:w-full next-step">
+              <span class="button-content">Next</span>
+              <img class="hidden animate-spin h-5 w-5 mx-auto my-0" src="/images/loading.svg" alt="Loading icon">
+            </button>
           </div>
         </div>
-        <div class="lg:mt-10">
-          <p class="text-2xl font-bold mb-10">Please provide an email address and we will send you a receipt and PDF
-            label.</p>
-          <div class="py-8">
-            <input id="iovation-input" name="iovation-input" type="hidden" required />
-            <label class="block font-bold" for="email">Email Address:</label>
-            <input class="input w-3/5 lg:w-full" id="email" type="text" placeholder="e.g. jane@company.com" required>
+        <div class="inline-block mt-20">      
+          <p class="text-s text-gray-500">ShipPenguin is powered by ShipEngine, the world's leading shipping API. Learn
+          more about <a target="_blank" class="link" href="https://www.shipengine.com/?ref=shippenguin">ShipEngine</a>.</p>
+          <div class="footer-container">
+          <a class="link no-underline" target="_blank" href="https://www.shipengine.com/privacy-policy/">Privacy Policy</a>
+          <a class="link no-underline ml-5" target="_blank" href="https://www.shipengine.com/terms-of-service/">Terms Of Service</a>
+          <a class="link no-underline float-right" target="_blank" href="https://www.shipengine.com/ccpa/">Do Not Sell My Information</a>
           </div>
-          <div class="flex items-center pb-8">
-            <input id="terms-and-conditions" type="checkbox" required class="mr-2 w-4 h-4 align-text-top">
-            <label for="terms-and-conditions" class="py-2">I agree to the <a class="link" href="https://www.shipengine.com/terms-of-service/" target="_blank">Terms and Conditions.</a></label>
-          </div>
-          <button id="print-label" type="submit" class="btn w-2/5 lg:w-full next-step">
-            <span class="button-content">Next</span>
-            <img class="hidden animate-spin h-5 w-5 mx-auto my-0" src="/images/loading.svg" alt="Loading icon">
-          </button>
         </div>
       </div>
     </form>
@@ -395,24 +443,26 @@
 
   <!-- Thank you for your purchase -->
   <section class="section-container md:w-full step-five hidden">
-    <div class="card-container text-center sm:px-12 px-24 space-y-20">
+    <div class="card-container text-center sm:px-12 px-24 space-y-20 pb-5">
       <h2 class="text-3xl sm:text-2xl font-bold">Thank You For Your Purchase! We have emailed your label and a receipt to the address provided.</h2>
       <button id="create-another-label" class="btn w-4/5 next-step">
         <img class="hidden animate-spin h-5 w-5 mx-auto my-0" src="/images/loading.svg" alt="Loading icon">
 
         <span class="button-content">Create Another Label?</span>
       </button>
-      <p class="text-s text-gray-500">ShipPenguin is powered by ShipEngine, the world's leading shipping API. Learn
-        more about <a class="link" href="https://www.shipengine.com/">ShipEngine</a>.</p>
+      <div class="inline-block mt-20">      
+        <p class="text-s text-gray-500">ShipPenguin is powered by ShipEngine, the world's leading shipping API. Learn
+        more about <a target="_blank" class="link" href="https://www.shipengine.com/?ref=shippenguin">ShipEngine</a>.</p>
+        <div class="footer-container">
+        <a class="link no-underline" target="_blank" href="https://www.shipengine.com/privacy-policy/">Privacy Policy</a>
+        <a class="link no-underline ml-5" target="_blank" href="https://www.shipengine.com/terms-of-service/">Terms Of Service</a>
+        <a class="link no-underline float-right" target="_blank" href="https://www.shipengine.com/ccpa/">Do Not Sell My Information</a>
+        </div>
+      </div>
     </div>
   </section>
 </div>
 
-  <footer class="bg-blue-container shadow flex justify-around w-full items-center text-sm bg-opacity-75 mb-0">
-    <a class="link my-2" target="_blank" href="https://www.shipengine.com/privacy-policy/">Privacy Policy</a>
-    <a class="link my-2" target="_blank" href="https://www.shipengine.com/terms-of-service/">Terms Of Service</a>
-    <a class="link my-2" target="_blank" href="https://www.shipengine.com/ccpa/">CCPA</a>
-  </footer>
 
   <!-- <script nonce="<%= nonce %>" defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script> -->
   <script nonce="<%= nonce %>" type="text/javascript" src="https://js.stripe.com/v3/"></script>
