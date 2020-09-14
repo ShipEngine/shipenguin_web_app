@@ -789,6 +789,13 @@ video {
   width: 100%;
 }
 
+.footer-container {
+  padding: 0.5rem;
+  text-align: left;
+  font-size: 0.75rem;
+  margin-top: 0.5rem;
+}
+
 .space-y-0 > :not(template) ~ :not(template) {
   --space-y-reverse: 0;
   margin-top: calc(0px * calc(1 - var(--space-y-reverse)));

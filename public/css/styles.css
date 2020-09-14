@@ -76,4 +76,8 @@ body {
   .label-edit-row {
       @apply flex absolute justify-between w-full;
   }
+
+  .footer-container {
+      @apply p-2 text-left text-xs mt-2;
+  }
 }
