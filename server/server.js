@@ -70,7 +70,6 @@ if (ngrok) {
     .then(url => {
       console.log(`App URL to see the demo in your browser: ${url}/`);
       opn(url);
-      //opn(url+ '/verify');
     })
     .catch(err => {
       if (err.code === 'ECONNREFUSED') {

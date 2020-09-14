@@ -36,7 +36,8 @@ const config = {
   },
 
   shippenguin: {
-    url: isProd ? process.env.SHIPPENGUIN_URL : `https://${process.env.NGROK_SUBDOMAIN}.ngrok.io`
+    // url: isProd ? process.env.SHIPPENGUIN_URL : `https://${process.env.NGROK_SUBDOMAIN}.ngrok.io`
+    // url: isProd ? process.env.SHIPPENGUIN_URL : `http://localhost:${process.env.PORT}`
   },
 
   iovation: {
@@ -56,13 +57,17 @@ const config = {
   // Optionally, if you have a paid ngrok account, you can specify your `subdomain`
   // and `authtoken` in your `.env` file to use it.
   ngrok: {
-    enabled: process.env.NODE_ENV !== "production",
+    enabled: process.env.ENABLE_NGROK === true,
     port: process.env.PORT || 8000,
     subdomain: process.env.NGROK_SUBDOMAIN,
     authtoken: process.env.NGROK_AUTHTOKEN,
   },
+  slackChannel: process.env.SLACK_CHANNEL_ID
 };
 
 config.iovation.url = isProd ? `https://api.iovation.com/fraud/v1/subs/${config.iovation.subscriberID}/checks` : `https://ci-api.iovation.com/fraud/v1/subs/${config.iovation.subscriberID}/checks`;
+
+config.shippenguin.url = isProd ? process.env.SHIPPENGUIN_URL : `http://localhost:${config.port}`;
+
 
 module.exports = config;

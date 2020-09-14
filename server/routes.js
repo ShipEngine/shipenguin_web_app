@@ -1,4 +1,3 @@
-
 "use strict";
 
 const config = require("./config");
@@ -15,7 +14,7 @@ require("dotenv").config();
 
 // Render the main app HTML.
 router.get("/", (req, res) => {
-  res.render("index.ejs", {nonce: res.locals.cspNonce });
+  res.render("index.ejs", { nonce: res.locals.cspNonce });
 });
 
 // ShipEngine API Address Validation
@@ -253,7 +252,11 @@ router.post("/create-checkout-session", async (req, res) => {
 router.get("/verify-stripe-payment", async (req, res) => {
   try {
     const session = await stripe.checkout.sessions.retrieve(req.query.sessionID);
-    res.send(200, session.payment_status === "paid")
+
+    // Fire and forget 
+    // notifySlackChannel(session);
+
+    res.send(200, session.payment_status === "paid");
   }
   catch (e) {
     console.error(e.message);
@@ -269,12 +272,16 @@ router.post("/refund-stripe-payment", async (req, res) => {
       payment_intent: session.payment_intent
     });
 
-    if(refund.status === "succeeded") {
-      res.send(200, true);
-    } 
-    else {
+    // Fire and forget 
+    // notifySlackChannel(refund);
+
+    if (refund.status === "succeeded") {
       res.send(200, true);
     }
+    else {
+      res.send(200, false);
+    }
+
   }
   catch (e) {
     console.error(e.message);
@@ -288,6 +295,44 @@ router.get("/config", (req, res) => {
     stripePublishableKey: config.stripe.publishableKey
   });
 });
+
+// async function notifySlackChannel(stripeSession) {
+
+
+//   console.log(stripSession);
+
+//   const dollars = stripeSession.amount_total / 100;
+//   const totalAmount = dollars.toLocaleString("en-US", { style: "currency", currency: "USD" });
+//   const sessionID = session.id;
+
+
+//   const body = {
+//     "blocks": [
+//       {
+//         "type": "section",
+//         "text": {
+//           "type": "mrkdwn",
+//           "text": `A Label has been purchased for the amount of ${totalAmount} \n Session ID: ${sessionID}`
+//         }
+//       }
+//     ]
+//   }
+
+//   try {
+//     const options = {
+//       "method": "POST",
+//       "headers": {
+//         "Content-Type": "application/json"
+//       },
+//       body: JSON.stringify(body)
+//     };
+
+//     await fetch(`https://hooks.slack.com/services/${config.slackChannel}`, options);
+//   }
+//   catch (e) {
+//     console.error(`Error notifying slack channel: ${e.message}`);
+//   }
+// }
 
 
 module.exports = router;
