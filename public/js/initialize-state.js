@@ -97,7 +97,7 @@ export async function setCurrentStep(isBrowserLoad) {
       if (labelUrls && labelUrls.pdf) {
         await sendEmail(labelUrls);
       }
-      else {
+      else if (labelUrls.labelPurchaseError) {
         const success = await refundStripePayment();
         if(success) {
           showInfo("Payment Refund", "Your Stripe Payment has been refunded.");
