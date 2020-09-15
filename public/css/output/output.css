@@ -697,6 +697,7 @@ video {
   transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow, transform;
   transition-duration: 200ms;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  font-size: 1rem;
 }
 
 .edit-btn:hover {
@@ -724,6 +725,7 @@ video {
   padding-right: 1rem;
   padding-top: 0.75rem;
   padding-bottom: 0.75rem;
+  font-size: 0.875rem;
 }
 
 .label-image-container {
@@ -790,10 +792,11 @@ video {
 }
 
 .footer-container {
+  display: flex;
   padding: 0.5rem;
-  text-align: left;
   font-size: 0.75rem;
-  margin-top: 0.5rem;
+  margin-top: 0.25rem;
+  justify-content: center;
 }
 
 .space-y-0 > :not(template) ~ :not(template) {

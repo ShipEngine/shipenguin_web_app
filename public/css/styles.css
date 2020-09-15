@@ -42,7 +42,7 @@ body {
 
   .edit-btn {
       @apply bg-white border border-gray-800 text-gray-800 rounded-sm self-start 
-      flex w-20 justify-around py-1 px-5 transition duration-200 ease-in-out;
+      flex w-20 justify-around py-1 px-5 transition duration-200 ease-in-out text-base;
   }
   .edit-btn:hover {
       @apply bg-blue-container;
@@ -52,7 +52,7 @@ body {
   }
 
   .address-container {
-      @apply bg-gray-background w-full rounded-t-lg flex justify-between px-4 py-3;
+      @apply bg-gray-background w-full rounded-t-lg flex justify-between px-4 py-3 text-sm;
   }
 
   .label-image-container {
@@ -78,6 +78,6 @@ body {
   }
 
   .footer-container {
-      @apply p-2 text-left text-xs mt-2;
+      @apply flex p-2 text-xs mt-1 justify-center;
   }
 }
