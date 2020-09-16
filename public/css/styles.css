@@ -18,8 +18,9 @@ body {
   }  
   .btn {
       background-color: theme("colors.blue-button");
-      @apply font-bold text-white p-3 uppercase rounded-sm 
+      @apply font-semibold  text-base text-white p-3 rounded-sm px-8 mt-12
       transition duration-200 ease-in-out;
+      border-radius: 23.5px;;
   }
   .btn:hover {
       @apply bg-blue-hover;
