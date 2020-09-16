@@ -36,7 +36,8 @@ module.exports = {
                 "green-hover": "#00a38b",
                 "blue-container": "#effafd",
                 "cerulean-blue": "#294ccb",
-                "blue-button": "#005ff7"
+                "blue-button": "#005ff7",
+                "blue-hover": "#0049BE"
             },
             fontFamily: {
                 primary: ["Roboto", "sans-serif"]

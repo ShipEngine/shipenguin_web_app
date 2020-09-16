@@ -22,7 +22,7 @@ body {
       transition duration-200 ease-in-out;
   }
   .btn:hover {
-      @apply bg-green-hover;
+      @apply bg-blue-hover;
   }
 
   .link {
