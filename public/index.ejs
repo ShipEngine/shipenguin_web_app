@@ -199,6 +199,7 @@
           </div>
         </div>
       </div>
+      <div class="flex-col">
       <div class="flex sm:flex-col">
         <div class="w-1/2 sm:w-full">
           <h1 class="text-black text-2xl ml-8 mt-8">Package Details</h1>
@@ -252,15 +253,16 @@
         <div class="w-1/2 p-12 sm:w-full">
           <img class="w-1/2 sm:w-full" src="/images/step2_box.png" alt="Box with length, width, height">
         </div>
+        
       </div>
-    </div>
-    
-    <div class="my-5 md:mx-3 text-right">
-      <a href="">Go Back</a>
-      <button id="step-2-button" type="submit" form="step-2-form" class="btn w-1/6 md:w-full next-step">
-        <img class="hidden animate-spin h-5 w-5 mx-auto my-0" src="/images/loading.svg" alt="Loading icon">
-        <span class="button-content">Next</span>
-      </button>
+      <div class="text-right mx-10 my-10">
+        <button class="back-btn">Go back</button>
+        <button id="step-2-button" type="submit" form="step-2-form" class="btn w-48 next-step">
+          <img class="hidden animate-spin h-5 w-5 mx-auto my-1" src="/images/loading.svg" alt="Loading icon">
+          <span class="button-content">Continue</span>
+        </button>
+      </div>
+      </div>
     </div>
   </section>
 
