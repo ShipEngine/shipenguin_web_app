@@ -607,18 +607,19 @@ video {
 .btn {
   background-color: #005ff7;
   font-weight: 600;
-  font-size: 1rem;
+  font-size: 1.125rem;
   --text-opacity: 1;
   color: #fff;
   color: rgba(255, 255, 255, var(--text-opacity));
-  padding: 0.75rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
   border-radius: 0.125rem;
   padding-left: 2rem;
   padding-right: 2rem;
-  margin-top: 3rem;
   transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow, transform;
   transition-duration: 200ms;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  outline: 0;
   border-radius: 23.5px;
 }
 
@@ -626,6 +627,25 @@ video {
   --bg-opacity: 1;
   background-color: #0049BE;
   background-color: rgba(0, 73, 190, var(--bg-opacity));
+}
+
+.back-btn {
+  font-weight: 600;
+  --text-opacity: 1;
+  color: #005ff7;
+  color: rgba(0, 95, 247, var(--text-opacity));
+  font-size: 1.125rem;
+  margin-left: 1.25rem;
+  margin-right: 1.25rem;
+  transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow, transform;
+  transition-duration: 200ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.back-btn:hover {
+  --text-opacity: 1;
+  color: #0049BE;
+  color: rgba(0, 73, 190, var(--text-opacity));
 }
 
 .link {
@@ -648,15 +668,12 @@ video {
   border-radius: 0.5rem;
   box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
   --bg-opacity: 1;
-  background-color: #effafd;
-  background-color: rgba(239, 250, 253, var(--bg-opacity));
+  background-color: #fff;
+  background-color: rgba(255, 255, 255, var(--bg-opacity));
   padding: 2.5rem;
 }
 
 .input {
-  --bg-opacity: 1;
-  background-color: #f7fafc;
-  background-color: rgba(247, 250, 252, var(--bg-opacity));
   -webkit-appearance: none;
      -moz-appearance: none;
           appearance: none;
@@ -674,6 +691,16 @@ video {
   color: #4a5568;
   color: rgba(74, 85, 104, var(--text-opacity));
   line-height: 1.25;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  margin-bottom: 0.5rem;
+}
+
+.input-label {
+  font-size: 0.875rem;
+  --text-opacity: 1;
+  color: #4a5568;
+  color: rgba(74, 85, 104, var(--text-opacity));
+  font-weight: 600;
 }
 
 .edit-btn {
@@ -21814,6 +21841,10 @@ video {
 
 .grid-cols-none {
   grid-template-columns: none;
+}
+
+.grid-cols-address {
+  grid-template-columns: 55% 10% auto;
 }
 
 .col-auto {
@@ -44948,6 +44979,10 @@ body {
     grid-template-columns: none;
   }
 
+  .sm\:grid-cols-address {
+    grid-template-columns: 55% 10% auto;
+  }
+
   .sm\:col-auto {
     grid-column: auto;
   }
@@ -68038,6 +68073,10 @@ body {
 
   .md\:grid-cols-none {
     grid-template-columns: none;
+  }
+
+  .md\:grid-cols-address {
+    grid-template-columns: 55% 10% auto;
   }
 
   .md\:col-auto {
@@ -91132,6 +91171,10 @@ body {
     grid-template-columns: none;
   }
 
+  .lg\:grid-cols-address {
+    grid-template-columns: 55% 10% auto;
+  }
+
   .lg\:col-auto {
     grid-column: auto;
   }
@@ -114222,6 +114265,10 @@ body {
 
   .xl\:grid-cols-none {
     grid-template-columns: none;
+  }
+
+  .xl\:grid-cols-address {
+    grid-template-columns: 55% 10% auto;
   }
 
   .xl\:col-auto {

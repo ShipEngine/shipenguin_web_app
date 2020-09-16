@@ -52,6 +52,9 @@ module.exports = {
             width: {
                 smallLabelWidth: "24rem",
                 labelWidth: "30rem"
+            },
+            gridTemplateColumns: {
+                "address": "55% 10% auto"
             }
         }
     }
