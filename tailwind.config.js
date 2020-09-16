@@ -31,7 +31,7 @@ module.exports = {
             },
             colors: {
                 "blue-background": "#baeff3",
-                "gray-background": "#dbf0f2",
+                "gray-background": "#eef1f4",
                 "green-button": "#00b89d",
                 "green-hover": "#00a38b",
                 "blue-container": "#effafd",

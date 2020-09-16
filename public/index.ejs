@@ -158,13 +158,11 @@
 
   <!-- Dimensions and Weights -->
   <section id="step2" class="section-container md:w-full sm:text-sm step-two hidden">
-    <div class="flex mb-4 px-2 items-center justify-between">
-      <h1 class="text-white text-2xl">Package Details</h1>
-    </div>
     <div class="card-container p-0 pb-3 text-center flex">
-      <div class="address-container text-left">
-        <div class="flex"><strong>From:</strong>
-          <p id="dimensions-from-summary" class="pl-2 text-sm">
+      <div class="address-container text-left block w-1/4">
+        <div class="pb-8">
+          <p class="text-xl pb-2">Shipping from</p>
+          <p id="dimensions-from-summary" class=" text-sm">
             <span class="name"></span>
             <br />
             <span class="street-address"></span>
@@ -172,8 +170,12 @@
             <span class="city-state-zip"></span>
           </p>
         </div>
-        <div class="flex"><strong>To:</strong>
-          <p id="dimensions-to-summary" class="pl-2 text-sm">
+        <div class="border-b-2 border-dashed border-gray-400">
+
+        </div>
+        <div class="pt-8">
+          <p class="text-xl pb-2">Shipping to</p>
+          <p id="dimensions-to-summary" class=" text-sm">
             <span class="name"></span>
             <br />
             <span class="street-address"></span>
@@ -184,8 +186,9 @@
       </div>
       <div class="flex sm:flex-col">
         <div class="w-1/2 sm:w-full">
+          <h1 class="text-black text-2xl">Package Details</h1>
           <form id="step-2-form" name="step-2-form" class="w-full max-w-sm mt-12 ml-12 sm:mt-2 sm:ml-1">
-            <div class="flex items-center mb-4">
+            <div class="flex items-center mb-4">  
               <div class="">
                 <label class="block text-black font-bold mb-1 md:mb-0 pr-8" for="inline-full-name">
                   WEIGHT
@@ -225,20 +228,13 @@
         </div>
       </div>
     </div>
+    
     <div class="my-5 md:mx-3 text-right">
+      <a href="">Go Back</a>
       <button id="step-2-button" type="submit" form="step-2-form" class="btn w-1/6 md:w-full next-step">
         <img class="hidden animate-spin h-5 w-5 mx-auto my-0" src="/images/loading.svg" alt="Loading icon">
         <span class="button-content">Next</span>
       </button>
-    </div>
-    <div class="inline-block mt-5 text-sm">      
-      <p class="text-s text-gray-500">ShipPenguin is powered by ShipEngine, the world's leading shipping API. Learn
-      more about <a target="_blank" class="link" href="https://www.shipengine.com/?ref=shippenguin">ShipEngine</a>.</p>
-      <div class="footer-container">
-      <a class="link no-underline mx-3" target="_blank" href="https://www.shipengine.com/privacy-policy/">Privacy Policy</a>
-      <a class="link no-underline mx-3" target="_blank" href="https://www.shipengine.com/terms-of-service/">Terms Of Service</a>
-      <a class="link no-underline mx-3" target="_blank" href="https://www.shipengine.com/ccpa/">Do Not Sell My Information</a>
-      </div>
     </div>
   </section>
 
