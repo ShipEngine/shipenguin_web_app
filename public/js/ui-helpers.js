@@ -28,7 +28,7 @@ export function clearInfo() {
 export function loading(isLoading) {
   if (isLoading) {
 
-    const buttons =  document.querySelectorAll("button.next-step");
+    const buttons =  document.querySelectorAll("button.navigate-step");
     for(let button of buttons) {
       button.setAttribute("disabled", "disabled");
     }
@@ -46,7 +46,7 @@ export function loading(isLoading) {
   } 
   else {
 
-    const buttons =  document.querySelectorAll("button.next-step");
+    const buttons =  document.querySelectorAll("button.navigate-step");
     for(let button of buttons) {
       button.removeAttribute("disabled");
     }
@@ -137,6 +137,25 @@ export function populateCheckoutPage() {
   const paymentButton = document.querySelector("#print-label .button-content");
   paymentButton.textContent = `Pay ${shippingCost}`;
 
+  // dimensions
+  const dimensions = getLocalStorageItem("dimensions");
+  const weight = getLocalStorageItem("weight");
+
+  const weighText = document.querySelector("#checkout-weight-summary");
+
+  weighText.innerHTML = "";
+  const weightString =  `${weight.pounds ? weight.pounds : "0"}lb(s), ${weight.ounces ? weight.ounces : "0"}oz`;
+  
+  weighText.textContent = `${weightString}`;
+
+  const dimensionsText = document.querySelector("#checkout-dimensions-summary");
+
+  dimensionsText.innerHTML = "";
+
+  const dimensionsString = dimensions.length ? `${dimensions.length} x ${dimensions.width} x ${dimensions.height} in` : "No dimensions were entered";
+
+  dimensionsText.textContent = dimensionsString;
+
 }
 
 export function populateDimensionsAndWeightPage() {
@@ -209,11 +228,18 @@ export function populateRatePage() {
   const dimensions = getLocalStorageItem("dimensions");
   const weight = getLocalStorageItem("weight");
 
-  const dimensionWeight = document.querySelector("#rate-dimension-weight-summary");
+  const weighText = document.querySelector("#rate-weight-summary");
 
-  dimensionWeight.innerHTML = "";
+  weighText.innerHTML = "";
   const weightString =  `${weight.pounds ? weight.pounds : "0"}lb(s), ${weight.ounces ? weight.ounces : "0"}oz`;
-  const dimensionsString = dimensions.length ? `(${dimensions.length} x ${dimensions.width} x ${dimensions.height} in)` : "";
+  
+  weighText.textContent = `${weightString}`;
 
-  dimensionWeight.textContent = `${weightString} ${dimensionsString}`;
+  const dimensionsText = document.querySelector("#rate-dimensions-summary");
+
+  dimensionsText.innerHTML = "";
+
+  const dimensionsString = dimensions.length ? `${dimensions.length} x ${dimensions.width} x ${dimensions.height} in` : "No dimensions were entered";
+
+  dimensionsText.textContent = dimensionsString;
 }

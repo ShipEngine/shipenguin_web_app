@@ -10,6 +10,23 @@ window.addEventListener("load", () => {
 
   initializeState();
 
+
+  document.getElementById("step-1-go-back").addEventListener("click", () => {
+    window.location.hash = "#step0"
+  });
+
+  document.getElementById("step-2-go-back").addEventListener("click", () => {
+    window.location.hash = "#step1"
+  });
+
+  document.getElementById("step-3-go-back").addEventListener("click", () => {
+    window.location.hash = "#step2"
+  });
+
+  document.getElementById("step-4-go-back").addEventListener("click", () => {
+    window.location.hash = "#step3"
+  });
+
   // Landing Page
   document.getElementById("step0NextButton").addEventListener("click", () => {
     window.location.hash = "#step1"
@@ -43,6 +60,8 @@ window.addEventListener("load", () => {
       window.location.hash = "#step2";
     }
   });
+
+
 
   // Dimensions and Weights
   document.getElementById("step-2-form").addEventListener("submit", async (evt) => {
