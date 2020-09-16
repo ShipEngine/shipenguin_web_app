@@ -646,7 +646,7 @@ video {
 
 .card-container {
   border-radius: 0.5rem;
-  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
   --bg-opacity: 1;
   background-color: #effafd;
   background-color: rgba(239, 250, 253, var(--bg-opacity));
@@ -23941,6 +23941,7 @@ body {
   height: 100vh;
   display: flex;
   flex-direction: column;
+  font-family: 'Open Sans', sans-serif;
   justify-content: space-between;
   background-size: cover;
   background: radial-gradient(#fff, #baeff3);
