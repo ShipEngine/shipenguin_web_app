@@ -257,47 +257,55 @@
   <!-- Select Rates -->
   <section class="section-container md:w-full sm:text-sm pt-0 step-three hidden">
     <form id="step-3-form">
-      <div class="card-container p-0">
-        <div class="address-container text-left">
-          <div class="flex"><strong>From:</strong>
-            <p id="rate-from-summary" class="pl-2 text-sm">
+      <div class="card-container flex p-0">
+        <div class="address-container text-left block w-1/4">
+          <div class="pb-10">
+            <p class="text-xl pb-4">Shipping from</p>
+            <p id="rate-from-summary" class=" text-xs">
               <span class="name"></span>
               <br />
               <span class="street-address"></span>
               <br />
               <span class="city-state-zip"></span>
             </p>
+            <div class="flex items-center pt-4">
+              <img id="to-address-verified" class="inline-block h-4" src="/images/verified.svg" alt="image verified logo"/>
+              <p class="text-green-verified font-bold pl-1">Address Verified</p>
+            </div>
           </div>
-          <div class="flex"><strong>To:</strong>
-            <p id="rateToSummary" class="pl-2 text-sm">
+          <div class="border-b-2 border-dashed border-gray-400">
+
+          </div>
+          <div class="pt-10">
+            <p class="text-xl pb-4">Shipping to</p>
+            <p id="rateToSummary" class="text-xs">
               <span class="name"></span>
               <br />
               <span class="street-address"></span>
               <br />
               <span class="city-state-zip"></span>
             </p>
+            <div class="flex items-center pt-4">
+              <img id="to-address-verified" class="inline-block h-4" src="/images/verified.svg" alt="image verified logo"/>
+              <p class="text-green-verified font-bold pl-1">Address Verified</p>
+            </div>
           </div>
-          <a href="#step1" class="edit-btn">
-            <img class="edit-icon" src="/images/edit-regular.svg" alt="edit icon">
-            Edit
-          </a>
         </div>
-        <div class="address-container rounded-none mt-1">
-          <div class="flex items-center"><strong>Package:</strong>
+        <div class="border-l-2 border-dashed border-gray-400">
+
+        </div>
+        <div class="address-container rounded-none w-1/4 ">
+          <div class="">
+            <p class="text-xl pb-4">Package</p>
             <p id="rate-dimension-weight-summary" class="pl-2"></p>
           </div>
-          <a href="#step2" class="edit-btn">
-            <img class="edit-icon" src="/images/edit-regular.svg" alt="edit icon">
-            Edit
-          </a>
         </div>
-        <h1 class="text-black text-2xl">Select a USPS Service</h1>
-        <div class="flex lg:flex-col-reverse lg:items-center justify-between pb-10 text-left">
-          <div class="w-1/2 sm:w-full">
+        
+        <div class=" lg:flex-col-reverse lg:items-center justify-between pb-10 text-left w-1/2">
+          <h1 class="text-black text-2xl">Select a USPS Service</h1>
+          <div class="w-full sm:w-full">
             <div id="rate-input-list" class="flex flex-col mx-auto ml-32 lg:ml-5 lg:mt-10"></div>
           </div>
-          <div class="flex w-1/2 sm:w-full items-center">
-            <img class="max-w-sm lg:max-w-xs" src="/images/usps-logo-transparent.png" alt="USPS logo"></div>
         </div>
       </div>
       <div class="flex items-center my-3 md:mx-5 justify-end">
