@@ -175,7 +175,7 @@
             <br />
             <span class="city-state-zip"></span>
           </p>
-          <div class="flex items-center pt-4">
+          <div class="flex items-center pt-4 ">
             <img id="to-address-verified" class="inline-block h-4" src="/images/verified.svg" alt="image verified logo"/>
             <p class="text-green-verified font-bold pl-1">Address Verified</p>
           </div>
@@ -263,8 +263,8 @@
   <!-- Select Rates -->
   <section class="section-container md:w-full sm:text-sm pt-0 step-three hidden">
     <form id="step-3-form">
-      <div class="card-container flex p-0">
-        <div class="address-container text-left block w-1/4">
+      <div class="card-container flex p-0 sm:block">
+        <div class="address-container text-left block w-1/4 sm:w-full sm:flex">
           <div class="pb-10">
             <p class="text-xl pb-4">Shipping from</p>
             <p id="rate-from-summary" class=" text-xs">
@@ -274,7 +274,7 @@
               <br />
               <span class="city-state-zip"></span>
             </p>
-            <div class="flex items-center pt-4">
+            <div class="flex items-center pt-4 ">
               <img id="to-address-verified" class="inline-block h-4" src="/images/verified.svg" alt="image verified logo"/>
               <p class="text-green-verified font-bold pl-1">Address Verified</p>
             </div>
@@ -282,7 +282,7 @@
           <div class="border-b-2 border-dashed border-gray-400">
 
           </div>
-          <div class="pt-10">
+          <div class="pt-10 sm:pt-0">
             <p class="text-xl pb-4">Shipping to</p>
             <p id="rateToSummary" class="text-xs">
               <span class="name"></span>
@@ -300,7 +300,7 @@
         <div class="border-l-2 border-dashed border-gray-400">
 
         </div>
-        <div class="address-container rounded-none w-1/4 ">
+        <div class="address-container rounded-none w-1/4 sm:w-full sm:flex">
           <div class="pl-4">
             <p class="text-xl pb-4">Package</p>
             <p class="text-l pb-4 font-semibold">Weight</p>
@@ -309,8 +309,8 @@
           </div>
         </div>
         
-        <div class=" lg:flex-col-reverse lg:items-center justify-between pb-10 text-left w-1/2">
-          <h1 class="text-black text-2xl mt-2 ml-8 mb-8">Select a USPS Service</h1>
+        <div class=" lg:flex-col-reverse lg:items-center justify-between pb-10 text-left w-1/2 sm:w-full">
+          <h1 class="text-black text-2xl mt-2 ml-8 mb-8 sm:mb-2">Select a USPS Service</h1>
           <div class="w-full sm:w-full">
             <div id="rate-input-list" class="flex flex-col mx-auto ml-8 lg:ml-5 lg:mt-10 mb-10"></div>
           </div>
