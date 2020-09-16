@@ -23925,7 +23925,7 @@ body {
   flex-direction: column;
   justify-content: space-between;
   background-size: cover;
-  background-color: #baeff3;
+  background: radial-gradient(#fff, #baeff3);
 }
 
 @media (max-width: 639px) {
