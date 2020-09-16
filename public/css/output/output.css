@@ -601,7 +601,7 @@ video {
   margin-top: 2.5rem;
   width: 80%;
   max-width: 80rem;
-  font-family: Roboto, sans-serif;
+  font-family: Open Sans, sans-serif;
 }
 
 .btn {
@@ -11075,7 +11075,7 @@ video {
 }
 
 .font-primary {
-  font-family: Roboto, sans-serif;
+  font-family: Open Sans, sans-serif;
 }
 
 .font-hairline {
@@ -23941,7 +23941,6 @@ body {
   height: 100vh;
   display: flex;
   flex-direction: column;
-  font-family: 'Open Sans', sans-serif;
   justify-content: space-between;
   background-size: cover;
   background: radial-gradient(#fff, #baeff3);
@@ -34208,7 +34207,7 @@ body {
   }
 
   .sm\:font-primary {
-    font-family: Roboto, sans-serif;
+    font-family: Open Sans, sans-serif;
   }
 
   .sm\:font-hairline {
@@ -57300,7 +57299,7 @@ body {
   }
 
   .md\:font-primary {
-    font-family: Roboto, sans-serif;
+    font-family: Open Sans, sans-serif;
   }
 
   .md\:font-hairline {
@@ -80392,7 +80391,7 @@ body {
   }
 
   .lg\:font-primary {
-    font-family: Roboto, sans-serif;
+    font-family: Open Sans, sans-serif;
   }
 
   .lg\:font-hairline {
@@ -103484,7 +103483,7 @@ body {
   }
 
   .xl\:font-primary {
-    font-family: Roboto, sans-serif;
+    font-family: Open Sans, sans-serif;
   }
 
   .xl\:font-hairline {

@@ -7,7 +7,6 @@ body {
     height: 100vh;
     display: flex;
     flex-direction: column;
-    font-family: 'Open Sans', sans-serif;
     justify-content: space-between;
     background-size: cover;
     background: radial-gradient(#fff, theme("colors.blue-background"));
