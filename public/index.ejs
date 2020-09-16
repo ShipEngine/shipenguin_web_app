@@ -341,63 +341,81 @@
   <!-- Checkout -->
   <section id="step4" class="section-container md:w-full pt-0 step-four hidden">
     <form id="step4Form">
-      <div class="flex mb-4 px-2 items-center justify-between">
-        <h1 class="text-white text-2xl">Review and Pay</h1>
-        <span class="text-white text-base">STEP 4 OF 4</span>
-      </div>
-      <div class="card-container text-center pb-5 sm:px-0 mb-20">
-        <div class="grid lg:grid-cols-1 grid-cols-2 gap-6 text-left sm:px-6">
-          <div class="label-image-container xl:w-smallLabelWidth xl:h-smallLabelHeight relative">
-            <div class="label-edit-row top-32 xl:top-29 px-3 items-center">
-              <p id="carrier-service" class="uppercase text-xl xl:text-xl bg-yellow-400"></p>
-              <a href="#step3" class="edit-btn mt-1 xl:pb-0">
-                <img class="edit-icon" src="/images/edit-regular.svg" alt="edit icon">
-                Edit
-              </a>
-            </div>
-            <div class="label-edit-row top-44 xl:top-36 px-3">
-              <p id="checkout-from-address" class="xl:text-sm text-lg">
-                <span class="name bg-yellow-400"></span>
-                <br />
-                <span class="street-address bg-yellow-400"></span>
-                <br />
-                <span class="city-state-zip bg-yellow-400"></span>
-              </p>
-              <a href="#step1" class="edit-btn mt-1 xl:pb-0">
-                <img class="edit-icon" src="/images/edit-regular.svg" alt="edit icon">
-                Edit
-              </a>
-            </div>
-            <div class="label-edit-row top-78 xl:top-62">
-              <p id="checkout-to-address" class="text-lg xl:text-sm pl-20">
-                <span class="name bg-yellow-400"></span>
-                <br />
-                <span class="street-address bg-yellow-400"></span>
-                <br />
-                <span class="city-state-zip bg-yellow-400"></span>
-              </p>
-              <a href="#step1" class="edit-btn xl:pb-0 mr-3">
-                <img class="edit-icon" src="/images/edit-regular.svg" alt="edit icon">
-                Edit
-              </a>
+      <div class="card-container flex p-0">
+        <div class="address-container text-left block w-1/5">
+          <div class="pb-10">
+            <p class="text-xl pb-4">Shipping from</p>
+            <p id="checkout-from-address" class=" text-xs">
+              <span class="name"></span>
+              <br />
+              <span class="street-address"></span>
+              <br />
+              <span class="city-state-zip"></span>
+            </p>
+            <div class="flex items-center pt-4">
+              <img id="to-address-verified" class="inline-block h-4" src="/images/verified.svg" alt="image verified logo"/>
+              <p class="text-green-verified font-bold pl-1">Address Verified</p>
             </div>
           </div>
-          <div class="lg:mt-10">
-            <p class="text-2xl font-bold mb-10">Please provide an email address and we will send you a receipt and PDF
-              label.</p>
-            <div class="py-8">
-              <input id="iovation-input" name="iovation-input" type="hidden" required />
-              <label class="block font-bold" for="email">Email Address:</label>
-              <input class="input w-3/5 lg:w-full" id="email" type="text" placeholder="e.g. jane@company.com" required>
+          <div class="border-b-2 border-dashed border-gray-400">
+
+          </div>
+          <div class="pt-10">
+            <p class="text-xl pb-4">Shipping to</p>
+            <p id="checkout-to-address" class="text-xs">
+              <span class="name"></span>
+              <br />
+              <span class="street-address"></span>
+              <br />
+              <span class="city-state-zip"></span>
+            </p>
+            <div class="flex items-center pt-4">
+              <img id="to-address-verified" class="inline-block h-4" src="/images/verified.svg" alt="image verified logo"/>
+              <p class="text-green-verified font-bold pl-1">Address Verified</p>
             </div>
-            <div class="flex items-center pb-8">
-              <input id="terms-and-conditions" type="checkbox" required class="mr-2 w-4 h-4 align-text-top">
-              <label for="terms-and-conditions" class="py-2">I agree to the <a class="link" href="https://www.shipengine.com/terms-of-service/" target="_blank">Terms and Conditions.</a></label>
+          </div>
+        </div>
+        <div class="border-l-2 border-dashed border-gray-400">
+
+        </div>
+        <div class="address-container rounded-none w-1/6 ">
+          <div class="">
+            <p class="text-xl pb-8">Package</p>
+            <p class="text-l pb-4 font-semibold">Weight</p>
+            <p id="checkout-dimension-weight-summary" class="pl-2 pb-4"></p>
+            <p class="text-l pb-4 font-semibold">Dimensions</p>
+          </div>
+        </div>
+        <div class="p-10">
+          <div id="carrier-service" class="hidden"></div>          
+          <div class="">
+            <h1 class="text-3xl mb-2">Confirm email and pay for label</h1>
+            <h2 class="text-lg">We'll generate your USPS label and email it along with a receipt</h2>
+
+            <div class="bg-gray-background rounded flex p-6 my-10">
+              <img class="border w-64" src="./images/usps-label.png" alt="picture of a sample USPS label">
+              <div class="ml-10 flex flex-col justify-between h-auto">
+                <div>
+                <h3 class="pr-5 text-lg">Enter an email address where we can send your label</h3>
+                <div class="py-8">
+                  <input id="iovation-input" name="iovation-input" type="hidden" required />
+                  <label class="block input-label" for="email">Email address</label>
+                  <input class="input" id="email" type="text" placeholder="e.g. jane@company.com" required>
+                </div>
+              </div>
+                <div class="terms-container flex text-sm items-center -mb-2">
+                  <input id="terms-and-conditions" type="checkbox" required class="mr-2 w-4 h-4 align-text-top">
+                  <label for="terms-and-conditions" class="py-2">I agree to the <a class="link no-underline" href="https://www.shipengine.com/terms-of-service/" target="_blank">terms and conditions</a></label>
+                </div>
+              </div>
             </div>
-            <button id="print-label" type="submit" class="btn w-2/5 lg:w-full next-step">
-              <span class="button-content">Next</span>
-              <img class="hidden animate-spin h-5 w-5 mx-auto my-0" src="/images/loading.svg" alt="Loading icon">
-            </button>
+            <div class="text-right">
+              <button class="back-btn">Go back</button>
+              <button id="print-label" type="submit" form="step-2-form" class="btn w-48 next-step">
+                <img class="hidden animate-spin h-5 w-5 mx-auto my-1" src="/images/loading.svg" alt="Loading icon">
+                <span class="button-content">Continue</span>
+              </button>
+            </div>
           </div>
         </div>
       </div>
