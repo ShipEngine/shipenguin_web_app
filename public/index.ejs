@@ -341,9 +341,9 @@
   <!-- Checkout -->
   <section id="step4" class="section-container md:w-full pt-0 step-four hidden">
     <form id="step4Form">
-      <div class="card-container flex p-0">
-        <div class="address-container text-left block w-1/5">
-          <div class="pb-10">
+      <div class="card-container flex md:flex-col p-0">
+        <div class="address-container text-left block w-1/4 md:w-full md:flex md:p-4">
+          <div class="pb-10 pl-10 lg:pl-0">
             <p class="text-xl pb-4">Shipping from</p>
             <p id="checkout-from-address" class=" text-xs">
               <span class="name"></span>
@@ -360,7 +360,7 @@
           <div class="border-b-2 border-dashed border-gray-400">
 
           </div>
-          <div class="pt-10">
+          <div class="pt-10 md:pt-0 pl-10 lg:pl-0">
             <p class="text-xl pb-4">Shipping to</p>
             <p id="checkout-to-address" class="text-xs">
               <span class="name"></span>
@@ -378,7 +378,7 @@
         <div class="border-l-2 border-dashed border-gray-400">
 
         </div>
-        <div class="address-container rounded-none w-1/6 ">
+        <div class="address-container rounded-none w-1/5 md:w-full md:flex">
           <div class="">
             <p class="text-xl pb-8">Package</p>
             <p class="text-l pb-4 font-semibold">Weight</p>
@@ -392,11 +392,11 @@
             <h1 class="text-3xl mb-2">Confirm email and pay for label</h1>
             <h2 class="text-lg">We'll generate your USPS label and email it along with a receipt</h2>
 
-            <div class="bg-gray-background rounded flex p-6 my-10">
-              <img class="border w-64" src="./images/usps-label.png" alt="picture of a sample USPS label">
-              <div class="ml-10 flex flex-col justify-between h-auto">
+            <div class="bg-gray-background rounded flex md:flex-col p-6 my-10">
+              <img class="border w-56 md:m-auto md:mb-10" src="./images/usps-label.png" alt="picture of a sample USPS label">
+              <div class="ml-10 flex flex-col justify-between h-auto md:ml-0">
                 <div>
-                <h3 class="pr-5 text-lg">Enter an email address where we can send your label</h3>
+                <h3 class="pr-5 text-lg md:pr-0">Enter an email address where we can send your label</h3>
                 <div class="py-8">
                   <input id="iovation-input" name="iovation-input" type="hidden" required />
                   <label class="block input-label" for="email">Email address</label>
@@ -437,7 +437,7 @@
 </div>
 
 <footer class="flex justify-between items-center m-4 text-sm md:flex-col md:text-center">
-  <p class="leading-4 ml-5 text-gray-700">ShipPenguin is powered by <a target="_blank" class="footer-link" href="https://www.shipengine.com/?ref=shippenguin">ShipEngine</a>, the world's leading shipping API.</p>
+  <p class="leading-4 ml-5 text-gray-700 md:ml-0">ShipPenguin is powered by <a target="_blank" class="footer-link" href="https://www.shipengine.com/?ref=shippenguin">ShipEngine</a>, the world's leading shipping API.</p>
   <div class="footer-container font-bold">
     <a class="footer-link mx-3" target="_blank" href="https://www.shipengine.com/privacy-policy/">Privacy Policy</a>
     <a class="footer-link mx-3" target="_blank" href="https://www.shipengine.com/terms-of-service/">Terms Of Service</a>
