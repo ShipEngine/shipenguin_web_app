@@ -796,9 +796,27 @@ video {
 .footer-container {
   display: flex;
   padding: 0.5rem;
-  font-size: 0.75rem;
   margin-top: 0.25rem;
   justify-content: center;
+}
+
+.footer-link {
+  font-weight: 700;
+  --text-opacity: 1;
+  color: #4a5568;
+  color: rgba(74, 85, 104, var(--text-opacity));
+  transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow, transform;
+  transition-duration: 200ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.footer-link:hover {
+  --text-opacity: 1;
+  color: #000;
+  color: rgba(0, 0, 0, var(--text-opacity));
+  transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow, transform;
+  transition-duration: 200ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .space-y-0 > :not(template) ~ :not(template) {

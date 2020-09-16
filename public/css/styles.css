@@ -80,6 +80,14 @@ body {
   }
 
   .footer-container {
-      @apply flex p-2 text-xs mt-1 justify-center;
+      @apply flex p-2 mt-1 justify-center;
+  }
+
+  .footer-link {
+      @apply font-bold text-gray-700 transition duration-200 ease-in-out;
+  }
+
+  .footer-link:hover {
+      @apply text-black transition duration-200 ease-in-out;
   }
 }
