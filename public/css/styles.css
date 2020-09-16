@@ -17,7 +17,8 @@ body {
       @apply container mx-auto mt-10 w-4/5 max-w-7xl font-primary;
   }  
   .btn {
-      @apply bg-green-button font-bold text-white p-3 uppercase rounded-sm 
+      background-color: theme("colors.blue-button");
+      @apply font-bold text-white p-3 uppercase rounded-sm 
       transition duration-200 ease-in-out;
   }
   .btn:hover {

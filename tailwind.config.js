@@ -30,12 +30,13 @@ module.exports = {
                 "7xl": "80rem"
             },
             colors: {
-                "blue-background": "#72cbd3",
+                "blue-background": "#baeff3",
                 "gray-background": "#dbf0f2",
                 "green-button": "#00b89d",
                 "green-hover": "#00a38b",
                 "blue-container": "#effafd",
-                "cerulean-blue": "#294ccb"
+                "cerulean-blue": "#294ccb",
+                "blue-button": "#005ff7"
             },
             fontFamily: {
                 primary: ["Roboto", "sans-serif"]
