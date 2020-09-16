@@ -40,7 +40,7 @@ module.exports = {
                 "blue-hover": "#0049BE"
             },
             fontFamily: {
-                primary: ["Roboto", "sans-serif"]
+                primary: ["Open Sans", "sans-serif"]
             },
             backgroundImage: theme => ({
                 "usps-label": "url('../../images/usps-label.png')"

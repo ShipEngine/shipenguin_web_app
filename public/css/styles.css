@@ -34,7 +34,7 @@ body {
   }
 
   .card-container {
-      @apply rounded-lg shadow bg-blue-container p-10;
+      @apply rounded-lg shadow-xl bg-blue-container p-10;
   }
 
   .input {
