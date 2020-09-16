@@ -31,13 +31,14 @@ module.exports = {
             },
             colors: {
                 "blue-background": "#baeff3",
-                "gray-background": "#dbf0f2",
+                "gray-background": "#eef1f4",
                 "green-button": "#00b89d",
                 "green-hover": "#00a38b",
                 "blue-container": "#effafd",
                 "cerulean-blue": "#294ccb",
                 "blue-button": "#005ff7",
-                "blue-hover": "#0049BE"
+                "blue-hover": "#0049BE",
+                "green-verified": "#058c42"
             },
             fontFamily: {
                 primary: ["Open Sans", "sans-serif"]

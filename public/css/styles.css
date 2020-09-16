@@ -65,7 +65,7 @@ body {
   }
 
   .address-container {
-      @apply bg-gray-background w-full rounded-t-lg flex justify-between px-4 py-3 text-sm;
+      @apply bg-gray-background w-full rounded-t-lg rounded-b-lg flex justify-between px-4 py-3 text-sm;
   }
 
   .label-image-container {
