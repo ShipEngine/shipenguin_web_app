@@ -75,7 +75,13 @@ export async function rateEstimate() {
       const label = document.createElement("label");
       const totalAmount = rate.shipping_amount.amount + rate.insurance_amount.amount + rate.confirmation_amount.amount + rate.other_amount.amount;
       label.setAttribute("for", rate.rate_id);
-      label.textContent = `$${totalAmount.toFixed(2)} - ${rate.service_type} / ${rate.delivery_days} day(s)`;
+
+      if(rate.service_type.includes("Media Mail")) {
+        label.innerHTML = `$${totalAmount.toFixed(2)} - <a class="link" target="_blank" href="https://about.usps.com/notices/not121/not121_tech.htm">${rate.service_type}</a> / ${rate.delivery_days} day(s)`;
+      }
+      else {
+        label.textContent = `$${totalAmount.toFixed(2)} - ${rate.service_type} / ${rate.delivery_days} day(s)`;
+      }
       label.className = "py-2";
 
       if (!defaultChecked) {
