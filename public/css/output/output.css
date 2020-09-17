@@ -629,6 +629,10 @@ video {
   background-color: rgba(0, 73, 190, var(--bg-opacity));
 }
 
+.btn:active {
+  outline: 0;
+}
+
 .back-btn {
   font-weight: 600;
   --text-opacity: 1;

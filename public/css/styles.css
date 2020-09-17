@@ -25,6 +25,9 @@ body {
   .btn:hover {
       @apply bg-blue-hover;
   }
+  .btn:active {
+      @apply outline-none;
+  }
 
   .back-btn {
       @apply font-semibold text-blue-button text-lg mx-5 transition duration-200 ease-in-out;
