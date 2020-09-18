@@ -7,22 +7,25 @@
     "node": ">=10.0.0"
   },
   "dependencies": {
+    "@sendgrid/mail": "^7.2.5",
     "axios": "^0.19.2",
     "body-parser": "^1.17.1",
+    "compression": "^1.7.4",
     "dotenv": "^4.0.0",
-    "ejs": "^2.5.7",
+    "ejs": "^2.7.4",
     "express": "^4.17.1",
     "express-sslify": "^1.2.0",
+    "helmet": "^4.1.1",
     "morgan": "^1.9.1",
     "ngrok": "^3.2.7",
     "node-fetch": "^2.6.0",
     "opn": "^6.0.0",
     "postcss-import": "^12.0.1",
-    "request": "^2.88.2",
     "stripe": "^6.36.0"
   },
   "devDependencies": {
     "@babel/core": "^7.10.5",
+    "cross-env": "^7.0.2",
     "@babel/preset-env": "^7.10.4",
     "@types/faker": "^4.1.5",
     "autoprefixer": "^9.8.5",
@@ -37,15 +40,16 @@
     "gulp-sourcemaps": "^2.6.5",
     "ngrok": "^3.2.7",
     "nodemon": "^2.0.4",
-    "npm-run-all": "^4.1.5"
+    "npm-run-all": "^4.1.5",
+    "tailwindcss": "^1.8.7"
   },
   "scripts": {
     "setup-cli": "stripe login --project-name=stripe-payments-demo",
-    "webhook": "stripe listen --project-name=stripe-payments-demo --forward-to http://localhost:8000/webhook",
-    "start": "NODE_ENV=production node server/node/server.js",
-    "dev": "NODE_ENV=development nodemon server/node/server.js",
-    "dev:ngrok": "NODE_ENV=development node server/node/server.js",
-    "gulp_watch": "gulp watch"
+    "start": "node server/server.js",
+    "dev": "cross-env NODE_ENV=development nodemon server/server.js",
+    "dev:ngrok": "cross-env NODE_ENV=development node server/server.js",
+    "gulp_watch": "gulp watch",
+    "build-css": "npx tailwind build public/css/styles.css -o public/css/output/output.css"
   },
   "repository": {
     "type": "git",
