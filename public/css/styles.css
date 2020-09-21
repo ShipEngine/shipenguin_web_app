@@ -18,7 +18,7 @@ body {
   }  
   .btn {
       background-color: theme("colors.blue-button");
-      @apply font-semibold  text-lg text-white py-2 rounded-sm px-12
+      @apply font-semibold  text-lg text-white py-2 rounded-sm px-8
       transition duration-200 ease-in-out outline-none;
       border-radius: 23.5px;;
   }
@@ -98,7 +98,7 @@ body {
   }
 
   .footer-link {
-      @apply font-bold text-gray-700 transition duration-200 ease-in-out;
+      @apply underline text-gray-700 transition duration-200 ease-in-out;
   }
 
   .footer-link:hover {

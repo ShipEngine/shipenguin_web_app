@@ -614,8 +614,8 @@ video {
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
   border-radius: 0.125rem;
-  padding-left: 3rem;
-  padding-right: 3rem;
+  padding-left: 2rem;
+  padding-right: 2rem;
   transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow, transform;
   transition-duration: 200ms;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
@@ -834,7 +834,7 @@ video {
 }
 
 .footer-link {
-  font-weight: 700;
+  text-decoration: underline;
   --text-opacity: 1;
   color: #4a5568;
   color: rgba(74, 85, 104, var(--text-opacity));
