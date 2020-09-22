@@ -299,7 +299,7 @@
     <section class="section-container md:w-full sm:text-sm pt-0 step-three hidden">
       <form id="step-3-form">
         <div class="card-container flex p-0 sm:block">
-          <div class="address-container text-left block w-1/4 sm:w-full sm:flex sm:p-4">
+          <div class="address-container text-left block pl-64px pt-32px pr-40px w-1/4 sm:w-full sm:flex sm:p-4">
             <div class="pb-10">
               <p class="text-xl pb-4">Shipping from</p>
               <p id="rate-from-summary" class=" text-xs">
@@ -312,10 +312,10 @@
               <div class="flex items-center pt-4 ">
                 <img id="to-address-verified" class="inline-block h-4" src="/images/verified.svg"
                   alt="image verified logo" />
-                <p class="text-green-verified font-bold pl-1">Address Verified</p>
+                <p class="text-green-verified font-bold pl-1">USPS valid address</p>
               </div>
             </div>
-            <div class="border-b-2 border-dashed border-gray-400">
+            <div class="border-b-2 border-dotted border-gray-400">
 
             </div>
             <div class="pt-10 sm:pt-0">
@@ -330,34 +330,33 @@
               <div class="flex items-center pt-4">
                 <img id="to-address-verified" class="inline-block h-4" src="/images/verified.svg"
                   alt="image verified logo" />
-                <p class="text-green-verified font-bold pl-1">Address Verified</p>
+                <p class="text-green-verified font-bold pl-1">USPS valid address</p>
               </div>
             </div>
           </div>
-          <div class="border-l-2 border-dashed border-gray-400">
+          <div class="border-l-2 border-dotted border-gray-400">
 
           </div>
-          <div class="address-container rounded-none w-1/4 sm:w-full sm:flex">
+          <div class="address-container rounded-none pt-32px pl-40px w-1/4 sm:w-full sm:flex">
             <div class="pl-4">
-              <p class="text-xl pb-4">Package</p>
-              <p class="text-l pb-4 font-semibold">Weight</p>
-              <p id="rate-weight-summary" class=" pb-4"></p>
-              <p class="text-l pb-4 font-semibold">Dimensions</p>
-              <p id="rate-dimensions-summary" class=" pb-4"></p>
-
+              <p class="text-xl pb-32px">Package</p>
+              <p class="text-l pb-12px font-semibold">Weight</p>
+              <p id="rate-weight-summary" class=" pb-32px"></p>
+              <p class="text-l pb-12px font-semibold">Dimensions</p>
+              <p id="rate-dimensions-summary" class=" pb-32px"></p>
+              <img class="w-1/2 ml-5" src="/images/step2_box_new.png" alt="Box with length, width, height">
             </div>
           </div>
 
-          <div class=" lg:flex-col-reverse lg:items-center justify-between pb-10 text-left w-1/2 sm:w-full p-10 sm:p-4">
-            <h1 class="text-black text-2xl mt-2 mb-8 sm:mb-2">Select a USPS Service</h1>
+          <div class=" lg:flex-col-reverse lg:items-center justify-between pb-10 text-left w-1/2 sm:w-full pt-32px pl-64px pr-64px sm:p-4">
+            <h1 class="text-black text-2xl mt-2 mb-32px sm:mb-2">Select a USPS Service</h1>
             <div class="w-full sm:w-full">
-              <div id="rate-input-list" class="flex flex-col mx-auto lg:mt-10 mb-10"></div>
+              <div id="rate-input-list" class="flex flex-col mx-auto lg:mt-10 mb-40px"></div>
             </div>
 
-            <div class="flex items-center my-3 md:mx-5 ml-8 mr-2">
+            <div class="flex items-center my-3 md:mx-5 mr-2">
               <input type="checkbox" id="hazardous-materials" required class="m-2 w-4 h-4 align-text-top">
-              <label for="hazardous-materials" class="text-black py-2">I agree this package contains no <a class="link"
-                  href="pdfs/ShipPenguin_List_of_Hazardous_Materials.pdf" target="_blank">hazardous materials</a>
+              <label for="hazardous-materials" class="text-black text-sm py-2">I verify this package contains no <a class="link" href="pdfs/ShipPenguin_List_of_Hazardous_Materials.pdf" target="_blank">hazardous materials</a>
               </label>
             </div>
             <div class="text-right mt-5 mr-10 sm:pb-8 sm:mr-2 sm:ml-2">
