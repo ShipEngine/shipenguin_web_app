@@ -49,9 +49,9 @@ export async function rateEstimate() {
 
     const data = await response.json();
 
-    if(data.errors && data.errors.length > 0) {
+    if (data.errors && data.errors.length > 0) {
 
-      if(data.errors[0].message.includes("Mailpiece length plus girth")) {
+      if (data.errors[0].message.includes("Mailpiece length plus girth")) {
         showError("Package Dimensions Error", "Package length plus girth dimensions cannot exceed 130 inches.");
       }
       else {
@@ -64,7 +64,8 @@ export async function rateEstimate() {
     const rateInputList = document.getElementById("rate-input-list");
     rateInputList.innerHTML = "";
     let defaultChecked = false;
-    for (let rate of data.rate_response.rates) {
+    const sortedRates = data.rate_response.rates.sort((a, b) => (a.shipping_amount.amount > b.shipping_amount.amount) ? 1 : ((b.shipping_amount.amount > a.shipping_amount.amount) ? -1 : 0));
+    for (let rate of sortedRates) {
       const radioInput = document.createElement("input");
       radioInput.id = rate.rate_id;
       radioInput.value = rate.rate_id;
@@ -76,7 +77,7 @@ export async function rateEstimate() {
       const totalAmount = rate.shipping_amount.amount + rate.insurance_amount.amount + rate.confirmation_amount.amount + rate.other_amount.amount;
       label.setAttribute("for", rate.rate_id);
 
-      if(rate.service_type.includes("Media Mail")) {
+      if (rate.service_type.includes("Media Mail")) {
         label.innerHTML = `$${totalAmount.toFixed(2)} - <a class="link" target="_blank" href="https://about.usps.com/notices/not121/not121_tech.htm">${rate.service_type}</a> / ${rate.delivery_days} day(s)`;
       }
       else {

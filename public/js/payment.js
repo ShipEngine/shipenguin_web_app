@@ -1,17 +1,9 @@
-import { getLocalStorageItem, setLocalStorage } from "./local-storage.js";
-import { showError } from "./ui-helpers.js";
+import { getLocalStorageItem } from "./local-storage.js";
+import { loading } from "./ui-helpers.js";
 
-let stripe;
-export async function makeStripePayment() {
-
-  if (!stripe) {
-    const response = await fetch("/config");
-    const config = await response.json();
-    stripe = Stripe(config.stripePublishableKey);
-  }
-
+export async function makeStripePayment(stripe, card) {
   // TODO: add error handling
-  const response = await fetch("/create-checkout-session", {
+  const response = await fetch("/create-payment-intent", {
     method: "POST",
     headers: {
       "Content-Type": "application/json"
@@ -19,44 +11,46 @@ export async function makeStripePayment() {
     body: JSON.stringify({ "rateID": getLocalStorageItem("rateID") })
   })
 
-  const session = await response.json();
-  setLocalStorage("stripeSession", session.id);
-  await stripe.redirectToCheckout({ sessionId: session.id });
+  const jsonResponse = await response.json();
 
-
-  //   .then(function (result) {
-  //   // If `redirectToCheckout` fails due to a browser or network
-  //   // error, you should display the localized error message to your
-  //   // customer using `error.message`.
-  //   if (result.error) {
-  //     alert(result.error.message);
-  //   }
-  // })
-  //   .catch(function (error) {
-  //     console.error('Error:', error);
-  //   });
+  payWithCard(stripe, card, jsonResponse.clientSecret)
 }
 
-export async function verifyStripePayment() {
+// Calls stripe.confirmCardPayment
+// If the card requires authentication Stripe shows a pop-up modal to
+// prompt the user to enter authentication details without leaving your page.
+var payWithCard = function (stripe, card, clientSecret) {
+  loading(true);
+  stripe
+    .confirmCardPayment(clientSecret, {
+      payment_method: {
+        card: card
+      }
+    })
+    .then(function (result) {
+      if (result.error) {
+        // Show error to your customer
+        showError(result.error.message);
+      } else {
+        // The payment succeeded!
+        orderComplete(result.paymentIntent.id);
+      }
+    });
+};
 
-  const sessionID = getLocalStorageItem("stripeSession");
+/* ------- UI helpers ------- */
+// Shows a success message when the payment is complete
+var orderComplete = function (paymentIntentId) {
+  loading(false);
+  window.location.hash = "#step5"
+};
 
-  const response = await fetch(`/verify-stripe-payment?sessionID=${sessionID}`);
-  const success = await response.json();
-
-  return success;
-}
-
-export async function refundStripePayment() {
-
-  try {
-    const sessionID = getLocalStorageItem("stripeSession");
-    const response = await fetch(`/refund-stripe-payment?sessionID=${sessionID}`, { method: "POST"});
-  
-    const data = await response.json();
-    return data;
-  }
-  catch (e) {
-    showError("Stripe Refund issue", `${e.message} \n Please contact ShipEngine support`);
-  }
-}
+// Show the customer the error from Stripe if their card fails to charge
+var showError = function (errorMsgText) {
+  loading(false);
+  var errorMsg = document.querySelector("#card-errors");
+  errorMsg.textContent = errorMsgText;
+  setTimeout(function () {
+    errorMsg.textContent = "";
+  }, 4000);
+};

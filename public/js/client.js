@@ -7,9 +7,12 @@ import { checkForFraud } from "./check-for-fraud.js";
 import { debounce, loading, showError, clearError, clearInfo } from "./ui-helpers.js";
 
 window.addEventListener("load", () => {
-
   initializeState();
 
+  document.getElementById("step-1-clear").addEventListener("click", () => {
+    clearLocalStorage();
+    clearInputs();
+  })
 
   document.getElementById("step-1-go-back").addEventListener("click", () => {
     window.location.hash = "#step0"
@@ -60,8 +63,6 @@ window.addEventListener("load", () => {
       window.location.hash = "#step2";
     }
   });
-
-
 
   // Dimensions and Weights
   document.getElementById("step-2-form").addEventListener("submit", async (evt) => {
@@ -120,9 +121,34 @@ window.addEventListener("load", () => {
     window.location.hash = "#step4";
   });
 
+
+  // Initialize stripe elements
+  // https://stripe.com/docs/stripe-js#elements
+  const stripe = Stripe("pk_test_0gDWcjB7xWWgt34p1UQoCxFH00CcruEzwb");
+
+  // Create an instance of Elements.
+  const elements = stripe.elements();
+
+  // Create an instance of the card Element.
+  const card = elements.create('card');
+
+  // Add an instance of the card Element into the `card-element` <div>.
+  card.mount('#card-element');
+
+  // Handle real-time validation errors from the card Element.
+  card.on('change', function (event) {
+    var displayError = document.getElementById('card-errors');
+    if (event.error) {
+      displayError.textContent = event.error.message;
+    } else {
+      displayError.textContent = '';
+    }
+  });
+
   // Checkout
-  document.getElementById("step4Form").addEventListener("submit", async (evt) => {
-    evt.preventDefault();
+  document.getElementById("step4Form").addEventListener("submit", async (event) => {
+    event.preventDefault();
+    console.log(event.target.value)
     loading(true);
     const isFraud = await checkForFraud();
 
@@ -132,7 +158,7 @@ window.addEventListener("load", () => {
     }
     else {
       setLocalStorage("email", document.getElementById("email").value);
-      await makeStripePayment();
+      await makeStripePayment(stripe, card);
     }
   });
 

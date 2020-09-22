@@ -3,10 +3,8 @@ import { setStep, loading, showError, populateCheckoutPage, populateRatePage, po
 import { getLabel } from "./get-label.js";
 import { sendEmail } from "./send-email.js";
 import { rateEstimate } from "./rate-estimate.js";
-import { verifyStripePayment, refundStripePayment } from "./payment.js";
 
 export function initializeState() {
-
   setCurrentStep(true);
 
   // Populate fields
@@ -50,7 +48,6 @@ export function initializeState() {
 }
 
 export async function setCurrentStep(isBrowserLoad) {
-
   switch (window.location.hash) {
     case "#step1":
       setStep("step-one");
@@ -83,29 +80,29 @@ export async function setCurrentStep(isBrowserLoad) {
     case "#step5":
       setStep("step-five");
       loading(true);
-      const madePayment = await verifyStripePayment();
-      clearError();
-      clearInfo();
-      if (!madePayment) {
-        loading(false);
-        showError("Stripe Payment", "Sorry but you don't appear to have made a payment, please contact ShipEngine support");
-        break;
-      }
+      // const madePayment = await verifyStripePayment();
+      // clearError();
+      // clearInfo();
+      // if (!madePayment) {
+      //   loading(false);
+      //   showError("Stripe Payment", "Sorry but you don't appear to have made a payment, please contact ShipEngine support");
+      //   break;
+      // }
 
-      const labelUrls = await getLabel();
+      // const labelUrls = await getLabel();
 
-      if (labelUrls && labelUrls.pdf) {
-        await sendEmail(labelUrls);
-      }
-      else if (labelUrls.labelPurchaseError) {
-        const success = await refundStripePayment();
-        if(success) {
-          showInfo("Payment Refund", "Your Stripe Payment has been refunded.");
-        }
-        else {
-          showError("Payment Refund", "There was an issue refunding your payment, please contact ShipEngine support");
-        }
-      }
+      // if (labelUrls && labelUrls.pdf) {
+      //   await sendEmail(labelUrls);
+      // }
+      // else if (labelUrls.labelPurchaseError) {
+      //   const success = await refundStripePayment();
+      //   if(success) {
+      //     showInfo("Payment Refund", "Your Stripe Payment has been refunded.");
+      //   }
+      //   else {
+      //     showError("Payment Refund", "There was an issue refunding your payment, please contact ShipEngine support");
+      //   }
+      // }
       loading(false);
       break;
 

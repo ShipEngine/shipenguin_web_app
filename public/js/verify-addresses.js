@@ -66,7 +66,6 @@ export async function verifyAddresses() {
   return verified;
 }
 
-
 function verifyAddress(addressName, verifiedIcon, { status, matched_address }) {
   if (status === "verified") {
     setLocalStorage(addressName, matched_address);
