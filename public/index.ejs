@@ -391,7 +391,7 @@
               <p class="text-green-verified font-bold pl-1">Address Verified</p>
             </div>
           </div>
-          <div class="border-b-2 border-dashed border-gray-400">
+          <div class="border-b-2 border-dotted border-gray-400">
 
           </div>
           <div class="pt-10 md:pt-0 pl-10 lg:pl-0">
@@ -410,39 +410,41 @@
             </div>
           </div>
         </div>
-        <div class="border-l-2 border-dashed border-gray-400">
+        <div class="border-l-2 border-dotted border-gray-400">
 
         </div>
         <div class="address-container rounded-none w-1/5 md:w-full md:flex">
           <div class="">
-            <p class="text-xl pb-8">Package</p>
-            <p class="text-l pb-4 font-semibold">Weight</p>
-            <p id="checkout-weight-summary" class="pl-2 pb-4"></p>
-            <p class="text-l pb-4 font-semibold">Dimensions</p>
-            <p id="checkout-dimensions-summary" class="pl-2 pb-4"></p>
+            <p class="text-xl pb-32px">Package</p>
+            <p class="text-l pb-12px font-semibold">Weight</p>
+            <p id="checkout-weight-summary" class="pb-32px"></p>
+            <p class="text-l pb-12px font-semibold">Dimensions</p>
+            <p id="checkout-dimensions-summary" class="pb-32px"></p>
+            <img class="w-1/2 ml-5" src="/images/step2_box_new.png" alt="Box with length, width, height">
 
           </div>
         </div>
-        <div class="p-10">
+        <div class="pt-32px pl-64px pr-64px">
           <div id="carrier-service" class="hidden"></div>
           <div class="">
-            <h1 class="text-3xl mb-2">Confirm email and pay for label</h1>
-            <h2 class="text-lg">We'll generate your USPS label and email it along with a receipt</h2>
+            <h1 class="text-3xl">Payment</h1>
 
-            <div class="bg-gray-background rounded flex md:flex-col p-6 my-10">
-              <img class="border w-56 md:m-auto md:mb-10" src="./images/usps-label1.png"
-                alt="picture of a sample USPS label">
-              <div class="ml-10 flex flex-col justify-between h-auto md:ml-0">
-                <div>
-                  <h3 class="pr-5 text-lg md:pr-0">Enter an email address where we can send your label</h3>
-                  <div class="py-8">
+
+            <div class="rounded flex md:flex-col pt-24px pb-24px">
+
+              <div class="mr-10 pr-32px flex flex-col h-auto md:ml-0 border-r-gray border-r-2 border-dotted">
+                <div class="pb-16px">
+                  <div class="pt-24px">
                     <input id="iovation-input" name="iovation-input" type="hidden" required />
-                    <label class="block input-label" for="email">Email address</label>
-                    <input class="input" id="email" type="email" placeholder="" required>
+                    <div class="flex justify-between items-center">
+                      <label class="block input-label" for="email">Email</label>
+                      <span class="text-xs text-gray-700 ">We'll email your label here</span>
+                    </div>
+                    <input class="input" id="email" type="email" name="email" placeholder="" required>
                   </div>
                 </div>
 
-                <div>
+                <div class="pb-20px">
                   <label for="card-element">
                     Credit or debit card
                   </label>
@@ -453,25 +455,32 @@
                   <!-- Used to display form errors. -->
                   <div id="card-errors" role="alert"></div>
                 </div>
+
+                <div class="terms-container flex text-sm items-center -mb-2">
+                  <input name="terms-and-conditions" id="terms-and-conditions" type="checkbox" required
+                    class="mr-2 w-4 h-4 align-text-top">
+                  <label for="terms-and-conditions" class="py-2">I agree to the <a class="link no-underline"
+                      href="https://www.shipengine.com/terms-of-service/" target="_blank">terms and
+                      conditions</a></label>
+                </div>
+              </div>
+              <div class="flex flex-col">
+                <img class="border w-32 md:m-auto md:mb-10" src="./images/usps-label1.png"
+                  alt="picture of a sample USPS label">
+                <span class="text-xs text-gray-700 text-center">Label Preview</span>
+
               </div>
 
-              <div class="terms-container flex text-sm items-center -mb-2">
-                <input id="terms-and-conditions" type="checkbox" required class="mr-2 w-4 h-4 align-text-top">
-                <label for="terms-and-conditions" class="py-2">I agree to the <a class="link no-underline"
-                    href="https://www.shipengine.com/terms-of-service/" target="_blank">terms and
-                    conditions</a></label>
-              </div>
+            </div>
+            <div class="text-right sm:flex pb-32px">
+              <button id="step-4-go-back" type="button" class="back-btn navigate-step">Go back</button>
+              <button id="print-label" type="submit" class="btn navigate-step">
+                <img class="hidden animate-spin h-5 w-5 mx-auto my-1" src="/images/loading.svg" alt="Loading icon">
+                <span class="button-content">Continue</span>
+              </button>
             </div>
           </div>
-          <div class="text-right sm:flex">
-            <button id="step-4-go-back" type="button" class="back-btn navigate-step">Go back</button>
-            <button id="print-label" type="submit" class="btn navigate-step">
-              <img class="hidden animate-spin h-5 w-5 mx-auto my-1" src="/images/loading.svg" alt="Loading icon">
-              <span class="button-content">Continue</span>
-            </button>
-          </div>
         </div>
-      </div>
       </div>
     </form>
   </section>
