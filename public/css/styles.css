@@ -15,7 +15,7 @@ body {
 @layer components {
   .section-container {
       @apply container mx-auto w-4/5 max-w-7xl font-primary;
-  }  
+  }
   .btn {
       background-color: theme("colors.blue-button");
       @apply font-semibold  text-lg text-white py-2 rounded-sm px-8
@@ -48,7 +48,7 @@ body {
   }
 
   .input {
-      @apply appearance-none border border-gray-400 rounded 
+      @apply appearance-none border border-gray-400 rounded
       w-full py-2 px-2 text-gray-700 leading-tight shadow-md mb-2;
   }
 
@@ -57,7 +57,7 @@ body {
   }
 
   .edit-btn {
-      @apply bg-white border border-gray-800 text-gray-800 rounded-sm self-start 
+      @apply bg-white border border-gray-800 text-gray-800 rounded-sm self-start
       flex w-20 justify-around py-1 px-5 transition duration-200 ease-in-out text-base;
   }
   .edit-btn:hover {
@@ -104,4 +104,35 @@ body {
   .footer-link:hover {
       @apply text-black transition duration-200 ease-in-out;
   }
+}
+
+/**
+ * https://stripe.com/docs/stripe-js#elements
+ */
+.StripeElement {
+  box-sizing: border-box;
+
+  height: 40px;
+
+  padding: 10px 12px;
+
+  border: 1px solid transparent;
+  border-radius: 4px;
+  background-color: white;
+
+  box-shadow: 0 1px 3px 0 #e6ebf1;
+  -webkit-transition: box-shadow 150ms ease;
+  transition: box-shadow 150ms ease;
+}
+
+.StripeElement--focus {
+  box-shadow: 0 1px 3px 0 #cfd7df;
+}
+
+.StripeElement--invalid {
+  border-color: #fa755a;
+}
+
+.StripeElement--webkit-autofill {
+  background-color: #fefde5 !important;
 }

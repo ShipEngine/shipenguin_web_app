@@ -14,7 +14,7 @@ require("dotenv").config();
 
 // Render the main app HTML.
 router.get("/", (req, res) => {
-  res.render("index.ejs", { nonce: res.locals.cspNonce });
+  res.render("index.ejs", { nonce: res.locals.cspNonce, stripePublishableKey: config.stripe.publishableKey });
 });
 
 // ShipEngine API Address Validation
@@ -39,7 +39,6 @@ router.post("/verify-addresses", async (req, res) => {
     res.send(500, "Unexpected Server Error");
   }
 });
-
 
 // Simple ShipEngine rates call
 router.post("/rates", async (req, res) => {
@@ -73,7 +72,6 @@ router.post("/rates", async (req, res) => {
     res.send(500, "Unexpected Server Error");
   }
 });
-
 
 // Call iovation with the information passed from the browser to check for fraud
 router.post("/check-for-fraud", async (req, res) => {
@@ -203,9 +201,8 @@ router.post("/email", async (req, res) => {
 });
 
 // Create a Stripe Checkout Session
-router.post("/create-checkout-session", async (req, res) => {
+router.post("/create-payment-intent", async (req, res) => {
   try {
-
     const options = {
       "method": "GET",
       "headers": {
@@ -214,75 +211,20 @@ router.post("/create-checkout-session", async (req, res) => {
       }
     };
 
-    // Get the totalCharge from the rateID rather than passing a payment amount in the call from the 
+    // Get the totalCharge from the rateID rather than passing a payment amount in the call from the
     // the browser to attempt to mitigate potential fraud.
     const response = await fetch(`https://api.shipengine.com/v1/rates/${req.body.rateID}/`, options);
     const parsedResponse = await response.json();
 
     const totalCharge = parsedResponse.shipping_amount.amount + parsedResponse.insurance_amount.amount + parsedResponse.confirmation_amount.amount + parsedResponse.other_amount.amount;
 
-    const session = await stripe.checkout.sessions.create({
-      payment_method_types: ["card"],
-      line_items: [
-        {
-          price_data: {
-            currency: "usd",
-            product_data: {
-              name: "Shipping Label",
-            },
-            unit_amount: totalCharge * 100,
-          },
-          quantity: 1,
-        },
-      ],
-      mode: "payment",
-      success_url: `${config.shippenguin.url}/#step5`,
-      cancel_url: `${config.shippenguin.url}/#step4`,
-      metadata: {
-        "terms-of-service": "TOSv1",
-        "date-accepted": new Date().toISOString(),
-        "customer-ip": req.ip
-      }
+    // Create a PaymentIntent with the order amount and currency
+    const paymentIntent = await stripe.paymentIntents.create({
+      amount: totalCharge * 100,
+      currency: "usd"
     });
 
-    res.json({ id: session.id });
-  }
-  catch (e) {
-    console.error(e.message);
-    res.status(500).send("Unexpected Server Error");
-  }
-});
-
-// Verify the Stripe Payment
-router.get("/verify-stripe-payment", async (req, res) => {
-  try {
-    const session = await stripe.checkout.sessions.retrieve(req.query.sessionID);
-
-    res.status(200).send(session.payment_status === "paid");
-  }
-  catch (e) {
-    console.error(e.message);
-    res.status(500).send("Unexpected Server Error");
-  }
-});
-
-router.post("/refund-stripe-payment", async (req, res) => {
-  try {
-    const session = await stripe.checkout.sessions.retrieve(req.query.sessionID);
-
-    const refund = await stripe.refunds.create({
-      payment_intent: session.payment_intent
-    });
-
-    if (refund.status === "succeeded") {
-      // Fire and forget 
-      notifySlackChannel(req.query.sessionID, true);
-      res.status(200).send(true);
-    }
-    else {
-      res.status(200).send(false);
-    }
-
+    res.json({ clientSecret: paymentIntent.client_secret });
   }
   catch (e) {
     console.error(e.message);
@@ -298,8 +240,7 @@ router.get("/config", (req, res) => {
 });
 
 async function notifySlackChannel(stripeSessionID, isRefund) {
-
-  if(!config.slackChannel) {
+  if (!config.slackChannel) {
     return;
   }
   try {
@@ -337,6 +278,5 @@ async function notifySlackChannel(stripeSessionID, isRefund) {
     console.error(`Error notifying slack channel: ${e.message}`);
   }
 }
-
 
 module.exports = router;
