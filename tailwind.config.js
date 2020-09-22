@@ -57,6 +57,16 @@ module.exports = {
             gridTemplateColumns: {
                 "address": "55% 10% auto",
                 "address-sm": "45% 15% auto"
+            },
+            spacing: {
+                '16px': '16px',
+                '24px': '24px',
+                '28px': '28px',
+                '32px': '32px',
+                '40px': '40px',
+                '64px': '64px',
+                '128px': '128px',
+                '256px': '256px'
             }
         }
     }
