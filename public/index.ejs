@@ -21,8 +21,8 @@
 
 <body>
   <div>
-  <header class="mb-12 mt-8">
-    <a href="#"><img class="max-w-xs mx-auto mt-4" src="/images/shipenguin-logo_v5.svg" alt="ShipPenguin logo"></a>
+  <header class="flex justify-center mt-28px mb-32px mt-8 sm:my-16px">
+    <a href="#"><img class="w-256px" src="/images/shipenguin-logo_v5.svg" alt="ShipPenguin logo"></a>
     <!-- <a class="absolute top-0 right-0" href="https://github.com/ShipEngine/shipenguin_web_app" target="_blank">
       <img class="h-14" src="/images/github-corner.svg" alt="Github Logo"/>
     </a> -->
@@ -67,12 +67,12 @@
   <!-- Addresses -->
   <section class="section-container md:w-full step-one hidden">
     <form id="address-form">
-      <div class="card-container flex-col pb-3 p-0">
-        <div class="flex lg:flex-col p-10 pb-0 sm:px-6 mr-10 lg:mr-0">
-          <div class="px-5 xl:px-0 w-1/2 lg:w-full">
-            <h2 class="text-3xl mb-5"><span>Shipping from</span></h2>
+      <div class="card-container flex-col px-64px py-32px sm:px-16px sm:py-24px">
+        <div class="flex lg:flex-col">
+          <div class="w-1/2 lg:w-full pr-32px lg:pr-0">
+            <h2 class="text-3xl mb-16px"><span>Ship from:</span></h2>
             <div class="flex md:items-center">
-              <div class="w-3/4">
+              <div class="w-3/4 sm:w-full">
                 <label class="input-label" for="from-name">Name</label>
                 <input class="input" id="from-name" type="text" placeholder="" required>
               </div>
@@ -86,7 +86,7 @@
                 <label class="input-label" for="from-address2">Address 2</label>
                 <input class="input" id="from-address2" type="address" placeholder="">
 
-                <div class="grid grid-cols-address md:grid-cols-address-sm gap-6 md:gap-2">
+                <div class="grid grid-cols-address md:grid-cols-address-sm gap-16px md:gap-2">
                   <div>
                     <label class="input-label" for="from-city">City</label>
                     <input class="input" id="from-city" type="text" placeholder="">
@@ -110,12 +110,12 @@
             </div>
           </div>
 
-          <div class="px-5 xl:px-0 w-1/2 lg:w-full">
-            <h2 class="text-3xl mb-5 lg:mt-10">
-              <span>Shipping to</span>
+          <div class="w-1/2 lg:w-full pl-32px lg:pl-0">
+            <h2 class="text-3xl mb-16px lg:pt-24px lg:border-t lg:border-dashed lg:border-gray-400">
+              <span>Ship to:</span>
             </h2>
             <div class="flex md:items-center">
-              <div class="w-3/4">
+              <div class="w-3/4 sm:w-full">
                 <label class="input-label" for="to-name">Name</label>
                 <input class="input" id="to-name" type="text" placeholder="" required>
               </div>
@@ -129,7 +129,7 @@
                   <label class="input-label" for="to-address2">Address 2</label>
                   <input class="input" id="to-address2" type="address" placeholder="">
 
-                  <div class="grid grid-cols-address md:grid-cols-address-sm gap-6 md:gap-2">
+                  <div class="grid grid-cols-address md:grid-cols-address-sm gap-16px md:gap-2">
                     <div>
                       <label class="input-label" for="to-city">City</label>
                       <input class="input" id="to-city" type="text" placeholder="">
@@ -154,7 +154,7 @@
             </div>
           </div>
         </div>
-        <div class="text-right mx-10 mb-5 sm:pb-8 sm:mr-2 sm:ml-2">
+        <div class="text-right">
           <button id="step-1-go-back" class="back-btn navigate-step" type="button">Go back</button>
           <button id="step-1-next-button" type="submit" class="btn w-48 sm:w-1/2 navigate-step">
             <img class="hidden animate-spin h-5 w-5 mx-auto my-1" src="/images/loading.svg" alt="Loading icon">
@@ -168,9 +168,9 @@
   <!-- Dimensions and Weights -->
   <section id="step2" class="section-container md:w-full sm:text-sm step-two hidden">
     <div class="card-container p-0 flex sm:block">
-      <div class="address-container p-12 text-left block w-1/3 sm:w-full sm:p-4 sm:flex">
+      <div class="address-container rounded-r-none text-left py-32px pl-64px pr-40px block w-1/3 sm:w-full sm:flex">
         <div class="pb-10">
-          <p class="text-xl pb-4">Shipping from</p>
+          <p class="text-xl pb-24px">Shipping from</p>
           <p id="dimensions-from-summary" class=" text-xs">
             <span class="name"></span>
             <br />
@@ -178,17 +178,17 @@
             <br />
             <span class="city-state-zip"></span>
           </p>
-          <div class="flex items-center pt-4 ">
+          <div class="flex items-center pt-16px">
             <img id="to-address-verified" class="inline-block h-4" src="/images/verified.svg" alt="image verified logo"/>
             <p class="text-green-verified font-bold pl-1">Address Verified</p>
           </div>
           
         </div>
-        <div class="border-b-2 border-dashed border-gray-400">
+        <div class="border-b border-dashed border-gray-400">
 
         </div>
-        <div class="pt-10 sm:pt-0">
-          <p class="text-xl pb-4">Shipping to</p>
+        <div class="pt-32px sm:pt-0">
+          <p class="text-xl pb-24px">Shipping to</p>
           <p id="dimensions-to-summary" class=" text-xs">
             <span class="name"></span>
             <br />
@@ -196,20 +196,20 @@
             <br />
             <span class="city-state-zip"></span>
           </p>
-          <div class="flex items-center pt-4">
+          <div class="flex items-center pt-16px">
             <img id="to-address-verified" class="inline-block h-4" src="/images/verified.svg" alt="image verified logo"/>
             <p class="text-green-verified font-bold pl-1">Address Verified</p>
           </div>
         </div>
       </div>
       <div class="flex-col">
-      <div class="flex sm:flex-col">
+      <div class="flex sm:flex-col pl-40px pr-64px py-32px">
         <div class="w-1/2 sm:w-full">
-          <h1 class="text-black text-2xl ml-8 mt-8 sm:ml-4">Package Details</h1>
-          <form id="step-2-form" name="step-2-form" class="w-full max-w-sm mt-12 ml-12 sm:mt-2 sm:ml-4">
-            <div class=" mb-4">  
-              <div class="">
-                <label class="block text-black mb-2 " for="inline-full-name">
+          <h1 class="text-black text-2xl pb-32px">Package Details</h1>
+          <form id="step-2-form" name="step-2-form" class="w-full max-w-sm">
+            <div class=" mb-32px">  
+              <div>
+                <label class="block text-black mb-16px" for="inline-full-name">
                   Weight
                 </label>
               </div>
@@ -228,25 +228,22 @@
             </div>
             <div class=" mb-4 mt-12">
               <div class="">
-                <label class="block text-black mb-2 pr-4" for="inline-full-name">
+                <label class="block text-black mb-16px" for="inline-full-name">
                   Dimensions 
                 </label>
               </div>
               <div class="flex items-center">
                 <div class="w-1/3 pr-2 sm:w-1/4">
                   <label for="length" class="text-xs text-gray-500">Length</label>
-                  <input id="length" class="input mr-2" type="number" placeholder="" min="1" />
-                  
+                  <input id="length" class="input mr-2" type="number" placeholder="" min="1" />                  
                 </div>
                 <div class="w-1/3 pr-2 sm:w-1/4 ">
                   <label for="width" class="text-xs text-gray-500">Width</label>
-                  <input id="width" class="input mr-2" type="number" placeholder="" min="1"/>
-                  
+                  <input id="width" class="input mr-2" type="number" placeholder="" min="1"/>  
                 </div>
                 <div class="w-1/3  items-center sm:w-1/4">
                   <label for="height" class="text-xs text-gray-500">Height</label>
-                  <input id="height" class="input mr-2" type="number" placeholder="" min="1">
-                  
+                  <input id="height" class="input mr-2" type="number" placeholder="" min="1">                  
                 </div>
                 <p class="pl-2 text-gray-500 text-xs mt-4">inches</p>
               </div>  

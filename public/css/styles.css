@@ -14,7 +14,7 @@ body {
 
 @layer components {
   .section-container {
-      @apply container mx-auto mt-10 w-4/5 max-w-7xl font-primary;
+      @apply container mx-auto w-4/5 max-w-7xl font-primary;
   }  
   .btn {
       background-color: theme("colors.blue-button");
