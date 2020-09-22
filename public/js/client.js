@@ -121,7 +121,6 @@ window.addEventListener("load", () => {
     window.location.hash = "#step4";
   });
 
-
   // Initialize stripe elements
   // https://stripe.com/docs/stripe-js#elements
   const stripe = Stripe("pk_test_0gDWcjB7xWWgt34p1UQoCxFH00CcruEzwb");
@@ -148,8 +147,7 @@ window.addEventListener("load", () => {
   // Checkout
   document.getElementById("step4Form").addEventListener("submit", async (event) => {
     event.preventDefault();
-    console.log(event.target.value)
-    loading(true);
+
     const isFraud = await checkForFraud();
 
     if (isFraud) {
