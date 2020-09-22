@@ -59,6 +59,7 @@ module.exports = {
                 "address-sm": "45% 15% auto"
             },
             spacing: {
+                '12px': '12px',
                 '16px': '16px',
                 '24px': '24px',
                 '28px': '28px',
