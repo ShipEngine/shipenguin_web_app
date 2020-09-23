@@ -78,10 +78,10 @@ export async function rateEstimate() {
       label.setAttribute("for", rate.rate_id);
 
       if (rate.service_type.includes("Media Mail")) {
-        label.innerHTML = `$${totalAmount.toFixed(2)} - <a class="link" target="_blank" href="https://about.usps.com/notices/not121/not121_tech.htm">${rate.service_type}</a> / ${rate.delivery_days} day(s)`;
+        label.innerHTML = `<a class="link" target="_blank" href="https://about.usps.com/notices/not121/not121_tech.htm">${rate.service_type}</a> / ${rate.delivery_days} day(s) $${totalAmount.toFixed(2)}`;
       }
       else {
-        label.textContent = `$${totalAmount.toFixed(2)} - ${rate.service_type} / ${rate.delivery_days} day(s)`;
+        label.textContent = `${rate.service_type} / ${rate.delivery_days} day(s) $${totalAmount.toFixed(2)}`;
       }
       label.className = "py-2";
 
@@ -91,7 +91,7 @@ export async function rateEstimate() {
       }
 
       const inputWrapper = document.createElement("div");
-      inputWrapper.className = "my-2";
+      inputWrapper.className = "my-2 pb-16px border-b-2 border-dotted border-gray";
 
       inputWrapper.append(radioInput);
       inputWrapper.append(label);
