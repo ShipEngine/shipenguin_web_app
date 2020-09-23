@@ -38,7 +38,8 @@ module.exports = {
                 "cerulean-blue": "#294ccb",
                 "blue-button": "#005ff7",
                 "blue-hover": "#0049BE",
-                "green-verified": "#058c42"
+                "green-verified": "#058c42",
+                "gray-label": "#495057"
             },
             fontFamily: {
                 primary: ["Open Sans", "sans-serif"]
