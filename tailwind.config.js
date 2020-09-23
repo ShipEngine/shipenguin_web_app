@@ -38,7 +38,8 @@ module.exports = {
                 "cerulean-blue": "#294ccb",
                 "blue-button": "#005ff7",
                 "blue-hover": "#0049BE",
-                "green-verified": "#058c42"
+                "green-verified": "#058c42",
+                "gray-label": "#495057"
             },
             fontFamily: {
                 primary: ["Open Sans", "sans-serif"]
@@ -56,7 +57,21 @@ module.exports = {
             },
             gridTemplateColumns: {
                 "address": "55% 10% auto",
-                "address-sm": "45% 15% auto"
+                "address-sm": "45% 15% auto",
+                "rate-estimate": "50% 25% 25%"
+            },
+            spacing: {
+                '12px': '12px',
+                '16px': '16px',
+                '20px': '20px',
+                '24px': '24px',
+                '28px': '28px',
+                '32px': '32px',
+                '40px': '40px',
+                '54px': '54px',
+                '64px': '64px',
+                '128px': '128px',
+                '256px': '256px'
             }
         }
     }

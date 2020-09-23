@@ -7,9 +7,34 @@ import { checkForFraud } from "./check-for-fraud.js";
 import { debounce, loading, showError, clearError, clearInfo } from "./ui-helpers.js";
 
 window.addEventListener("load", () => {
-
   initializeState();
 
+  document.getElementById("toggle-show-from-company").addEventListener("click", (event) => {
+    event.preventDefault();
+    document.getElementById("from-company")
+    const input = document.getElementById("from-company-input");
+    if (input.style.display === "none") {
+      input.style.display = "block";
+    } else {
+      input.style.display = "none";
+    }
+  })
+
+  document.getElementById("toggle-show-to-company").addEventListener("click", (event) => {
+    event.preventDefault();
+    document.getElementById("to-company")
+    const input = document.getElementById("to-company-input");
+    if (input.style.display === "none") {
+      input.style.display = "block";
+    } else {
+      input.style.display = "none";
+    }
+  })
+
+  document.getElementById("step-1-clear").addEventListener("click", () => {
+    clearLocalStorage();
+    clearInputs();
+  })
 
   document.getElementById("step-1-go-back").addEventListener("click", () => {
     window.location.hash = "#step0"
@@ -61,8 +86,6 @@ window.addEventListener("load", () => {
     }
   });
 
-
-
   // Dimensions and Weights
   document.getElementById("step-2-form").addEventListener("submit", async (evt) => {
     evt.preventDefault();
@@ -110,20 +133,42 @@ window.addEventListener("load", () => {
     const selectedRate = rateFieldSet.querySelector("input:checked");
     const rateID = selectedRate.value;
 
-    const rateLabel = rateFieldSet.querySelector(`label[for="${rateID}`);
+    const carrierService = document.getElementById(`carrier-service-${rateID}`).innerText;
+    const shippingCost = document.getElementById(`carrier-service-cost-${rateID}`).innerText;
 
-    const carrierService = rateLabel.textContent.split("-")[1].split("/")[0].trim();
-    const shippingCost = rateLabel.textContent.split("-")[0].trim();
     setLocalStorage("carrierService", carrierService);
     setLocalStorage("shippingCost", shippingCost);
     setLocalStorage("rateID", rateID);
     window.location.hash = "#step4";
   });
 
+  // Initialize stripe elements
+  // https://stripe.com/docs/stripe-js#elements
+  const stripe = Stripe("pk_test_0gDWcjB7xWWgt34p1UQoCxFH00CcruEzwb");
+
+  // Create an instance of Elements.
+  const elements = stripe.elements();
+
+  // Create an instance of the card Element.
+  const card = elements.create('card');
+
+  // Add an instance of the card Element into the `card-element` <div>.
+  card.mount('#card-element');
+
+  // Handle real-time validation errors from the card Element.
+  card.on('change', function (event) {
+    var displayError = document.getElementById('card-errors');
+    if (event.error) {
+      displayError.textContent = event.error.message;
+    } else {
+      displayError.textContent = '';
+    }
+  });
+
   // Checkout
-  document.getElementById("step4Form").addEventListener("submit", async (evt) => {
-    evt.preventDefault();
-    loading(true);
+  document.getElementById("step4Form").addEventListener("submit", async (event) => {
+    event.preventDefault();
+
     const isFraud = await checkForFraud();
 
     if (isFraud) {
@@ -132,7 +177,7 @@ window.addEventListener("load", () => {
     }
     else {
       setLocalStorage("email", document.getElementById("email").value);
-      await makeStripePayment();
+      await makeStripePayment(stripe, card);
     }
   });
 
