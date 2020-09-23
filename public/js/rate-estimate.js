@@ -82,20 +82,20 @@ export async function rateEstimate() {
       }
 
       const inputLabel = document.createElement("div");
-      inputLabel.className = "flex flex-row justify-between w-full";
+      inputLabel.className = "flex flex-row justify-between w-full pt-16px pb-16px";
 
       const inputTitle = document.createElement("p");
-      inputTitle.className = "w-1/3";
+      inputTitle.className = "";
       inputTitle.innerText = rate.service_type
       inputLabel.append(inputTitle);
 
       const inputToolTip = document.createElement("p");
-      inputToolTip.className = "w-1/3";
+      inputToolTip.className = "";
       inputToolTip.innerText = "Learn More"
       inputLabel.append(inputToolTip);
 
       const inputPrice = document.createElement("p");
-      inputPrice.className = "w-1/3 font-bold";
+      inputPrice.className = "font-bold";
       inputPrice.innerText = `$${totalAmount.toFixed(2)}`
       inputLabel.append(inputPrice);
 
