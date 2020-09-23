@@ -26354,6 +26354,14 @@ body {
   visibility: visible;
 }
 
+@media only screen and (max-width: 686px) {
+  .tooltip .tooltiptext {
+    top: 165%;
+    right: -100%;
+    left: -150%;
+  }
+}
+
 @media (max-width: 639px) {
   .sm\:container {
     width: 100%;
