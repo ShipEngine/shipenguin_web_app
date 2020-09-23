@@ -387,7 +387,7 @@
   <section id="step4" class="section-container md:w-full pt-0 step-four hidden">
     <form id="step4Form">
       <div class="card-container flex p-0 sm:flex-col-reverse">
-        <div class="address-container text-left block w-1/4 md:w-full md:flex pt-32px pl-64px">
+        <div class="address-container text-left block w-1/4 md:w-full md:flex pt-32px pl-64px sm:flex-col sm:pl-16px">
           <div class="pb-16px mr-40px lg:pl-0">
             <p class="text-xl pb-4">Shipping from</p>
             <p id="checkout-from-address" class=" text-xs">
@@ -425,7 +425,7 @@
         <div class="border-l-2 border-dotted border-gray-400">
 
         </div>
-        <div class="address-container rounded-none w-1/5 md:w-full md:flex pl-40px pt-32px">
+        <div class="address-container rounded-none w-1/5 md:w-full md:flex pl-40px pt-32px sm:pl-16px sm:pt-24px">
           <div class="">
             <p class="text-xl pb-32px">Package</p>
             <p class="text-l pb-12px font-semibold">Weight</p>
@@ -436,15 +436,15 @@
 
           </div>
         </div>
-        <div class="pt-32px pl-64px pr-64px">
+        <div class="pt-32px pl-64px pr-64px sm:pt-24px sm:pl-16px sm:pr-16px">
           <div id="carrier-service" class="hidden"></div>
           <div class="">
             <h1 class="text-3xl">Payment</h1>
 
 
-            <div class="rounded flex md:flex-col pt-24px pb-24px">
+            <div class="rounded flex md:flex-col pt-24px pb-24px sm:p-0">
 
-              <div class="mr-10 pr-32px flex flex-col h-auto md:ml-0 border-r-gray border-r-2 border-dotted">
+              <div class="mr-10 pr-32px sm:pr-0 flex flex-col h-auto md:ml-0 border-r-gray border-r-2 border-dotted sm:border-0">
                 <div class="pb-16px">
                   <div class="pt-24px">
                     <input id="iovation-input" name="iovation-input" type="hidden" required />
@@ -468,7 +468,7 @@
                   <div id="card-errors" role="alert"></div>
                 </div>
 
-                <div class="terms-container flex text-sm items-center -mb-2">
+                <div class="terms-container flex text-sm items-center -mb-2 sm:mb-16px">
                   <input name="terms-and-conditions" id="terms-and-conditions" type="checkbox" required
                     class="mr-2 w-4 h-4 align-text-top">
                   <label for="terms-and-conditions" class="py-2">I agree to the <a class="link no-underline"
@@ -476,7 +476,7 @@
                       conditions</a></label>
                 </div>
               </div>
-              <div class="flex flex-col">
+              <div class="flex flex-col sm:hidden">
                 <img class="border w-32 md:m-auto md:mb-10" src="./images/usps-label1.png"
                   alt="picture of a sample USPS label">
                 <span class="text-xs text-gray-700 text-center">Label Preview</span>
