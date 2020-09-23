@@ -9,6 +9,28 @@ import { debounce, loading, showError, clearError, clearInfo } from "./ui-helper
 window.addEventListener("load", () => {
   initializeState();
 
+  document.getElementById("toggle-show-from-company").addEventListener("click", (event) => {
+    event.preventDefault();
+    document.getElementById("from-company")
+    const input = document.getElementById("from-company-input");
+    if (input.style.display === "none") {
+      input.style.display = "block";
+    } else {
+      input.style.display = "none";
+    }
+  })
+
+  document.getElementById("toggle-show-to-company").addEventListener("click", (event) => {
+    event.preventDefault();
+    document.getElementById("to-company")
+    const input = document.getElementById("to-company-input");
+    if (input.style.display === "none") {
+      input.style.display = "block";
+    } else {
+      input.style.display = "none";
+    }
+  })
+
   document.getElementById("step-1-clear").addEventListener("click", () => {
     clearLocalStorage();
     clearInputs();
