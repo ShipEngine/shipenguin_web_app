@@ -141,6 +141,7 @@ body {
     position: relative;
     display: inline-block;
     border-bottom: 1px dotted black;
+    color:  #6C757D;
   }
   
   .tooltip .tooltiptext {
