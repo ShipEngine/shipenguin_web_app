@@ -81,7 +81,11 @@
         <div class="card-container flex-col px-64px py-32px sm:px-16px sm:py-24px">
           <div class="flex lg:flex-col ">
             <div class="w-1/2 lg:w-full pr-32px lg:pr-0">
-              <h2 class="text-3xl mb-16px"><span>Shipping from</span></h2>
+              <div class="flex justify-between">
+                <h2 class="text-3xl mb-16px"><span>Ship from</span></h2>
+                <button>Show Company</button>
+              </div>
+              
               <div class="flex md:items-center">
                 <div class="w-3/4 sm:w-full">
                   <label class="input-label" for="from-name">Name</label>
@@ -128,9 +132,13 @@
             </div>
 
             <div class="w-1/2 lg:w-full pl-32px lg:pl-0">
-              <h2 class="text-3xl mb-16px lg:pt-24px lg:border-t lg:border-dashed lg:border-gray-400">
-                <span>Ship to</span>
-              </h2>
+              <div class="flex justify-between">
+                <h2 class="text-3xl mb-16px lg:pt-24px lg:border-t lg:border-dashed lg:border-gray-400">
+                  <span>Ship to</span>
+                </h2>
+                <button>Show Company</button>
+              </div>
+              
               <div class="flex md:items-center">
                 <div class="w-3/4 sm:w-full">
                   <label class="input-label" for="to-name">Name</label>
