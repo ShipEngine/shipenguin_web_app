@@ -26141,15 +26141,17 @@ body {
 
 .tooltip .tooltiptext {
   visibility: hidden;
-  width: 120px;
-  background-color: white;
+  width: 280px;
+  background-color: #f6f6f6;
   color: black;
   text-align: center;
   border-radius: 6px;
-  padding: 5px 0;
+  padding: 10px;
   /* Position the tooltip */
   position: absolute;
   z-index: 1;
+  top: -185%;
+  left: 120%;
 }
 
 .tooltip:hover .tooltiptext {
