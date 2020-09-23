@@ -703,7 +703,6 @@ video {
   --text-opacity: 1;
   color: #4a5568;
   color: rgba(74, 85, 104, var(--text-opacity));
-  font-weight: 600;
 }
 
 .edit-btn {
