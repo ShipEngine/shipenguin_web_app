@@ -65,36 +65,44 @@ export async function rateEstimate() {
     rateInputList.innerHTML = "";
     let defaultChecked = false;
     const sortedRates = data.rate_response.rates.sort((a, b) => (a.shipping_amount.amount > b.shipping_amount.amount) ? 1 : ((b.shipping_amount.amount > a.shipping_amount.amount) ? -1 : 0));
+
     for (let rate of sortedRates) {
+      const totalAmount = rate.shipping_amount.amount + rate.insurance_amount.amount + rate.confirmation_amount.amount + rate.other_amount.amount;
+
       const radioInput = document.createElement("input");
       radioInput.id = rate.rate_id;
       radioInput.value = rate.rate_id;
       radioInput.type = "radio";
       radioInput.setAttribute("name", "rates");
-      radioInput.className = "mx-3 w-4 h-4 align-text-top";
-
-      const label = document.createElement("label");
-      const totalAmount = rate.shipping_amount.amount + rate.insurance_amount.amount + rate.confirmation_amount.amount + rate.other_amount.amount;
-      label.setAttribute("for", rate.rate_id);
-
-      if (rate.service_type.includes("Media Mail")) {
-        label.innerHTML = `<a class="link" target="_blank" href="https://about.usps.com/notices/not121/not121_tech.htm">${rate.service_type}</a> / ${rate.delivery_days} day(s) $${totalAmount.toFixed(2)}`;
-      }
-      else {
-        label.textContent = `${rate.service_type} / ${rate.delivery_days} day(s) $${totalAmount.toFixed(2)}`;
-      }
-      label.className = "py-2";
+      radioInput.className = "checked:bg-gray-900 checked:border-transparent mr-2";
 
       if (!defaultChecked) {
         radioInput.setAttribute("checked", "checked");
         defaultChecked = true;
       }
 
-      const inputWrapper = document.createElement("div");
-      inputWrapper.className = "my-2 pb-16px border-b-2 border-dotted border-gray";
+      const inputLabel = document.createElement("div");
+      inputLabel.className = "flex flex-row justify-between w-full";
 
+      const inputTitle = document.createElement("p");
+      inputTitle.className = "w-1/3";
+      inputTitle.innerText = rate.service_type
+      inputLabel.append(inputTitle);
+
+      const inputToolTip = document.createElement("p");
+      inputToolTip.className = "w-1/3";
+      inputToolTip.innerText = "Learn More"
+      inputLabel.append(inputToolTip);
+
+      const inputPrice = document.createElement("p");
+      inputPrice.className = "w-1/3 font-bold";
+      inputPrice.innerText = `$${totalAmount.toFixed(2)}`
+      inputLabel.append(inputPrice);
+
+      const inputWrapper = document.createElement("div");
+      inputWrapper.className = "flex items-center border-b-2 border-dotted border-gray-400";
       inputWrapper.append(radioInput);
-      inputWrapper.append(label);
+      inputWrapper.append(inputLabel);
 
       rateInputList.append(inputWrapper);
     }
