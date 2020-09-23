@@ -103,6 +103,10 @@ export async function rateEstimate() {
       inputTitle.id = `carrier-service-${rate.rate_id}`
       inputLabel.append(inputTitle);
 
+      const inputContainer = document.createElement("div");
+      inputContainer.className = "flex flex-row justify-between w-48 sm:w-40";
+      inputLabel.append(inputContainer);
+
       const inputToolTip = document.createElement("div");
       inputToolTip.className = "tooltip";
       inputToolTip.innerText = "Learn More"
@@ -110,13 +114,13 @@ export async function rateEstimate() {
       toolTip.className = "tooltiptext";
       toolTip.innerText = setToolTip(rate.service_type)
       inputToolTip.append(toolTip);
-      inputLabel.append(inputToolTip);
+      inputContainer.append(inputToolTip);
 
       const inputPrice = document.createElement("p");
       inputPrice.className = "font-bold";
       inputPrice.innerText = `$${totalAmount.toFixed(2)}`
       inputPrice.id = `carrier-service-cost-${rate.rate_id}`
-      inputLabel.append(inputPrice);
+      inputContainer.append(inputPrice);
 
       const inputWrapper = document.createElement("div");
       inputWrapper.className = "flex items-center border-b-2 border-dotted border-gray-400";

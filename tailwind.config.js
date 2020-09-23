@@ -56,7 +56,8 @@ module.exports = {
             },
             gridTemplateColumns: {
                 "address": "55% 10% auto",
-                "address-sm": "45% 15% auto"
+                "address-sm": "45% 15% auto",
+                "rate-estimate": "50% 25% 25%"
             },
             spacing: {
                 '12px': '12px',

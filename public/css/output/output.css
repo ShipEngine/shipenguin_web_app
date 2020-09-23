@@ -23644,6 +23644,10 @@ video {
   grid-template-columns: 45% 15% auto;
 }
 
+.grid-cols-rate-estimate {
+  grid-template-columns: 50% 25% 25%;
+}
+
 .col-auto {
   grid-column: auto;
 }
@@ -49161,6 +49165,10 @@ body {
     grid-template-columns: 45% 15% auto;
   }
 
+  .sm\:grid-cols-rate-estimate {
+    grid-template-columns: 50% 25% 25%;
+  }
+
   .sm\:col-auto {
     grid-column: auto;
   }
@@ -74576,6 +74584,10 @@ body {
 
   .md\:grid-cols-address-sm {
     grid-template-columns: 45% 15% auto;
+  }
+
+  .md\:grid-cols-rate-estimate {
+    grid-template-columns: 50% 25% 25%;
   }
 
   .md\:col-auto {
@@ -99995,6 +100007,10 @@ body {
     grid-template-columns: 45% 15% auto;
   }
 
+  .lg\:grid-cols-rate-estimate {
+    grid-template-columns: 50% 25% 25%;
+  }
+
   .lg\:col-auto {
     grid-column: auto;
   }
@@ -125410,6 +125426,10 @@ body {
 
   .xl\:grid-cols-address-sm {
     grid-template-columns: 45% 15% auto;
+  }
+
+  .xl\:grid-cols-rate-estimate {
+    grid-template-columns: 50% 25% 25%;
   }
 
   .xl\:col-auto {
