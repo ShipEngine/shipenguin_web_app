@@ -100,9 +100,9 @@ export async function rateEstimate() {
       const inputTitle = document.createElement("p");
       inputTitle.className = "";
       inputTitle.innerText = rate.service_type
+      inputTitle.id = `carrier-service-${rate.rate_id}`
       inputLabel.append(inputTitle);
 
-      console.log(rate);
       const inputToolTip = document.createElement("div");
       inputToolTip.className = "tooltip";
       inputToolTip.innerText = "Learn More"
@@ -115,6 +115,7 @@ export async function rateEstimate() {
       const inputPrice = document.createElement("p");
       inputPrice.className = "font-bold";
       inputPrice.innerText = `$${totalAmount.toFixed(2)}`
+      inputPrice.id = `carrier-service-cost-${rate.rate_id}`
       inputLabel.append(inputPrice);
 
       const inputWrapper = document.createElement("div");

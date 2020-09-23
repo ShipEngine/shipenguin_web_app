@@ -133,10 +133,9 @@ window.addEventListener("load", () => {
     const selectedRate = rateFieldSet.querySelector("input:checked");
     const rateID = selectedRate.value;
 
-    const rateLabel = rateFieldSet.querySelector(`label[for="${rateID}`);
+    const carrierService = document.getElementById(`carrier-service-${rateID}`).innerText;
+    const shippingCost = document.getElementById(`carrier-service-cost-${rateID}`).innerText;
 
-    const carrierService = rateLabel.textContent.split("-")[1].split("/")[0].trim();
-    const shippingCost = rateLabel.textContent.split("-")[0].trim();
     setLocalStorage("carrierService", carrierService);
     setLocalStorage("shippingCost", shippingCost);
     setLocalStorage("rateID", rateID);
