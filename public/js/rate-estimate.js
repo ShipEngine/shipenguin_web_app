@@ -1,6 +1,15 @@
 import { getLocalStorageItem } from "./local-storage.js";
 import { showError, loading, clearError } from "./ui-helpers.js";
 
+function setToolTip(package_type) {
+  switch (package_type) {
+    case 'package':
+      return "First class mail (Delivery in 1–3 days for packages 13 oz. or less and envelopes 3.5 oz. or less)"
+    default:
+      return "First class mail (Delivery in 1–3 days for packages 13 oz. or less and envelopes 3.5 oz. or less)"
+  }
+}
+
 export async function rateEstimate() {
   const rateBody = {
     rate_options: {
@@ -89,9 +98,14 @@ export async function rateEstimate() {
       inputTitle.innerText = rate.service_type
       inputLabel.append(inputTitle);
 
-      const inputToolTip = document.createElement("p");
-      inputToolTip.className = "";
+      console.log(rate);
+      const inputToolTip = document.createElement("div");
+      inputToolTip.className = "tooltip";
       inputToolTip.innerText = "Learn More"
+      const toolTip = document.createElement("span");
+      toolTip.className = "tooltiptext";
+      toolTip.innerText = setToolTip(rate.package_type)
+      inputToolTip.append(toolTip);
       inputLabel.append(inputToolTip);
 
       const inputPrice = document.createElement("p");
