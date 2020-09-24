@@ -26,8 +26,8 @@ app.use((req, res, next) => {
 app.use(helmet.contentSecurityPolicy({
   directives: {
     defaultSrc: ["'self'", "https://fonts.gstatic.com", "https://js.stripe.com", "https://mpsnare.iesnare.com", "wss://mpsnare.iesnare.com/"],
-    scriptSrc: ["'self'", "https://www.shippenguin.com/", "https://shippenguin.com", "https://mpsnare.iesnare.com",  (req, res) => `'nonce-${res.locals.cspNonce}'`],
-    styleSrc: ["'self'", "https://www.shippenguin.com/", "https://shippenguin.com", "https://fonts.googleapis.com"]
+    scriptSrc: ["'self'", "https://www.shippenguin.com/", "https://mpsnare.iesnare.com",  (req, res) => `'nonce-${res.locals.cspNonce}'`],
+    styleSrc: ["'self'", "https://www.shippenguin.com/", "https://fonts.googleapis.com"]
   }
 }));
 
