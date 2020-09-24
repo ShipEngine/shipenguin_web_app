@@ -144,7 +144,7 @@ window.addEventListener("load", () => {
 
   // Initialize stripe elements
   // https://stripe.com/docs/stripe-js#elements
-  const stripe = Stripe("pk_test_0gDWcjB7xWWgt34p1UQoCxFH00CcruEzwb");
+  const stripe = Stripe("pk_live_51HH9TXGNdcQrv4sowZxPw5uaQ6gKH4fFLg4t8e2yY41EOqvN1EDhlndZUB8l9ws4FcvRCD8u3SAl83orLS2nTojm00a91Cp8Jb");
 
   // Create an instance of Elements.
   const elements = stripe.elements();
