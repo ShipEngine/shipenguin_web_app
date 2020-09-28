@@ -6,7 +6,7 @@ import { verifyAddresses } from "./verify-addresses.js";
 import { checkForFraud } from "./check-for-fraud.js";
 import { debounce, loading, showError, clearError, clearInfo } from "./ui-helpers.js";
 
-window.addEventListener("load", () => {
+window.addEventListener("load", async () => {
   initializeState();
 
   document.getElementById("toggle-show-from-company").addEventListener("click", (event) => {
@@ -144,7 +144,9 @@ window.addEventListener("load", () => {
 
   // Initialize stripe elements
   // https://stripe.com/docs/stripe-js#elements
-  const stripe = Stripe("pk_test_0gDWcjB7xWWgt34p1UQoCxFH00CcruEzwb");
+  const response = await fetch("/config");
+  const config = await response.json();
+  const stripe = Stripe(config.stripePublishableKey);
 
   // Create an instance of Elements.
   const elements = stripe.elements();
