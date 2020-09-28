@@ -2,7 +2,7 @@ import { getLocalStorageItem } from "./local-storage.js";
 import { showError, clearError } from "./ui-helpers.js";
 
 export async function getLabel() {
-  const labelBody = { "rate": getLocalStorageItem("rateID"), "stripeSession": getLocalStorageItem("stripeSession") };
+  const labelBody = { "rate": getLocalStorageItem("rateID"), "stripePaymentIntentID": getLocalStorageItem("stripePaymentIntentID") };
   clearError();
   try {
     const response = await fetch("/label", {

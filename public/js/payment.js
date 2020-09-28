@@ -1,4 +1,4 @@
-import { getLocalStorageItem } from "./local-storage.js";
+import { getLocalStorageItem, setLocalStorage } from "./local-storage.js";
 import { loading } from "./ui-helpers.js";
 
 export async function makeStripePayment(stripe, card) {
@@ -8,7 +8,10 @@ export async function makeStripePayment(stripe, card) {
     headers: {
       "Content-Type": "application/json"
     },
-    body: JSON.stringify({ "rateID": getLocalStorageItem("rateID") })
+    body: JSON.stringify({ 
+      "rateID": getLocalStorageItem("rateID"),
+      "email": getLocalStorageItem("email")
+    })
   })
 
   const jsonResponse = await response.json();
@@ -19,7 +22,7 @@ export async function makeStripePayment(stripe, card) {
 // Calls stripe.confirmCardPayment
 // If the card requires authentication Stripe shows a pop-up modal to
 // prompt the user to enter authentication details without leaving your page.
-var payWithCard = function (stripe, card, clientSecret) {
+const payWithCard = (stripe, card, clientSecret) => {
   loading(true);
   stripe
     .confirmCardPayment(clientSecret, {
@@ -40,15 +43,16 @@ var payWithCard = function (stripe, card, clientSecret) {
 
 /* ------- UI helpers ------- */
 // Shows a success message when the payment is complete
-var orderComplete = function (paymentIntentId) {
+const orderComplete = function (paymentIntentId) {
   loading(false);
+  setLocalStorage("stripePaymentIntentID", paymentIntentId)
   window.location.hash = "#step5"
 };
 
 // Show the customer the error from Stripe if their card fails to charge
-var showError = function (errorMsgText) {
+const showError = function (errorMsgText) {
   loading(false);
-  var errorMsg = document.querySelector("#card-errors");
+  const errorMsg = document.querySelector("#card-errors");
   errorMsg.textContent = errorMsgText;
   setTimeout(function () {
     errorMsg.textContent = "";

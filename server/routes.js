@@ -113,9 +113,9 @@ router.post("/label", async (req, res) => {
 
     const rate = req.body.rate;
     const rateUrl = "https://api.shipengine.com/v1/labels/rates/" + rate;
-    const stripeSession = req.body.stripeSession;
+    const stripePaymentIntentID = req.body.stripePaymentIntentID;
 
-    delete req.body.stripeSession;
+    delete req.body.stripePaymentIntentID;
 
     const options = {
       "method": "POST",
@@ -130,7 +130,7 @@ router.post("/label", async (req, res) => {
     const response = await fetch(rateUrl, options);
     const parsedResponse = await response.json();
 
-    notifySlackChannel(stripeSession);
+    notifySlackChannel(stripePaymentIntentID);
 
     res.json(parsedResponse)
   }
@@ -196,7 +196,7 @@ router.post("/email", async (req, res) => {
     if (error.response) {
       console.error(error.response.body)
     }
-    res.statu(500).send("Unexpected Server Error");
+    res.status(500).send("Unexpected Server Error");
   }
 });
 
@@ -221,7 +221,14 @@ router.post("/create-payment-intent", async (req, res) => {
     // Create a PaymentIntent with the order amount and currency
     const paymentIntent = await stripe.paymentIntents.create({
       amount: totalCharge * 100,
-      currency: "usd"
+      currency: "usd",
+      receipt_email: req.body.email,
+      metadata: {
+        "terms-of-service": "TOSv1",
+        "date-accepted": new Date().toISOString(),
+        "customer-ip": req.ip,
+        "email": req.body.email
+      }
     });
 
     res.json({ clientSecret: paymentIntent.client_secret });
@@ -239,15 +246,15 @@ router.get("/config", (req, res) => {
   });
 });
 
-async function notifySlackChannel(stripeSessionID, isRefund) {
+async function notifySlackChannel(stripePaymentIntentID, isRefund) {
   if (!config.slackChannel) {
     return;
   }
   try {
 
-    const stripeSession = await stripe.checkout.sessions.retrieve(stripeSessionID);
+    const stripeSession = await stripe.paymentIntents.retrieve(stripePaymentIntentID);
 
-    const dollars = stripeSession.amount_total / 100;
+    const dollars = stripeSession.amount / 100;
     const totalAmount = dollars.toLocaleString("en-US", { style: "currency", currency: "USD" });
 
     const action = isRefund ? "refunded" : "purchased";
@@ -258,7 +265,7 @@ async function notifySlackChannel(stripeSessionID, isRefund) {
           "type": "section",
           "text": {
             "type": "mrkdwn",
-            "text": `A Label has been ${action} for the amount of ${totalAmount} \n Payment Intent ID: ${stripeSession.payment_intent}`
+            "text": `A Label has been ${action} for the amount of ${totalAmount} \n Payment Intent ID: ${stripeSession.id}`
           }
         }
       ]
