@@ -104,6 +104,10 @@ body {
   .footer-link:hover {
       @apply text-black transition duration-200 ease-in-out;
   }
+
+  #error-card, #info-card {
+    @apply max-w-7xl;
+  }
 }
 
 /**
