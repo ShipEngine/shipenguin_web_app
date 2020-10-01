@@ -29,12 +29,12 @@ export async function checkForFraud() {
       },
       body: JSON.stringify(body)
     })
-    const data = response.json();
+    const data = await response.json();
 
     if (data.result === "A") {
-      return true;
+      return false;
     }
-    return false;
+    return true;
   } 
   catch (e) {
     showError("Fraud Detection", "Error validating your identity, please contact ShipEngine support");
