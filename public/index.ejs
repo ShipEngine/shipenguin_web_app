@@ -23,7 +23,8 @@
 <body>
   <div>
     <header class="mb-12 mt-8">
-      <a href="#"><img class="max-w-xs sm:w-256px mx-auto mt-4" src="/images/shipenguin-logo_v5.svg" alt="ShipPenguin logo"></a>
+      <a href="#"><img class="max-w-xs sm:w-256px mx-auto mt-4" src="/images/shipenguin-logo_v5.svg"
+          alt="ShipPenguin logo"></a>
       <!-- <a class="absolute top-0 right-0" href="https://github.com/ShipEngine/shipenguin_web_app" target="_blank">
       <img class="h-14" src="/images/github-corner.svg" alt="Github Logo"/>
     </a> -->
@@ -189,7 +190,8 @@
           </div>
           <div class="text-right flex flex-row justify-end">
             <button id="step-1-clear" class="back-btn navigate-step" type="button">Clear</button>
-            <button id="step-1-go-back" class="back-btn text-lg  w-48 sm:w-1/2 navigate-step hidden" type="button">Go back</button>
+            <button id="step-1-go-back" class="back-btn text-lg  w-48 sm:w-1/2 navigate-step hidden" type="button">Go
+              back</button>
             <button id="step-1-next-button" type="submit" class="btn w-48 sm:w-1/2 navigate-step">
               <img class="hidden animate-spin h-5 w-5 mx-auto my-1" src="/images/loading.svg" alt="Loading icon">
               <span class="button-content">Continue</span>
@@ -311,7 +313,8 @@
     <section class="section-container md:w-full sm:text-sm pt-0 step-three hidden">
       <form id="step-3-form">
         <div class="card-container flex p-0 sm:flex-col-reverse">
-          <div class="address-container rounded-r-none text-left block pl-64px pt-32px pr-40px w-1/4 sm:w-full sm:flex sm:p-4 sm:flex-col">
+          <div
+            class="address-container rounded-r-none text-left block pl-64px pt-32px pr-40px w-1/4 sm:w-full sm:flex sm:p-4 sm:flex-col">
             <div class="pb-20px">
               <p class="text-lg pb-16px">Ship from</p>
               <p id="rate-from-summary" class=" text-xs">
@@ -365,7 +368,36 @@
             class=" lg:flex-col-reverse lg:items-center justify-between pb-10 text-left w-1/2 sm:w-full pt-32px pl-64px pr-64px sm:p-4">
             <h1 class="text-black font-semibold text-xl mb-32px sm:mb-2">Select a USPS Service</h1>
             <div class="w-full sm:w-full">
-              <div id="rate-input-list" class="flex flex-col mx-auto lg:mt-10 mb-40px"></div>
+              <div id="rate-input-list" class="flex flex-col mx-auto lg:mt-10 mb-40px">
+                <div class="flex items-center border-b-2 border-dotted border-gray-400">
+                  <input id="se-253968247" type="radio" value="se-253968247" name="rates"
+                    class="checked:bg-gray-900 checked:border-transparent mr-2" checked="checked">
+                  <div class="flex flex-row justify-between w-full pt-16px pb-16px">
+                    <p id="carrier-service-se-253968247" class="tooltip">
+                      USPS Media Mail 
+                      <img class="inline h-4 w-4" src="/images/information-logo.svg" alt="Information Logo">
+
+                      <span class="tooltiptext">Media
+                        mail (Delivery in 2–8 days for
+                        books, manuscripts, recordings and other media in packages 70 lbs. or less)</span></p>
+                    <p class="font-bold" id="carrier-service-cost-se-253968247">$2.80</p>
+                  </div>
+                </div>
+                <!-- <div class="flex items-center border-b-2 border-dotted border-gray-400"><input id="se-253968245"
+                    type="radio" value="se-253968245" name="rates"
+                    class="checked:bg-gray-900 checked:border-transparent mr-2">
+                  <div class="flex flex-row justify-between w-full pt-16px pb-16px">
+                    <p class="" id="carrier-service-se-253968245">USPS Priority Mail</p>
+                    <div class="flex flex-row justify-between w-48 sm:w-40">
+                      <div class="tooltip">Learn More<span class="tooltiptext">Priority: Priority (Delivery in 1–3 days
+                          on average for letters, envelopes, tubes and small packages 70 lbs. or less)</span></div>
+                      <p class="font-bold" id="carrier-service-cost-se-253968245">$6.48</p>
+                    </div>
+                  </div>
+                </div> -->
+
+
+              </div>
             </div>
             <div class="flex items-center my-3 sm:ml-0 sm:mr-0 mr-2 sm:items-top">
               <input type="checkbox" id="hazardous-materials" required class="m-2 w-4 h-4 align-text-top">
@@ -381,7 +413,7 @@
                 <span class="button-content">Continue</span>
               </button>
             </div>
-        </form>
+      </form>
   </div>
   </div>
   </section>
@@ -390,7 +422,8 @@
   <section id="step4" class="section-container md:w-full pt-0 step-four hidden">
     <form id="step4Form">
       <div class="card-container flex p-0 sm:flex-col-reverse">
-        <div class="address-container rounded-r-none text-left block w-1/4 md:w-full md:flex pt-32px pr-0 pl-64px sm:flex-col sm:pl-16px">
+        <div
+          class="address-container rounded-r-none text-left block w-1/4 md:w-full md:flex pt-32px pr-0 pl-64px sm:flex-col sm:pl-16px">
           <div class="pb-20px mr-40px lg:pl-0">
             <p class="text-lg pb-16px">Ship from</p>
             <p id="checkout-from-address" class=" text-xs">
@@ -448,7 +481,8 @@
 
             <div class="rounded flex md:flex-col pt-24px pb-24px sm:p-0">
 
-              <div class="mr-10 pr-32px sm:pr-0 flex flex-col h-auto md:ml-0 border-r-gray border-r-2 border-dotted sm:border-0 sm:mr-0">
+              <div
+                class="mr-10 pr-32px sm:pr-0 flex flex-col h-auto md:ml-0 border-r-gray border-r-2 border-dotted sm:border-0 sm:mr-0">
                 <div class="pb-16px">
                   <div class="pt-24px">
                     <input id="iovation-input" name="iovation-input" type="hidden" required />

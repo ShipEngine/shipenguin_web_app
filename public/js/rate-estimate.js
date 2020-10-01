@@ -97,30 +97,29 @@ export async function rateEstimate() {
       const inputLabel = document.createElement("div");
       inputLabel.className = "flex flex-row justify-between w-full pt-16px pb-16px";
 
-      const inputTitle = document.createElement("p");
-      inputTitle.className = "";
-      inputTitle.innerText = rate.service_type
-      inputTitle.id = `carrier-service-${rate.rate_id}`
-      inputLabel.append(inputTitle);
+      const infoLogo = document.createElement("img");
+      infoLogo.className = "inline h-4 w-4";
+      infoLogo.src = "/images/information-logo.svg";
+      infoLogo.alt = "Information Logo";
 
-      const inputContainer = document.createElement("div");
-      inputContainer.className = "flex flex-row justify-between w-48 sm:w-40";
-      inputLabel.append(inputContainer);
-
-      const inputToolTip = document.createElement("div");
-      inputToolTip.className = "tooltip";
-      inputToolTip.innerText = "Learn More"
       const toolTip = document.createElement("span");
       toolTip.className = "tooltiptext";
       toolTip.innerText = setToolTip(rate.service_type)
-      inputToolTip.append(toolTip);
-      inputContainer.append(inputToolTip);
+
+      const inputTitle = document.createElement("p");
+      inputTitle.className = "tooltip";
+      inputTitle.innerText = rate.service_type;
+      inputTitle.id = `carrier-service-${rate.rate_id}`;
+      inputTitle.append(infoLogo);
+      inputTitle.append(toolTip);
+
+      inputLabel.append(inputTitle);
 
       const inputPrice = document.createElement("p");
       inputPrice.className = "font-bold";
       inputPrice.innerText = `$${totalAmount.toFixed(2)}`
       inputPrice.id = `carrier-service-cost-${rate.rate_id}`
-      inputContainer.append(inputPrice);
+      inputLabel.append(inputPrice);
 
       const inputWrapper = document.createElement("div");
       inputWrapper.className = "flex items-center border-b-2 border-dotted border-gray-400";
