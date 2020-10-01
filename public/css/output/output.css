@@ -26486,8 +26486,15 @@ body {
 .tooltip {
   position: relative;
   display: inline-block;
-  border-bottom: 1px dotted black;
   color:  #6C757D;
+}
+
+.tooltip .rate-title {
+  border-bottom: 1px dotted black;
+}
+
+.tooltip .info-logo {
+  margin: 0 0 1px 4px;
 }
 
 .tooltip .tooltiptext {

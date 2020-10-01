@@ -98,7 +98,7 @@ export async function rateEstimate() {
       inputLabel.className = "flex flex-row justify-between w-full pt-16px pb-16px";
 
       const infoLogo = document.createElement("img");
-      infoLogo.className = "inline h-4 w-4";
+      infoLogo.className = "info-logo inline h-4 w-4";
       infoLogo.src = "/images/information-logo.svg";
       infoLogo.alt = "Information Logo";
 
@@ -106,10 +106,15 @@ export async function rateEstimate() {
       toolTip.className = "tooltiptext";
       toolTip.innerText = setToolTip(rate.service_type)
 
+      const rateTitle = document.createElement("span");
+      rateTitle.innerText = rate.service_type;
+      rateTitle.className = "rate-title";
+
       const inputTitle = document.createElement("p");
       inputTitle.className = "tooltip";
-      inputTitle.innerText = rate.service_type;
+      // inputTitle.innerText = rate.service_type;
       inputTitle.id = `carrier-service-${rate.rate_id}`;
+      inputTitle.append(rateTitle);
       inputTitle.append(infoLogo);
       inputTitle.append(toolTip);
 

@@ -140,11 +140,17 @@ body {
 .tooltip {
     position: relative;
     display: inline-block;
-    border-bottom: 1px dotted black;
     color:  #6C757D;
-  }
-  
-  .tooltip .tooltiptext {
+}
+
+.tooltip .rate-title {
+    border-bottom: 1px dotted black;
+}
+.tooltip .info-logo {
+    margin: 0 0 1px 4px;
+}  
+
+.tooltip .tooltiptext {
     visibility: hidden;
     width: 280px;
     background-color: #f6f6f6;
@@ -152,17 +158,17 @@ body {
     text-align: center;
     border-radius: 6px;
     padding: 10px;
-  
+
     /* Position the tooltip */
     position: absolute;
     z-index: 1;
     top: -185%;
     left: 120%;
-  }
+}
   
-  .tooltip:hover .tooltiptext {
+.tooltip:hover .tooltiptext {
     visibility: visible;
-  }
+}
 
 @media only screen and (max-width: 686px) {
     .tooltip .tooltiptext {
